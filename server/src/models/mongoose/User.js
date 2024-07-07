@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   },
   email: { 
     type: String,
-    required: true,
+    required: false,
     unique: true,
     lowercase: true,
     trim: true,
@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
   whatsapp: { 
     type: String,
     required: false,
+    unique: true,
     trim: true
   }
 }, {

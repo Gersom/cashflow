@@ -11,6 +11,11 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: false,
     trim: true
+  },
+  account: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account',
+    required: true
   }
 }, {
   timestamps: true,

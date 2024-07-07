@@ -10,10 +10,10 @@ switch (DB_ENGINE) {
 }
 
 const models = {
+  UserModel: require(`./${pathModel}/User`),
   AccountModel: require(`./${pathModel}/Account`),
   CategoryModel: require(`./${pathModel}/Category`),
   MovementModel: require(`./${pathModel}/Movement`),
-  UserModel: require(`./${pathModel}/User`),
 }
 
 module.exports = models

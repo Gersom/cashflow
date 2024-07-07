@@ -11,7 +11,7 @@ const getAllAccountsController = async (query = {}) => {
 };
 
 const getAccountController = async (id) => {
-  const account = await AccountModel.findOneData(id);
+  const account = await AccountModel.findDataById(id);
   if (!account) {
     throw new NotFoundError(`Account with id ${id} not found`);
   }

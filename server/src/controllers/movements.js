@@ -11,7 +11,7 @@ const getAllMovementsController = async (query = {}) => {
 };
 
 const getMovementController = async (id) => {
-  const movement = await MovementModel.findOneData(id);
+  const movement = await MovementModel.findDataById(id);
   if (!movement) {
     throw new NotFoundError(`Movement with id ${id} not found`);
   }

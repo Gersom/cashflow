@@ -11,7 +11,7 @@ const getAllCategoriesController = async (query = {}) => {
 };
 
 const getCategoryController = async (id) => {
-  const category = await CategoryModel.findOneData(id);
+  const category = await CategoryModel.findDataById(id);
   if (!category) {
     throw new NotFoundError(`Category with id ${id} not found`);
   }
