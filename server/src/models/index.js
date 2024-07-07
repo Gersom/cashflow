@@ -5,9 +5,6 @@ switch (DB_ENGINE) {
   case "mongodb":
     pathModel = 'mongoose'
     break
-  case "postgresql":
-    pathModel = 'sequelize'
-    break
   default:
     throw new Error("Environment variable 'DB_ENGINE' is not valid.")
 }
