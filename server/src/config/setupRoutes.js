@@ -19,6 +19,7 @@ const setupRoutes = async (app) => {
       }
     }
 
+    app.use('/', (req, res) => res.send('Hello'));
     app.use('/api', router);
     app.use('/storage', express.static(path.join(__dirname, '..', 'storage')));
     
