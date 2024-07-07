@@ -19,10 +19,15 @@ const setupRoutes = async (app) => {
       }
     }
 
-    app.use('/', (req, res) => res.send('Hello'));
+    // Define API routes first
     app.use('/api', router);
+
+    // Static file serving
     app.use('/storage', express.static(path.join(__dirname, '..', 'storage')));
     
+    // Root route
+    app.get('/', (req, res) => res.send('Hello'));
+
     // Not Found Routes
     app.use((req, res, next) => {
       next(new NotFoundError('Unconfigured route, please review the documentation.'));
