@@ -1,20 +1,16 @@
 require('dotenv').config();
 require('module-alias/register');
 
-const express = require("express");
-const app = express();
+const { connectDB } = require('@config/connectDB');
+const insertData = require("@services/insertDB");
+const createServer = require('@config/createServer');
 
-const middlewares = require("@config/middlewares");
-const setupRoutes = require("@config/routes");
-const listen = require("@config/listen");
-const errorHandler = require('@middlewares/errorHandler');
 
 async function startServer() {
   try {
-    middlewares(app);
-    await setupRoutes(app);
-    app.use(errorHandler);
-    listen(app);
+    await connectDB();
+    await insertData();
+    createServer();
   } catch (err) {
     process.exit(1);
   }
