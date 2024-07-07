@@ -7,22 +7,22 @@ const accountSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  amount: { 
+  balance: { 
     type: Number,
     required: true,
     default: 0
   },
-  currencySymbol: { 
-    type: String,
-    required: true,
-    trim: true,
-    default: 'S/.'
-  },
-  currencyType: { 
-    type: String,
-    required: true,
-    trim: true,
-    default: 'Soles'
+  currency: {
+    symbol: { 
+      type: String,
+      trim: true,
+      default: 'S/.'
+    },
+    type: { 
+      type: String,
+      trim: true,
+      default: 'Soles'
+    }
   },
   description: { 
     type: String,
