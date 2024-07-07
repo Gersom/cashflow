@@ -28,11 +28,11 @@
     "@controllers": "./src/controllers",
     "@data": "./src/data",
     "@handlers": "./src/handlers",
+    "@middlewares": "./src/middlewares",
     "@models": "./src/models",
     "@routes": "./src/routes",
     "@services": "./src/services",
     "@storage": "./src/storage",
-    "@middlewares": "./src/middlewares",
     "@utils": "./src/utils"
   }
 }
