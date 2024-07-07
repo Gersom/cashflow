@@ -9,11 +9,15 @@ const setupRoutes = require("@config/routes");
 const listen = require("@config/listen");
 const errorHandler = require('@middlewares/errorHandler');
 
-// Config server
-middlewares(app);
-setupRoutes(app)
-  .then(() => {
+async function startServer() {
+  try {
+    middlewares(app);
+    await setupRoutes(app);
     app.use(errorHandler);
     listen(app);
-  })
-  .catch(err => process.exit(1));
+  } catch (err) {
+    process.exit(1);
+  }
+}
+
+startServer();
