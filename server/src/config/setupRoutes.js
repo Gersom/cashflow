@@ -30,7 +30,8 @@ const setupRoutes = async (app) => {
 
     // Not Found Routes
     app.use((req, res, next) => {
-      next(new NotFoundError('Unconfigured route, please review the documentation.'));
+      const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+      next(new NotFoundError(`Unconfigured route: ${fullUrl}. Please review the documentation.`));
     });
   };
 
