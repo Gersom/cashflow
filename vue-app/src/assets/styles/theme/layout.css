@@ -1,0 +1,27 @@
+/* Additional global styles can be added here */
+.dark-mode {
+  --background-color: var(--dark-background-color);
+  --background-color2: var(--dark-background-color2);
+  --title-color: var(--dark-title-color);
+  --subtitle-color: var(--dark-subtitle-color);
+  --text-color: var(--dark-text-color);
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-medium);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  /* Styles for tablets and mobile devices */
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Styles for small desktops */
+}
+
+@media (min-width: 1025px) {
+  /* Styles for large desktops */
+}

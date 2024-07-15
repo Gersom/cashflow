@@ -3,7 +3,7 @@ import HelloWorld from '@components/HelloWorld.vue'
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper dark-mode">
     <div>
       <a href="https://farmfe.org/" target="_blank">
         <img src="@images/logo.png" class="logo" alt="Farm logo" />
@@ -16,10 +16,10 @@ import HelloWorld from '@components/HelloWorld.vue'
   </div>
 </template>
 
-<style scoped>
+<style>
   .wrapper {
     align-items: center;
-    background: #F3F4F8;
+    background: var(--background-color);
     display: flex;
     flex-direction: column;
     height: 100vh;
