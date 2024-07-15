@@ -1,4 +1,5 @@
 <script setup>
+defineEmits(['vnode-unmounted'])
 defineOptions({
   name: 'CategoriesPage'
 })

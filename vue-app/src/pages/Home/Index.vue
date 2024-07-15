@@ -1,17 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { useThemeStore } from '@stores/theme'
+import { storeToRefs } from 'pinia'
 
 defineOptions({
   name: 'HomePage'
 })
 
-const count = ref(0)
+const themeStore = useThemeStore()
+const { currentTheme } = storeToRefs(themeStore)
+const toggleTheme = () => {
+  themeStore.toggleTheme()
+}
 </script>
 
 <template>
   <div class="home-page">
     <h1>Home Page</h1>
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <p>Tema actual: {{ currentTheme }}</p>
+    <button @click="toggleTheme">Cambiar tema</button>
   </div>
 </template>
 

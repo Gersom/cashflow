@@ -13,6 +13,7 @@ export default defineConfig({
         '@components': path.join(process.cwd(), "src/components"),
         '@layouts': path.join(process.cwd(), "src/layouts"),
         '@pages': path.join(process.cwd(), "src/pages"),
+        '@stores': path.join(process.cwd(), "src/stores"),
       },
     },
   },
