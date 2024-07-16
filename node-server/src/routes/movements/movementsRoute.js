@@ -7,7 +7,7 @@ const {
   createMovement,
   updateMovement,
   deleteMovement
-} = require("@handlers/movements");
+} = require("./movementsHandler");
 
 router.get("/", asyncHandler(getAllMovements));
 router.get("/:id", asyncHandler(getMovement));
