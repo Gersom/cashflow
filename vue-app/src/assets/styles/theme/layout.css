@@ -1,5 +1,5 @@
 /* Additional global styles can be added here */
-.dark-mode {
+.is-dark-mode {
   --background-color: var(--dark-background-color);
   --background-color2: var(--dark-background-color2);
   --title-color: var(--dark-title-color);
