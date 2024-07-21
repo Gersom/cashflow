@@ -30,9 +30,9 @@ const isRouteCurrent = computed(() => {
       <div class="link-icon">
         <component :is="iconComponent" />
       </div>
-      <span class="link-text">
+      <!-- <span class="link-text">
         {{ text }}
-      </span>
+      </span> -->
     </RouterLink>
   </div>
 </template>
