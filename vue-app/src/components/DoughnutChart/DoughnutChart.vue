@@ -31,7 +31,7 @@ const chartOptions = ref({
                         fontSize: '100%',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 400,
-                        color: '#fff',
+                        color: 'var(--text-color)',
                         formatter: function (w) {
                             if (Array.isArray(w.globals.seriesTotals)) {
                                 return w.globals.seriesTotals.reduce((a, b) => a + b, 0)+ ' $';

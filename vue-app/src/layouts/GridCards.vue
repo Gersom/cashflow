@@ -20,6 +20,6 @@ defineOptions({
         display: grid;
         gap: 2rem;
         /* grid-auto-rows:100%; */
-        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
 </style>
