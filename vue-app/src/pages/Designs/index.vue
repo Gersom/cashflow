@@ -79,7 +79,6 @@ const toggleTheme = () => {
 .DesingPage {
   margin-top: 20px;
   padding: 20px;
-  background: var(--background-color);
   color: var(--text-color);
   .title {
     color: var(--title-color);
