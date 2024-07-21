@@ -1,14 +1,24 @@
 <script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  userName: {
+    type: String,
+    default: 'User 1223314'
+  }
+});
+
 defineOptions({
   name: 'Head'
 })
+
 </script>
 
 <template>
   <header class="head">
     <div class="head-info">
       <h2>Bienvenido</h2>
-      <small>User2345</small>
+      <small>{{props.userName}}</small>
     </div>
     <div class="profile--container">
       <img

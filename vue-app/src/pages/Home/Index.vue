@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import GridCards from '@layouts/GridCards.vue'
 import Head from '@components/Head/Head.vue'
 import CardHead from '@components/CardHead/CardHead.vue'
+import DoughnutChart from '@components/DoughnutChart/DoughnutChart.vue'
 
 defineOptions({
   name: 'HomePage'
@@ -24,7 +25,7 @@ const toggleTheme = () => {
       <GridCards>
         <template v-slot:first>
           <div class="card">
-
+            <DoughnutChart></DoughnutChart>
           </div>
         </template>
         <template v-slot:second>
