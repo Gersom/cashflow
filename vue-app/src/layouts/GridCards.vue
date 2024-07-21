@@ -15,9 +15,11 @@ defineOptions({
 
 <style scoped>
     .grid-cards{
+        height: 80vh;
+        padding:0rem;
         display: grid;
-        gap: 1rem;
-        grid-auto-rows:75vh;
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        gap: 2rem;
+        /* grid-auto-rows:100%; */
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     }
 </style>

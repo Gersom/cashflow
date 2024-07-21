@@ -30,9 +30,9 @@ defineOptions({
 
 <style scoped>
 .head {
-  height: 10%;
+  height: 10vh;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   align-items: center;
 }
 
@@ -45,29 +45,28 @@ defineOptions({
 .head h2 {
   color: var(--primary-color);
   display: block;
-  line-height: .9;
+  line-height: .7;
   margin: 0;
   padding: 0;
+  font-size: 3rem;
 }
 
 .head small {
   margin: 0;
-
+  font-size: 2.5vh;
+  line-height: 1.9;
   padding: 0 .2rem;
-  color: var(--button-text-color);
-
-
+  color: var(--text-color);
 }
 
 .profile--container {
   position: relative;
-  width: 45px;
-  height: 45px;
+  width: 7.5vh;
+  height: 7.5vh;
   overflow: hidden;
   border-radius: 50%;
   border: 1rem;
   background-color: var(--primary-color);
-  box-shadow: 0px 0px 0px 3px var(--primary-color);
-
+  box-shadow: 0px 0px 0px .5vh var(--primary-color);
 }
 </style>

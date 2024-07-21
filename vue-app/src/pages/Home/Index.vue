@@ -5,6 +5,8 @@ import GridCards from '@layouts/GridCards.vue'
 import Head from '@components/Head/Head.vue'
 import CardHead from '@components/CardHead/CardHead.vue'
 import DoughnutChart from '@components/DoughnutChart/DoughnutChart.vue'
+import TotalBalance from '@components/TotalBalance/TotalBalance.vue'
+import Stat from '@components/Stat/Stat.vue'
 
 defineOptions({
   name: 'HomePage'
@@ -25,7 +27,18 @@ const toggleTheme = () => {
       <GridCards>
         <template v-slot:first>
           <div class="card">
-            <DoughnutChart></DoughnutChart>
+            <div class="chart-card">
+              <TotalBalance/>
+              <div class="chart-container">
+                <DoughnutChart></DoughnutChart>
+              </div>
+              <div class="reserved">
+                <Stat/>
+                <Stat/>
+                <Stat/>
+                
+              </div>
+            </div>
           </div>
         </template>
         <template v-slot:second>
@@ -48,15 +61,17 @@ const toggleTheme = () => {
 <style scoped>
 .home-page {
   width: 100%;
-  height: 100vh;
+  height:100svh;
+  overflow-y: auto;
   background-color: var(--background-color);
 }
 
 .home-page main {
+  height: 100%;
   padding: 2rem;
   display: flex;
   flex-flow: column nowrap;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .home-page h2 {
@@ -67,8 +82,37 @@ const toggleTheme = () => {
 .card {
   width: 100%;
   height: 100%;
+  min-width: 360px;
+  min-height: 59px;
   border-radius: .3rem;
-  padding: 1.5rem;
+  /* padding: 1.5rem; */
   background-color: var(--background-color2);
 }
+
+.chart-card{
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.chart-container{
+  width: 70%;
+  align-self: center;
+  display: inline-block;
+}
+
+.reserved{
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+  scrollbar-width: thin;
+  overflow-y: auto;
+}
+
 </style>

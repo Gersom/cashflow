@@ -21,14 +21,14 @@ const chartOptions = ref({
         pie: {
             customScale: 1,
             donut: {
-                size: '75%',
+                size: '80%',
                 background: 'transparent',
                 labels: {
                     show: true,
                     total: {
                         show: true,
                         label: 'Gastos 2024',
-                        fontSize: '20px',
+                        fontSize: '100%',
                         fontFamily: 'Helvetica, Arial, sans-serif',
                         fontWeight: 400,
                         color: '#fff',
@@ -41,10 +41,10 @@ const chartOptions = ref({
                     },
                     value: {
                         show: true,
-                        fontSize: '20px', 
+                        fontSize: '100%', 
                         fontFamily: 'Helvetica, Arial, sans-serif', 
                         fontWeight: 600,  
-                        offsetY: 6, 
+                        offsetY: 3, 
                         color: '#00eca6',
                           formatter: function (val) {
                             return val + ' $'; 
@@ -72,9 +72,9 @@ const chartOptions = ref({
 </script>
 
 <template>
-    <div id="chart">
         <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
-    </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
