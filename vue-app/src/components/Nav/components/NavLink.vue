@@ -40,7 +40,6 @@ const isRouteCurrent = computed(() => {
 <style lang="scss" scoped>
 .nav-link {
   .link-icon {
-    margin-right: 10px;
     height: 30px;
   }
   .link-icon,
@@ -48,6 +47,9 @@ const isRouteCurrent = computed(() => {
     color: var(--text-color);
     transition: color 0.3s;
   }
+  /**.link-text {
+    margin-left: 10px;
+  }*/
   & > * {
     display: flex;
     align-items: center;

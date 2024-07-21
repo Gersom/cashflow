@@ -22,7 +22,7 @@ defineOptions({
   background: var(--background-color);
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
   min-height: 100vh;
   width: 100%;
   .header {
