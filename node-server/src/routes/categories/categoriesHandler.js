@@ -4,7 +4,7 @@ const {
   postCategoryController,
   updateCategoryController,
   deleteCategoryController
-} = require("@controllers/categories");
+} = require("./categoriesController");
 
 const getAllCategories = async (req, res) => {
   const result = await getAllCategoriesController(req.query);

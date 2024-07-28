@@ -1,10 +1,12 @@
 /* Additional global styles can be added here */
-.dark-mode {
+.is-dark-mode {
   --background-color: var(--dark-background-color);
   --background-color2: var(--dark-background-color2);
   --title-color: var(--dark-title-color);
   --subtitle-color: var(--dark-subtitle-color);
   --text-color: var(--dark-text-color);
+  --button-background-disabled: var(--dark-button-background-disabled);
+  --button-color-disabled: var(--dark-button-color-disabled);
 }
 
 .container {

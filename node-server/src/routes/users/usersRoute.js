@@ -7,7 +7,7 @@ const {
   createUser,
   updateUser,
   deleteUser
-} = require("@handlers/users");
+} = require("./usersHandler");
 
 router.get("/", asyncHandler(getAllUsers));
 router.get("/:id", asyncHandler(getUser));

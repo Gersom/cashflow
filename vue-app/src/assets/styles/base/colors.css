@@ -30,7 +30,7 @@
   /* Dark Mode */
   --dark-background-color: #14151a;
   --dark-background-color2: #282a36;
-  --dark-title-color: #000000;
-  --dark-subtitle-color: #717171;
-  --dark-text-color: #1F1F1F;
+  --dark-title-color: #ffffff;
+  --dark-subtitle-color: #cccccc;
+  --dark-text-color: #ffffff;
 }

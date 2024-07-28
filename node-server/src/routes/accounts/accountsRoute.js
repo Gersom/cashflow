@@ -7,7 +7,7 @@ const {
   createAccount,
   updateAccount,
   deleteAccount
-} = require("@handlers/accounts");
+} = require("./accountsHandler");
 
 router.get("/", asyncHandler(getAllAccounts));
 router.get("/:id", asyncHandler(getAccount));
