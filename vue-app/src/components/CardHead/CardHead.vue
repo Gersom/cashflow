@@ -26,37 +26,28 @@ const toggleDropdown = () => {
 </script>
 
 <template>
-<div class="card-head">
-    <p v-if="!props.isSelect">
-      <span>{{ props.title }} :</span>
-    </p>
-    
+<div class="card-head"> 
     <button
       @click="toggleDropdown"
       v-if="props.isSelect"
     >
-      <span>{{ selectedMonth }}</span>
+      <span>{{ props.title }} {{ selectedMonth }}</span>
       <div class="arrow" :class="{ 'arrow-up': isOpen }">
-        <IconSelect />
+        <IconSelect/>
       </div>
     </button>
-
     <div v-if="isSelect && isOpen" class="dropdown-content">
       <div v-for="month in months" :key="month" class="dropdown-item" @click="selectMonth(month)">
         {{ month }}
       </div>
     </div>
+
   </div>
+
   <div class="card-head">
-    <p v-if="props.isSelect">
+    <p v-if="!props.isSelect">
       <span>{{ props.title }} :</span>
     </p>
-    
-    <div v-if="isSelect && isOpen" class="dropdown-content">
-      <div v-for="month in months" :key="month" class="dropdown-item" @click="selectMonth(month)">
-        {{ month }}
-      </div>
-    </div>
   </div>
 </template>
 
@@ -66,14 +57,11 @@ button{
   border-radius: 0;
   padding: 0;
   text-align: left;
-  /* background: none; */
+  background: none;
   color: var(--text-color);
   font-weight: bolder;
-
-}
-
-.card-head{
-  /* display: flex; */
+  display: flex;
+  gap:1rem;
 }
 
 .card-head > p{
@@ -117,33 +105,20 @@ button{
   background-color: var(--primary-color);
 }
 
-.dropdown {
-  position: relative;
-  width: 200px;
-  font-family: Arial, sans-serif;
-}
-
-.dropdown-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  background-color: #2c3e50;
-  color: white;
-  cursor: pointer;
-}
-
 .arrow {
-  height: 100%;
+  height: 1rem;
   transition: transform 0.3s ease;
+  transform-origin: 50% 50%;
 }
 
 .arrow-up {
-  transform: rotate(180deg) translate(0, -100%);
+  height: 1rem;
+  transform: rotate(180deg) translate(0, -120%);
+  transform-origin: 50% 50%;
 }
 
 .dropdown-content {
-  position: absolute;
+  /* position: absolute; */
   top: 100%;
   left: 0;
   width: 100%;
