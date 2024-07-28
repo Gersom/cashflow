@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
 
 const props = defineProps({
   balance: {
@@ -45,6 +44,7 @@ defineOptions({
 .underlined::first-letter{
     font-size: 1.8rem;
     vertical-align: middle;
+    text-wrap: nowrap;
 }
 
 .underlined::after {
@@ -54,6 +54,7 @@ defineOptions({
   bottom: 0;
   width: 100%;
   height: .3rem;
+  text-wrap: nowrap;
   background-color: var(--secondary-color);
 }
 </style>

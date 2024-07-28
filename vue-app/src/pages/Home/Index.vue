@@ -29,9 +29,9 @@ const toggleTheme = () => {
           <div class="card">
             <div class="chart-card">
               <TotalBalance/>
-              <div class="chart-container">
-                <DoughnutChart></DoughnutChart>
-              </div>
+                <div class="chart-container">
+                  <DoughnutChart></DoughnutChart>
+                </div>
               <div class="reserved">
                 <Stat/>
                 <Stat/>
@@ -43,12 +43,18 @@ const toggleTheme = () => {
         </template>
         <template v-slot:second>
           <div class="card">
-            <CardHead title="Crear nuevo movimiento" />
+            <div class="create-movements">
+              <CardHead title="Crear nuevo movimiento" />
+
+            </div>
           </div>
         </template>
         <template v-slot:third>
           <div class="card">
-            <CardHead title="Movimientos de Junio" />
+            <div class="create-movements">
+              <CardHead title="Movimientos de " isSelect="true"/>
+              
+            </div>
           </div>
         </template>
       </GridCards>
