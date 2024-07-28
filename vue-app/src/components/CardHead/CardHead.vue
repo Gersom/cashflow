@@ -18,8 +18,8 @@ const props = defineProps({
 });
 
 let selectedMonth = ref('Junio');
-const isOpen = ref(true);
-const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'];
+const isOpen = ref(false);
+const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio']; // temporal array
 
 const toggleDropdown = () => {
     isOpen.value = !isOpen.value;
