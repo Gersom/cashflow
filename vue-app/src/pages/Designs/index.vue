@@ -7,6 +7,8 @@ import CustomButton from "@components/CustomButton/index.vue";
 import IconAdd from "@icons/actions/IconAdd.vue";
 // import { storeToRefs } from 'pinia'
 
+defineOptions({name: 'DesignsPage'})
+
 const themeStore = useThemeStore()
 // const { currentTheme } = storeToRefs(themeStore)
 const toggleTheme = () => {
