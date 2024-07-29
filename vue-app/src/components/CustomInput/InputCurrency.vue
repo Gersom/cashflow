@@ -198,24 +198,16 @@
       width: 100%;
       z-index: 1;
     }
-    
-    /* Currency Type */
     .currency-symbol {
       left: 15px;
       position: absolute;
       z-index: 9;
     }
-
-    /* Dark Theme */
-    &.is-dark-theme {
-      .input-tag {
-        background: rgb(20 21 26 / 30%);
-      }
-      .input-tag:focus {
-        background: rgb(20 21 26 / 70%);
-      }
+    .input-tag,
+    .currency-symbol {
+      font-weight: 700;
     }
-  
+
     /* Transaction Type */
     &.is-income-transaction {
       .currency-symbol,
@@ -229,6 +221,20 @@
         color: var(--error-color);
       }
     }
+    
+    /* Dark Theme */
+    &.is-dark-theme {
+      .input-tag {
+        background: rgb(20 21 26 / 30%);
+      }
+      .input-tag:focus {
+        background: rgb(20 21 26 / 70%);
+      }
+      .input-tag,
+      .currency-symbol {
+        font-weight: 500;
+      }
+    }  
   }
 
 </style>
