@@ -1,28 +1,33 @@
 <script setup>
-import CustomInput from "@components/CustomInput/index.vue";
+import CustomInputText from "@components/CustomInput/InputText.vue";
+import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue";
 
 import { ref } from 'vue'
-const valueInput = ref('')
+const inputIncomeValue  = ref('0.00')
+const inputExpenseValue  = ref('0.00')
 </script>
 
 <template>
 <ul class='input-section'>
   <li>
-    <p>Input normal</p>
-    <CustomInput 
-      v-model="valueInput"
-    />
+    <p>Input <strong>text</strong> default</p>
+    <CustomInputText />
   </li>
   <li>
-    <p>Input placeholder</p>
-    <CustomInput
+    <p>Input <strong>text</strong> placeholder</p>
+    <CustomInputText
       placeholder="Ola 👌"
     />
   </li>
   <li>
-    <p>Input placeholder</p>
-    <CustomInput
-      placeholder="Ola 👌"
+    <p>Input <strong>currency</strong> Income</p>
+    <CustomInputCurrency
+      v-model="inputIncomeValue"
+    />
+    <p>Input <strong>currency</strong> Expense</p>
+    <CustomInputCurrency
+      transaction-type="expense"
+      v-model="inputExpenseValue"
     />
   </li>
 </ul>
@@ -41,6 +46,9 @@ const valueInput = ref('')
   }
   li:first-child {
     margin-top: 0px;
+  }
+  p {
+    color: var(--primary-color);
   }
 }
 </style>
