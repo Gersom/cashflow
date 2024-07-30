@@ -1,33 +1,100 @@
 <script setup>
 import CustomInputText from "@components/CustomInput/InputText.vue";
 import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue";
+import CustomInputRadio from "@components/CustomInput/InputRadio.vue";
+import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue";
 
 import { ref } from 'vue'
-const inputIncomeValue  = ref('0.00')
-const inputExpenseValue  = ref('0.00')
+const inputTextDefault  = ref('')
+const inputTextPlaceholder  = ref('')
+
+const inputRadioTwo  = ref({})
+const inputRadioDataTwo = [
+  { value: 'value1', text: 'Name 1' },
+  { value: 'value2', text: 'Name 2' }
+]
+const inputRadioFour  = ref({})
+const inputRadioDataFour = [
+  { value: 'value1', text: 'Name 1' },
+  { value: 'value2', text: 'Name 2' },
+  { value: 'value3', text: 'Name 3' },
+  { value: 'value4', text: 'Name 4' },
+]
+const inputRadioSeven  = ref({})
+const inputRadioDataSeven = [
+  { value: 'value1', text: 'Name 1' },
+  { value: 'value2', text: 'Name 2' },
+  { value: 'value3', text: 'Name 3' },
+  { value: 'value4', text: 'Name 4' },
+  { value: 'value5', text: 'Name 5' },
+  { value: 'value6', text: 'Name 6' },
+  { value: 'value7', text: 'Name 7' }
+]
+
+const inputCurrencyIncome  = ref('0.00')
+const inputCurrencyExpense  = ref('0.00')
+
+const inputTextareaDefault  = ref('')
+const inputTextareaPlaceholder  = ref('')
 </script>
 
 <template>
 <ul class='input-section'>
   <li>
-    <p>Input <strong>text</strong> default</p>
-    <CustomInputText />
+    <p><strong>Text</strong> default</p>
+    <CustomInputText v-model="inputTextDefault" />
   </li>
   <li>
-    <p>Input <strong>text</strong> placeholder</p>
+    <p><strong>Text</strong> placeholder</p>
     <CustomInputText
+      v-model="inputTextPlaceholder"
       placeholder="Ola 👌"
     />
   </li>
   <li>
-    <p>Input <strong>currency</strong> Income</p>
+    <p><strong>Currency</strong> Income</p>
     <CustomInputCurrency
-      v-model="inputIncomeValue"
+      v-model="inputCurrencyIncome"
     />
-    <p>Input <strong>currency</strong> Expense</p>
+    <p><strong>Currency</strong> Expense</p>
     <CustomInputCurrency
       transaction-type="expense"
-      v-model="inputExpenseValue"
+      v-model="inputCurrencyExpense"
+    />
+  </li>
+  <li>
+    <p><strong>Textarea</strong> default</p>
+    <CustomInputTextarea
+      v-model="inputTextareaDefault"
+    />
+  </li>
+  <li>
+    <p><strong>Textarea</strong> placeholder</p>
+    <CustomInputTextarea
+      v-model="inputTextareaPlaceholder"
+      :placeholder="'Ola 👌\npepe'"
+    />
+  </li>
+  <li>
+    <p><strong>Radio</strong> two option</p>
+    <CustomInputRadio
+      :data="inputRadioDataTwo"
+      v-model="inputRadioTwo"
+    />
+  </li>
+  <li>
+    <p><strong>Radio</strong> seven options</p>
+    <CustomInputRadio
+      :data="inputRadioDataSeven"
+      v-model="inputRadioSeven"
+    />
+  </li>
+  <li>
+    <p><strong>Radio vertical</strong> four options</p>
+    <CustomInputRadio
+      :data="inputRadioDataFour"
+      orientation="vertical"
+      v-model="inputRadioFour"
     />
   </li>
 </ul>
@@ -48,7 +115,7 @@ const inputExpenseValue  = ref('0.00')
     margin-top: 0px;
   }
   p {
-    color: var(--primary-color);
+    color: var(--text-color);
   }
 }
 </style>
