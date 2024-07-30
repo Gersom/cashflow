@@ -52,7 +52,7 @@ const toggleTheme = () => {
         <template v-slot:third>
           <div class="card">
             <div class="create-movements">
-              <CardHead title="Movimientos de " isSelect="true"/>
+              <CardHead title="Movimientos de " :isSelect="true"/>
               
             </div>
           </div>
