@@ -1,16 +1,14 @@
 <script setup>
+defineOptions({name: 'DesignsPage'})
 defineEmits(['vnode-unmounted'])
+
 import { useThemeStore } from '@stores/theme'
 import ButtonsSection from "./components/Buttons.vue";
-import InputsSection from "./components/Inputs.vue";
 import CustomButton from "@components/CustomButton/index.vue";
 import IconAdd from "@icons/actions/IconAdd.vue";
-// import { storeToRefs } from 'pinia'
-
-defineOptions({name: 'DesignsPage'})
+import InputsSection from "./components/Inputs.vue";
 
 const themeStore = useThemeStore()
-// const { currentTheme } = storeToRefs(themeStore)
 const toggleTheme = () => {
   themeStore.toggleTheme()
 }
@@ -27,10 +25,10 @@ const toggleTheme = () => {
     @click="toggleTheme"
   />
   
-  <h2 class="title">inputs</h2>
+  <h2 class="title">INPUTS</h2>
   <InputsSection />
   
-  <h2 class="title">Botones</h2>
+  <h2 class="title">BUTTONS</h2>
   <ButtonsSection />
 </div>
 </template>

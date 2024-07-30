@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useThemeStore = defineStore('theme', {
+export const useUserStore = defineStore('user', {
   state: () => ({
     user: {
       id: '005454515120',
@@ -18,17 +18,12 @@ export const useThemeStore = defineStore('theme', {
     }
   }),
   getters: {
-    currencyAll: (state) => `${state.currency.amount} ${state.currency.name}`
+    currencyNormal: ({currency}) => `${currency.symbol} ${currency.amount}`,
+    currencyAll: ({currency}) => `${currency.amount} ${currency.name}`,
   },
   actions: {
-    setLightMode() {
-      this.isDarkMode = false
-    },
-    setDarkMode() {
-      this.isDarkMode = true
-    },
-    toggleTheme() {
-      this.isDarkMode = !this.isDarkMode
+    setGetUser() {
+      // fetch get user
     }
   }
 })

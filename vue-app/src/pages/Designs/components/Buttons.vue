@@ -7,20 +7,20 @@ import IconAdd from "@icons/actions/IconAdd.vue";
 <div class='buttons-section'>
   <div class="content">
     <!--  -->
-    <p>Boton Normal</p>
+    <p>Normal</p>
     <CustomButton
       text="Crear movimiento"
     />
     
     <!--  -->
-    <p>Boton con icono</p>
+    <p>With icon</p>
     <CustomButton
       :icon-component="IconAdd"
       text="Crear movimiento"
     />
     
     <!--  -->
-    <p>Boton Animado</p>
+    <p>Animated</p>
     <CustomButton
       :animation="true"
       :icon-component="IconAdd"
@@ -28,7 +28,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
     />
     
     <!--  -->
-    <p>Boton Transparente</p>
+    <p>Transparent</p>
     <CustomButton
       :icon-component="IconAdd"
       :transparent="true"
@@ -36,7 +36,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
     />
     
     <!--  -->
-    <p>Boton Pequeño</p>
+    <p>Small</p>
     <CustomButton
       :animation="true"
       :icon-component="IconAdd"
@@ -46,7 +46,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
     />
       
     <!--  -->
-    <p>Boton Desabilitado</p>
+    <p>Disabled</p>
     <CustomButton
       :disabled="true"
       :icon-component="IconAdd"
