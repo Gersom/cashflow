@@ -1,10 +1,18 @@
+/* Dark Mode */
 :root {
-  /* Dark Mode */
+  /* States */
+  --dark-success-color: #16e2a6;
+
+  /* Backgrounds */
   --dark-background-color: #14151a;
   --dark-background-color2: #282a36;
+
+  /* Text */
   --dark-title-color: #fff;
   --dark-subtitle-color: #D1D5DB;
   --dark-text-color: #ffffff;
+
+  /* Buttons */
   --dark-button-background-disabled: rgb(20 21 26 / 50%);
   --dark-button-color-disabled: #9CA3AF;
 }
