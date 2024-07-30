@@ -4,7 +4,7 @@ const {
   postUserController,
   updateUserController,
   deleteUserController
-} = require("@controllers/users");
+} = require("./usersController");
 
 const getAllUsers = async (req, res) => {
   const result = await getAllUsersController(req.query);

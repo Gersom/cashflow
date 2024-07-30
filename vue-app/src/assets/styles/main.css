@@ -1,9 +1,13 @@
 /* Base styles */
+@import './base/fonts.css';
 @import './base/colors.css';
 @import './base/variables.css';
+@import './base/button.css';
+@import './base/dark-mode.css';
 @import './base/reset.css';
 
 /* Theme styles */
 @import './theme/layout.css';
 @import './theme/global.css';
+@import './theme/scroll.css';
 @import './theme/utilities.css';

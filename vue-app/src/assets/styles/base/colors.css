@@ -8,7 +8,7 @@
 
   /* States */
   --error-color: #e25050;
-  --success-color: #16e2a6;
+  --success-color: #1fbe96;
   --warning-color: #fea83a;
   
   /* Backgrounds */
@@ -20,17 +20,4 @@
   --subtitle-color: #717171;
   --text-color: #1F1F1F;
   --link-color: var(--primary-color);
-
-  /* Buttons */
-  --button-background: var(--primary-color);
-  --button-border-radius: 10px;
-  --button-height: 48px;
-  --button-text-color: #fff;
-  
-  /* Dark Mode */
-  --dark-background-color: #14151a;
-  --dark-background-color2: #282a36;
-  --dark-title-color: #000000;
-  --dark-subtitle-color: #717171;
-  --dark-text-color: #1F1F1F;
 }

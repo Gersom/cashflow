@@ -1,7 +1,7 @@
 :root {
   /* Typography */
-  --font-family-base: 'Arial', sans-serif;
-  --font-family-headings: 'Helvetica', sans-serif;
+  --font-family-base: var(--font-nunito);
+  --font-family-headings: var(--font-poppins);
   --font-size-base: 16px;
   --line-height-base: 1.5;
 
@@ -12,7 +12,7 @@
 
   /* Layout */
   --container-max-width: 1200px;
-  --border-radius: 4px;
+  --border-radius: 7px;
 
   /* Transitions */
   --transition-fast: 0.3s ease;

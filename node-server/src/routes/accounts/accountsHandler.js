@@ -4,7 +4,7 @@ const {
   postAccountController,
   updateAccountController,
   deleteAccountController
-} = require("@controllers/accounts");
+} = require("./accountsController");
 
 const getAllAccounts = async (req, res) => {
   const result = await getAllAccountsController(req.query);

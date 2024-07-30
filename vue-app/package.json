@@ -9,9 +9,12 @@
     "clean": "farm clean"
   },
   "dependencies": {
-    "pinia": "^2.1.7",
+    "@cyhnkckali/vue3-color-picker": "2.0.2",
+    "apexcharts": "3.50.0",
+    "pinia": "2.1.7",
     "vue": "3.4.0",
-    "vue-router": "^4.4.0"
+    "vue-router": "4.4.0",
+    "vue3-apexcharts": "1.5.3"
   },
   "devDependencies": {
     "@farmfe/cli": "1.0.2",

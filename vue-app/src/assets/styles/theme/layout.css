@@ -1,10 +1,20 @@
 /* Additional global styles can be added here */
-.dark-mode {
+.is-dark-mode {
+  /* States */
+  --success-color: var(--dark-success-color);
+
+  /* Backgrounds */
   --background-color: var(--dark-background-color);
   --background-color2: var(--dark-background-color2);
+
+  /* Text */
   --title-color: var(--dark-title-color);
   --subtitle-color: var(--dark-subtitle-color);
   --text-color: var(--dark-text-color);
+
+  /* Buttons */
+  --button-background-disabled: var(--dark-button-background-disabled);
+  --button-color-disabled: var(--dark-button-color-disabled);
 }
 
 .container {

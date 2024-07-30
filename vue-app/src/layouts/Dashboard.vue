@@ -8,14 +8,30 @@ defineOptions({
 
 <template>
   <div class="dashboard-layout">
-    <header>
+    <header class="header">
       <NavComponent />
     </header>
-    <main>
+    <main class="main">
       <slot />
     </main>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
+.dashboard-layout {
+  background: var(--background-color);
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  max-height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
+  width: 100%;
+}
+.dashboard-layout .header {
+  height: 100%;
+}
+.dashboard-layout .main {
+  width: 100%;
+}
 </style>

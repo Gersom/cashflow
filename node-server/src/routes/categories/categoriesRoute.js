@@ -7,7 +7,7 @@ const {
   createCategory,
   updateCategory,
   deleteCategory
-} = require("@handlers/categories");
+} = require("./categoriesHandler");
 
 router.get("/", asyncHandler(getAllCategories));
 router.get("/:id", asyncHandler(getCategory));

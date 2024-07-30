@@ -4,7 +4,7 @@ const {
   postMovementController,
   updateMovementController,
   deleteMovementController
-} = require("@controllers/movements");
+} = require("./movementsController");
 
 const getAllMovements = async (req, res) => {
   const result = await getAllMovementsController(req.query);

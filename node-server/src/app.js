@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('module-alias/register');
 
-const { connectDB } = require('@config/connectDB');
+const { connectDB } = require('@services/connectDB');
 const insertData = require("@services/insertDB");
 const createServer = require('@config/createServer');
 
