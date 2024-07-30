@@ -2,7 +2,7 @@
   // ------------
   // Imports
   // ------------
-  import { ref, computed, onMounted, nextTick } from 'vue'
+  import { ref, computed } from 'vue'
   import { storeToRefs } from 'pinia'
   import { useThemeStore } from '@stores/theme'
   import { useUserStore } from '@stores/user'
@@ -21,10 +21,6 @@
       type: String,
       default: ''
     },
-    type: {
-      type: String,
-      default: 'text' // text, currency
-    },
     transactionType: {
       type: String,
       default: 'income' // income, expense
@@ -42,11 +38,13 @@
   // Data references
   // ------------
   const inputRef = ref(null)
-  const value = ref('0.00')
   const pressedShift = ref(false)
   const pressedShiftTab = ref(true)
   const pressedTab = ref(false)
-  
+
+  // Computed
+  const valueInput = computed(() => props.modelValue)
+
   // ------------
   // Methods
   // ------------
@@ -63,7 +61,7 @@
     let decimalPart = parts[1] || '00';
     decimalPart = decimalPart.length === 1 ? decimalPart + '0' : decimalPart.substring(0, 2);
     parts = `${integerPart}.${decimalPart}`
-    value.value = parts;
+    emitInput(parts)
     event.target.value = parts;
   }
   const handleFocus = () => {
@@ -79,7 +77,7 @@
 
     let newValue = event.target.value.replace(/[^\d.]/g, '')
     newValue = formatNumber(newValue)
-    value.value = newValue
+    emitInput(newValue)
     event.target.value = newValue
 
     inputRef.value.setSelectionRange(cursorPosition, cursorPosition)
@@ -121,10 +119,13 @@
   // ------------
   // Utils Funtions
   // ------------
+  const emitInput = (value) => {
+    emit('update:modelValue', value)
+  }
   const selectDecimals = () => {
     const dotIndex = inputRef.value.value.indexOf('.')
     if(dotIndex === -1) {
-      value.value = inputRef.value.value + '.00'
+      emitInput(inputRef.value.value + '.00')
       inputRef.value.value = inputRef.value.value + '.00'
       inputRef.value.setSelectionRange(inputRef.value.value.length - 2, inputRef.value.value.length)
     } else {
@@ -165,7 +166,7 @@
       <input
         class="input-tag"
         ref="inputRef"
-        :value="value"
+        :value="valueInput"
         @blur="handleBlur"
         @focus="handleFocus"
         @input="handleInput"
