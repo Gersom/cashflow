@@ -70,21 +70,21 @@ const props = defineProps({
   .icon-component {
     opacity: 0;
     position: relative;
-    right: 20px;
+    right: 13px;
     transition: all 0.4s;
   }
   .span-text {
     position: relative;
-    right: 20px;
+    right: 13px;
     transition: all 0.4s;
   }
   &:hover {
     .icon-component {
       opacity: 1;
-      right: 10px;
+      right: 0px;
     }
     .span-text {
-      right: 10px;
+      right: 0px;
     }
   }
 }

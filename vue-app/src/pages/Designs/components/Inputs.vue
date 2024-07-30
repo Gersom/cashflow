@@ -3,6 +3,8 @@ import CustomInputText from "@components/CustomInput/InputText.vue";
 import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue";
 import CustomInputRadio from "@components/CustomInput/InputRadio.vue";
 import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue";
+import CustomInputColor from "@components/CustomInput/InputColor.vue";
+import CustomInputColorPicker from "@components/CustomInput/InputColorPicker.vue";
 
 import { ref } from 'vue'
 const inputTextDefault  = ref('')
@@ -34,6 +36,8 @@ const inputRadioDataSeven = [
 const inputCurrencyIncome  = ref('0.00')
 const inputCurrencyExpense  = ref('0.00')
 
+const inputColor  = ref('#90A4AE')
+
 const inputTextareaDefault  = ref('')
 const inputTextareaPlaceholder  = ref('')
 </script>
@@ -60,6 +64,17 @@ const inputTextareaPlaceholder  = ref('')
     <CustomInputCurrency
       transaction-type="expense"
       v-model="inputCurrencyExpense"
+    />
+  </li>
+  <li>
+    <p><strong>Color</strong></p>
+    <CustomInputColor
+      v-model="inputColor"
+    />
+  </li>
+  <li>
+    <p><strong>Color width picker</strong></p>
+    <CustomInputColorPicker
     />
   </li>
   <li>

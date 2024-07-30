@@ -75,7 +75,7 @@
   .custom-input-radio {
     align-items: center;
     background: var(--background-color);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     border: none;
     color: var(--text-color);
     display: flex;

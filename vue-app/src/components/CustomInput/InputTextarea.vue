@@ -5,7 +5,7 @@
   import { useThemeStore } from '@stores/theme'
 
   // Vue defines
-  defineOptions({name: 'CustomInputText'})
+  defineOptions({name: 'CustomInputTextarea'})
   const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
   // Props
@@ -51,7 +51,7 @@
     .textarea-tag {
       align-items: center;
       background: var(--background-color);
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       border: none;
       color: var(--text-color);
       field-sizing: content;
