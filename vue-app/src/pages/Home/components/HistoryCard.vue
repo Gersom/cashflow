@@ -1,6 +1,7 @@
 <script setup>
 import CardHead from '@components/CardHead/CardHead.vue'
 import TransactionBadge from '@components/TransactionBadge/TransactionBadge.vue';
+import MovementCard from './MovementCard/MovementCard.vue';
 
 defineOptions({
   name: 'HistoryCard'
@@ -22,6 +23,7 @@ defineOptions({
       </div>
     </div>
 
+    <MovementCard/>
 
   </div>
 </template>
@@ -42,11 +44,5 @@ defineOptions({
       }
     }
 
-
   }
 </style>
-<!-- .card {
-  &.history-card {
-   
-  }
-} -->
