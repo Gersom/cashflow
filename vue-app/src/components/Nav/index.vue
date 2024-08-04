@@ -1,28 +1,24 @@
 <script setup>
-defineOptions({ name: 'Nav' })
-import IconLogo from '@icons/IconLogo.vue';
-import IconLogOut from '@icons/login/IconLogOut.vue';
-import links from './data/link-list.js'
-import NavLink from './components/NavLink.vue';
-import { useRouter } from 'vue-router'
-const router = useRouter()
+defineOptions({ name: "Nav" });
+import IconLogo from "@icons/others/IconLogo.vue";
+import IconLogOut from "@icons/login/IconLogOut.vue";
+import links from "./data/link-list.js";
+import NavLink from "./components/NavLink.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const toLogout = () => {
   // code
-}
+};
 const toHome = () => {
-  router.push('/')
-}
+  router.push("/");
+};
 </script>
 
 <template>
   <nav class="nav">
     <div class="nav-content">
-      <button
-        class="logo"
-        type="button"
-        @click="toHome"
-      >
+      <button class="logo" type="button" @click="toHome">
         <IconLogo />
       </button>
       <div class="items">
@@ -34,11 +30,7 @@ const toHome = () => {
           :text="link.text"
         />
       </div>
-      <button
-        class="logout"
-        type="button"
-        @click="toLogout"
-      >
+      <button class="logout" type="button" @click="toLogout">
         <IconLogOut />
       </button>
     </div>
@@ -51,7 +43,7 @@ const toHome = () => {
   width: 80px;
   position: relative;
   &:before {
-    content: '';
+    content: "";
     height: 70px;
     width: 70px;
     background: var(--background-color2);
@@ -70,7 +62,8 @@ const toHome = () => {
     top: 0;
     left: 0px;
   }
-  .logo, .logout {
+  .logo,
+  .logout {
     height: 30px;
     border: 0;
     background: none;
