@@ -26,7 +26,7 @@ const onClose = () => {
 
 <template>
   <div
-    class="custom-dialog"
+    class="dialog-blur"
     :class="{ 'is-dark-theme': themeStore.currentTheme === 'dark' }"
     v-show="props.show"
   >
@@ -41,11 +41,11 @@ const onClose = () => {
 </template>
 
 <style lang="scss" scoped>
-.custom-dialog {
+.dialog-blur {
   display: flex;
   justify-content: center;
   .blur {
-    background: rgb(var(--primary-color-rgb) / 10%);
+    background: rgb(0 0 0 / 20%);
     backdrop-filter: blur(3px);
     height: 100%;
     left: 0;
@@ -73,14 +73,10 @@ const onClose = () => {
   }
 
   /* Dark Theme */
-  /*&.is-dark-theme {
-      .input-tag {
-        color: var(--text-color);
-        background: rgb(20 21 26 / 30%);
-      }
-      .input-tag:focus {
-        background: rgb(20 21 26 / 70%);
-      }
-    }*/
+  &.is-dark-theme {
+    .blur {
+      background: rgb(var(--primary-color-rgb) / 10%);
+    }
+  }
 }
 </style>

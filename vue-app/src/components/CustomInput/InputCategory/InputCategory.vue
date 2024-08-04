@@ -4,7 +4,8 @@ import { ref, nextTick } from "vue";
 import NewItem from "./components/NewItem.vue";
 import Category from "./components/Category.vue";
 import CategorySelect from "./components/CategorySelect.vue";
-import CustomDialog from "@components/CustomDialog/index.vue";
+import DialogBlur from "@layouts/DialogBlur.vue";
+import { useThemeStore } from "@stores/theme";
 
 // Vue defines
 defineOptions({ name: "CustomInputCategories" });
@@ -13,6 +14,9 @@ const emit = defineEmits(["vnode-unmounted", "change-categories"]);
 // Data
 const showCategorySelect = ref(false);
 const categories = ref([]);
+
+// Store
+const themeStore = useThemeStore();
 
 // Methods
 const selectCategorySelect = (cat) => {
@@ -39,7 +43,10 @@ const toogleCategorySelect = () => {
 </script>
 
 <template>
-  <div class="custom-input-categories">
+  <div
+    class="custom-input-categories"
+    :class="{ 'is-dark-theme': themeStore.isDarkTheme }"
+  >
     <div class="container">
       <button
         class="item"
@@ -58,12 +65,13 @@ const toogleCategorySelect = () => {
         <NewItem :show-close="showCategorySelect" />
       </button>
     </div>
-    <CustomDialog :show="showCategorySelect" @close="closeCategorySelect">
+
+    <DialogBlur :show="showCategorySelect" @close="closeCategorySelect">
       <CategorySelect
         :selected-categories="categories"
         @select="selectCategorySelect"
       />
-    </CustomDialog>
+    </DialogBlur>
   </div>
 </template>
 
@@ -72,7 +80,7 @@ const toogleCategorySelect = () => {
   position: relative;
   .container {
     align-items: center;
-    background: #22242e;
+    background: var(--background-color);
     border-radius: var(--border-radius);
     display: flex;
     justify-content: center;
@@ -90,6 +98,11 @@ const toogleCategorySelect = () => {
     }
     .item:first-child {
       margin-left: 0;
+    }
+  }
+  &.is-dark-theme {
+    .container {
+      background: #22242e;
     }
   }
 }
