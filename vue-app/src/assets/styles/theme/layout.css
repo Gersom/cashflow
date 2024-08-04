@@ -11,6 +11,7 @@
 
   /* Backgrounds */
   --background-color: var(--dark-background-color);
+  --background-color-rgb: var(--dark-background-color-rgb);
   --background-color2: var(--dark-background-color2);
 
   /* Text */
