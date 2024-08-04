@@ -5,6 +5,7 @@ import CustomInputRadio from "@components/CustomInput/InputRadio.vue";
 import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue";
 import CustomInputColor from "@components/CustomInput/InputColor.vue";
 import CustomInputColorPicker from "@components/CustomInput/InputColorPicker.vue";
+import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue";
 
 import { ref } from 'vue'
 const inputTextDefault  = ref('')
@@ -46,7 +47,12 @@ const inputTextareaPlaceholder  = ref('')
 <ul class='input-section'>
   <li>
     <p><strong>Text</strong> default</p>
+    <i class="icon icon-box" aria-label="icono caja" />
     <CustomInputText v-model="inputTextDefault" />
+  </li>
+  <li>
+    <p><strong>Category</strong> default</p>
+    <InputCategory />
   </li>
   <li>
     <p><strong>Text</strong> placeholder</p>
