@@ -1,5 +1,11 @@
 /* Additional global styles can be added here */
-.is-dark-mode {
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-medium);
+}
+
+.is-dark-theme {
   /* States */
   --success-color: var(--dark-success-color);
 
@@ -15,12 +21,6 @@
   /* Buttons */
   --button-background-disabled: var(--dark-button-background-disabled);
   --button-color-disabled: var(--dark-button-color-disabled);
-}
-
-.container {
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-medium);
 }
 
 /* Media queries for responsive design */
