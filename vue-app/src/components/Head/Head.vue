@@ -1,12 +1,13 @@
 <script setup>
-defineEmits(['vnode-unmounted'])
+
 import { useRoute } from 'vue-router'
-import { reactive, computed } from 'vue'
-import {getCurrentMonthName} from '../../utils/date.js'
+import { computed } from 'vue'
+import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
 
 const route = useRoute()
 
 const month = getCurrentMonthName()
+const year = getCurrentYear()
 
 const routerTitleMap = {
   Home: 'Bienvenido',
@@ -14,7 +15,7 @@ const routerTitleMap = {
 }
 
 const titleName = computed(()=>{
-  return routerTitleMap[route.name] || route.slice(1);
+  return routerTitleMap[route.name] || route.path.slice(1);
 })
 
 const props = defineProps({
@@ -34,8 +35,8 @@ defineOptions({
   <header class="page-header">
     <div class="header-content">
       <div class="info">
-        <h2 class="page-title">{{titleName}}</h2>
-        <small class="user-name">{{props.userName}}</small>
+        <h1 class="page-title">{{titleName}}</h1>
+        <p class="user-name">{{props.userName}}</p>
       </div>
       <div class="user-avatar">
         <img
@@ -45,68 +46,80 @@ defineOptions({
     </div>
 
     <div class="header-date">
-      <time :datetime="`${Date.now.month} ${Date.now.year}`">
-        <span>
-          {{month}} 
-        </span>
-        <span>
-          {{Date.now.year}}
-        </span>
+      <time :datetime="Date.now()">
+        <span class="month">{{month}}</span>
+        <span class="year">{{year}}</span>
       </time>
     </div>
   </header>
 </template>
 
-<style  scoped>
-.head{
+<style lang="scss" scoped>
+
+.page-header {
   display: flex;
   justify-content: space-between;
-}
 
-.greater{
-  height: 10vh;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-}
+  .header-content {
+    height: 10vh;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 
-.info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-.left h2 {
-  color: var(--primary-color);
-  display: block;
-  line-height: .7;
-  margin: 0;
-  padding: 0;
-  font-size: 3rem;
-}
+      .page-title {
+        color: var(--primary-color);
+        display: block;
+        line-height: 0.7;
+        margin: 0;
+        padding: 0;
+        font-size: 3rem;
+      }
 
-.left small {
-  margin: 0;
-  font-size: 2.5vh;
-  line-height: 1.9;
-  padding: 0 .2rem;
-  color: var(--text-color);
-}
+      .user-name {
+        margin: 0;
+        font-size: 2.5vh;
+        line-height: 1.9;
+        padding: 0 0.2rem;
+        color: var(--text-color);
+      }
+    }
 
-.profile--container {
-  position: relative;
-  width: 7.5vh;
-  height: 7.5vh;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 1rem;
-  background-color: var(--primary-color);
-  box-shadow: 0px 0px 0px .5vh var(--primary-color);
-}
+    .user-avatar {
+      position: relative;
+      width: 7.5vh;
+      height: 7.5vh;
+      overflow: hidden;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--primary-color);
+      box-shadow: 0px 0px 0px 0.5vh var(--primary-color);
+    }
+  }
 
-.right .month h2{
-  color: var(--subtitle-color);
+  .header-date {
+    color: var(--subtitle-color);
+    display: flex;
+    align-items: center;
+    font-weight:500;
 
+    .month {
+      font-size: 3rem;
+      text-transform: capitalize;
+
+      &::after {
+        content: " ";
+      }
+    }
+
+    .year {
+      font-size: 5rem;
+    }
+  }
 }
 
 </style>
