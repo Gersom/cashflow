@@ -65,7 +65,7 @@ const selectValue = (selected) => {
       gap: 1rem;
       position: relative;
       margin: 0;
-      padding: 0 0 5px 0;
+      padding: 0 0 10px 0;
     }
 
     & button::after {
@@ -83,7 +83,7 @@ const selectValue = (selected) => {
       position: relative;
       display: inline-block;
       margin: 0;
-      padding: 0 0 5px 0;
+      padding: 0 0 10px 0;
       font-weight: bolder;
     }
 
