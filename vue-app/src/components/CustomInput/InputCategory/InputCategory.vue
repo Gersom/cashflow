@@ -5,7 +5,7 @@ import { storeToRefs } from "pinia";
 import { useThemeStore } from "@stores/theme";
 import NewItem from "./components/NewItem.vue";
 import Category from "./components/Category.vue";
-import CategoryList from "./components/CategoryList.vue";
+import CategorySelect from "./components/CategorySelect.vue";
 
 // Vue defines
 defineOptions({ name: "CustomInputCategories" });
@@ -84,7 +84,10 @@ const toggleCategorySelect = () => {
         </button>
       </div>
     </div>
-    <CategoryList @select="selectCategorySelect" v-show="showCategorySelect" />
+    <CategorySelect
+      @select="selectCategorySelect"
+      v-show="showCategorySelect"
+    />
   </div>
 </template>
 
