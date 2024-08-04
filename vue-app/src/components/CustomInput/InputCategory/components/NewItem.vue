@@ -1,15 +1,13 @@
 <script setup>
-  import IconAdd from '@icons/actions/IconAdd.vue'
+import IconAdd from "@icons/actions/IconAdd.vue";
 </script>
 
 <template>
-  <div class='new-item'>
+  <div class="new-item">
     <span class="icon">
       <IconAdd />
     </span>
-    <span class="text">
-      Agregar
-    </span>
+    <span class="text"> Agregar </span>
   </div>
 </template>
 
