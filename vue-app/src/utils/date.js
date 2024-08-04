@@ -13,10 +13,8 @@ const getCurrentYear = (locale = 'es-ES') => {
     return date.toLocaleString(locale, { year: 'numeric' });
 };
 
-const funcs = {
+export {
     getCurrentMonthName,
     getCurrentDayName,
     getCurrentYear
 }
-
-export default funcs;

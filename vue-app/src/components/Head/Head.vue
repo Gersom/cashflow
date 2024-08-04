@@ -14,21 +14,13 @@ const routerTitleMap = {
 }
 
 const titleName = computed(()=>{
-  return routerTitleMap[route.name] || route.name;
+  return routerTitleMap[route.name] || route.slice(1);
 })
 
 const props = defineProps({
   userName: {
     type: String,
     default: 'User 1223314'
-  },
-  month: {
-    type: String,
-    default: 'Octubre'
-  },
-  year: {
-    type: String,
-    default: '2022'
   }
 });
 
