@@ -4,6 +4,7 @@
 :root {
   /* General */
   --primary-color: #3fa2f6;
+  --primary-color-rgb: 63 162 246;
   --secondary-color: #00eca6;
 
   /* States */

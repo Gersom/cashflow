@@ -1,13 +1,24 @@
 <script setup>
 import IconAdd from "@icons/actions/IconAdd.vue";
+import IconClose from "@icons/actions/IconClose.vue";
+
+const props = defineProps({
+  showClose: {
+    type: Boolean,
+    default: false,
+  },
+});
 </script>
 
 <template>
   <div class="new-item">
     <span class="icon">
-      <IconAdd />
+      <IconAdd v-show="!props.showClose" />
+      <IconClose v-show="props.showClose" />
     </span>
-    <span class="text"> Agregar </span>
+    <span class="text">
+      {{ props.showClose ? "Cerrar" : "Agregar" }}
+    </span>
   </div>
 </template>
 
