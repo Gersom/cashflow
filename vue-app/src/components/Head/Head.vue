@@ -2,12 +2,18 @@
 
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
+import { useUserStore } from '@stores/user';
+import { storeToRefs } from 'pinia';
 import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
 
 const route = useRoute()
 
 const month = getCurrentMonthName()
 const year = getCurrentYear()
+
+
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
 
 const routerTitleMap = {
   Home: 'Bienvenido',
@@ -18,12 +24,6 @@ const titleName = computed(()=>{
   return routerTitleMap[route.name] || route.path.slice(1);
 })
 
-const props = defineProps({
-  userName: {
-    type: String,
-    default: 'User 1223314'
-  }
-});
 
 defineOptions({
   name: 'Head'
@@ -36,7 +36,7 @@ defineOptions({
     <div class="header-content">
       <div class="info">
         <h1 class="page-title">{{titleName}}</h1>
-        <p class="user-name">{{props.userName}}</p>
+        <p class="user-name">{{user.name}}</p>
       </div>
       <div class="user-avatar">
         <img
