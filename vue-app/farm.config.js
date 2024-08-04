@@ -15,6 +15,7 @@ export default defineConfig({
         '@layouts': path.join(process.cwd(), "src/layouts"),
         '@pages': path.join(process.cwd(), "src/pages"),
         '@stores': path.join(process.cwd(), "src/stores"),
+        '@utils' : path.join(process.cwd(), "src/utils")
       },
     },
   },
