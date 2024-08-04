@@ -15,17 +15,17 @@ const props = defineProps({
   },
 });
 
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-const route = useRoute()
+const route = useRoute();
 const isRouteCurrent = computed(() => {
-  return route?.name?.toLowerCase() === props?.pageName?.toLowerCase()
-})
+  return route?.name?.toLowerCase() === props?.pageName?.toLowerCase();
+});
 </script>
 
 <template>
-  <div :class="['nav-link', {'is-current-page': isRouteCurrent}]">
+  <div :class="['nav-link', { 'is-current-page': isRouteCurrent }]">
     <RouterLink :to="{ name: pageName }">
       <div class="link-icon">
         <component :is="iconComponent" />
@@ -40,7 +40,11 @@ const isRouteCurrent = computed(() => {
 <style lang="scss" scoped>
 .nav-link {
   .link-icon {
-    height: 30px;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .link-icon,
   .link-text {
@@ -50,9 +54,21 @@ const isRouteCurrent = computed(() => {
   /**.link-text {
     margin-left: 10px;
   }*/
-  & > * {
+  a {
     display: flex;
     align-items: center;
+    padding: 15px 0;
+    position: relative;
+    justify-content: center;
+    &:before {
+      content: "";
+      height: 20px;
+      width: 4px;
+      background: var(--primary-color);
+      position: absolute;
+      left: 0;
+      display: none;
+    }
   }
   &:hover {
     .link-icon,
@@ -63,6 +79,9 @@ const isRouteCurrent = computed(() => {
 }
 
 .nav-link.is-current-page {
+  a:before {
+    display: block;
+  }
   .link-icon,
   .link-text {
     color: var(--primary-color);

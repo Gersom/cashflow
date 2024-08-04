@@ -1,10 +1,13 @@
 <script setup>
 defineOptions({ name: "Nav" });
 import IconLogo from "@icons/others/IconLogo.vue";
-import IconLogOut from "@icons/login/IconLogOut.vue";
+import IconInfo from "@icons/nav/IconInfo.vue";
 import links from "./data/link-list.js";
 import NavLink from "./components/NavLink.vue";
 import { useRouter } from "vue-router";
+import { useAppStore } from "@stores/app";
+
+const appStore = useAppStore();
 const router = useRouter();
 
 const toLogout = () => {
@@ -18,9 +21,12 @@ const toHome = () => {
 <template>
   <nav class="nav">
     <div class="nav-content">
-      <button class="logo" type="button" @click="toHome">
-        <IconLogo />
-      </button>
+      <div class="logo" type="button">
+        <div class="icon-logo">
+          <IconLogo />
+        </div>
+        <span class="version">{{ appStore.version }}</span>
+      </div>
       <div class="items">
         <NavLink
           v-for="(link, index) in links"
@@ -30,8 +36,10 @@ const toHome = () => {
           :text="link.text"
         />
       </div>
-      <button class="logout" type="button" @click="toLogout">
-        <IconLogOut />
+      <button class="button-info" type="button" @click="toLogout">
+        <div class="icon-info">
+          <IconInfo />
+        </div>
       </button>
     </div>
   </nav>
@@ -40,42 +48,61 @@ const toHome = () => {
 <style lang="scss" scoped>
 .nav {
   height: 100%;
-  width: 80px;
+  width: 61px;
   position: relative;
-  &:before {
-    content: "";
-    height: 70px;
-    width: 70px;
-    background: var(--background-color2);
-  }
+  // &:before {
+  //   content: "";
+  //   height: 70px;
+  //   width: 70px;
+  //   background: var(--background-color2);
+  // }
   .nav-content {
     background: var(--background-color2);
-    width: 70px;
-    padding: 20px 0;
+    width: 61px;
+    padding: 15px 0;
     height: 100%;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     position: fixed;
     top: 0;
     left: 0px;
   }
-  .logo,
-  .logout {
-    height: 30px;
-    border: 0;
-    background: none;
-    color: var(--text-color);
-  }
-  .logout {
-    &:hover {
-      color: var(--secondary-color);
+  .logo {
+    .icon-logo {
+      height: 20px;
+    }
+    .version {
+      font-size: 10px;
+    }
+    &:after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      background: rgb(255 255 255 / 10%);
+      margin: 15px 0 0px 0;
+      display: block;
     }
   }
-  .items > * {
-    margin: 20px 0;
+  .button-info {
+    background: none;
+    border: none;
+    margin-top: auto;
+    .icon-info {
+      height: 20px;
+      color: var(--text-color);
+    }
   }
+  .items {
+    width: 100%;
+  }
+  // .items > * {
+  //   margin-top: 25px;
+  // }
+  // .items > *:first-child {
+  //   margin-top: 0px;
+  // }
 }
 </style>
