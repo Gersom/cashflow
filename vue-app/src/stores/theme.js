@@ -2,20 +2,20 @@ import { defineStore } from 'pinia'
 
 export const useThemeStore = defineStore('theme', {
   state: () => ({
-    isDarkMode: true
+    isDarkTheme: true
   }),
   getters: {
-    currentTheme: (state) => state.isDarkMode ? 'dark' : 'light'
+    currentTheme: (state) => state.isDarkTheme ? 'dark' : 'light'
   },
   actions: {
     setLightMode() {
-      this.isDarkMode = false
+      this.isDarkTheme = false
     },
     setDarkMode() {
-      this.isDarkMode = true
+      this.isDarkTheme = true
     },
     toggleTheme() {
-      this.isDarkMode = !this.isDarkMode
+      this.isDarkTheme = !this.isDarkTheme
     }
   }
 })
