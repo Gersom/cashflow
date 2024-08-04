@@ -57,11 +57,11 @@ const onClose = () => {
   .content {
     background: var(--background-color);
     position: absolute;
-    bottom: calc(100% + 20px);
+    bottom: calc(100% + 15px);
     z-index: 13;
     border-radius: 10px;
     .icon {
-      height: 30px;
+      height: 20px;
       color: var(--background-color);
       position: absolute;
       top: calc(100% - 7px);
