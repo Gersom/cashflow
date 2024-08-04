@@ -14,7 +14,9 @@ export const useUserStore = defineStore('user', {
       amount: '9999.45',
       symbol: 'S/.',
       name: 'Soles',
-      code: 'PEN'
+      code: 'PEN',
+      currencyPosition: 'before',
+      decimalPlaces: 2
     }
   }),
   getters: {
