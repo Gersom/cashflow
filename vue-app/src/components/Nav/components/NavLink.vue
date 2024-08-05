@@ -67,7 +67,9 @@ const isRouteCurrent = computed(() => {
       background: var(--primary-color);
       position: absolute;
       left: 0;
-      display: none;
+      display: block;
+      opacity: 0;
+      transition: 0.5s ease opacity;
     }
   }
   &:hover {
@@ -80,7 +82,7 @@ const isRouteCurrent = computed(() => {
 
 .nav-link.is-current-page {
   a:before {
-    display: block;
+    opacity: 1;
   }
   .link-icon,
   .link-text {
