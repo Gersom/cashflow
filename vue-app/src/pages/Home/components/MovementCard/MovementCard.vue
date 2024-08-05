@@ -1,6 +1,7 @@
 <script setup>
 import TransactionBadge from '@components/TransactionBadge/TransactionBadge.vue';
 import { computed } from 'vue';
+import BookmarkTag from './components/BookmarkTag.vue';
 
 const emit = defineEmits(["click"]);
 const props = defineProps({
@@ -28,11 +29,8 @@ const formattedDate = computed(() => {
 <template>
     
     <div class="bookmarks">
-        <div class="bookmark">
-            <span>Casa</span>
-            <span class="fix"/>
-        </div>
-        <div class="bookmark">nocasa</div>
+       <BookmarkTag/>
+       <BookmarkTag/>
     </div>
     <div class="info-tag-wrapper">
         <div class="info-tag">
@@ -125,10 +123,6 @@ const formattedDate = computed(() => {
     }
 
     &:hover {
-        .content {
-            opacity: 0;
-        }
-
         .edit-button {
             opacity: 1;
         }
@@ -137,34 +131,6 @@ const formattedDate = computed(() => {
 
 .bookmarks{
     display: flex;
-}
-
-.bookmark {
-    height: 24px;
-    position:relative;
-    top: 0px;
-    background-color: #e87461;
-    color: var(--text-color);
-    padding: 4px 12px;
-    border-radius: 8px 8px 0 0 ;
-    font-weight: bold;
-    font-size: 14px;
-    z-index: 0;
-    width: fit-content;
-
-    &::before {
-        content: '🏠';
-        margin-right: 4px;
-    }
-
-    .fix{
-        content: '';
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 10px;
-        background-color: #e87461;
-    }
+    gap: 3px;
 }
 </style>
