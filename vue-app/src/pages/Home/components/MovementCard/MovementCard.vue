@@ -1,5 +1,6 @@
 <script setup>
 import TransactionBadge from '@components/TransactionBadge/TransactionBadge.vue';
+import IconEdit from '@icons/actions/IconEdit.vue';
 import { computed } from 'vue';
 import BookmarkTag from './components/BookmarkTag.vue';
 
@@ -27,10 +28,10 @@ const formattedDate = computed(() => {
 </script>
 
 <template>
-    
+
     <div class="bookmarks">
-       <BookmarkTag/>
-       <BookmarkTag/>
+        <BookmarkTag />
+        <BookmarkTag />
     </div>
     <div class="info-tag-wrapper">
         <div class="info-tag">
@@ -44,24 +45,37 @@ const formattedDate = computed(() => {
                 </div>
             </div>
             <button class="edit-button">
-                text
+                <div class="edit-hover">
+                    <div class="icon">
+                        <IconEdit />
+                    </div>
+                    <div class="edit-text">
+                        <p class="name">Editar</p>
+                        <p class="description">{{ props.text}}</p>
+                    </div>
+                </div>
             </button>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+.bookmarks {
+    display: flex;
+    gap: 3px;
+}
+
 .info-tag-wrapper {
     position: relative;
     height: 56px;
     width: 100%;
-    
+
     .info-tag {
         position: relative;
         height: 100%;
         width: 100%;
         background-color: var(--background-color-2);
-        
+
         .content {
             border-radius: var(--border-radius);
             border: 2px solid var(--background-color);
@@ -73,7 +87,8 @@ const formattedDate = computed(() => {
             display: flex;
             justify-content: space-between;
             padding: 10px;
-            background-color: var(--background-color2);;
+            background-color: var(--background-color2);
+            ;
             transition: opacity .3s ease;
             z-index: 2;
         }
@@ -120,6 +135,48 @@ const formattedDate = computed(() => {
         opacity: 0;
         transition: opacity 0.3s ease;
         z-index: 2;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+
+        .edit-hover {
+            display: flex;
+            align-items: center;
+            color: var(--text-color);
+            font-family: var(--font-nunito);
+            gap: 4px;
+
+            .icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .edit-text {
+                height: 56px;
+                display: flex;
+                flex-direction: column;
+                padding: 13px 0;
+                .name {
+                    height: auto;
+                    margin: 0;
+                    text-align: left;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 1;
+                }
+
+                .description {
+                    margin: 0;
+                    text-align: left;
+                    font-size: 14px;
+                    line-height: 1.1;
+                    width: 100%;
+                }
+            }
+        }
     }
 
     &:hover {
@@ -127,10 +184,5 @@ const formattedDate = computed(() => {
             opacity: 1;
         }
     }
-}
-
-.bookmarks{
-    display: flex;
-    gap: 3px;
 }
 </style>

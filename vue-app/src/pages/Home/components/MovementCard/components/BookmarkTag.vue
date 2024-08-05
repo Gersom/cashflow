@@ -60,11 +60,6 @@ const props = defineProps({
         }
     }
 
-
-        
-
-    
-
     .fix {
         content: '';
         position: absolute;
