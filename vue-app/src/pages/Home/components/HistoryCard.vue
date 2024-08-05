@@ -23,7 +23,7 @@ defineOptions({
       </div>
     </div>
 
-    <MovementCard/>
+    <MovementCard :date="new Date"/>
 
   </div>
 </template>
