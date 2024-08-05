@@ -6,8 +6,10 @@ import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue";
 import CustomInputColor from "@components/CustomInput/InputColor.vue";
 import CustomInputColorPicker from "@components/CustomInput/InputColorPicker.vue";
 import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue";
+import IconUrl from "@icons/form/IconUrl.vue";
 
 import { ref } from "vue";
+const inputTextIcon = ref("");
 const inputTextDefault = ref("");
 const inputTextPlaceholder = ref("");
 
@@ -60,6 +62,16 @@ const onChangeCategories = (categories) => {
     <li>
       <p><strong>Text</strong> placeholder</p>
       <CustomInputText v-model="inputTextPlaceholder" placeholder="Ola 👌" />
+    </li>
+
+    <!-- Input Text Default -->
+    <li>
+      <p>text icon</p>
+      <CustomInputText
+        placeholder="https://..."
+        v-model="inputTextIcon"
+        :icon-component="IconUrl"
+      />
     </li>
 
     <!-- Input Category -->

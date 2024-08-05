@@ -18,6 +18,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  iconComponent: {
+    type: [Boolean, Object],
+    default: false,
+  },
 });
 
 // Store
@@ -36,9 +40,21 @@ const valueInput = computed({
 <template>
   <div
     class="custom-input-text"
-    :class="{ 'is-dark-theme': currentTheme === 'dark' }"
+    :class="{
+      'is-icon': iconComponent,
+      'is-dark-theme': currentTheme === 'dark',
+    }"
   >
-    <input class="input-tag" v-model="valueInput" :placeholder="placeholder" />
+    <label class="label">
+      <div class="icon-component" v-if="iconComponent">
+        <component :is="iconComponent" />
+      </div>
+      <input
+        class="input-tag"
+        v-model="valueInput"
+        :placeholder="placeholder"
+      />
+    </label>
   </div>
 </template>
 
@@ -55,6 +71,26 @@ const valueInput = computed({
     height: 36px;
     padding: 0 15px;
     width: 100%;
+  }
+  .label {
+    position: relative;
+  }
+
+  &.is-icon {
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-component {
+      position: absolute;
+      left: 15px;
+      height: 18px;
+      color: var(--text-color);
+    }
+    .input-tag {
+      padding-left: 38px;
+    }
   }
 
   /* Dark Theme */
