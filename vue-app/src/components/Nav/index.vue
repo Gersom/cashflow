@@ -108,6 +108,10 @@ const toHome = () => {
     .icon-info {
       height: 20px;
       color: var(--text-color);
+      transition: 0.3s ease color;
+      &:hover {
+        color: var(--secondary-color);
+      }
     }
   }
   .items {
