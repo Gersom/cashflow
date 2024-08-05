@@ -66,7 +66,11 @@ const toogleCategorySelect = () => {
       </button>
     </div>
 
-    <DialogBlur :show="showCategorySelect" @close="closeCategorySelect">
+    <DialogBlur
+      :show="showCategorySelect"
+      :dependent="true"
+      @close="closeCategorySelect"
+    >
       <CategorySelect
         :selected-categories="categories"
         @select="selectCategorySelect"
@@ -94,7 +98,7 @@ const toogleCategorySelect = () => {
       padding: 0;
       position: relative;
       width: 60px;
-      z-index: 12;
+      z-index: 11;
     }
     .item:first-child {
       margin-left: 0;

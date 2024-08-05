@@ -1,17 +1,25 @@
 <script setup>
 defineOptions({ name: "Nav" });
-import IconLogo from "@icons/others/IconLogo.vue";
+import { useAppStore } from "@stores/app";
+import { useRouter } from "vue-router";
 import IconInfo from "@icons/nav/IconInfo.vue";
+import IconLogo from "@icons/others/IconLogo.vue";
 import links from "./data/link-list.js";
 import NavLink from "./components/NavLink.vue";
-import { useRouter } from "vue-router";
-import { useAppStore } from "@stores/app";
+import DialogBlur from "@layouts/DialogBlur.vue";
+import InfoModal from "./components/InfoModal.vue";
+import { ref } from "vue";
 
 const appStore = useAppStore();
 const router = useRouter();
 
-const toLogout = () => {
-  // code
+const showInfoModal = ref(false);
+
+const openInfoModal = () => {
+  showInfoModal.value = true;
+};
+const closeInfoModal = () => {
+  showInfoModal.value = false;
 };
 const toHome = () => {
   router.push("/");
@@ -36,12 +44,19 @@ const toHome = () => {
           :text="link.text"
         />
       </div>
-      <button class="button-info" type="button" @click="toLogout">
+      <button class="button-info" type="button" @click="openInfoModal">
         <div class="icon-info">
           <IconInfo />
         </div>
       </button>
     </div>
+    <DialogBlur
+      :button-close="true"
+      :show="showInfoModal"
+      @close="closeInfoModal"
+    >
+      <InfoModal />
+    </DialogBlur>
   </nav>
 </template>
 
