@@ -1,20 +1,18 @@
 <script setup>
 // Imports
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useThemeStore } from "@stores/theme";
+import IconEye from "@icons/form/IconEye.vue";
+import IconEyeSlash from "@icons/form/IconEyeSlash.vue";
 
 // Vue defines
-defineOptions({ name: "CustomInputText" });
+defineOptions({ name: "CustomInputPassword" });
 const emit = defineEmits(["vnode-unmounted", "update:modelValue"]);
 
 // Props
 const props = defineProps({
   modelValue: {
-    type: String,
-    default: "",
-  },
-  placeholder: {
     type: String,
     default: "",
   },
@@ -27,6 +25,9 @@ const props = defineProps({
 // Store
 const themeStore = useThemeStore();
 const { currentTheme } = storeToRefs(themeStore);
+
+// Data
+const showPassword = ref(false);
 
 // Computed
 const valueInput = computed({
@@ -51,9 +52,32 @@ const valueInput = computed({
       </div>
       <input
         class="input-tag"
+        type="text"
         v-model="valueInput"
-        :placeholder="placeholder"
+        v-if="showPassword"
       />
+      <input
+        class="input-tag"
+        type="password"
+        v-model="valueInput"
+        v-if="!showPassword"
+      />
+      <button
+        class="showEye"
+        v-show="showPassword"
+        type="button"
+        @click="showPassword = !showPassword"
+      >
+        <IconEye />
+      </button>
+      <button
+        class="showEye"
+        v-show="!showPassword"
+        type="button"
+        @click="showPassword = !showPassword"
+      >
+        <IconEyeSlash />
+      </button>
     </label>
   </div>
 </template>
@@ -74,6 +98,16 @@ const valueInput = computed({
   }
   .label {
     position: relative;
+  }
+  .showEye {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    height: 20px;
+    padding: 0;
   }
 
   &.is-icon {
