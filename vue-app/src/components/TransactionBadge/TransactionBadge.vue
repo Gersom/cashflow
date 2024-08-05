@@ -27,12 +27,12 @@ const formattedAmount = computed(() => Math.abs(props.amount).toFixed(currency.d
   <div class="transaction-badge" :class="{ positive: isPositive }">
     <template v-if="currency.currencyPosition === 'before'">
       <p class="badge">
-        {{ sign }} {{ currency.symbol }} {{ formattedAmount }} 
+        {{ sign }} {{ currency.symbol }} {{ formattedAmount }}
       </p>
     </template>
     <template v-else>
       <p class="badge">
-        {{ sign }} {{ formattedAmount }} {{ currency.symbol }} 
+        {{ sign }} {{ formattedAmount }} {{ currency.symbol }}
       </p>
     </template>
     <div class="arrow-icon" :class="{ 'rotate-180': !isPositive }">
@@ -42,34 +42,47 @@ const formattedAmount = computed(() => Math.abs(props.amount).toFixed(currency.d
 </template>
 
 <style scoped>
-
-.badge{
-  padding: 0;
-  margin: 0 5px 0 0;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: var(--font-poppins);
-}
-
 .transaction-badge {
-  display: inline-flex;
-  align-items: center;
-  
-}
-.transaction-badge.positive {
-  color: var(--success-color);
-}
-.transaction-badge:not(.positive) {
-  color: var(--error-color);
-}
-.arrow-icon {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 12px;
-  height: 12px;
-  transition: transform 0.3s ease;
+  padding: 0;
+  margin: 0;
+  
+  .badge {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: var(--font-poppins);
+  }
+
+  .arrow-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 12px;
+    transition: transform 0.3s ease;
+    padding: 0;
+    margin: 0;
+  }
 }
+
+.transaction-badge.positive {
+  color: var(--success-color);
+
+  .arrow-icon {
+    padding-left: 4px;
+  }
+}
+
+.transaction-badge:not(.positive) {
+  color: var(--error-color);
+  .arrow-icon {
+    padding-right: 4px;
+  }
+}
+
 .rotate-180 {
   transform: rotate(180deg);
 }

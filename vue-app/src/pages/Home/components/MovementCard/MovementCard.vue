@@ -8,9 +8,9 @@ import CardButton from './components/CardButton.vue';
 <template>
     <div class="card">
         <div class="category">
-  
+            
         </div>
-        <CardButton />
+        <CardButton :date="new Date"/>
     </div>
 </template>
 
