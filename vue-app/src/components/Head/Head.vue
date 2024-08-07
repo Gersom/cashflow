@@ -17,7 +17,7 @@ const { user } = storeToRefs(userStore);
 
 const routerTitleMap = {
   Home: 'Bienvenido',
-  //dashboard: 'configuracion',
+  Profile: 'Mi Perfil'
 }
 
 const titleName = computed(()=>{
@@ -59,11 +59,11 @@ defineOptions({
 .page-header {
   display: flex;
   justify-content: space-between;
-
+  gap: 20px;
   .header-content {
     height: 10vh;
     display: flex;
-    gap: 2rem;
+    gap: 25px;
     align-items: center;
 
     .info {
@@ -74,25 +74,28 @@ defineOptions({
       .page-title {
         color: var(--primary-color);
         display: block;
-        line-height: 0.7;
+        line-height: 1;
         margin: 0;
         padding: 0;
-        font-size: 3rem;
+        font-size: 40px;
+        font-family: var(--font-secular);
       }
-
+      
       .user-name {
         margin: 0;
-        font-size: 2.5vh;
+        font-size: 16px;
+        font-weight: 500;
         line-height: 1.9;
         padding: 0 0.2rem;
+        font-family: var(--font-poppins);
         color: var(--text-color);
       }
     }
 
     .user-avatar {
       position: relative;
-      width: 7.5vh;
-      height: 7.5vh;
+      width: 70px;
+      height: 70px;
       overflow: hidden;
       border-radius: 50%;
       border: none;
@@ -108,7 +111,7 @@ defineOptions({
     font-weight:500;
 
     .month {
-      font-size: 3rem;
+      font-size: 32px;
       text-transform: capitalize;
 
       &::after {
@@ -117,7 +120,7 @@ defineOptions({
     }
 
     .year {
-      font-size: 5rem;
+      font-size: 40px;
     }
   }
 }
