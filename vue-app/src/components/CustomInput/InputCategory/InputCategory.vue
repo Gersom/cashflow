@@ -91,6 +91,7 @@ const toogleCategorySelect = () => {
     padding: 10px 15px;
     position: relative;
     width: 100%;
+    height: 66px;
     .item {
       background: none;
       border: none;

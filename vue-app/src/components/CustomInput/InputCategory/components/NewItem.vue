@@ -31,9 +31,9 @@ const props = defineProps({
     align-items: center;
     border-radius: var(--border-radius);
     display: flex;
-    height: 36px;
+    min-height: 30px;
     justify-content: center;
-    width: 36px;
+    min-width: 30px;
   }
   .text {
     font-size: 14px;

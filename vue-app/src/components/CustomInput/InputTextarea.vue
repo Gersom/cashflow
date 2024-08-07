@@ -48,6 +48,7 @@
 
 <style lang="scss" scoped>
   .custom-input-textarea {
+    box-sizing: border-box;
     .textarea-tag {
       align-items: center;
       background: var(--background-color);
@@ -57,11 +58,12 @@
       field-sizing: content;
       font-family: var(--font-poppins);
       font-size: 16px;
+      min-height: 54px;
       max-height: 138px;
-      min-height: 66px;
-      padding: 9px 15px;
+      padding: 3px 15px;
       resize: none; /* vertical */
       width: 100%;
+      margin: 0;
     }
 
     /* Dark Theme */

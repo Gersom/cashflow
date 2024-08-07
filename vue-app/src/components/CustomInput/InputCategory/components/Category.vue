@@ -47,9 +47,9 @@ const props = defineProps({
     display: flex;
     justify-content: center;
     border-radius: var(--border-radius);
-    height: 36px;
+    min-height: 30px;
     font-size: 20px;
-    width: 36px;
+    min-width: 30px;
     transition: 0.3s ease all;
 
     &.trash-container {

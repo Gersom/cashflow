@@ -68,7 +68,7 @@ const valueInput = computed({
     color: var(--text-color);
     font-family: var(--font-poppins);
     font-size: 16px;
-    height: 36px;
+    min-height: 34px;
     padding: 0 15px;
     width: 100%;
   }

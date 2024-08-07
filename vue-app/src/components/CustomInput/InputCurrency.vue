@@ -193,7 +193,7 @@
       color: var(--text-color);
       font-family: var(--font-poppins);
       font-size: 16px;
-      height: 36px;
+      height: 34px;
       padding: 0 15px 0 50px;
       position: relative;
       width: 100%;

@@ -84,9 +84,9 @@
     font-family: var(--font-poppins);
     font-size: 14px;
     justify-content: space-around;
-    min-height: 36px;
-    padding: 5px 5px;
+    padding: 6px 6px;
     width: 100%;
+    min-height: 34px;
 
     &.is-vertical {
       flex-direction: column;
@@ -99,13 +99,13 @@
     &.is-dark-theme {
       color: var(--text-color);
       background: rgb(20 21 26 / 30%);
+      
     }
 
     .label-tag {
       align-items: center;
       cursor: pointer;
       display: flex;
-      margin: 4px 10px;
       .input-tab {
         display: none;
       }
@@ -115,20 +115,20 @@
         border-radius: 50%;
         border: 2px solid var(--primary-color);
         display:flex;
-        height: 18px;
+        height: 22px;
         justify-content: center;
         margin-right: 5px;
         position: relative;
-        width: 18px;
+        width: 22px;
         &:before {
           background: var(--primary-color);
           border-radius: 50%;
           border: 2px solid var(--primary-color);
           content: '';
           display: none;
-          height: 8px;
+          height: 12px;
           position: absolute;
-          width: 8px;
+          width: 12px;
         }
       }
     }
