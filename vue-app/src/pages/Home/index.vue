@@ -8,7 +8,7 @@ import CreateCard from './components/CreateCard.vue'
 import HistoryCard from './components/HistoryCard.vue'
 
 defineOptions({
-  name: 'HomePage'
+  name: 'Home'
 })
 
 const themeStore = useThemeStore()
@@ -41,7 +41,6 @@ const toggleTheme = () => {
 .home-page {
   width: 100%;
   height: 100svh;
-  overflow-y: auto;
   background-color: var(--background-color);
 
   main {
