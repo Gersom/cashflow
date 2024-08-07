@@ -33,7 +33,7 @@ const selectValue = (selected) => {
 <template>
   <div class="card-head">
     <button @click="toggleDropdown" v-if="props.isSelect">
-      <span>{{ props.title }} {{ selectedMonth }}</span>
+      <span class="button-title">{{ props.title }} {{ selectedMonth }}</span>
       <div class="arrow" :class="{ 'arrow-up': isOpen }">
         <IconSelect />
       </div>
@@ -47,7 +47,7 @@ const selectValue = (selected) => {
 
   <div class="card-head">
     <p v-if="!props.isSelect">
-      <span>{{ props.title }} :</span>
+      <span class="normal-title">{{ props.title }} :</span>
     </p>
   </div>
 </template>
@@ -60,12 +60,23 @@ const selectValue = (selected) => {
       text-align: left;
       background: none;
       color: var(--text-color);
-      font-weight: bolder;
       display: flex;
       gap: 1rem;
       position: relative;
       margin: 0;
-      padding: 0 0 10px 0;
+      padding: 0 0 15px 0;
+    }
+
+    .button-title{
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-poppins);
+    }
+
+    .normal-title{
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-poppins);
     }
 
     & button::after {
@@ -83,8 +94,7 @@ const selectValue = (selected) => {
       position: relative;
       display: inline-block;
       margin: 0;
-      padding: 0 0 10px 0;
-      font-weight: bolder;
+      padding: 0 0 15px 0;
     }
 
     & p ::after {

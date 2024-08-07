@@ -135,7 +135,7 @@ const movements = [
 
 <style lang="scss" scoped>
   .history-card{   
-    
+  
     .movements-summary{
       display: flex;
       justify-content:space-between;
@@ -153,7 +153,7 @@ const movements = [
       display: flex;
       flex-direction: column;
       gap: 13px;
-      height: 500px;
+      height: 420px;
       overflow-y: auto;
     }
 
