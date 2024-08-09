@@ -38,7 +38,7 @@ const handleLogout = () => {
     </p>
     <CustomButton
       size="small"
-      :red-color="true"
+      color="var(--error-color)"
       text="Borrar cuenta"
       :icon-component="IconClose"
       :transparent="true"

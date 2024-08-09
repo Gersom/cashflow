@@ -26,9 +26,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  redColor: {
-    type: Boolean,
-    default: false,
+  color: {
+    type: String,
+    default: '',
   },
 });
 </script>
@@ -37,7 +37,7 @@ const props = defineProps({
   <button
     :class="['custom-button', `is-${size}`, {'is-solid': !transparent}, {'is-disabled': disabled}, {'is-animation': animation}]"
     @click="emit('click')"
-    :style="redColor ? { '--custom-btn-color': 'var(--error-color)' } : {}"
+    :style="props.color ? { '--custom-btn-color': props.color } : {}"
   >
     <div class="icon-component">
       <component :is="iconComponent" />
