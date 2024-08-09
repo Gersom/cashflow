@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import CardHead from '@components/CardHead/CardHead.vue'
+import CardTitle from '@components/CardTitle/CardTitle.vue'
 import CustomButton from "@components/CustomButton/index.vue"
 import IconAdd from "@icons/actions/IconAdd.vue"
 import CustomInputText from "@components/CustomInput/InputText.vue"
@@ -13,7 +13,7 @@ import InputCategory from "@components/CustomInput/InputCategory/InputCategory.v
 
 <template>
   <div class="card card-profile">
-        <CardHead title="Datos personales "/>
+        <CardTitle title="Datos personales "/>
   </div>
 </template>
 

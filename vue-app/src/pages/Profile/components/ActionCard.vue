@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import CardHead from '@components/CardHead/CardHead.vue'
+import CardTitle from '@components/CardTitle/CardTitle.vue'
 import CustomButton from "@components/CustomButton/index.vue"
 import IconAdd from "@icons/actions/IconAdd.vue"
 import CustomInputText from "@components/CustomInput/InputText.vue"
