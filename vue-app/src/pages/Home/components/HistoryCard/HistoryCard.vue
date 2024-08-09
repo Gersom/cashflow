@@ -45,7 +45,7 @@ import MovementCard from './components/MovementCard/MovementCard.vue';
     .movements-summary {
       display: flex;
       justify-content:space-between;
-      padding: 0em 0 1em 0;
+      padding: 0em 0 22px 0;
       width: 70%;
       & p{
         margin: 0;
@@ -59,7 +59,7 @@ import MovementCard from './components/MovementCard/MovementCard.vue';
       display: flex;
       flex-direction: column;
       gap: 13px;
-      height: 420px;
+      height: 439px;
       overflow-y: auto;
     }
 

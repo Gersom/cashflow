@@ -24,7 +24,7 @@ defineOptions({
   padding-bottom: 22px;
   display: grid;
   gap: 22px;
-  grid-auto-rows:591px;
+  grid-auto-rows:minmax(591px, auto);
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
 }
 .card-item{
