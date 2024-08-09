@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'IconEyeSlash'
+  name: 'IconPicture'
 }
 </script>
