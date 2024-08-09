@@ -32,6 +32,13 @@
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
     gap: 22px;
 
+    .item {
+    padding: 22px;
+    border-radius: 10px;
+    background-color: var(--background-color2)
+    
+    }
+
     .profile-actions {
         display: flex;
         flex-direction: column;
@@ -56,9 +63,4 @@
 
 }
 
-
-.item {
-    border-radius: 10px;
-    background-color: var(--background-color2)
-}
 </style>

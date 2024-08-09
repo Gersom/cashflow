@@ -27,9 +27,10 @@ defineOptions({
 }
 
 .balance small{
-    font-size: 1.4rem;
-    font-weight: 700;
     color: var( --subtitle-color);
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .underlined {
@@ -38,11 +39,13 @@ defineOptions({
   display: inline-block;
   margin: 0;
   padding: 0 0 5px 5px;
-  font-size: 3.6rem;
+  font-family: var(--font-poppins);
+  font-weight: 500;
+  font-size: 36px;
 }
 
 .underlined::first-letter{
-    font-size: 1.8rem;
+    font-size: 20px;
     vertical-align: middle;
     text-wrap: nowrap;
 }
@@ -53,7 +56,7 @@ defineOptions({
   left: 5px;
   bottom: 0;
   width: 100%;
-  height: .3rem;
+  height: 3px;
   text-wrap: nowrap;
   background-color: var(--secondary-color);
 }

@@ -3,7 +3,10 @@ import { useThemeStore } from '@stores/theme'
 import { storeToRefs } from 'pinia'
 import MasonryCards from '@layouts/MasonryCards.vue'
 import Head from '@components/Head/Head.vue'
-
+import ProfileCard from './components/ProfileCard.vue'
+import ActionCard from './components/ActionCard.vue'
+import PasswordCard from './components/PasswordCard.vue'
+import PersonalCard from './components/PersonalCard.vue'
 
 defineOptions({
   name: 'Profile'
@@ -22,16 +25,16 @@ const toggleTheme = () => {
       <Head />
       <MasonryCards>
         <template v-slot:profile>
-          
+          <ProfileCard/>
         </template>
         <template v-slot:personal>
-          
+            <PersonalCard/>
         </template>
         <template v-slot:password>
-         
+            <PasswordCard/>
         </template>
         <template v-slot:actions>
-          
+            <ActionCard/>
         </template>
       </MasonryCards>
     </main>
