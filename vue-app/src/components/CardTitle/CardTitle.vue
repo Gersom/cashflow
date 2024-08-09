@@ -55,7 +55,7 @@ const props = defineProps({
 .card-title {
   width: fit-content;
   .title {
-    color: var(--text-color);
+    color: var(--title-color);
     margin: 0;
     padding: 0 0 15px 0;
     position: relative;

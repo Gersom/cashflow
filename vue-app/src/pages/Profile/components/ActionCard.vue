@@ -24,26 +24,32 @@ const handleLogout = () => {
     <p class="paragraph">
       Podrás volver a iniciar sesión cuando desees.
     </p>
-    <CustomButton
-      text="Cerrar sesión"
-      :icon-component="IconLogOut"
-      @click="handleLogout"
-    />
+    <div class="button">
+      <CustomButton
+        text="Cerrar sesión"
+        :icon-component="IconLogOut"
+        @click="handleLogout"
+      />
+    </div>
 
-    <h4 class="title">
+    <span class="separador" />
+
+    <h4 class="title" style="--action-card-color: var(--error-color)">
       Cuenta de usuario
     </h4>
     <p class="paragraph">
       Una vez que eliminas tu cuenta, no hay vuelta atrás.
     </p>
-    <CustomButton
-      size="small"
-      color="var(--error-color)"
-      text="Borrar cuenta"
-      :icon-component="IconClose"
-      :transparent="true"
-      @click="handleDeleteAccount"
-    />
+    <div class="button">
+      <CustomButton
+        size="small"
+        color="var(--error-color)"
+        text="Borrar cuenta"
+        :icon-component="IconClose"
+        :transparent="true"
+        @click="handleDeleteAccount"
+      />
+    </div>
   </div>
 </template>
 
@@ -52,6 +58,23 @@ const handleLogout = () => {
   height: 100%;
   width: 100%;
   color: var(--text-color);
+  .title {
+    color: var(--action-card-color, var(--title-color));
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+  }
+  .paragraph {
+    margin: 0;
+    font-size: 14px;
+  }
+  .separador {
+    margin: 25px 0 0 0;
+    display: block;
+  }
+  .button {
+    margin-top: 15px;
+  }
   .icon {
     height: 30px;
     color: var(--primary-color);
