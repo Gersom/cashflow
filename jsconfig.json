@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "node-server/*": ["node-server/*"],
+      "vue-app/*": ["vue-app/*"]
+    },
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    "dist",
+    "**/dist/*"
+  ],
+  "include": [
+    "node-server/**/*",
+    "vue-app/**/*"
+  ]
+}

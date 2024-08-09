@@ -26,12 +26,6 @@
   const colorValue = ref('#90A4AE')
   const showColorPicker = ref(false)
 
-  // Computed
-  const valueInput = computed({
-    get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
-  })
-
   // Methods
   const toggleColorPicker = () => {
     showColorPicker.value = !showColorPicker.value
@@ -46,6 +40,9 @@
   const closeColorPicker = () => {
     showColorPicker.value = false
   }
+  const updateColorValue = (value) => {
+    emit('update:modelValue', value)
+  }
 </script>
 
 <template>
@@ -56,24 +53,16 @@
     <div class="input-container">
       <InputColor
         v-model="colorValue"
+        @input="updateColorValue"
         @select-color="toggleColorPicker"
       />
     </div>
 
-    <div class="button-container">
-      <CustomButton
-        size="small"
-        :text="showColorPicker ? 'Cerrar' : 'Editar'"
-        :animation="true"
-        :icon-component="IconEdit"
-        :transparent="true"
-        @click="toggleColorPicker"
-      />
-    </div>
     <DialogBlur
       :show="showColorPicker"
       :dependent="true"
       position-x="right"
+      position-y="top"
       @close="closeColorPicker"
     >
       <Vue3ColorPicker
@@ -89,6 +78,17 @@
         :showPickerMode="false"
       />
     </DialogBlur>
+
+    <div class="button-container">
+      <CustomButton
+        size="small"
+        :text="showColorPicker ? 'Cerrar' : 'Editar'"
+        :animation="true"
+        :icon-component="IconEdit"
+        :transparent="true"
+        @click="toggleColorPicker"
+      />
+    </div>
   </div>
 </template>
 

@@ -1,17 +1,33 @@
 <script setup>
 import { ref } from 'vue'
-import CardTitle from '@components/CardTitle/CardTitle.vue'
-import IconLogOut from "@icons/login/IconLogOut.vue"
+
+// Layout
+import DialogBlur from '@layouts/DialogBlur.vue'
+
+// Icons components
 import IconClose from "@icons/actions/IconClose.vue"
+import IconLogOut from "@icons/login/IconLogOut.vue"
+
+// Components global
+import CardTitle from '@components/CardTitle/CardTitle.vue'
 import CustomButton from '@components/CustomButton/index.vue'
 
-const handleDeleteAccount = () => {
-  console.log('Delete account')
-}
+// Components Local
+import ConfirmDeleteAccount from './components/ConfirmDeleteAccount.vue'
+
+// Data
+const showDeleteAccountDialog = ref(false)
+
+// Methods
 const handleLogout = () => {
   console.log('Logout')
 }
-
+const handleDeleteAccount = () => {
+  showDeleteAccountDialog.value = true
+}
+const handleCloseDialog = () => {
+  showDeleteAccountDialog.value = false
+}
 </script>
 
 <template>
@@ -50,6 +66,16 @@ const handleLogout = () => {
         @click="handleDeleteAccount"
       />
     </div>
+
+    <DialogBlur
+      :show="showDeleteAccountDialog"
+      :button-close="true"
+      @close="handleCloseDialog"
+    >
+      <ConfirmDeleteAccount
+        @close="handleCloseDialog"
+      />
+    </DialogBlur>
   </div>
 </template>
 

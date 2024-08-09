@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import MasonryCards from '@layouts/MasonryCards.vue'
 import Head from '@components/Head/Head.vue'
 import ProfileCard from './components/ProfileCard.vue'
-import ActionCard from './components/ActionCard.vue'
+import ActionCard from './components/ActionCard/ActionCard.vue'
 import PasswordCard from './components/PasswordCard.vue'
 import PersonalCard from './components/PersonalCard.vue'
 

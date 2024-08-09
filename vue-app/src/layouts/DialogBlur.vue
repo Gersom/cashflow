@@ -24,11 +24,11 @@ const props = defineProps({
   },
   positionX: {
     type: String,
-    default: "center", // left, right
+    default: "center", // center, left, right
   },
   positionY: {
     type: String,
-    default: "top", // top or bottom
+    default: "center", // center, top or bottom
   },
 });
 
@@ -72,7 +72,9 @@ const onClose = () => {
   display: flex;
   height: 100%;
   justify-content: center;
+  left: 0;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 99;
   .blur {
