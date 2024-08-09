@@ -22,6 +22,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  position: {
+    type: String,
+    default: "center", // left, right
+  },
 });
 
 // Store
@@ -38,6 +42,8 @@ const onClose = () => {
     class="dialog-blur"
     :class="{
       'is-dependent': props.dependent,
+      'is-left': props.position === 'left',
+      'is-right': props.position === 'right',
       'is-dark-theme': themeStore.currentTheme === 'dark',
     }"
     v-show="props.show"
@@ -57,11 +63,11 @@ const onClose = () => {
 
 <style lang="scss" scoped>
 .dialog-blur {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  position: fixed;
+  display: flex;
   height: 100%;
+  justify-content: center;
+  position: fixed;
   width: 100%;
   z-index: 99;
   .blur {
@@ -104,17 +110,37 @@ const onClose = () => {
     }
     .content {
       position: absolute;
-      bottom: calc(100% + 15px);
+      bottom: calc(100% + 20px);
       z-index: 13;
       .icon {
-        height: 20px;
         color: var(--background-color);
+        display: flex;
+        height: 20px;
+        justify-content: center;
         position: absolute;
         top: calc(100% - 7px);
         transform: rotate(180deg);
-        display: flex;
-        justify-content: center;
         width: 100%;
+      }
+    }
+  }
+
+  /* Position */
+  &.is-left {
+    .content {
+      left: 0px;
+      .icon {
+        padding-right: 15%;
+        justify-content: flex-end;
+      }
+    }
+  }
+  &.is-right {
+    .content {
+      right: 0px;
+      .icon {
+        padding-left: 15%;
+        justify-content: flex-start;
       }
     }
   }

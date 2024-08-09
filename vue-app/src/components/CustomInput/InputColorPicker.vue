@@ -4,9 +4,10 @@
   import { ref, computed } from 'vue'
   import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
   import CustomButton from '@components/CustomButton/index.vue'
-  import IconEdir from '@icons/actions/IconEdit.vue'
+  import DialogBlur from "@layouts/DialogBlur.vue";
+  import IconEdit from '@icons/actions/IconEdit.vue'
   import InputColor from '@components/CustomInput/InputColor.vue'
-  
+
   // Vue defines
   defineOptions({name: 'CustomInputColor'})
   const emit = defineEmits([
@@ -34,14 +35,24 @@
   // Methods
   const toggleColorPicker = () => {
     showColorPicker.value = !showColorPicker.value
-    if (showColorPicker.value) {
+    if (
+      showColorPicker.value  
+      && colorValue.value[0] !== '#' 
+      && colorValue.value.slice(0, 3) !== 'rgb'
+    ) {
       colorValue.value = '#ff8e38'
     }
+  }
+  const closeColorPicker = () => {
+    showColorPicker.value = false
   }
 </script>
 
 <template>
-  <div class='custom-input-color-picker'>
+  <div
+    class='custom-input-color-picker'
+    :class="{ 'is-color-picker': showColorPicker }"
+  >
     <div class="input-container">
       <InputColor
         v-model="colorValue"
@@ -54,13 +65,16 @@
         size="small"
         :text="showColorPicker ? 'Cerrar' : 'Editar'"
         :animation="true"
-        :icon-component="IconEdir"
+        :icon-component="IconEdit"
         :transparent="true"
         @click="toggleColorPicker"
       />
     </div>
-    <div class="color-picker-container"
-      v-show="showColorPicker"
+    <DialogBlur
+      :show="showColorPicker"
+      :dependent="true"
+      position="right"
+      @close="closeColorPicker"
     >
       <Vue3ColorPicker
         v-if="showColorPicker"
@@ -74,31 +88,33 @@
         :showInputMenu="false"
         :showPickerMode="false"
       />
-    </div>
+    </DialogBlur>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
   .custom-input-color-picker {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    justify-content: space-between;
     position: relative;
-  }
-  .custom-input-color-picker .input-container {
-    width: calc(100% - (100px + 10px));
-  }
-  .custom-input-color-picker .button-container {
-    width: 100px;
-  }
-  .custom-input-color-picker .color-picker-container {
-    border-radius: 20px;
-    background-color: white;
-    position: absolute;
-    bottom: calc(34px + 10px);
-    right: 0;
-    z-index: 99;
-  }
+    width: 100%;
 
+    .input-container {
+      width: calc(100% - (100px + 10px));
+    }
+    .button-container {
+      width: 100px;
+    }
+    
+    &.is-color-picker {
+      .input-container {
+        z-index: 12;
+      }
+      .button-container {
+        z-index: 12;
+      }
+    }
+  }
+  
 </style>

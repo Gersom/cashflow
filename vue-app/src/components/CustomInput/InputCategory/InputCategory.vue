@@ -45,7 +45,10 @@ const toogleCategorySelect = () => {
 <template>
   <div
     class="custom-input-categories"
-    :class="{ 'is-dark-theme': themeStore.isDarkTheme }"
+    :class="{
+      'is-dark-theme': themeStore.isDarkTheme,
+      'is-select-categories': showCategorySelect
+    }"
   >
     <div class="container">
       <button
@@ -99,12 +102,18 @@ const toogleCategorySelect = () => {
       padding: 0;
       position: relative;
       width: 60px;
-      z-index: 11;
     }
     .item:first-child {
       margin-left: 0;
     }
   }
+
+  &.is-select-categories {
+    .item {
+      z-index: 11;
+    }
+  }
+
   &.is-dark-theme {
     .container {
       background: #22242e;
