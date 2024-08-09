@@ -1,4 +1,6 @@
 <script setup>
+import { getContrastColor} from '@utils/color.js';
+import { computed } from 'vue';
 
 const props = defineProps({
   data: {
@@ -14,10 +16,13 @@ const props = defineProps({
   },
 });
 
+const textColor = computed(() => getContrastColor(props.data.color))
+console.log(textColor);
+
 </script>
 
 <template>
-    <div  :style="{ background: props.data.color }" class="bookmark">
+    <div  :style="{ background: props.data.color, color:textColor}" class="bookmark">
         <span class="bookmark-data"> 
             <i :class="`icon icon-${props.data.iconName}`"/>
             <p class="bookmark-name"> {{props.data.name}}</p>
