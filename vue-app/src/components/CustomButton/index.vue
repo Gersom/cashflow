@@ -26,6 +26,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  redColor: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -33,6 +37,7 @@ const props = defineProps({
   <button
     :class="['custom-button', `is-${size}`, {'is-solid': !transparent}, {'is-disabled': disabled}, {'is-animation': animation}]"
     @click="emit('click')"
+    :style="redColor ? { '--custom-btn-color': 'var(--error-color)' } : {}"
   >
     <div class="icon-component">
       <component :is="iconComponent" />
@@ -49,8 +54,8 @@ const props = defineProps({
   align-items: center;
   background-color: transparent;
   border-radius: var(--button-border-radius);
-  border: 2px solid var(--button-background);
-  color: var(--button-background);
+  border: 2px solid var(--custom-btn-color, var(--button-background));
+  color: var(--custom-btn-color, var(--button-background));
   cursor: pointer;
   display: flex;
   font-size: 16px;
@@ -62,7 +67,7 @@ const props = defineProps({
     margin-right: 5px;
   }
   &:hover {
-    background-color: var(--button-background);
+    background-color: var(--custom-btn-color, var(--button-background));
     color: var(--button-color);
   }
 }
@@ -89,7 +94,7 @@ const props = defineProps({
   }
 }
 .custom-button.is-solid {
-  background-color: var(--button-background);
+  background-color: var(--custom-btn-color, var(--button-background));
   color: var(--button-color);
 }
 
