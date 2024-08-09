@@ -60,7 +60,7 @@
       font-size: 16px;
       min-height: 54px;
       max-height: 138px;
-      padding: 3px 15px;
+      padding: 10px 15px;
       resize: none; /* vertical */
       width: 100%;
       margin: 0;

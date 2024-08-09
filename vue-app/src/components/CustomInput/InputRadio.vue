@@ -84,28 +84,15 @@
     font-family: var(--font-poppins);
     font-size: 14px;
     justify-content: space-around;
-    padding: 6px 6px;
+    padding: 5px 15px;
     width: 100%;
     min-height: 34px;
-
-    &.is-vertical {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-wrap: nowrap;
-    }
-
-    /* Dark Theme */
-    &.is-dark-theme {
-      color: var(--text-color);
-      background: rgb(20 21 26 / 30%);
-      
-    }
 
     .label-tag {
       align-items: center;
       cursor: pointer;
       display: flex;
+      padding: 5px 10px;
       .input-tab {
         display: none;
       }
@@ -115,36 +102,54 @@
         border-radius: 50%;
         border: 2px solid var(--primary-color);
         display:flex;
-        height: 22px;
+        height: 18px;
         justify-content: center;
         margin-right: 5px;
         position: relative;
-        width: 22px;
+        width: 18px;
         &:before {
           background: var(--primary-color);
           border-radius: 50%;
           border: 2px solid var(--primary-color);
           content: '';
           display: none;
-          height: 12px;
+          height: 8px;
           position: absolute;
-          width: 12px;
+          width: 8px;
+        }
+      }
+      &:hover {
+        .input-text {
+          color: var(--primary-color);
+        }
+      }
+      &.is-selected {
+        .radio::before {
+          display: block;
+        }
+        .input-text {
+          color: var(--primary-color);
         }
       }
     }
-    .label-tag:hover {
-      .input-text {
-        color: var(--primary-color);
+
+    /* Vertial orientation */
+    &.is-vertical {
+      align-items: flex-start;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      .label-tag {
+        padding-left: 0px;
       }
     }
-    .label-tag.is-selected {
-      .radio::before {
-        display: block;
-      }
-      .input-text {
-        color: var(--primary-color);
-      }
-    }
+
+    /* Dark Theme */
+    &.is-dark-theme {
+      color: var(--text-color);
+      background: rgb(20 21 26 / 30%);
+      
+    }    
   }
 
 </style>
