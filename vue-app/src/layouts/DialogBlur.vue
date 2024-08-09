@@ -22,9 +22,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  position: {
+  positionX: {
     type: String,
     default: "center", // left, right
+  },
+  positionY: {
+    type: String,
+    default: "top", // top or bottom
   },
 });
 
@@ -42,8 +46,9 @@ const onClose = () => {
     class="dialog-blur"
     :class="{
       'is-dependent': props.dependent,
-      'is-left': props.position === 'left',
-      'is-right': props.position === 'right',
+      'is-left': props.positionX === 'left',
+      'is-right': props.positionX === 'right',
+      'is-top': props.positionY === 'top',
       'is-dark-theme': themeStore.currentTheme === 'dark',
     }"
     v-show="props.show"
@@ -110,7 +115,7 @@ const onClose = () => {
     }
     .content {
       position: absolute;
-      bottom: calc(100% + 20px);
+      top: calc(100% + 20px);
       z-index: 13;
       .icon {
         color: var(--background-color);
@@ -118,8 +123,7 @@ const onClose = () => {
         height: 20px;
         justify-content: center;
         position: absolute;
-        top: calc(100% - 7px);
-        transform: rotate(180deg);
+        bottom: calc(100% - 7px);
         width: 100%;
       }
     }
@@ -130,8 +134,8 @@ const onClose = () => {
     .content {
       left: 0px;
       .icon {
-        padding-right: 15%;
-        justify-content: flex-end;
+        padding-left: 15%;
+        justify-content: flex-start;
       }
     }
   }
@@ -139,8 +143,19 @@ const onClose = () => {
     .content {
       right: 0px;
       .icon {
-        padding-left: 15%;
-        justify-content: flex-start;
+        padding-right: 15%;
+        justify-content: flex-end;
+      }
+    }
+  }
+  &.is-top {
+    .content {
+      top: initial;
+      bottom: calc(100% + 20px);
+      .icon {
+        bottom: initial;
+        top: calc(100% - 7px);
+        transform: rotateX(180deg);
       }
     }
   }

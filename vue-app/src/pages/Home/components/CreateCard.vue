@@ -1,32 +1,35 @@
 <script setup>
 import { ref } from 'vue'
-import CardHead from '@components/CardHead/CardHead.vue'
+
+// Components
+import CardTitle from '@components/CardTitle/CardTitle.vue'
 import CustomButton from "@components/CustomButton/index.vue"
-import IconAdd from "@icons/actions/IconAdd.vue"
-import CustomInputText from "@components/CustomInput/InputText.vue"
+
+// Custom Inputs
 import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue"
 import CustomInputRadio from "@components/CustomInput/InputRadio.vue"
+import CustomInputText from "@components/CustomInput/InputText.vue"
 import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue"
 import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue"
 
-defineOptions({
-  name: 'CreateCard'
-})
+// Icons
+import IconAdd from "@icons/actions/IconAdd.vue"
 
 const inputTextDefault = ref('')
 const inputCurrencyExpense = ref('0.00')
 const inputTextareaDefault = ref('')
 const inputRadioTwo = ref({})
+
 const inputRadioDataTwo = [
   { value: 'gasto', text: 'Gasto' },
   { value: 'ingreso', text: 'Ingreso' }
 ]
-
 </script>
 
 <template>
   <div class="card create-card">
-    <CardHead title="Crear nuevo movimiento" />
+    <CardTitle title="Crear nuevo movimiento" />
+
     <div class="form">
       <div class="input-group">
         <p>Titulo</p>
@@ -49,7 +52,12 @@ const inputRadioDataTwo = [
         <InputCategory />
       </div>
     </div>
-    <CustomButton :animation="true" :icon-component="IconAdd" text="Crear movimiento" />
+
+    <CustomButton
+      text="Crear movimiento"
+      :animation="true"
+      :icon-component="IconAdd"
+    />
   </div>
 </template>
 
@@ -57,12 +65,12 @@ const inputRadioDataTwo = [
 .card {
   &.create-card {
     & .form {
-      padding: 20px 0 20px 0;
+      padding: 0px 0 20px 0;
       display: flex;
       flex-direction: column;
       gap: 15px;
 
-      & .input-group>p {
+      & .input-group >  p {
         margin: 0px;
         padding: 0;
         font-size: 14px;

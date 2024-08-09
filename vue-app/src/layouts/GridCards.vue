@@ -31,7 +31,7 @@ defineOptions({
   width: 100%;
   height: 100%;
   min-width: 360px;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: var(--border-radius);
   background-color: var(--background-color2);
   padding: 25px;

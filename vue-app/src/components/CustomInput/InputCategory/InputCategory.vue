@@ -72,6 +72,7 @@ const toogleCategorySelect = () => {
     <DialogBlur
       :show="showCategorySelect"
       :dependent="true"
+      position-y="top"
       @close="closeCategorySelect"
     >
       <CategorySelect

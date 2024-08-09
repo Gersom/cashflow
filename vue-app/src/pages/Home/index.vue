@@ -1,38 +1,37 @@
 <script setup>
-import { useThemeStore } from '@stores/theme'
-import { storeToRefs } from 'pinia'
+// Layout
 import GridCards from '@layouts/GridCards.vue'
+
+// Components global
 import Head from '@components/Head/Head.vue'
+
+// Components local
 import ChartCard from './components/ChartCard.vue'
 import CreateCard from './components/CreateCard.vue'
-import HistoryCard from './components/HistoryCard.vue'
+import HistoryCard from './components/HistoryCard/HistoryCard.vue'
 
-defineOptions({
-  name: 'Home'
-})
-
-const themeStore = useThemeStore()
-const { currentTheme } = storeToRefs(themeStore)
-const toggleTheme = () => {
-  themeStore.toggleTheme()
-}
+defineOptions({ name: 'Home' })
 </script>
 
 <template>
   <div class="home-page">
     <main>
       <Head />
+
       <GridCards>
         <template v-slot:first>
           <ChartCard />
         </template>
+
         <template v-slot:second>
           <CreateCard />
         </template>
+
         <template v-slot:third>
           <HistoryCard />
         </template>
       </GridCards>
+
     </main>
   </div>
 </template>

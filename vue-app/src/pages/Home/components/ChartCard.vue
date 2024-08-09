@@ -1,8 +1,7 @@
 <script setup>
-import CardHead from '@components/CardHead/CardHead.vue'
 import DoughnutChart from '@components/DoughnutChart/DoughnutChart.vue'
-import TotalBalance from '@components/TotalBalance/TotalBalance.vue'
 import Stat from '@components/Stat/Stat.vue'
+import TotalBalance from '@components/TotalBalance/TotalBalance.vue'
 
 defineOptions({
   name: 'ChartCard'

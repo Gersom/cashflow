@@ -73,7 +73,7 @@
     <DialogBlur
       :show="showColorPicker"
       :dependent="true"
-      position="right"
+      position-x="right"
       @close="closeColorPicker"
     >
       <Vue3ColorPicker
