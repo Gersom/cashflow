@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const { asyncHandler } = require('@middlewares/asyncHandler');
+const authMiddleware = require('@middlewares/jwtAuthorization');
 const { NotFoundError } = require('@utils/errors');
 
 const setupRoutes = async (app) => {
@@ -12,7 +13,7 @@ const setupRoutes = async (app) => {
     app.use('/register', require('@routes/register/registerRoute.js'));
 
     // Define API routes
-    app.use('/api', routerApi);
+    app.use('/api', authMiddleware, routerApi);
 
     // Static file serving
     app.use('/storage', express.static(path.join(__dirname, '..', 'storage')));
