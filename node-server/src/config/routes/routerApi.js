@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const path = require('path');
-const ROUTES_DIR = path.join(__dirname, '..', '..', 'api', 'routes');
+const ROUTES_DIR = path.join(__dirname, '..', '..', 'routes', 'api');
 
 const routerApi = async () => {
   const getRouteFolders = require('./utils/getRouteFolders');
