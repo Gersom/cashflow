@@ -7,7 +7,11 @@ const setupRoutes = async (app) => {
   const loadRoutes = async () => {
     const routerApi = await require('./routerApi');
 
-    // Define API routes first
+    // Define Login/register route
+    app.use('/login', require('@routes/login/loginRoute.js'));
+    app.use('/register', require('@routes/register/registerRoute.js'));
+
+    // Define API routes
     app.use('/api', routerApi);
 
     // Static file serving
