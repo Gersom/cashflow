@@ -1,5 +1,8 @@
 {
-  "name": "principal",
-  "balance": 0,
-  "description": "principal"
+  "name": "Principal",
+  "currency": {
+    "symbol": "$",
+    "name": "dolar",
+    "code": "USD"
+  }
 }

@@ -15,7 +15,7 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  account_id: {
+  accountId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true

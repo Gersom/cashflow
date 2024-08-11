@@ -14,13 +14,14 @@ const movementSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
+    enum: ['income', 'expense']
   },
   amount: {
     type: Number,
     required: true
   },
-  account_id: {
+  accountId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true
