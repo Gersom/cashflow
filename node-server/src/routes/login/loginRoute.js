@@ -5,6 +5,6 @@ const {
   getAllUsers,
 } = require("./loginHandler");
 
-router.get("/", asyncHandler(getAllUsers));
+router.post("/", asyncHandler(getAllUsers));
 
 module.exports = router;
