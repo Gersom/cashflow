@@ -7,18 +7,21 @@ const categorySchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  description: { 
+  icon: {
     type: String,
-    required: false,
-    trim: true
+    required: true,
   },
-  account: {
+  color: {
+    type: String,
+    required: true,
+  },
+  account_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true
-  }
+  },
 }, {
-  timestamps: true,
+  timestamps: false,
   versionKey: false
 });
 

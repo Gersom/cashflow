@@ -2,21 +2,30 @@ const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const accountSchema = new mongoose.Schema({
-  user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
   name: {
     type: String,
     required: true,
     trim: true
   },
-  currency_type: {
-    type: String,
-    required: true,
-    trim: true
-  }
+  currency: {
+    symbol: {
+      type: String,
+      required: true
+    },
+    code: {
+      type: String,
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
+    }
+  },
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
 }, {
   timestamps: true,
   versionKey: false

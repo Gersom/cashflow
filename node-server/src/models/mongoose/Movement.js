@@ -2,21 +2,7 @@ const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const movementSchema = new mongoose.Schema({
-  account_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Account',
-    required: true
-  },
-  date: {
-    type: Date,
-    required: true
-  },
   title: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  type: {
     type: String,
     required: true,
     trim: true
@@ -25,15 +11,23 @@ const movementSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  type: {
+    type: String,
+    required: true,
+    trim: true
+  },
   amount: {
     type: Number,
     required: true
   },
+  account_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Account',
+    required: true
+  },
   categories: [{
-    category_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category'
-    }
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
   }]
 }, {
   timestamps: true,
