@@ -2,55 +2,48 @@ const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const movementSchema = new mongoose.Schema({
-  amount: { 
-    type: Number,
-    required: true
-  },
-  description: { 
-    type: String,
-    required: false,
-    trim: true
-  },
-  image: { 
-    type: String,
-    required: false,
-    trim: true
-  },
-  title: { 
-    type: String,
-    required: true,
-    trim: true
-  },
-  type: { 
-    type: String,
-    required: true,
-    enum: ['entry', 'exit'],
-    lowercase: true,
-    trim: true
-  },
-  account: {
+  account_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true
   },
-  category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+  date: {
+    type: Date,
     required: true
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  type: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    trim: true
+  },
+  amount: {
+    type: Number,
     required: true
-  }
+  },
+  categories: [{
+    category_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category'
+    }
+  }]
 }, {
   timestamps: true,
   versionKey: false
 });
 
 // Índices para mejorar el rendimiento de las consultas
+movementSchema.index({ account_id: 1 });
+movementSchema.index({ date: 1 });
 movementSchema.index({ type: 1 });
-movementSchema.index({ title: 1 });
 
 // Método de instancia para obtener una representación formateada
 movementSchema.methods.toJSON = function() {
