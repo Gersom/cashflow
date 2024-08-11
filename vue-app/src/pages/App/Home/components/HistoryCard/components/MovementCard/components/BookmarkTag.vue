@@ -17,8 +17,6 @@ const props = defineProps({
 });
 
 const textColor = computed(() => getContrastColor(props.data.color))
-console.log(textColor);
-
 </script>
 
 <template>

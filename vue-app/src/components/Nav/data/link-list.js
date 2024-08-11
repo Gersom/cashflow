@@ -5,22 +5,22 @@ import IconEye from '@icons/form/IconEye.vue';
 
 export default [
   {
-    pageName: 'Home',
+    pageName: 'AppHome',
     text: 'Inicio',
     icon: IconHome,
   },
   {
-    pageName: 'Categories',
+    pageName: 'AppCategories',
     text: 'Categorías',
     icon: IconGeometricFigures,
   },
   {
-    pageName: 'Designs',
+    pageName: 'AppDesigns',
     text: 'Diseños',
     icon: IconEye,
   },
   {
-    pageName: 'Profile',
+    pageName: 'AppProfile',
     text: 'Perfil',
     icon: IconPerson,
   },

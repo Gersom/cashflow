@@ -1,14 +1,17 @@
 <script setup>
 import IconClose from "@icons/actions/IconClose.vue"
 import CustomButton from '@components/CustomButton/index.vue'
+import { useRouter } from 'vue-router'
 
 const emit = defineEmits(['close'])
+const router = useRouter()
 
 const handleDeleteAccount = () => {
   console.log('Delete account')
+  router.push({ name: 'Login' })
 }
 const handleClose = () => {
-  console.log('Close')
+  emit('close')
 }
 </script>
 
@@ -34,7 +37,7 @@ const handleClose = () => {
     <div class="buttons">
       <CustomButton
         text="Quiero quedarme :D"
-        @click="emit('close')"
+        @click="handleClose"
       />
       <CustomButton
         color="var(--error-color)"
