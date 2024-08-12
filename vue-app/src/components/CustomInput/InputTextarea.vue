@@ -70,10 +70,10 @@
     &.is-dark-theme {
       .textarea-tag {
         color: var(--text-color);
-        background: rgb(20 21 26 / 30%);
+        background: rgb(var(--background-color-rgb) / 30%);
       }
       .textarea-tag:focus {
-        background: rgb(20 21 26 / 70%);
+        background: rgb(var(--background-color-rgb) / 70%);
       }
     }
   }

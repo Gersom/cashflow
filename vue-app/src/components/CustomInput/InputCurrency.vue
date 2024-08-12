@@ -226,10 +226,10 @@
     /* Dark Theme */
     &.is-dark-theme {
       .input-tag {
-        background: rgb(20 21 26 / 30%);
+        background: rgb(var(--background-color-rgb) / 30%);
       }
       .input-tag:focus {
-        background: rgb(20 21 26 / 70%);
+        background: rgb(var(--background-color-rgb) / 70%);
       }
       .input-tag,
       .currency-symbol {

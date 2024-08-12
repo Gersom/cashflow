@@ -147,8 +147,7 @@
     /* Dark Theme */
     &.is-dark-theme {
       color: var(--text-color);
-      background: rgb(20 21 26 / 30%);
-      
+      background: rgb(var(--background-color-rgb) / 30%);
     }    
   }
 
