@@ -4,7 +4,7 @@ import { ref } from "vue"
 import { useRouter } from 'vue-router'
 
 // Icons
-import IconLogin from '@icons/login/IconLogIn.vue'
+import IconGeometricFigures from '@icons/nav/IconGeometricFigures.vue'
 
 // Layouts
 import LoginLayout from '@layouts/LoginLayout.vue';
@@ -12,13 +12,12 @@ import LoginLayout from '@layouts/LoginLayout.vue';
 // Components
 import CustomButtom from '@components/CustomButton/index.vue'
 import Email from "@components/FormInput/Email.vue"
-import Password from "@components/FormInput/Password.vue";
 
 const router = useRouter()
 
 const handleSubmit = (e) => {
   e.preventDefault()
-  router.push({ name: 'AppHome' })
+  // router.push({ name: 'AppHome' })
 }
 
 
@@ -29,46 +28,32 @@ const handlerEmail = (text, isValid) => {
   emailValidate.value = isValid;
 };
 
-const passwordValue = ref("");
-const passwordValidate = ref(false);
-const handlerPassword = (text, isValid) => {
-  passwordValue.value = text;
-  passwordValidate.value = isValid;
-};
-
 </script>
 
 <template>
-<div class='login-page'>
-  <LoginLayout title="Iniciar sesión">
+<div class='recover-password'>
+  <LoginLayout title="Recuperar contraseña">
 
     <form class="login-form" @submit="handleSubmit">
       <div class="input-container">
         <Email @validate="handlerEmail" />
       </div>
-      <div class="input-container">
-        <Password @validate="handlerPassword" />
-      </div>
 
-      <div class="recover-password-link">
-        <router-link :to="{ name: 'RecoverPassword' }">
-          ¿Olvidaste tu contraseña?
-        </router-link> 
-      </div>
+      <p>Te enviaremos un código de verificación a tu correo electrónico para recuperar tu contraseña</p>
 
       <div class="submit-button">
         <CustomButtom
-          text="Iniciar Sesión"
+          text="Enviar codigo"
           type="submit"
           :animation="true"
-          :icon-component="IconLogin"
+          :icon-component="IconGeometricFigures"
         />
       </div>
 
       <p class="register-link">
-        No tienes una cuenta? 
-        <router-link :to="{ name: 'Register' }">
-          Registrate
+        Ya te acordaste de tu contraseña?
+        <router-link :to="{ name: 'Login' }">
+          Inicia sesión
         </router-link> 
       </p>
     </form>
@@ -78,7 +63,7 @@ const handlerPassword = (text, isValid) => {
 </template>
 
 <style lang='scss' scoped>
-.login-page {
+.recover-password {
   .login-form  {
     .input-container {
       margin-top: 15px;
