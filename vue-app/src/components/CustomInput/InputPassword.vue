@@ -58,6 +58,7 @@ const valueInput = computed({
       />
       <input
         class="input-tag"
+        placeholder="* * * * * *"
         type="password"
         v-model="valueInput"
         v-if="!showPassword"
@@ -108,6 +109,10 @@ const valueInput = computed({
     right: 15px;
     height: 20px;
     padding: 0;
+    transition: color 0.5s ease;
+    &:hover {
+      color: var(--title-color);
+    }
   }
 
   &.is-icon {
@@ -138,6 +143,7 @@ const valueInput = computed({
     }
     .input-tag:focus {
       background: rgb(var(--background-color-rgb) / 70%);
+      color: var(--title-color);
     }
   }
 }

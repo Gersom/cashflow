@@ -30,14 +30,19 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  type: {
+    type: String,
+    default: 'button',
+  },
 });
 </script>
 
 <template>
   <button
     :class="['custom-button', `is-${size}`, {'is-solid': !transparent}, {'is-disabled': disabled}, {'is-animation': animation}]"
-    @click="emit('click')"
     :style="props.color ? { '--custom-btn-color': props.color } : {}"
+    :type="type"
+    @click="emit('click')"
   >
     <div class="icon-component">
       <component :is="iconComponent" />

@@ -104,6 +104,7 @@ const valueInput = computed({
     }
     .input-tag:focus {
       background: rgb(var(--background-color-rgb) / 70%);
+      color: var(--title-color);
     }
   }
 }
