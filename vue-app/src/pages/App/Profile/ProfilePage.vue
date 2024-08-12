@@ -1,26 +1,19 @@
 <script setup>
-import { useThemeStore } from '@stores/theme'
-import { storeToRefs } from 'pinia'
+// Layouts
 import MasonryCards from '@layouts/MasonryCards.vue'
+
+// Components global
 import Head from '@components/Head/Head.vue'
-import ProfileCard from './components/ProfileCard.vue'
+
+// Components local
 import ActionCard from './components/ActionCard/ActionCard.vue'
 import PasswordCard from './components/PasswordCard.vue'
 import PersonalCard from './components/PersonalCard.vue'
-
-defineOptions({
-  name: 'Profile'
-})
-
-const themeStore = useThemeStore()
-const { currentTheme } = storeToRefs(themeStore)
-const toggleTheme = () => {
-  themeStore.toggleTheme()
-}
+import ProfileCard from './components/ProfileCard.vue'
 </script>
 
 <template>
-  <div class="home-page">
+  <div class="profile-page">
     <main>
       <Head />
       <MasonryCards>
@@ -42,7 +35,7 @@ const toggleTheme = () => {
 </template>
 
 <style lang="scss" scoped>
-.home-page {
+.profile-page {
   width: 100%;
   height: 100svh;
   overflow-y: auto;

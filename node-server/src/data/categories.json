@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Inicial",
+    "icon": "icon-hash",
+    "color": "#d0f0c0"
+  },
+  {
+    "name": "Casa",
+    "icon": "icon-home",
+    "color": "#b0e0e6"
+  },
+  {
+    "name": "Salud",
+    "icon": "icon-heart",
+    "color": "#ffb6c1"
+  },
+  {
+    "name": "Salidas",
+    "icon": "icon-coffee",
+    "color": "#f5deb3"
+  },
+  {
+    "name": "Viajes",
+    "icon": "icon-map-pin",
+    "color": "#e0ffff"
+  }
+]

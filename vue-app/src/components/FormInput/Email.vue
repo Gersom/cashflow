@@ -60,7 +60,7 @@ const validateValue = () => {
     </div>
     <InputText
       @input="validateValue"
-      placeholder="example@cashflow.com"
+      placeholder="david@cashflow.com"
       v-model="inputValue"
       :icon-component="IconEmail"
     />

@@ -1,5 +1,4 @@
 <script setup>
-import DashboardLayout from "@layouts/Dashboard.vue";
 import { useThemeStore } from "@stores/theme";
 import { storeToRefs } from "pinia";
 
@@ -9,15 +8,10 @@ const { isDarkTheme } = storeToRefs(themeStore);
 
 <template>
   <div
-    :class="{
-      App: true,
-      'is-dark-theme': isDarkTheme,
-      'is-light-theme': !isDarkTheme,
-    }"
+    class="app-container"
+    :class="{ 'is-dark-theme': isDarkTheme }"
   >
-    <DashboardLayout>
-      <RouterView />
-    </DashboardLayout>
+    <RouterView />
   </div>
 </template>
 

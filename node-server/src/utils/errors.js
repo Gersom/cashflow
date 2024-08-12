@@ -14,7 +14,16 @@ class ValidationError extends Error {
   }
 }
 
+class AuthorizationError extends Error {
+  constructor(message){
+    super(message);
+    this.name = 'AuthorizationError';
+    this.status = 401;
+  }
+}
+
 module.exports = {
   NotFoundError,
-  ValidationError
+  ValidationError,
+  AuthorizationError
 };

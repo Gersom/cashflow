@@ -1,36 +1,21 @@
-const { UserModel, AccountModel, CategoryModel } = require("@models")
+const { AccountModel, CategoryModel } = require("@models")
 const insertIfAbsent = require("./utils/insertIfAbsent")
-const categoryData = require("@data/category.json")
-const getProperty = require("@utils/dbEngineProperties")
+const categoriesData = require("@data/categories.json")
 
 const insertUsers = async () => {
-  const annyUser = await UserModel.findOneData(
-    { email: 'anny@cashflow.com' }
-  );
-  const gersomUser = await UserModel.findOneData(
-    { email: 'gersom@cashflow.com' }
+  const gersomAccount = await AccountModel.findOneData(
+    { name: "Principal" }
   );
 
-  const annyAccountUser = await AccountModel.findOneData(
-    { user: annyUser[getProperty().id], name: "principal" }
-  );
-  const gersomAccountUser = await AccountModel.findOneData(
-    { user: gersomUser[getProperty().id], name: "principal" }
-  );
+  let categories = categoriesData.map(category => ({
+    ...category,
+    accountId: gersomAccount.id
+  }))
 
   await insertIfAbsent({
     name: 'Categories',
     model: CategoryModel,
-    data: [
-      {
-        ...categoryData,
-        account: annyAccountUser[getProperty().id]
-      },
-      {
-        ...categoryData,
-        account: gersomAccountUser[getProperty().id]
-      }
-    ],
+    data: categories
   })
 }
 

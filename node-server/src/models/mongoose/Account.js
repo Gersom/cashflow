@@ -2,51 +2,38 @@ const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const accountSchema = new mongoose.Schema({
-  name: { 
+  name: {
     type: String,
     required: true,
-    trim: true,
-  },
-  balance: { 
-    type: Number,
-    required: true,
-    default: 0
+    trim: true
   },
   currency: {
-    symbol: { 
+    symbol: {
       type: String,
-      trim: true,
-      default: 'S/.'
+      required: true
     },
-    type: { 
+    code: {
       type: String,
-      trim: true,
-      default: 'Soles'
+      required: true
+    },
+    name: {
+      type: String,
+      required: true
     }
   },
-  description: { 
-    type: String,
-    required: false,
-    trim: true
-  },
-  image: { 
-    type: String,
-    required: false,
-    trim: true
-  },
-  user: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  }
+  },
 }, {
   timestamps: true,
   versionKey: false
 });
 
 // Índices para mejorar el rendimiento de las consultas
+accountSchema.index({ user_id: 1 });
 accountSchema.index({ name: 1 });
-accountSchema.index({ currencyType: 1 });
 
 // Método de instancia para obtener una representación formateada
 accountSchema.methods.toJSON = function() {

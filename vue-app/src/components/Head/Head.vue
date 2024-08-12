@@ -1,7 +1,5 @@
 <script setup>
-
 import { useRoute } from 'vue-router'
-import { computed } from 'vue'
 import { useUserStore } from '@stores/user';
 import { storeToRefs } from 'pinia';
 import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
@@ -14,29 +12,14 @@ const year = getCurrentYear()
 
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
-
-const routerTitleMap = {
-  Home: 'Bienvenido',
-  Profile: 'Mi Perfil'
-}
-
-const titleName = computed(()=>{
-  return routerTitleMap[route.name] || route.path.slice(1);
-})
-
-
-defineOptions({
-  name: 'Head'
-})
-
 </script>
 
 <template>
   <header class="page-header">
     <div class="header-content">
       <div class="info">
-        <h1 class="page-title">{{titleName}}</h1>
-        <p class="user-name">{{user.name}}</p>
+        <h1 class="page-title">{{ route.meta.title }}</h1>
+        <p class="user-name">{{ user.name}}</p>
       </div>
       <div class="user-avatar">
         <img
@@ -47,8 +30,8 @@ defineOptions({
 
     <div class="header-date">
       <time :datetime="Date.now()">
-        <span class="month">{{month}}</span>
-        <span class="year">{{year}}</span>
+        <span class="month">{{ month }}</span>
+        <span class="year">{{ year }}</span>
       </time>
     </div>
   </header>

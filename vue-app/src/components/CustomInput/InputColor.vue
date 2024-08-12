@@ -89,10 +89,11 @@
     &.is-dark-theme {
       .input-tag {
         font-weight: 500;
-        background: rgb(20 21 26 / 30%);
+        background: rgb(var(--background-color-rgb) / 30%);
       }
       .input-tag:focus {
-        background: rgb(20 21 26 / 70%);
+        background: rgb(var(--background-color-rgb) / 70%);
+        color: var(--title-color);
       }
     }  
   }

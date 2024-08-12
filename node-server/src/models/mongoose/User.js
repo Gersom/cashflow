@@ -2,41 +2,36 @@ const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const userSchema = new mongoose.Schema({
-  name: { 
-    type: String,
-    required: true,
-    trim: true
-  },
   email: { 
-    type: String,
-    required: false,
-    unique: true,
-    lowercase: true,
-    trim: true,
-  },
-  password: { 
-    type: String,
-    required: true
-  },
-  gender: { 
-    type: String,
-    required: false,
-    enum: ['male', 'female', 'other']
-  },
-  image: { 
-    type: String,
-    required: false,
-    trim: true
+    type: String, 
+    required: true, 
+    unique: true, 
+    lowercase: true, 
+    trim: true 
   },
   whatsapp: { 
-    type: String,
-    required: false,
-    unique: true,
-    trim: true
+    type: String, 
+    required: false, 
+    unique: true, 
+    trim: true 
+  },
+  password: { 
+    type: String, 
+    required: true 
+  },
+  name: { 
+    type: String, 
+    required: true, 
+    trim: true 
+  },
+  profile_pic: { 
+    type: String, 
+    required: false, 
+    trim: true 
   }
-}, {
-  timestamps: true,
-  versionKey: false
+}, { 
+  timestamps: true, 
+  versionKey: false 
 });
 
 // Índices para mejorar el rendimiento de las consultas

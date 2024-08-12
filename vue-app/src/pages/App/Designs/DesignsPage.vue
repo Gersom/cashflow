@@ -16,7 +16,7 @@ const toggleTheme = () => {
 </script>
 
 <template>
-  <div class="DesingPage">
+  <div class="designs-page">
     <h1 class="title">Desing Page</h1>
     <p>Tema actual: {{ themeStore.currentTheme }}</p>
     <CustomButton
@@ -37,7 +37,7 @@ const toggleTheme = () => {
 </template>
 
 <style lang="scss" scoped>
-.DesingPage {
+.designs-page {
   margin-top: 20px;
   padding: 20px;
   color: var(--text-color);

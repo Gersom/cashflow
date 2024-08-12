@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 // Layout
 import DialogBlur from '@layouts/DialogBlur.vue'
@@ -17,10 +18,11 @@ import ConfirmDeleteAccount from './components/ConfirmDeleteAccount.vue'
 
 // Data
 const showDeleteAccountDialog = ref(false)
+const router = useRouter()
 
 // Methods
 const handleLogout = () => {
-  console.log('Logout')
+  router.push({ name: 'Login' })
 }
 const handleDeleteAccount = () => {
   showDeleteAccountDialog.value = true

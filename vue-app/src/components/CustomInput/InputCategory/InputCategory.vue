@@ -117,7 +117,7 @@ const toogleCategorySelect = () => {
 
   &.is-dark-theme {
     .container {
-      background: #22242e;
+      background: rgb(var(--background-color-rgb) / 30%);
     }
   }
 }
