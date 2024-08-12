@@ -8,11 +8,8 @@ const { isDarkTheme } = storeToRefs(themeStore);
 
 <template>
   <div
-    :class="{
-      App: true,
-      'is-dark-theme': isDarkTheme,
-      'is-light-theme': !isDarkTheme,
-    }"
+    class="app-container"
+    :class="{ 'is-dark-theme': isDarkTheme }"
   >
     <RouterView />
   </div>
