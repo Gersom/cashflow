@@ -1,7 +1,6 @@
-import Categories from '@pages/App/Categories/CategoriesPage.vue'
-import Home from '@pages/App/Home/HomePage.vue'
-import Designs from '@pages/App/Designs/DesignsPage.vue'
-import Profile from '@pages/App/Profile/ProfilePage.vue'
+import Home from '@pages/app/pages/home/HomePage.vue'
+import Profile from '@pages/app/pages/profile/ProfilePage.vue'
+import Categories from '@pages/app/pages/categories/CategoriesPage.vue'
 
 export const routesApp = [
   {
@@ -24,12 +23,5 @@ export const routesApp = [
     component: Categories,
     alias: '/app/categorias',
     meta: { title: 'Mis Categorías' }
-  },
-  {
-    path: '/app/mis-disenos',
-    name: 'AppDesigns',
-    component: Designs,
-    alias: '/app/designs',
-    meta: { title: 'Mis Diseños' }
   },
 ]

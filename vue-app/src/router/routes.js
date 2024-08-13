@@ -1,8 +1,9 @@
-import Login from '@pages/Login/Login.vue'
-import Register from '@pages/Register/Register.vue'
-import RecoverPassword from '@pages/RecoverPassword/RecoverPassword.vue'
-import App from '@pages/App/AppPage.vue'
 import { routesApp } from './routesApp'
+import App from '@pages/app/AppPage.vue'
+import Designs from '@pages/designs/DesignsPage.vue'
+import Login from '@pages/login/LoginPage.vue'
+import RecoverPassword from '@pages/recover-password/RecoverPasswordPage.vue'
+import Register from '@pages/register/RegisterPage.vue'
 
 export const routes = [
   {
@@ -29,5 +30,11 @@ export const routes = [
     name: 'App',
     component: App,
     children: routesApp
+  },
+  {
+    path: '/mis-disenos',
+    name: 'Designs',
+    component: Designs,
+    alias: '/designs',
   },
 ]
