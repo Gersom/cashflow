@@ -39,17 +39,16 @@ const handlerPassword = (text, isValid) => {
 
 const postLogin = (e) => {
   e.preventDefault()
-  const loginData = {
-    email: 'usuario@ejemplo.com',
-    password: 'contraseña123'
-  };
 
   fetch('http://localhost:3001/api/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(loginData)
+    body: JSON.stringify({
+      email: emailValue.value,
+      password: passwordValue.value
+    })
   })
   .then(response => response.json())
   .then(data => {
