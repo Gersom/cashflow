@@ -1,6 +1,6 @@
 <script setup>
 // Layouts
-import MasonryCards from '@layouts/MasonryCards.vue'
+import MasonryCards from '@app-page/layouts/MasonryCards.vue'
 
 // Components global
 import Head from '@components/Head/Head.vue'
