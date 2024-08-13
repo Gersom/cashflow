@@ -1,6 +1,15 @@
 const { UserModel } = require("@models");
 const { NotFoundError, ValidationError } = require("@utils/errors");
 
+const getAllUsersController = async (query = {}) => {
+  const users = await UserModel.findAllData(query);
+  return {
+    data: users,
+    count: users.length,
+    success: 'Users retrieved successfully'
+  };
+};
+
 const getUserController = async (id) => {
   const user = await UserModel.findDataById(id);
   if (!user) {
@@ -35,5 +44,6 @@ const deleteUserController = async (id) => {
 module.exports = {
   getUserController,
   updateUserController,
-  deleteUserController
+  deleteUserController,
+  getAllUsersController
 };
