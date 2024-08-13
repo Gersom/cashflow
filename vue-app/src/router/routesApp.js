@@ -7,21 +7,26 @@ export const routesApp = [
     path: '/app',
     name: 'AppHome',
     component: Home,
-    alias: '/app/inicio',
+    alias: ['inicio', 'home'],
     meta: { title: 'Bienvenido' }
   },
   {
-    path: '/app/mi-perfil',
+    path: 'mi-perfil',
     name: 'AppProfile',
     component: Profile,
-    alias: '/app/perfil',
+    alias: ['perfil', 'profile'],
     meta: { title: 'Mi Perfil' }
   },
   {
-    path: '/app/mis-categorias',
+    path: 'mis-categorias',
     name: 'AppCategories',
     component: Categories,
-    alias: '/app/categorias',
+    alias: ['categorias', 'categories'],
     meta: { title: 'Mis Categorías' }
   },
+  {
+    path: 'disenos',
+    alias: ['designs', 'my-designs', 'mis-disenos'],
+    redirect: '/disenos'
+  }
 ]

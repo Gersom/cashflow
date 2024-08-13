@@ -8,21 +8,24 @@ import Register from '@pages/register/RegisterPage.vue'
 export const routes = [
   {
     path: '/',
-    redirect: '/iniciar-sesion'
+    redirect: '/ingresar'
   },
   {
-    path: '/iniciar-sesion',
+    path: '/ingresar',
     name: 'Login',
+    alias: ['/login', '/entrar', '/iniciar-sesion'],
     component: Login
   },
   {
     path: '/recuperar-contrasena',
     name: 'RecoverPassword',
+    alias: ['/recover-password', '/recover', '/recuperar'],
     component: RecoverPassword
   },
   {
     path: '/registrarse',
     name: 'Register',
+    alias: ['/registro', '/register', '/signup'],
     component: Register
   },
   {
@@ -35,6 +38,6 @@ export const routes = [
     path: '/mis-disenos',
     name: 'Designs',
     component: Designs,
-    alias: '/designs',
+    alias: ['/designs', '/disenos', '/my-designs'],
   },
 ]
