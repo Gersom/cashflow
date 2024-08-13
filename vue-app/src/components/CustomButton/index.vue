@@ -42,6 +42,7 @@ const props = defineProps({
     :class="['custom-button', `is-${size}`, {'is-solid': !transparent}, {'is-disabled': disabled}, {'is-animation': animation}]"
     :style="props.color ? { '--custom-btn-color': props.color } : {}"
     :type="type"
+    :disabled="disabled"
     @click="emit('click')"
   >
     <div class="icon-component">

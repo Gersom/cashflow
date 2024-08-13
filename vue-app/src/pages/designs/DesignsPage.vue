@@ -38,7 +38,6 @@ const toggleTheme = () => {
 
 <style lang="scss" scoped>
 .designs-page {
-  margin-top: 20px;
   padding: 20px;
   color: var(--text-color);
   .title {
