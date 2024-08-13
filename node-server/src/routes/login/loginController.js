@@ -21,13 +21,14 @@ const loginController = async (body = {}) => {
     email: user.email,
   };
 
-  const token = jwt.sign(userForToken, process.env.JWT_SECRET);
+  const token = jwt.sign(userForToken, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
+  });
 
   user.password = undefined;
   delete user.password; // remove password from response  
 
   return {
-   email: email,
    token: token,
   };
 };

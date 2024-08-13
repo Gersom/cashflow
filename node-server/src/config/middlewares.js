@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 
 const middlewares = (app) => {
   if (process.env.NODE_ENV === 'development') {
@@ -13,6 +14,9 @@ const middlewares = (app) => {
   // Parsing JSON y url-encoded data
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+
+  // Cookie parser
+  app.use(cookieParser());
 
   // CORS configuration
   app.use(cors({
