@@ -2,6 +2,7 @@
 // Imports nodemodules
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
+import { SERVER_URL, API_URL } from "@src/config/envs";
 
 // Icons
 import IconLogin from '@icons/login/IconLogIn.vue'
@@ -40,8 +41,9 @@ const handlerPassword = (text, isValid) => {
 const postLogin = (e) => {
   e.preventDefault()
 
-  fetch('http://localhost:3001/login', {
+  fetch(`${SERVER_URL}/login`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -60,8 +62,9 @@ const postLogin = (e) => {
 }
 
 const getUser = () => {
-  fetch('http://localhost:3001/api/users', {
+  fetch(`${API_URL}/users`, {
     method: 'GET',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     }
