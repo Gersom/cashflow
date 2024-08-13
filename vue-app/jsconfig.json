@@ -11,13 +11,20 @@
     "paths": {
       "@/*": ["./*"],
       "@src/*": ["src/*"],
+
       "@assets/*": ["src/assets/*"],
       "@images/*": ["src/assets/images/*"],
-      "@components/*": ["src/components/*"],
       "@icons/*": ["src/assets/icons/*"],
+
+      "@components/*": ["src/components/*"],
+
       "@layouts/*": ["src/layouts/*"],
+
       "@pages/*": ["src/pages/*"],
+      "@app-page/*": ["src/pages/app/*"],
+
       "@stores/*": ["src/stores/*"],
+
       "@utils/*": ["src/utils/*"]
     }
   },

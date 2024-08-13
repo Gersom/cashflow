@@ -35,14 +35,14 @@ const props = defineProps({
   .card {
     width: 100%;
     max-width: 400px;
-    padding: 50px 25px;
+    padding: 30px 25px;
     border-radius: 15px;
     background: var(--background-color2);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 
   .logo {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
   }
 }
 </style>

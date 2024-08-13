@@ -81,14 +81,14 @@ const handlerPassword = (text, isValid) => {
 .login-page {
   .login-form  {
     .input-container {
-      margin-top: 15px;
+      margin-top: 10px;
       &:first-child {
         margin-top: 0px;
       }
     }
     
     .submit-button {
-      margin-top: 25px;
+      margin-top: 15px;
     }
 
     .register-link {
