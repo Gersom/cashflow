@@ -1,5 +1,5 @@
 <script setup>
-import DashboardLayout from "@layouts/Dashboard.vue";
+import DashboardLayout from "@app-page/layouts/Dashboard.vue";
 defineOptions({ name: 'AppPage' })
 </script>
 

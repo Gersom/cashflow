@@ -1,6 +1,6 @@
 <script setup>
 // Layout
-import GridCards from '@layouts/GridCards.vue'
+import GridCards from '@app-page/layouts/GridCards.vue'
 
 // Components global
 import Head from '@components/Head/Head.vue'
