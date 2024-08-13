@@ -1,6 +1,15 @@
 const { UserModel } = require("@models");
 const { NotFoundError, ValidationError } = require("@utils/errors");
 
+const getAllUsersController = async (query = {}) => {
+  const users = await UserModel.findAllData(query);
+  return {
+    data: users,
+    count: users.length,
+    success: 'Users retrieved successfully'
+  };
+};
+
 const getUserController = async (id) => {
   const user = await UserModel.findDataById(id);
   if (!user) {
@@ -9,6 +18,16 @@ const getUserController = async (id) => {
   return {
     data: user,
     success: 'User retrieved successfully'
+  };
+};
+
+const postUserController = async (data) => {
+  if (!data.email || !data.password) {
+    throw new ValidationError("Email and password are required");
+  }
+  await UserModel.create(data);
+  return {
+    success: 'User created successfully'
   };
 };
 
@@ -33,7 +52,9 @@ const deleteUserController = async (id) => {
 };
 
 module.exports = {
+  getAllUsersController,
   getUserController,
+  postUserController,
   updateUserController,
   deleteUserController
 };

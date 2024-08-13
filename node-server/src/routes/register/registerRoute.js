@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { asyncHandler } = require("@middlewares/asyncHandler");
+const {
+  register,
+} = require("./registerHandler");
 
-router.get('/', (req, res) => res.send('Envia un POST'));
-
-router.post("/", (req, res) => {
-  res.json({
-    message: 'Body recibido',
-    data: req.body
-  });
-});
+router.post("/", asyncHandler(register));
 
 module.exports = router;

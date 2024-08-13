@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 
 //"Jhon321@"
 async function hashPassword(pwd) {
-    const hash = await bcrypt.hash(pwd , 10);
+    const hash = await bcrypt.hash(pwd , process.env.SALT_ROUNDS);
     return hash;
 }
 

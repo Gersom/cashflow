@@ -1,5 +1,5 @@
 const { UserModel } = require("@models");
-const { NotFoundError, ValidationError, AuthorizationError } = require("@utils/errors");
+const { AuthorizationError } = require("@utils/errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
