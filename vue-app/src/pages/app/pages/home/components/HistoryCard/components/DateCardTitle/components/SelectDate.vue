@@ -81,7 +81,7 @@ const props = defineProps({
       :transparent="true"
       @click="emit('close')"
       size="small"
-      text="Aceptar"
+      text="Ok"
     />
   </div>
 </div>
