@@ -3,6 +3,7 @@
 import { ref } from "vue"
 import { useRouter } from 'vue-router'
 import { SERVER_URL, API_URL } from "@src/config/envs";
+import axios from "axios"
 
 // Icons
 import IconLogin from '@icons/login/IconLogIn.vue'
@@ -38,42 +39,36 @@ const handlerPassword = (text, isValid) => {
 };
 
 
-const postLogin = (e) => {
+const postLogin = async (e) => {
   e.preventDefault()
 
-  fetch(`${SERVER_URL}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      email: emailValue.value,
-      password: passwordValue.value
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Respuesta del servidor:', data);
-  })
-  .catch(error => {
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: `${SERVER_URL}/login`,
+      data: {
+        email: emailValue.value,
+        password: passwordValue.value
+      },
+      withCredentials: true
+    });
+    console.log('Respuesta del servidor:', response.data);
+  } catch (error) {
     console.error('Error:', error);
-  });
+  }
 }
 
-const getUser = () => {
-  fetch(`${API_URL}/users`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Respuesta del servidor:', data);
-  })
-  .catch(error => {
+const getUser = async() => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: `${API_URL}/users`,
+      withCredentials: true
+    })
+    console.log('Respuesta del servidor:', response.data);
+  } catch (error) {
     console.error('Error:', error);
-  });
+  }
 }
 </script>
 
