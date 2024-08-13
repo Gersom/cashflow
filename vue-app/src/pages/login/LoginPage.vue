@@ -43,7 +43,6 @@ const postLogin = (e) => {
 
   fetch(`${SERVER_URL}/login`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -64,7 +63,6 @@ const postLogin = (e) => {
 const getUser = () => {
   fetch(`${API_URL}/users`, {
     method: 'GET',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     }
