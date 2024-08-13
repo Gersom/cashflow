@@ -8,8 +8,8 @@ const login = async (req, res) => {
   .cookie('access_token', result.token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-    maxAge: parseInt(process.env.JWT_EXPIRES_IN) * 1000,
+    sameSite: process.env.NODE_ENV === 'production' ? '' : 'strict',
+    maxAge: parseInt(process.env.COOKIE_MAX_AGE),
   })
   .status(200).json(result);
 };
