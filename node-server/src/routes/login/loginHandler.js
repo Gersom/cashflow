@@ -11,7 +11,7 @@ const login = async (req, res) => {
     sameSite: process.env.NODE_ENV === 'production' ? '' : 'strict',
     maxAge: parseInt(process.env.COOKIE_MAX_AGE),
   })
-  .status(200).json(result);
+  .status(200).json({ success: 'Loged in successfully' });
 };
 
 module.exports = {
