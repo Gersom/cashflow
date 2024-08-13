@@ -155,10 +155,10 @@ const addCategory = (cat) => {
   }
   button.button {
     .icon {
-      color: var(--text-color);
+      color: var(--title-color);
     }
     .text {
-      color: var(--text-color);
+      color: var(--title-color);
     }
     &:hover {
       .icon {

@@ -194,13 +194,14 @@
       font-family: var(--font-poppins);
       font-size: 16px;
       height: 34px;
-      padding: 0 15px 0 50px;
+      padding: 0 15px 0 0px;
       position: relative;
       width: 100%;
       z-index: 1;
+      text-align: center;
     }
     .currency-symbol {
-      left: 15px;
+      left: 25px;
       position: absolute;
       z-index: 9;
     }
@@ -231,8 +232,7 @@
       .input-tag:focus {
         background: rgb(var(--background-color-rgb) / 70%);
       }
-      .input-tag,
-      .currency-symbol {
+      .input-tag {
         font-weight: 500;
       }
     }  

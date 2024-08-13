@@ -17,7 +17,7 @@ defineOptions({
   <div class="balance">
     <small>Saldo total</small>
     <br>
-    <h5 class="underlined"> $ {{ props.balance }} </h5>
+    <h3 class="underlined"> $ {{ props.balance }} </h3>
   </div>
 </template>
 
@@ -34,7 +34,6 @@ defineOptions({
 }
 
 .underlined {
-  color: var(--text-color);
   position: relative;
   display: inline-block;
   margin: 0;

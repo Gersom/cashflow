@@ -51,13 +51,13 @@ const props = defineProps({
     font-size: 20px;
     min-width: 30px;
     transition: 0.3s ease all;
+    color: var(--title-color);
 
     &.trash-container {
       background: var(--error-color);
       display: none;
       .trash-content {
         height: 24px;
-        color: var(--text-color);
       }
     }
   }
@@ -71,9 +71,11 @@ const props = defineProps({
   &:hover {
     .icon {
       display: none;
+      color: var(--title-color);
     }
     .icon.trash-container {
       display: flex;
+      color: var(--title-color);
     }
     .text {
       color: var(--error-color);

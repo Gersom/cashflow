@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="new-item">
+  <div class="new-item" :class="{ 'is-selected': props.showClose }">
     <span class="icon">
       <IconAdd v-show="!props.showClose" />
       <IconClose v-show="props.showClose" />
@@ -47,7 +47,23 @@ const props = defineProps({
   &:hover {
     .icon,
     .text {
-      color: var(--primary-color);
+      color: var(--title-color);
+      // color: var(--primary-color);
+    }
+  }
+
+  &.is-selected {
+    .icon {
+      color: var(--error-color);
+    }
+    .text {
+      color: var(--title-color);
+    }
+    &:hover {
+      .icon,
+      .text {
+        color: var(--error-color);
+      }
     }
   }
 }
