@@ -36,13 +36,52 @@ const handlerPassword = (text, isValid) => {
   passwordValidate.value = isValid;
 };
 
+
+const postLogin = (e) => {
+  e.preventDefault()
+  const loginData = {
+    email: 'usuario@ejemplo.com',
+    password: 'contraseña123'
+  };
+
+  fetch('http://localhost:3001/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(loginData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Respuesta del servidor:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+const getUser = () => {
+  fetch('http://localhost:3001/api/users', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Respuesta del servidor:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
 </script>
 
 <template>
 <div class='login-page'>
   <LoginLayout title="Iniciar sesión">
 
-    <form class="login-form" @submit="handleSubmit">
+    <form class="login-form" @submit="postLogin">
       <div class="input-container">
         <Email @validate="handlerEmail" />
       </div>
@@ -60,6 +99,14 @@ const handlerPassword = (text, isValid) => {
         <CustomButtom
           text="Iniciar Sesión"
           type="submit"
+          :animation="true"
+          :icon-component="IconLogin"
+        />
+
+        <CustomButtom
+          text="GET"
+          type="button"
+          @click="getUser"
           :animation="true"
           :icon-component="IconLogin"
         />
