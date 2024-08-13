@@ -1,0 +1,29 @@
+@import 'vue-toastification/dist/index.css';
+
+/* Estilo general para todos los toasts */
+/* .Vue-Toastification__toast {} */
+
+/* Toast de éxito */
+.Vue-Toastification__toast--success {
+  background-color: var(--success-color);
+}
+
+/* Toast de error */
+.Vue-Toastification__toast--error {
+  background-color: var(--error-color);
+}
+
+/* Toast de advertencia */
+.Vue-Toastification__toast--warning {
+  background-color: var(--warning-color);
+}
+
+/* Toast de información */
+.Vue-Toastification__toast--info {
+  background-color: var(--primary-color);
+}
+
+/* Toast por defecto */
+.Vue-Toastification__toast--default {
+  background-color: var(--primary-color);
+}
