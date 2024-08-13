@@ -40,7 +40,7 @@ const handlerPassword = (text, isValid) => {
 const postLogin = (e) => {
   e.preventDefault()
 
-  fetch('http://localhost:3001/api/login', {
+  fetch('http://localhost:3001/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
