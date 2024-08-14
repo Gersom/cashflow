@@ -17,27 +17,22 @@ const validateValue = () => {
   const regexNumber = /^.*[0-9].*$/;
 
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (inputValue.value.length < 3) {
-    textNotification.value = "El nombre debe tener al menos 3 caracteres";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("El nombre debe tener al menos 3 caracteres", false);
   } else if (regexNumber.test(inputValue.value)) {
-    textNotification.value = "El nombre no puede contener números";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("El nombre no puede contener números", false);
   } else if (!regexEspecial.test(inputValue.value)) {
-    textNotification.value =
-      "El nombre no puede contener caracteres especiales";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("El nombre no puede contener caracteres especiales", false);
   } else {
-    textNotification.value = "Nombre / apodo válido";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Nombre / apodo válido", true);
   }
+};
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -45,22 +40,21 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
-      @input="validateValue"
       v-model="inputValue"
+      placeholder="David"
+      @input="validateValue"
       :icon-component="IconUserEdit"
     />
   </div>
@@ -73,10 +67,12 @@ const validateValue = () => {
     color: var(--text-color);
     margin: 0 0 5px 5px;
     display: flex;
-  }
-  .icon {
-    height: 16px;
-    margin-right: 5px;
+    align-items: center;
+
+    .icon {
+      height: 16px;
+      margin-right: 5px;
+    }
   }
 
   &.is-warning {
@@ -85,6 +81,7 @@ const validateValue = () => {
       color: var(--warning-color);
     }
   }
+
   &.is-success {
     .title,
     .icon {

@@ -23,18 +23,18 @@ const textNotification = ref("");
 
 const validateValue = () => {
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (inputValue.value !== props.password) {
-    textNotification.value = "La contraseña no coincide";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("La contraseña no coincide", false);
   } else {
-    textNotification.value = "Contraseña coincide";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Contraseña coincide", true);
   }
+};
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -42,17 +42,15 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || props.textInput }}</span>
     </div>
     <InputPassword

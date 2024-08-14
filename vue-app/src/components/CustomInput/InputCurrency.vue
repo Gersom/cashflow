@@ -64,10 +64,12 @@
     emitInput(parts)
     event.target.value = parts;
   }
+
   const handleFocus = () => {
     const dotIndex = inputRef.value.value.indexOf('.')
     inputRef.value.setSelectionRange(0, dotIndex)
   }
+
   const handleInput = (event) => {
     const regex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*(),?":{}|<>]/g
     let cursorPosition = event.target.selectionStart
@@ -82,21 +84,23 @@
 
     inputRef.value.setSelectionRange(cursorPosition, cursorPosition)
   }
+
   const handleKeyDown = (event) => {
-    if(event.key === 'Shift') {
+    if(event.key === 'Shift')
       pressedShift.value = true
-    }
+
     if(event.key === '.') {
       event.preventDefault()
       selectDecimals()
     }
+
     if(event.key === 'Tab') {
       if(pressedShift.value) {
         if(!pressedShiftTab.value) {
           pressedShiftTab.value = true
           pressedTab.value = false
           event.preventDefault()
-          console.log('selectIntegers')
+          // console.log('selectIntegers')
           selectIntegers()
         }
       } else {
@@ -104,12 +108,13 @@
           pressedShiftTab.value = false
           pressedTab.value = true
           event.preventDefault()
-          console.log('selectDecimals')
+          // console.log('selectDecimals')
           selectDecimals()
         }
       }
     }
   }
+
   const handleKeyUp = (event) => {
     if(event.key === 'Shift') {
       pressedShift.value = false
@@ -122,6 +127,7 @@
   const emitInput = (value) => {
     emit('update:modelValue', value)
   }
+
   const selectDecimals = () => {
     const dotIndex = inputRef.value.value.indexOf('.')
     if(dotIndex === -1) {
@@ -132,10 +138,12 @@
       inputRef.value.setSelectionRange(dotIndex + 1, dotIndex + 3)
     }
   }
+
   const selectIntegers = () => {
     const dotIndex = inputRef.value.value.indexOf('.')
     inputRef.value.setSelectionRange(0, dotIndex)
   }
+
   const formatNumber = (str) => {
     let parts = str.split('.');
     let integerPart = parts[0];

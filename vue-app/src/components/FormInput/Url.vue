@@ -17,18 +17,18 @@ const validateValue = () => {
     /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (!regex.test(inputValue.value)) {
-    textNotification.value = "Url no es válida";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("Url no es válida", false);
   } else {
-    textNotification.value = "Url válido";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Url válido", true);
   }
+};
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -36,17 +36,15 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
@@ -65,10 +63,12 @@ const validateValue = () => {
     color: var(--text-color);
     margin: 0 0 5px 5px;
     display: flex;
-  }
-  .icon {
-    height: 16px;
-    margin-right: 5px;
+    align-items: center;
+
+    .icon {
+      height: 16px;
+      margin-right: 5px;
+    }
   }
 
   &.is-warning {

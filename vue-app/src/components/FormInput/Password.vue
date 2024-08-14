@@ -5,13 +5,14 @@ import IconPassword from "@icons/form/IconPassword.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
-const emit = defineEmits(["validate"]);
 const props = defineProps({
   textInput: {
     type: String,
     default: "Contraseña",
   }
 });
+
+const emit = defineEmits(["validate"]);
 
 const inputValue = ref("");
 const stateValidation = ref(null);
@@ -22,23 +23,20 @@ const validateValue = () => {
   const regexNumber = /^.*[0-9].*$/;
 
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (!regexNumber.test(inputValue.value)) {
-    textNotification.value = "La contraseña debe contener al menos un número";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("La contraseña debe contener al menos un número", false);
   } else if (regexEspecial.test(inputValue.value)) {
-    textNotification.value =
-      "La contraseña debe contener al menos un caracter especial";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("La contraseña debe contener al menos un caracter especial", false);
   } else {
-    textNotification.value = "Contraseña válida";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Contraseña válida", true);
   }
+};
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -46,17 +44,15 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || props.textInput }}</span>
     </div>
     <InputPassword

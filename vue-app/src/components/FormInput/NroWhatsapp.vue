@@ -13,25 +13,33 @@ const text = ref("Nro de whatsapp");
 const textNotification = ref("");
 
 const validateValue = () => {
-  const whatsappRegex = /^\+\d{2,3}\d{9,10}$/;
+  const characterRegex = /[^\w\s+]/;
+  const lettersRegex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]+/g;
 
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (inputValue.value[0] !== "+" && inputValue.value[0] !== "0") {
-    textNotification.value = 'El número de whatsapp debe empezar con "+" ó "0"';
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
-  } else if (!whatsappRegex.test(inputValue.value)) {
-    textNotification.value = "El número de whatsapp no es válido";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState('El número de whatsapp debe empezar con "+" ó "0"', false);
+  } else if (inputValue.value.includes(" ")) {
+    updateState("El número de whatsapp no puede contener espacios", false);
+  } else if (lettersRegex.test(inputValue.value)) {
+    updateState("El número de whatsapp no puede contener letras", false);
+  } else if (characterRegex.test(inputValue.value)) {
+    updateState("El número de whatsapp no puede contener caracteres especiales", false);
+  } else if (inputValue.value.length < 9) {
+    updateState("El número de whatsapp debe tener al menos 9 dígitos", false);
+  } else if (inputValue.value.length > 14) {
+    updateState("El número de whatsapp no debe tener más de 14 dígitos", false);
   } else {
-    textNotification.value = "Número de whatsapp válido";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Número de whatsapp válido", true);
   }
+};
+
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -39,17 +47,15 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
@@ -68,10 +74,12 @@ const validateValue = () => {
     color: var(--text-color);
     margin: 0 0 5px 5px;
     display: flex;
-  }
-  .icon {
-    height: 16px;
-    margin-right: 5px;
+    align-items: center;
+
+    .icon {
+      height: 16px;
+      margin-right: 5px;
+    }
   }
 
   &.is-warning {

@@ -22,22 +22,20 @@ const validateValue = () => {
   };
 
   if (inputValue.value === "") {
-    textNotification.value = "";
-    stateValidation.value = null;
-    emit("validate", inputValue.value, false);
+    updateState("", null, "");
   } else if (!regex.test(inputValue.value)) {
-    textNotification.value = "Correo electrónico no es válido";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("Correo electrónico no es válido", false);
   } else if (!validatePoint(inputValue.value)) {
-    textNotification.value = "Correo electrónico no es válido";
-    stateValidation.value = false;
-    emit("validate", inputValue.value, false);
+    updateState("Correo electrónico no es válido", false);
   } else {
-    textNotification.value = "Correo electrónico válido";
-    stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    updateState("Correo electrónico válido", true);
   }
+};
+
+const updateState = (notification, validationState, emitValue = inputValue.value) => {
+  textNotification.value = notification;
+  stateValidation.value = validationState;
+  emit('validate', emitValue, validationState === true);
 };
 </script>
 
@@ -45,17 +43,15 @@ const validateValue = () => {
   <div
     class="user-name"
     :class="{
-      'is-warning': stateValidation == false,
-      'is-success': stateValidation == true,
+      'is-warning': stateValidation === false,
+      'is-success': stateValidation === true,
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
-        <IconSuccess />
+      <div class="icon" v-if="stateValidation !== null">
+        <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
-      <div class="icon" v-if="stateValidation == false">
-        <IconWarning />
-      </div>
+
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
