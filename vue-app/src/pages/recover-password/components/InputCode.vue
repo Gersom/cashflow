@@ -1,43 +1,50 @@
 <script setup>
 import { ref } from "vue";
-import InputPassword from "@components/CustomInput/InputPassword.vue";
-import IconPassword from "@icons/form/IconPassword.vue";
+import InputText from "@components/CustomInput/InputText.vue";
+import IconSheet from "@icons/nav/IconSheet.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
 const emit = defineEmits(["validate"]);
-const props = defineProps({
-  textInput: {
-    type: String,
-    default: "Contraseña",
-  }
-});
 
-const inputValue = ref("");
 const stateValidation = ref(null);
+const text = ref("Código de recuperación");
 const textNotification = ref("");
 
-const validateValue = () => {
-  const regexEspecial = /^[a-zA-Z0-9\s]+$/;
-  const regexNumber = /^.*[0-9].*$/;
+const props = defineProps({
+  inputValue: {
+    type: String,
+    default: "",
+  },
+})
 
-  if (inputValue.value === "") {
+const validateValue = (e) => {
+  const regexEspecial = /^[a-zA-Z0-9\s]+$/;
+
+  if (e.target.value === "") {
     textNotification.value = "";
     stateValidation.value = null;
-    emit("validate", inputValue.value, false);
-  } else if (!regexNumber.test(inputValue.value)) {
-    textNotification.value = "La contraseña debe contener al menos un número";
+    emit("validate", e.target.value, false);
+  }
+  else if (e.target.value.includes(" ")) {
+    textNotification.value = "El código no puede contener espacios";
     stateValidation.value = false;
-    emit("validate", inputValue.value, false);
-  } else if (regexEspecial.test(inputValue.value)) {
-    textNotification.value =
-      "La contraseña debe contener al menos un caracter especial";
+    emit("validate", e.target.value, false);
+  } 
+  else if (e.target.value.length !== 6) {
+    textNotification.value = "El código debe tener 6 caracteres";
     stateValidation.value = false;
-    emit("validate", inputValue.value, false);
-  } else {
-    textNotification.value = "Contraseña válida";
+    emit("validate", e.target.value, false);
+  }
+  else if (!regexEspecial.test(e.target.value)) {
+    textNotification.value = "El código no puede contener caracteres especiales";
+    stateValidation.value = false;
+    emit("validate", e.target.value, false);
+  }
+  else {
+    textNotification.value = "Código válido";
     stateValidation.value = true;
-    emit("validate", inputValue.value, true);
+    emit("validate", e.target.value, true);
   }
 };
 </script>
@@ -57,12 +64,13 @@ const validateValue = () => {
       <div class="icon" v-if="stateValidation == false">
         <IconWarning />
       </div>
-      <span>{{ textNotification || props.textInput }}</span>
+      <span>{{ textNotification || text }}</span>
     </div>
-    <InputPassword
+    <InputText
       @input="validateValue"
-      v-model="inputValue"
-      :icon-component="IconPassword"
+      placeholder="* * * * *"
+      :model-value="props.inputValue"
+      :icon-component="IconSheet"
     />
   </div>
 </template>

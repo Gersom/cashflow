@@ -11,11 +11,14 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  textInput: {
+    type: String,
+    default: "Confirmar contraseña",
+  }
 });
 
 const inputValue = ref("");
 const stateValidation = ref(null);
-const text = ref("Confirmar contraseña");
 const textNotification = ref("");
 
 const validateValue = () => {
@@ -50,7 +53,7 @@ const validateValue = () => {
       <div class="icon" v-if="stateValidation == false">
         <IconWarning />
       </div>
-      <span>{{ textNotification || text }}</span>
+      <span>{{ textNotification || props.textInput }}</span>
     </div>
     <InputPassword
       @input="validateValue"

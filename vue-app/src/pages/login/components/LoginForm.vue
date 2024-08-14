@@ -64,9 +64,9 @@ const handleSubmit = async(e) => {
     </div>
 
     <p class="register-link">
-      No tienes una cuenta? 
+      ¿No tienes una cuenta? 
       <router-link :to="{ name: 'Register' }">
-        Registrate
+        Registrate.
       </router-link> 
     </p>
   </form>

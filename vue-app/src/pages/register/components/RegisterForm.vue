@@ -74,7 +74,7 @@ const handleSubmit = async(e) => {
     <p class="register-link">
       Ya tienes una cuenta?
       <router-link :to="{ name: 'Login' }">
-        Inicia sesión
+        Inicia sesión.
       </router-link> 
     </p>
   </form>

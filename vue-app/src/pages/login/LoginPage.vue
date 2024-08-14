@@ -4,7 +4,7 @@ import { apiPost } from '@src/services/api';
 import { SERVER_URL } from "@src/config/env";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import FormLogin from './components/FormLogin.vue'
+import LoginForm from './components/LoginForm.vue'
 import LoginLayout from '@layouts/LoginLayout.vue';
 
 // Data
@@ -40,7 +40,7 @@ const handleSubmit = async(data) => {
 <template>
 <div class='login-page'>
   <LoginLayout title="Iniciar sesión">
-    <FormLogin @submit="handleSubmit" />
+    <LoginForm @submit="handleSubmit" />
   </LoginLayout>
 </div>
 </template>
