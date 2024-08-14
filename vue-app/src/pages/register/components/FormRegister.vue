@@ -5,20 +5,33 @@ import { ref, computed } from 'vue'
 import CustomButtom from '@components/CustomButton/index.vue'
 import Email from "@components/FormInput/Email.vue"
 import Password from "@components/FormInput/Password.vue";
+import Nickname from "@components/FormInput/Nickname.vue";
+import NroWhatsapp from "@components/FormInput/NroWhatsapp.vue";
 
 // Icons
-import IconLogin from '@icons/login/IconLogIn.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
 
 const emit = defineEmits(["submit"]);
 
 // Data
+const componentMap = {
+  name: Nickname,
+  email: Email,
+  password: Password,
+  whatsapp: NroWhatsapp
+}
+
 const formData = ref({
+  name: { value: '', isValid: false },
   email: { value: '', isValid: false },
   password: { value: '', isValid: false },
+  whatsapp: { value: '', isValid: false }
 })
 
 const isFormValid = computed(() => 
-  Object.values(formData.value).every(field => field.isValid)
+  Object.entries(formData.value)
+    .filter(([key]) => key !== 'whatsapp')
+    .every(([, field]) => field.isValid)
 )
 
 // Methods
@@ -39,41 +52,36 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="form-login" @submit="handleSubmit">
-    <div class="input-container">
-      <Email @validate="(txt, valid) => handleInput('email', txt, valid)" />
-    </div>
-    <div class="input-container">
-      <Password @validate="(txt, valid) => handleInput('password', txt, valid)" />
-    </div>
-
-    <div class="recover-password-link">
-      <router-link :to="{ name: 'RecoverPassword' }">
-        ¿Olvidaste tu contraseña?
-      </router-link> 
+  <form class="register-form" @submit="handleSubmit">
+    <div
+      class="input-container"
+      v-for="(inputComponent, key) in componentMap" :key="key">
+      <component
+        :is="inputComponent"
+        @validate="(txt, valid) => handleInput(key, txt, valid)" />
     </div>
 
     <div class="submit-button">
       <CustomButtom
-        text="Iniciar Sesión"
+        text="Registrarme"
         type="submit"
         :disabled="!isFormValid"
         :animation="true"
-        :icon-component="IconLogin"
+        :icon-component="IconSuccess"
       />
     </div>
 
     <p class="register-link">
-      No tienes una cuenta? 
-      <router-link :to="{ name: 'Register' }">
-        Registrate
+      Ya tienes una cuenta?
+      <router-link :to="{ name: 'Login' }">
+        Inicia sesión
       </router-link> 
     </p>
   </form>
 </template>
 
 <style lang='scss' scoped>
-  .form-login  {
+  .register-form  {
     .input-container {
       margin-top: 10px;
       &:first-child {
@@ -87,10 +95,6 @@ const handleSubmit = async(e) => {
 
     .register-link {
       text-align: center;
-    }
-      
-    .recover-password-link,
-    .register-link {
       margin-top: 7px;
       font-size: 14px;
     }

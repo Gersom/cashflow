@@ -194,7 +194,7 @@
       font-family: var(--font-poppins);
       font-size: 16px;
       height: 34px;
-      padding: 0 15px 0 0px;
+      padding: 0 15px 0 15px;
       position: relative;
       width: 100%;
       z-index: 1;

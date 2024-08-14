@@ -20,6 +20,10 @@ const validateValue = () => {
     textNotification.value = "";
     stateValidation.value = null;
     emit("validate", inputValue.value, false);
+  } else if (inputValue.value.length < 3) {
+    textNotification.value = "El nombre debe tener al menos 3 caracteres";
+    stateValidation.value = false;
+    emit("validate", inputValue.value, false);
   } else if (regexNumber.test(inputValue.value)) {
     textNotification.value = "El nombre no puede contener números";
     stateValidation.value = false;
