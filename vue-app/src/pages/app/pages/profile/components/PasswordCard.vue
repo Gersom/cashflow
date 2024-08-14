@@ -1,48 +1,66 @@
 <script setup>
-import { ref , computed} from 'vue'
+import { ref , computed } from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import Password from '@components/FormInput/Password.vue'
 import ConfirmPassword from '@components/FormInput/ConfirmPassword.vue'
 import CustomButton from "@components/CustomButton/index.vue"
 import IconSave from '@icons/actions/IconSave.vue'
+import Password from '@components/FormInput/Password.vue'
 
 
-const passwordValue = ref("");
-const passwordValidate = ref(false);
-const handlerPassword = (text, isValid) => {
-  passwordValue.value = text;
-  passwordValidate.value = isValid;
-};
+const formData = ref({
+  currentPassword: { value: '', isValid: false },
+  newPassword: { value: '', isValid: false },
+  confirmPassword: { value: '', isValid: false },
+})
 
-const confirmPasswordValue = ref("");
-const confirmPasswordValidate = ref(false);
-const handlerConfirmPassword = (text, isValid) => {
-  confirmPasswordValue.value = text;
-  confirmPasswordValidate.value = isValid;
-};
+const isFormValid = computed(() => 
+  Object.values(formData.value).every(field => field.isValid)
+)
 
-const isButtonEnabled = computed(() => {
-  return passwordValidate.value && confirmPasswordValidate.value;
-});
+// Methods
+const handleInput = (field, text, isValid) => {
+  formData.value[field] = { value: text, isValid }
+}
+
+const handleSubmit = async(e) => {
+  e.preventDefault()
+
+  const data = {}
+  Object.keys(formData.value).forEach(key => {
+    data[key] = formData.value[key].value;
+  });
+
+  console.log('data', data)
+}
 
 </script>
 
 <template>
-  <div class="card card-profile">
-        <CardTitle title="Crear nueva contraseña "/>
-        <div class="card-pwds">
-          <Password @validate="handlerPassword" />
-          <ConfirmPassword
-          :password="passwordValue"
-          @validate="handlerConfirmPassword"
-          />
-          <CustomButton
-          :disabled="!isButtonEnabled"
-          :icon-component="IconSave"
-          text="Cambiar contraseña"
-          />
-        </div>
-  </div>
+  <form class="card card-profile" @submit="handleSubmit">
+    <CardTitle title="Crear nueva contraseña "/>
+    <div class="card-pwds">
+      <Password
+        text-input="Contraseña actual"
+        @validate="(txt, valid) => handleInput('currentPassword', txt, valid)"
+      />
+      <Password
+        text-input="Nueva contraseña"
+        @validate="(txt, valid) => handleInput('newPassword', txt, valid)"
+      />
+      <ConfirmPassword
+        text-input="Confirmar nueva contraseña"
+        :password="formData.newPassword.value"
+        @validate="(txt, valid) => handleInput('confirmPassword', txt, valid)"
+      />
+
+      <CustomButton
+        :disabled="!isFormValid"
+        type="submit"
+        :icon-component="IconSave"
+        text="Cambiar contraseña"
+      />
+    </div>
+  </form>
 </template>
 
 <style lang="scss" scoped>

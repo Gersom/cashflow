@@ -2,11 +2,14 @@
 import IconClose from "@icons/actions/IconClose.vue"
 import CustomButton from '@components/CustomButton/index.vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 const emit = defineEmits(['close'])
 const router = useRouter()
+const toast = useToast()
 
 const handleDeleteAccount = () => {
+  toast.error('Tu cuenta se ha eliminado :c')
   console.log('Delete account')
   router.push({ name: 'Login' })
 }

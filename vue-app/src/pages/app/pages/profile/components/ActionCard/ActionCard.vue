@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 // Layout
 import DialogBlur from '@layouts/DialogBlur.vue'
@@ -19,9 +20,11 @@ import ConfirmDeleteAccount from './components/ConfirmDeleteAccount.vue'
 // Data
 const showDeleteAccountDialog = ref(false)
 const router = useRouter()
+const toast = useToast()
 
 // Methods
 const handleLogout = () => {
+  toast.info('Sesión cerrada, vuelve pronto :D')
   router.push({ name: 'Login' })
 }
 const handleDeleteAccount = () => {
