@@ -1,5 +1,5 @@
 <script setup>
-import TransactionBadge from '@components/TransactionBadge/TransactionBadge.vue';
+import TransactionBadge from '@app-page/components/TransactionBadge.vue';
 import IconEdit from '@icons/actions/IconEdit.vue';
 import { computed } from 'vue';
 import BookmarkTag from './components/BookmarkTag.vue';

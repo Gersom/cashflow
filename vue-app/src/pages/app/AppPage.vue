@@ -1,5 +1,6 @@
 <script setup>
-import DashboardLayout from "@app-page/layouts/Dashboard.vue";
+import "./styles/icomoon.css";
+import DashboardLayout from "./layouts/Dashboard.vue";
 defineOptions({ name: 'AppPage' })
 </script>
 

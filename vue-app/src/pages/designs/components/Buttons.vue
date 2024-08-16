@@ -1,5 +1,5 @@
 <script setup>
-import CustomButton from "@components/CustomButton/index.vue";
+import CustomButton from "@components/CustomButton/GeneralButton.vue";
 import IconAdd from "@icons/actions/IconAdd.vue";
 </script>
 

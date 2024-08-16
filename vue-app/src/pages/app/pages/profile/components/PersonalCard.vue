@@ -4,7 +4,7 @@ import CardTitle from '@components/CardTitle/CardTitle.vue'
 import Nickname from '@components/FormInput/Nickname.vue';
 import Email from '@components/FormInput/Email.vue';
 import NroWhatsapp from '@components/FormInput/NroWhatsapp.vue';
-import CustomButton from '@components/CustomButton/index.vue';
+import CustomButton from '@components/CustomButton/GeneralButton.vue';
 import IconSave from '@icons/actions/IconSave.vue';
 
 

@@ -1,6 +1,6 @@
 <script setup>
 import IconSuccess from '@icons/state/IconSuccess.vue';
-import CustomButton from '@components/CustomButton/index.vue';
+import CustomButton from '@components/CustomButton/GeneralButton.vue';
 
 const emit = defineEmits(['selected-year', 'selected-month', 'close']);
 

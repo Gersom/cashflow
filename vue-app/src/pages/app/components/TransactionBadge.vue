@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import IconArrow from '@icons/state/IconArrowUp.vue';
-import { useUserStore } from '@stores/user';
+import { useUserStore } from '@app-page/stores/user';
 import { storeToRefs } from 'pinia';
 
 

@@ -12,7 +12,7 @@ import IconLogOut from "@icons/login/IconLogOut.vue"
 
 // Components global
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import CustomButton from '@components/CustomButton/index.vue'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
 
 // Components Local
 import ConfirmDeleteAccount from './components/ConfirmDeleteAccount.vue'

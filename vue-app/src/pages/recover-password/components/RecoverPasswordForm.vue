@@ -2,7 +2,7 @@
 import { ref } from "vue"
 import { useToast } from 'vue-toastification'
 // Components
-import CustomButtom from '@components/CustomButton/index.vue'
+import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import Email from "@components/FormInput/Email.vue"
 
 // Icons

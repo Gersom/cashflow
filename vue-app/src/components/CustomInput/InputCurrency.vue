@@ -3,9 +3,7 @@
   // Imports
   // ------------
   import { ref, computed } from 'vue'
-  import { storeToRefs } from 'pinia'
   import { useThemeStore } from '@stores/theme'
-  import { useUserStore } from '@stores/user'
   
   // ------------
   // Vue defines
@@ -24,15 +22,17 @@
     transactionType: {
       type: String,
       default: 'income' // income, expense
-    }
+    },
+    currencySymbol: {
+      type: String,
+      default: 'S/.'
+    },
   })
 
   // ------------
   // Store
   // ------------
   const themeStore = useThemeStore()
-  const userStore = useUserStore()
-  const { currency } = storeToRefs(userStore)
   
   // ------------
   // Data references
@@ -169,7 +169,7 @@
     <label class="label-tab">
       <span class="currency-symbol">
         {{ props.transactionType === 'income' ? '+ ' : '- ' }}
-        {{ currency.symbol }}
+        {{ props.currencySymbol }}
       </span>
       <input
         class="input-tag"

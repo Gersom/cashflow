@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import CustomButton from "@components/CustomButton/index.vue"
+import CustomButton from "@components/CustomButton/GeneralButton.vue"
 
 // Custom Inputs
 import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue"

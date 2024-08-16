@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue'
 
 // Components
-import CustomButtom from '@components/CustomButton/index.vue'
+import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import Email from "@components/FormInput/Email.vue"
 import Password from "@components/FormInput/Password.vue";
 

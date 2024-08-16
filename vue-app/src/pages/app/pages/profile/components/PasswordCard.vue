@@ -2,7 +2,7 @@
 import { ref , computed } from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
 import ConfirmPassword from '@components/FormInput/ConfirmPassword.vue'
-import CustomButton from "@components/CustomButton/index.vue"
+import CustomButton from "@components/CustomButton/GeneralButton.vue"
 import IconSave from '@icons/actions/IconSave.vue'
 import Password from '@components/FormInput/Password.vue'
 

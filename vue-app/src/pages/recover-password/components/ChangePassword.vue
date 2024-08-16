@@ -2,7 +2,7 @@
 import { ref, computed } from "vue"
 import { useToast } from 'vue-toastification'
 // Components
-import CustomButtom from '@components/CustomButton/index.vue'
+import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import Password from "@components/FormInput/Password.vue"
 import ConfirmPassword from "@components/FormInput/ConfirmPassword.vue";
 

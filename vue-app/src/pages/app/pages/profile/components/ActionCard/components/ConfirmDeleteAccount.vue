@@ -1,6 +1,6 @@
 <script setup>
 import IconClose from "@icons/actions/IconClose.vue"
-import CustomButton from '@components/CustomButton/index.vue'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import { useToast } from "vue-toastification"
-import CustomButtom from '@components/CustomButton/index.vue'
+import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import IconGeometricFigures from '@icons/nav/IconGeometricFigures.vue'
 import InputCode from "./InputCode.vue"
 

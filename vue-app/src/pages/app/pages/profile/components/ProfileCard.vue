@@ -1,7 +1,8 @@
 <script setup>
 import { ref, computed} from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import CustomButton from "@components/CustomButton/index.vue"
+import UploadButton from "@components/CustomButton/UploadButton.vue"
+import GeneralButton from "@components/CustomButton/GeneralButton.vue"
 import IconSave from '@icons/actions/IconSave.vue';
 import IconPicture from '@icons/form/IconPicture.vue';
 import Url from '@components/FormInput/Url.vue';
@@ -27,10 +28,15 @@ const isButtonEnabled = computed(() => {
         <div class="upload">
             <p class="upload-title">
               <IconPicture/> Sube tu imagen</p>
-            <CustomButton
-            :transparent="true"
-            text="Cargar desde ordenador"
-            />
+
+            <div class="upload-content">
+              <p  class="upload-terms">
+                Tamaño máximo: 2MB, Formatos soportados: JPG, PNG
+              </p>
+              <div class="upload-button">
+                <UploadButton text="Cargar desde ordenador" />
+              </div>
+            </div>
         </div>
         <Url @validate="handlerUrl" />
         <div class="flex-avatar">
@@ -40,7 +46,7 @@ const isButtonEnabled = computed(() => {
               alt="User profile image">
           </div>
         </div>
-        <CustomButton
+        <GeneralButton
           :disabled="!isButtonEnabled"
           :icon-component="IconSave"
           text="Guardar imagen"
@@ -54,11 +60,12 @@ const isButtonEnabled = computed(() => {
 .card {
   height: 100%;
   width: 100%;
-  .card-content{
 
+  .card-content {
     display: flex;
     flex-direction: column;
     gap: 15px;
+
     .upload{
       display: flex;
       flex-direction: column;
@@ -69,21 +76,43 @@ const isButtonEnabled = computed(() => {
         font-size: 14px;
         margin: 0;
       }
+      .upload-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        .upload-terms{
+          color: var(--text-color);
+          font-size: 14px;
+          margin: 0;
+          max-width: 200px;
+          text-align: center
+        }
+        .upload-button{
+          display: flex;
+          justify-content: center;
+        }
+      }
+      .upload-button{
+        display: flex;
+        justify-content: center;
+      }
     }
+
     .flex-avatar{
       display: flex;
       padding: 25px 0 25px 0;
       justify-content: center;
       .user-avatar {
-          position: relative;
-          width: 100px;
-          height: 100px;
-          overflow: hidden;
-          border-radius: 50%;
-          border: none;
-          background-color: var(--title-color);
-          box-shadow: 0px 0px 0px 0.5vh var(--title-color);
-        }
+        position: relative;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: none;
+        background-color: var(--title-color);
+        box-shadow: 0px 0px 0px 0.5vh var(--title-color);
+      }
     }
   }
 }

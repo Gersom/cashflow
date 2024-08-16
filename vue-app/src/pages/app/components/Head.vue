@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { useUserStore } from '@stores/user';
+import { useUserStore } from '@app-page/stores/user';
 import { storeToRefs } from 'pinia';
 import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
 

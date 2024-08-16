@@ -4,7 +4,7 @@ defineEmits(["vnode-unmounted"]);
 
 import { useThemeStore } from "@stores/theme";
 import ButtonsSection from "./components/Buttons.vue";
-import CustomButton from "@components/CustomButton/index.vue";
+import CustomButton from "@components/CustomButton/GeneralButton.vue";
 import IconAdd from "@icons/actions/IconAdd.vue";
 import InputsSection from "./components/Inputs.vue";
 import FormSection from "./components/Form.vue";

@@ -3,7 +3,7 @@
 import GridCards from '@app-page/layouts/GridCards.vue'
 
 // Components global
-import Head from '@components/Head/Head.vue'
+import Head from '@app-page/components/Head.vue'
 
 // Components local
 import ChartCard from './components/ChartCard.vue'

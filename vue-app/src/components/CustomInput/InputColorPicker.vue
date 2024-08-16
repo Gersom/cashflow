@@ -1,9 +1,9 @@
 <script setup>
   // Imports
   import '@cyhnkckali/vue3-color-picker/dist/style.css'
-  import { ref, computed } from 'vue'
+  import { ref } from 'vue'
   import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
-  import CustomButton from '@components/CustomButton/index.vue'
+  import CustomButton from '@components/CustomButton/GeneralButton.vue'
   import DialogBlur from "@layouts/DialogBlur.vue";
   import IconEdit from '@icons/actions/IconEdit.vue'
   import InputColor from '@components/CustomInput/InputColor.vue'

@@ -3,7 +3,7 @@
 import MasonryCards from '@app-page/layouts/MasonryCards.vue'
 
 // Components global
-import Head from '@components/Head/Head.vue'
+import Head from '@app-page/components/Head.vue'
 
 // Components local
 import ActionCard from './components/ActionCard/ActionCard.vue'

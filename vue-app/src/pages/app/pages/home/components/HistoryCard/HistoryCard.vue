@@ -2,7 +2,7 @@
 import { movements } from './data/movements.js';
 
 // components global
-import TransactionBadge from '@components/TransactionBadge/TransactionBadge.vue';
+import TransactionBadge from '@app-page/components/TransactionBadge.vue';
 
 // components local
 import DateCardTitle from './components/DateCardTitle/DateCardTitle.vue'
