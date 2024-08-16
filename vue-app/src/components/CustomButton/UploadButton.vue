@@ -28,6 +28,7 @@ const handleClick = () => {
   fileInput.value.click()
 }
 const onFileChange = (e) => {
+  console.log(e.target.files[0])
   emit('upload-file', e.target.files[0])
 }
 </script>

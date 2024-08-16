@@ -5,18 +5,61 @@ import UploadButton from "@components/CustomButton/UploadButton.vue"
 import GeneralButton from "@components/CustomButton/GeneralButton.vue"
 import IconSave from '@icons/actions/IconSave.vue';
 import IconPicture from '@icons/form/IconPicture.vue';
-import Url from '@components/FormInput/Url.vue';
+import { apiPut } from '@src/services/api.js';
+import { SERVER_URL } from '@src/config/env.js';
+import { useToast } from 'vue-toastification';
 
-const urlValue = ref("");
-const urlValidate = ref(false);
-const handlerUrl = (text, isValid) => {
-  urlValue.value = text;
-  urlValidate.value = isValid;
-};
+// import Url from '@components/FormInput/Url.vue';
+// const urlValue = ref("");
+// const urlValidate = ref(false);
+// const handlerUrl = (text, isValid) => {
+//   urlValue.value = text;
+//   urlValidate.value = isValid;
+// };
 
-const isButtonEnabled = computed(() => {
-  return urlValidate.value;
-});
+const textButtonUpload = 'Cargar desde ordenador'
+const textformat = 'Tamaño máximo: 2MB, Formatos soportados: JPG, PNG'
+
+const toast = useToast()
+const newImage = ref(null)
+const currentImage = ref('https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+const isButtonEnabled = ref(false)
+
+const handleUploadFile = (file) => {
+  if (currentImage.value) {
+    URL.revokeObjectURL(currentImage.value);
+  }
+  newImage.value = file;
+  currentImage.value = URL.createObjectURL(file);
+  isButtonEnabled.value = true;
+}
+
+const convertToBase64 = () => {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    handleSubmit(e.target.result);
+  };
+  reader.readAsDataURL(newImage.value);
+}
+
+const handleSubmit = async (fileBase64) => {
+  toast.info('Subiendo imagen...');
+  isButtonEnabled.value = false;
+  try {
+    await apiPut({
+      url: `${SERVER_URL}/profile/image`,
+      data: { image: fileBase64 }
+    })
+    URL.revokeObjectURL(currentImage.value);
+    currentImage.value = fileBase64;
+    newImage.value = null;
+    toast.success('Imagen guardada correctamente');
+  } catch (error) {
+    isButtonEnabled.value = true;
+    toast.error('Error al guardar imagen');
+    console.error(error)
+  }
+}
 
 </script>
 
@@ -25,35 +68,43 @@ const isButtonEnabled = computed(() => {
     <CardTitle title="Foto de perfil "/>
     <div class="card-content">
 
-        <div class="upload">
-            <p class="upload-title">
-              <IconPicture/> Sube tu imagen</p>
+      <div class="upload">
+          <p class="upload-title">
+            <IconPicture/> Sube tu imagen</p>
 
-            <div class="upload-content">
-              <p  class="upload-terms">
-                Tamaño máximo: 2MB, Formatos soportados: JPG, PNG
-              </p>
-              <div class="upload-button">
-                <UploadButton text="Cargar desde ordenador" />
-              </div>
+          <div class="upload-content">
+            <p  class="upload-terms">
+              {{ newImage ? newImage.name : textformat }}
+            </p>
+            <div class="upload-button">
+              <UploadButton
+                :text="newImage ? 'Cambiar imagen' : textButtonUpload"
+                @upload-file="handleUploadFile"
+              />
             </div>
-        </div>
-        <Url @validate="handlerUrl" />
-        <div class="flex-avatar">
-          <div class="user-avatar">
-            <img
-              src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="User profile image">
           </div>
+      </div>
+
+      <div class="flex-avatar">
+        <div class="user-avatar">
+          <img
+            :src="currentImage"
+            alt="User profile image">
         </div>
+      </div>
+
+      <!-- <Url @validate="handlerUrl" /> -->
+
+      <div v-show="isButtonEnabled">
         <GeneralButton
-          :disabled="!isButtonEnabled"
+          @click="convertToBase64"
           :icon-component="IconSave"
           text="Guardar imagen"
         />
-        
       </div>
+        
     </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -75,6 +126,9 @@ const isButtonEnabled = computed(() => {
         color: var(--text-color);
         font-size: 14px;
         margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
       }
       .upload-content{
         display: flex;
@@ -85,7 +139,6 @@ const isButtonEnabled = computed(() => {
           color: var(--text-color);
           font-size: 14px;
           margin: 0;
-          max-width: 200px;
           text-align: center
         }
         .upload-button{
@@ -112,6 +165,11 @@ const isButtonEnabled = computed(() => {
         border: none;
         background-color: var(--title-color);
         box-shadow: 0px 0px 0px 0.5vh var(--title-color);
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
     }
   }
