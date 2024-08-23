@@ -1,12 +1,11 @@
 const { NotFoundError } = require('@utils/apiErrors');
-const { asyncHandler } = require("@middlewares/asyncHandler");
 const { join } = require('path');
 const express = require('express');
 const routerApi = require('@api');
 
 const setupRoutes = (app) => {
   // Define API routes
-  app.use('/api', asyncHandler(routerApi));
+  app.use('/api', routerApi);
 
   // Static file serving
   app.use('/storage', express.static(join(__dirname, '..', 'storage')));
