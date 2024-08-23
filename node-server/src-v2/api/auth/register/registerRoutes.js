@@ -1,7 +1,9 @@
 const express = require("express");
-const router = express.Router();
 const RegisterController = require("./registerController");
+const { asyncHandler } = require("@middlewares/asyncHandler");
 
-router.post("/", RegisterController);
+const router = express.Router();
+
+router.post("/", asyncHandler(RegisterController));
 
 module.exports = router;

@@ -1,12 +1,13 @@
 const { Router } = require("express");
+const { asyncHandler } = require("@middlewares/asyncHandler");
 const UserController = require("./userController");
 
 const router = Router();
 
-router.get("/", UserController.getAllUsers);
-router.get("/:id", UserController.getUser);
-// router.post("/", UserController.createUser);
-// router.put("/:id", UserController.updateUser);
-// router.delete("/:id", UserController.deleteUser);
+router.get("/", asyncHandler(UserController.getAllUsers));
+router.get("/:id", asyncHandler(UserController.getUser));
+// router.post("/", asyncHandler(UserController.createUser));
+// router.put("/:id", asyncHandler(UserController.updateUser));
+// router.delete("/:id", asyncHandler(UserController.deleteUser));
 
 module.exports = router;
