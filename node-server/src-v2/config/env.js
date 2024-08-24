@@ -12,6 +12,9 @@ const requiredEnvVars = [
   'JWT_EXPIRES_IN',
   'SALT_ROUNDS',
   'COOKIE_MAX_AGE',
+
+  'MAILER_EMAIL',
+  'MAILER_PASSWORD',
 ];
 
 const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
@@ -45,4 +48,9 @@ const jwt = {
   expiration: process.env.JWT_EXPIRES_IN,
 };
 
-module.exports = { serv, db, jwt };
+const mailer = {
+  email: process.env.MAILER_EMAIL,
+  password: process.env.MAILER_PASSWORD,
+}
+
+module.exports = { serv, db, jwt, mailer };

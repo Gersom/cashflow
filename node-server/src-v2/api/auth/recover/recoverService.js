@@ -1,20 +1,33 @@
 const { UserModel } = require("@models");
-const { NotFoundError, ValidationError } = require("@utils/apiErrors");
+const { NotFoundError, ValidationError, EmailSendError } = require("@utils/apiErrors");
 const { generateCode } = require("@utils/generateCode");
+const { sendEmail } = require("@utils/emailSender");
+const { generateHTML } = require("@utils/generateHTML");
 
 const RecoverService = {
   async requestCode(data) {
-    if (!data.email) {
-      throw new ValidationError("Email is required");
-    }
     const user = await UserModel.findOneData({ email: data.email });
     if (!user) {
       throw new NotFoundError(`User with email ${data.email} not found`);
     }
+
     const code = await generateCode();
+    const html = await generateHTML('emails/recoveryCode', { code });
+    const options = {
+      to: data.email,
+      subject: 'CashFlow - Recuperación de contraseña',
+      text: `Tu código de recuperación es: ${code}`,
+      html
+    };
+    const emailResponse = await sendEmail(options);
+    if (emailResponse.error) {
+      throw new EmailSendError(`Error sending email: ${emailResponse.error?.message}`);
+    }
+
     return {
       data: {
-        code
+        emailFrom: emailResponse?.info?.from,
+        emailTo: emailResponse?.info?.to[0],
       },
       success: 'Code generated successfully'
     };

@@ -1,0 +1,85 @@
+.email-wrapper {
+  width: 100%;
+  background-color: #f2f3f4;
+  padding: 50px 0;
+}
+
+.email-table.email-table--layout {
+  margin: auto;
+  max-width: 628px;
+  width: 100%;
+}
+
+.email-table.email-table--content {
+  background-color: #fff;
+  border-spacing: 0;
+  border: 2px solid #e7e7e7;
+  border-top: none;
+  color: #202124;
+  font-family: Roboto, -apple-system, BlinkMacSystemFont, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  text-align: center;
+}
+
+.email-header {
+  height: 25px;
+}
+
+.email-header.email-header--override {
+  background: #14151A;
+}
+
+.email-header img.image {
+  height: 90px;
+  width: auto;
+  margin: 15px auto;
+  display: block;
+}
+
+.email-main {
+  height: 0;
+}
+
+.main-container {
+  margin: 0;
+  overflow: auto;
+}
+
+.main-content {
+  margin: 24px;
+}
+
+.main-content h1 {
+  font-size: 20px;
+}
+
+.pre-code-instruction {
+  margin: 24px 0;
+}
+
+.post-code-instruction {
+  font-size: 12px;
+}
+
+.verification-code {
+  font-size: 20px;
+  margin: 24px 0;
+}
+
+.verification-code.verification-code--override {
+  font-size: 32px;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.email-footer {
+  height: 25px;
+}
+
+.email-footer.email-footer--override {
+  height: 0;
+}
+
+h1 {
+  margin: 0;
+}

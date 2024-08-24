@@ -22,8 +22,17 @@ class AuthorizationError extends Error {
   }
 }
 
+class EmailSendError extends Error {
+  constructor(message) {
+    super(message || 'Error sending email');
+    this.name = 'EmailSendError';
+    this.status = 500;
+  }
+}
+
 module.exports = {
   NotFoundError,
   ValidationError,
-  AuthorizationError
+  AuthorizationError,
+  EmailSendError 
 };

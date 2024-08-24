@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código de recuperación</title>
+    <link rel="stylesheet" type="text/css" href="recoveryCode.css" />
+</head>
+<body>
+  <div class="email-wrapper">
+    <table class="email-table email-table--layout email-table--content">
+      <tbody>
+        <tr class="email-header email-header--override">
+          <td>
+            <img
+              src="https://res.cloudinary.com/dwrhhzrar/image/upload/v1724485359/emails/logo-horizontal.png"
+              alt="Logo de Cashflow" class="image" data-bit="iit">
+            </td>
+        </tr>
+        <tr class="email-main">
+          <td>
+            <div class="main-container">
+              <div class="main-content">
+                <h1>Código de Verificación</h1>
+                <p class="pre-code-instruction">Por favor, ingresa el siguiente código en el formulario de verificación:</p>
+                <p class="verification-code verification-code--override">
+                  {{code}}
+                </p>
+                <p class="post-code-instruction">Este código expirará en breve. Si no encuentras el formulario de verificación, intenta iniciar sesión nuevamente.</p>
+                <p class="post-code-instruction">Si no solicitaste un código de verificación, te recomendamos que restablezcas tu contraseña de inmediato.</p>
+                <p class="post-code-instruction">Gracias por usar CashFlow App.</p>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr class="email-footer email-footer--override">
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
