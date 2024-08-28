@@ -29,10 +29,12 @@ const categorySchema = new Schema({
 categorySchema.index({ name: 1 });
 
 // Método de instancia para obtener una representación formateada
-categorySchema.methods.toJSON = function() {
-  const { _id, ...others } = this.toObject();
-  return { id: _id, ...others };
-};
+categorySchema.set('toJSON', {
+  transform: function(doc, ret) {
+    const { _id, ...others } = ret;
+    return { id: _id, ...others };
+  }
+});
 
 // Agregar métodos estáticos
 addMethods(categorySchema);

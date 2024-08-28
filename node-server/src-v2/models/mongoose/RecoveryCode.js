@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
-const userSchema = new Schema({
+const recoveryCodeSchema = new Schema({
   userId: { // Referencia al usuario
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -21,15 +21,24 @@ const userSchema = new Schema({
 });
 
 // Índices para mejorar el rendimiento de las consultas
-userSchema.index({ code: 1 });
+recoveryCodeSchema.index({ code: 1 });
 
 // Método de instancia para obtener una representación formateada
-userSchema.methods.toJSON = function() {
-  const { _id, ...others } = this.toObject();
-  return { id: _id, ...others };
-};
+recoveryCodeSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    if (ret.userId && typeof ret.userId === 'object') {
+      const { _id, userId, ...others } = ret;
+      const { _id: userIdId, ...userIdOthers } = userId;
+      return { id: _id, user: { id: userIdId, ...userIdOthers }, ...others };
+    }
+    else {
+      const { _id, ...others } = ret;
+      return { id: _id, ...others };
+    }
+  }
+});
 
 // Agregar métodos estáticos
-addMethods(userSchema);
+addMethods(recoveryCodeSchema);
 
-module.exports = model('RecoveryCode', userSchema);
+module.exports = model('RecoveryCode', recoveryCodeSchema);

@@ -38,10 +38,12 @@ userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ name: 1 });
 
 // Método de instancia para obtener una representación formateada
-userSchema.methods.toJSON = function() {
-  const { _id, password, ...others } = this.toObject();
-  return { id: _id, ...others };
-};
+userSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    const { _id, ...others } = ret;
+    return { id: _id, ...others };
+  }
+});
 
 // Agregar métodos estáticos
 addMethods(userSchema);

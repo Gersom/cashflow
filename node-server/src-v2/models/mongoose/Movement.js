@@ -41,10 +41,12 @@ movementSchema.index({ date: 1 });
 movementSchema.index({ type: 1 });
 
 // Método de instancia para obtener una representación formateada
-movementSchema.methods.toJSON = function() {
-  const { _id, ...others } = this.toObject();
-  return { id: _id, ...others };
-};
+movementSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    const { _id, ...others } = ret;
+    return { id: _id, ...others };
+  }
+});
 
 // Agregar métodos estáticos
 addMethods(movementSchema);

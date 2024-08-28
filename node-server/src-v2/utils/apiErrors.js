@@ -1,11 +1,3 @@
-class NotFoundError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = 'NotFoundError';
-    this.status = 404;
-  }
-}
-
 class ValidationError extends Error {
   constructor(message) {
     super(message);
@@ -22,6 +14,22 @@ class AuthorizationError extends Error {
   }
 }
 
+class NotFoundError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'NotFoundError';
+    this.status = 404;
+  }
+}
+
+class ExpirationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ExpirationError';
+    this.status = 410;
+  }
+}
+
 class EmailSendError extends Error {
   constructor(message) {
     super(message || 'Error sending email');
@@ -33,6 +41,7 @@ class EmailSendError extends Error {
 module.exports = {
   NotFoundError,
   ValidationError,
+  ExpirationError,
   AuthorizationError,
   EmailSendError 
 };

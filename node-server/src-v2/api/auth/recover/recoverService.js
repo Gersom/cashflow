@@ -1,14 +1,17 @@
 const { UserModel, RecoveryCodeModel } = require("@models");
-const { NotFoundError, ValidationError, EmailSendError } = require("@utils/apiErrors");
+const { 
+  NotFoundError, ValidationError, EmailSendError, ExpirationError
+} = require("@utils/apiErrors");
 const { generateCode } = require("@utils/generateCode");
-const { sendEmail } = require("@utils/emailSender");
 const { generateHTML } = require("@utils/generateHTML");
+const { responseSuccess } = require("@utils/apiSuccess");
+const { sendEmail } = require("@utils/emailSender");
 
 const RecoverService = {
   async requestCode(data) {
     const user = await UserModel.findOneData({ email: data.email });
     if (!user) {
-      throw new NotFoundError(`User with email ${data.email} not found`);
+      throw new NotFoundError(`The email ${data.email} does not correspond to any registered user`);
     }
 
     // Create recovery code
@@ -37,30 +40,28 @@ const RecoverService = {
       throw new EmailSendError(`Error sending email: ${emailResponse.error?.message}`);
     }
 
-    return {
-      data: {
-        emailFrom: emailResponse?.info?.from,
-        emailTo: emailResponse?.info?.to[0],
-      },
-      success: 'Code generated successfully'
-    };
+    return responseSuccess('Code generated successfully', { 
+      emailFrom: emailResponse?.info?.from,
+      emailTo: emailResponse?.info?.to[0]
+    });
   },
   
   async verifyCode(data) {
-    if (!data.code) {
-      throw new ValidationError("Code is required");
-    }
-    const user = await UserModel.findDataByCode(data.code);
+    const user = await UserModel.findOneData({ email: data.email });
     if (!user) {
-      throw new NotFoundError(`Code ${data.code} not found`);
+      throw new ValidationError(`The email ${data.email} does not correspond to any registered user`);
     }
-    const updatedUser = await user.verifyCode();
-    return {
-      data: {
-        updatedUser
-      },
-      success: 'Code verified successfully'
-    };
+
+    const recoveryCode = await RecoveryCodeModel.findOneData({ code: data.code, userId: user.id }).populate('userId');
+
+    if (!recoveryCode) {
+      throw new ValidationError(`Code ${data.code} not found, please generate a new one`);
+    }
+    if (recoveryCode.expiresAt < new Date()) {
+      throw new ExpirationError(`Code ${data.code} has expired, please generate a new one`);
+    }
+
+    return responseSuccess('Code verified successfully');
   },
   
   async resendCode(data) {
