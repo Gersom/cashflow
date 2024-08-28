@@ -1,11 +1,10 @@
 const { UserModel, RecoveryCodeModel } = require("@models");
 const { 
-  NotFoundError, ValidationError, EmailSendError, ExpirationError
+  NotFoundError, ValidationError, ExpirationError
 } = require("@utils/apiErrors");
 const { generateCode } = require("@utils/generateCode");
-const { generateHTML } = require("@utils/generateHTML");
 const { responseSuccess } = require("@utils/apiSuccess");
-const { sendEmail } = require("@utils/emailSender");
+const { sendEmailCode, expirationTime, createAndSaveCode } = require("./recoverUtils");
 
 const RecoverService = {
   async requestCode(data) {
@@ -14,35 +13,16 @@ const RecoverService = {
       throw new NotFoundError(`The email ${data.email} does not correspond to any registered user`);
     }
 
-    // Create recovery code
-    const code = await generateCode();
-
     // Delete previous codes
     await RecoveryCodeModel.deleteMany({ userId: user.id });
 
-    const expirationTime = 30; // minutes to expiration
-    const expiresAt = new Date(Date.now() + (expirationTime * 60 * 1000));
-    const recoveryCodeData = { userId: user.id, code, expiresAt }
-
-    // Save recovery code
-    await RecoveryCodeModel.create(recoveryCodeData);
+    const code = await createAndSaveCode(user.id);
     
-    const html = await generateHTML('emails/recoveryCode', { code });
-    const options = {
-      to: data.email,
-      subject: 'CashFlow - Recuperación de contraseña',
-      text: `Tu código de recuperación es: ${code}`,
-      html
-    };
-
-    const emailResponse = await sendEmail(options);
-    if (emailResponse.error) {
-      throw new EmailSendError(`Error sending email: ${emailResponse.error?.message}`);
-    }
+    const emailResponse = await sendEmailCode({ code, email: data.email });
 
     return responseSuccess('Code generated successfully', { 
-      emailFrom: emailResponse?.info?.from,
-      emailTo: emailResponse?.info?.to[0]
+      emailFrom: emailResponse.from,
+      emailTo: emailResponse.to
     });
   },
   
@@ -65,20 +45,34 @@ const RecoverService = {
   },
   
   async resendCode(data) {
-    if (!data.email) {
-      throw new ValidationError("Email is required");
-    }
-    const user = await UserModel.findDataByEmail(data.email);
+    const user = await UserModel.findOneData({ email: data.email });
     if (!user) {
-      throw new NotFoundError(`User with email ${data.email} not found`);
+      throw new ValidationError(`The email ${data.email} does not correspond to any registered user`);
     }
-    const code = await user.generateCode();
-    return {
-      data: {
-        code
-      },
-      success: 'Code generated successfully'
-    };
+
+    const recoveryCode = await RecoveryCodeModel.findOneData({ userId: user.id });
+
+    if (recoveryCode) {
+      await RecoveryCodeModel.updateData(recoveryCode.id, { expiresAt: expirationTime() })
+      const emailResponse = await sendEmailCode({
+        code: recoveryCode.code, email: data.email
+      });
+      return responseSuccess('Code resend successfully', { 
+        emailFrom: emailResponse.from,
+        emailTo: emailResponse.to
+      });
+    }
+
+    else {
+      const code = await createAndSaveCode(user.id);
+      const emailResponse = await sendEmailCode({
+        code, email: data.email
+      });
+      return responseSuccess('Code generated and send successfully', { 
+        emailFrom: emailResponse.from,
+        emailTo: emailResponse.to
+      });
+    }
   },
   
   async resetPassword(data) {
