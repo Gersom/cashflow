@@ -5,21 +5,21 @@ const juice = require('juice');
 
 const generateHTML = async (templatePath, data) => {
 
-  // Leer la plantilla HTML
+  // Read the HTML template
   const fileHTMLPath = path.join(__dirname, '..', 'templates', `${templatePath}.html`);
   const templateHTML = await fs.readFile(fileHTMLPath, 'utf-8');
 
-  // Leer el archivo CSS
+  // Read CSS file
   const fileCSSPath = path.join(__dirname, '..', 'templates', `${templatePath}.css`);
   const templateCSS = await fs.readFile(fileCSSPath, 'utf-8');
 
   // Inliner el CSS en la plantilla HTML
   const templateSource = juice.inlineContent(templateHTML, templateCSS);
 
-  // Compilar la plantilla
+  // Compile the template
   const template = handlebars.compile(templateSource);
 
-  // Renderizar la plantilla con datos dinámicos
+  // Render the template with dynamic data
   return template(data);
 }
 

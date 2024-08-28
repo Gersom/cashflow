@@ -1,4 +1,4 @@
-const { UserModel } = require("@models");
+const { UserModel, RecoveryCodeModel } = require("@models");
 const { NotFoundError, ValidationError, EmailSendError } = require("@utils/apiErrors");
 const { generateCode } = require("@utils/generateCode");
 const { sendEmail } = require("@utils/emailSender");
@@ -11,7 +11,19 @@ const RecoverService = {
       throw new NotFoundError(`User with email ${data.email} not found`);
     }
 
+    // Create recovery code
     const code = await generateCode();
+
+    // Delete previous codes
+    await RecoveryCodeModel.deleteMany({ userId: user.id });
+
+    const expirationTime = 30; // minutes to expiration
+    const expiresAt = new Date(Date.now() + (expirationTime * 60 * 1000));
+    const recoveryCodeData = { userId: user.id, code, expiresAt }
+
+    // Save recovery code
+    await RecoveryCodeModel.create(recoveryCodeData);
+    
     const html = await generateHTML('emails/recoveryCode', { code });
     const options = {
       to: data.email,
@@ -19,6 +31,7 @@ const RecoverService = {
       text: `Tu código de recuperación es: ${code}`,
       html
     };
+
     const emailResponse = await sendEmail(options);
     if (emailResponse.error) {
       throw new EmailSendError(`Error sending email: ${emailResponse.error?.message}`);
