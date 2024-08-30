@@ -2,6 +2,7 @@ const { UserModel } = require("@models");
 const { AuthorizationError } = require("@utils/apiErrors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { jwt: envJwt } = require("@config/env");
 
 const LoginService = async (body = {}) => {
 
@@ -21,8 +22,8 @@ const LoginService = async (body = {}) => {
     email: user.email,
   };
 
-  const token = jwt.sign(userForToken, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+  const token = jwt.sign(userForToken, envJwt.secret, {
+    expiresIn: envJwt.expiration,
   });
 
   user.password = undefined;

@@ -1,4 +1,6 @@
 const LoginService = require("./loginService");
+const { auth, serv } = require("@config/env");
+const { responseSuccess } = require("@utils/apiSuccess");
 
 const LoginController = async (req, res) => {
   const result = await LoginService(req.body);
@@ -6,11 +8,12 @@ const LoginController = async (req, res) => {
   res
   .cookie('access_token', result.token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? '' : 'strict',
-    maxAge: parseInt(process.env.COOKIE_MAX_AGE),
+    secure: serv.nodeEnv === 'production',
+    sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
+    maxAge: auth.cookieMaxAge,
   })
-  .status(200).json({ success: 'Loged in successfully' });
+  .status(200)
+  .json(responseSuccess('Loged in successfully'));
 };
 
 module.exports = LoginController;

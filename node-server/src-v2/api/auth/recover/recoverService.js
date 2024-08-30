@@ -1,17 +1,16 @@
 const { UserModel, RecoveryCodeModel } = require("@models");
-const { 
-  NotFoundError, ValidationError, ExpirationError
-} = require("@utils/apiErrors");
-const { generateCode } = require("@utils/generateCode");
-const { responseSuccess } = require("@utils/apiSuccess");
-const { sendEmailCode, expirationTime, createAndSaveCode } = require("./recoverUtils");
+const {
+  sendEmailCode,
+  sendEmailPasswordSuccess,
+  expirationTime,
+  createAndSaveCode,
+  verifyAndGetUser,
+  verifyRecoveryCode,
+} = require("./recoverUtils");
 
 const RecoverService = {
   async requestCode(data) {
-    const user = await UserModel.findOneData({ email: data.email });
-    if (!user) {
-      throw new NotFoundError(`The email ${data.email} does not correspond to any registered user`);
-    }
+    const user = await verifyAndGetUser(data.email);
 
     // Delete previous codes
     await RecoveryCodeModel.deleteMany({ userId: user.id });
@@ -20,78 +19,75 @@ const RecoverService = {
     
     const emailResponse = await sendEmailCode({ code, email: data.email });
 
-    return responseSuccess('Code generated successfully', { 
+    return { 
       emailFrom: emailResponse.from,
       emailTo: emailResponse.to
-    });
+    };
   },
   
   async verifyCode(data) {
-    const user = await UserModel.findOneData({ email: data.email });
-    if (!user) {
-      throw new ValidationError(`The email ${data.email} does not correspond to any registered user`);
-    }
+    const user = await verifyAndGetUser(data.email);
 
-    const recoveryCode = await RecoveryCodeModel.findOneData({ code: data.code, userId: user.id }).populate('userId');
+    await verifyRecoveryCode({ code: data.code, userId: user.id });
 
-    if (!recoveryCode) {
-      throw new ValidationError(`Code ${data.code} not found, please generate a new one`);
-    }
-    if (recoveryCode.expiresAt < new Date()) {
-      throw new ExpirationError(`Code ${data.code} has expired, please generate a new one`);
-    }
-
-    return responseSuccess('Code verified successfully');
+    return true;
   },
   
   async resendCode(data) {
-    const user = await UserModel.findOneData({ email: data.email });
-    if (!user) {
-      throw new ValidationError(`The email ${data.email} does not correspond to any registered user`);
-    }
+    const user = await verifyAndGetUser(data.email);
 
     const recoveryCode = await RecoveryCodeModel.findOneData({ userId: user.id });
 
+    // If the code exists
     if (recoveryCode) {
+      // update its expiration date and send an email
       await RecoveryCodeModel.updateData(recoveryCode.id, { expiresAt: expirationTime() })
       const emailResponse = await sendEmailCode({
         code: recoveryCode.code, email: data.email
       });
-      return responseSuccess('Code resend successfully', { 
+      return { 
         emailFrom: emailResponse.from,
-        emailTo: emailResponse.to
-      });
+        emailTo: emailResponse.to,
+        generatedCode: false
+      };
     }
 
+    // If it doesn't exist
     else {
+      // create a new one and send an email
       const code = await createAndSaveCode(user.id);
       const emailResponse = await sendEmailCode({
         code, email: data.email
       });
-      return responseSuccess('Code generated and send successfully', { 
+      return { 
         emailFrom: emailResponse.from,
-        emailTo: emailResponse.to
-      });
+        emailTo: emailResponse.to,
+        generatedCode: true
+      };
     }
   },
   
   async resetPassword(data) {
-    if (!data.code) {
-      throw new ValidationError("Code is required");
-    }
-    if (!data.password) {
-      throw new ValidationError("Password is required");
-    }
-    const user = await UserModel.findDataByCode(data.code);
-    if (!user) {
-      throw new NotFoundError(`Code ${data.code} not found`);
-    }
-    const updatedUser = await user.resetPassword(data.password);
-    return {
-      data: {
-        updatedUser
-      },
-      success: 'Password reset successfully'
+    const user = await verifyAndGetUser(data.email);
+
+    await verifyRecoveryCode({ code: data.code, userId: user.id });
+
+    const bcrypt = require("bcrypt");
+    const { auth } = require("@config/env");
+
+    const passwordHashed = await bcrypt.hash(data.password, auth.saltRounds);
+
+    // Update the user's password
+    await UserModel.updateData(user.id, { password: passwordHashed });
+    
+    // Delete the recovery code
+    await RecoveryCodeModel.deleteMany({ userId: user.id });
+
+    const emailResponse = await sendEmailPasswordSuccess(user.email);
+
+    return { 
+      emailFrom: emailResponse.from,
+      emailTo: emailResponse.to
     };
   }
 }

@@ -1,36 +1,51 @@
 const RecoverService = require("./recoverService");
-const { ValidationError } = require("@utils/apiErrors");
+const { serv } = require("@config/env")
+const { responseSuccess } = require("@utils/apiSuccess");
 
 const RecoverController = {
   async requestCode (req, res) {
-    if (!req.body?.email)
-      throw new ValidationError("Email is required");
-
     const result = await RecoverService.requestCode(req.body);
-    res.status(200).json(result);
+
+    const statusCode = 200;
+    const message = 'Code generated successfully'
+
+    if (serv.nodeEnv === 'development')
+      res.status(statusCode).json(responseSuccess(message, result))
+    else
+      res.status(statusCode).json(responseSuccess(message))
   },
   
   async verifyCode (req, res) {
-    if (!req.body?.email)
-      throw new ValidationError("Email is required");
-    if (!req.body?.code)
-      throw new ValidationError("Code is required");
-
-    const result = await RecoverService.verifyCode(req.body);
-    res.status(200).json(result);
+    await RecoverService.verifyCode(req.body);
+    res
+    .status(200)
+    .json(responseSuccess('Code verified successfully'));
   },
   
   async resendCode (req, res) {
-    if (!req.body?.email)
-      throw new ValidationError("Email is required");
-
     const result = await RecoverService.resendCode(req.body);
-    res.status(200).json(result);
+
+    const statusCode = 200;
+    const message = result.generatedCode
+    ? 'Code has been generated and sent correctly'
+    : 'Code resend successfully'
+
+    if (serv.nodeEnv === 'development')
+      res.status(statusCode).json(responseSuccess(message, result))
+    else
+      res.status(statusCode).json(responseSuccess(message))
   },
   
   async resetPassword (req, res) {
     const result = await RecoverService.resetPassword(req.body);
-    res.status(200).json(result);
+
+    const statusCode = 200;
+    const message = 'Password reset successfully'
+
+    if (serv.nodeEnv === 'development')
+      res.status(statusCode).json(responseSuccess(message, result))
+    else
+      res.status(statusCode).json(responseSuccess(message))
   },
 }
 

@@ -4,7 +4,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const { serv } = require("@config/env.js");
-const errorHandler = require('@middlewares/errorHandler.js');
 
 const middlewares = (app) => {
   // CORS configuration
@@ -28,9 +27,6 @@ const middlewares = (app) => {
   
   app.use(json());
   app.use(urlencoded({ extended: true }));
-
-  // Error handling
-  app.use(errorHandler);
 };
 
 module.exports = middlewares;

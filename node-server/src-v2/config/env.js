@@ -27,7 +27,6 @@ if (missingVars.length > 0) {
 
 const host = process.env.HOST;
 const port = process.env.PORT;
-
 const serv = {
   nodeEnv: process.env.NODE_ENV,
   host,
@@ -48,9 +47,15 @@ const jwt = {
   expiration: process.env.JWT_EXPIRES_IN,
 };
 
+const checkInteger = require("@utils/checkInteger");
+const auth = {
+  saltRounds: checkInteger(process.env.SALT_ROUNDS),
+  cookieMaxAge: checkInteger(process.env.COOKIE_MAX_AGE),
+};
+
 const mailer = {
   email: process.env.MAILER_EMAIL,
   password: process.env.MAILER_PASSWORD,
 }
 
-module.exports = { serv, db, jwt, mailer };
+module.exports = { serv, db, jwt, mailer, auth };
