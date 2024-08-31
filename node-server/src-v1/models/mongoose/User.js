@@ -1,7 +1,7 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
   email: { 
     type: String, 
     required: true, 
@@ -9,21 +9,22 @@ const userSchema = new Schema({
     lowercase: true, 
     trim: true 
   },
-  whatsapp: {
-    type: String,
-    required: false,
-    trim: true,
+  whatsapp: { 
+    type: String, 
+    required: false, 
+    unique: true, 
+    trim: true 
   },
-  password: {
-    type: String,
-    required: true
+  password: { 
+    type: String, 
+    required: true 
   },
   name: { 
-    type: String,
+    type: String, 
     required: true, 
     trim: true 
   },
-  profilePic: { 
+  profile_pic: { 
     type: String, 
     required: false, 
     trim: true 
@@ -38,14 +39,12 @@ userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ name: 1 });
 
 // Método de instancia para obtener una representación formateada
-userSchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
+userSchema.methods.toJSON = function() {
+  const { _id, password, ...others } = this.toObject();
+  return { id: _id, ...others };
+};
 
 // Agregar métodos estáticos
 addMethods(userSchema);
 
-module.exports = model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);

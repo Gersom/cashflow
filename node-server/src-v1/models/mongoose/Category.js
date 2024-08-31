@@ -1,7 +1,7 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
-const categorySchema = new Schema({
+const categorySchema = new mongoose.Schema({
   name: { 
     type: String,
     required: true,
@@ -16,7 +16,7 @@ const categorySchema = new Schema({
     required: true,
   },
   accountId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Account',
     required: true
   },
@@ -29,14 +29,12 @@ const categorySchema = new Schema({
 categorySchema.index({ name: 1 });
 
 // Método de instancia para obtener una representación formateada
-categorySchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
+categorySchema.methods.toJSON = function() {
+  const { _id, ...others } = this.toObject();
+  return { id: _id, ...others };
+};
 
 // Agregar métodos estáticos
 addMethods(categorySchema);
 
-module.exports = model('Category', categorySchema);
+module.exports = mongoose.model('Category', categorySchema);

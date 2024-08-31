@@ -3,14 +3,14 @@
     "baseUrl": ".",
     "paths": {
       "@root/*": ["./*"],
-      "@src/*": ["./src-v2/*"],
-      "@api/*": ["./src-v2/api/*"],
-      "@config/*": ["./src-v2/config/*"],
-      "@data/*": ["./src-v2/data/*"],
-      "@middlewares/*": ["./src-v2/middlewares/*"],
-      "@models/*": ["./src-v2/models/*"],
-      "@storage/*": ["./src-v2/storage/*"],
-      "@utils/*": ["./src-v2/utils/*"]
+      "@src/*": ["./src/*"],
+      "@api/*": ["./src/api/*"],
+      "@config/*": ["./src/config/*"],
+      "@data/*": ["./src/data/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@models/*": ["./src/models/*"],
+      "@storage/*": ["./src/storage/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
   "include": ["src/**/*"]

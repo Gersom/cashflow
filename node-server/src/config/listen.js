@@ -1,15 +1,10 @@
-const host = process.env.HOST || 'http://localhost'
-const port = process.env.PORT
-let path = ''
-
-if (port) path = `${host}:${port}`
-else path = host
-
-const message = 'Your server is ready'
-const allMessage = `\n${message}:\n=> ${path}\n`
+const { serv } = require("@config/env");
 
 const listen = (app) => {
-  app.listen(port, () => console.log(allMessage))
+  const message = 'Server running on'
+  const fullMessage = `\n${message}:\n=> ${serv.address}\n`
+  
+  app.listen(serv.port, () => console.log(fullMessage))
 }
 
-module.exports = listen
+module.exports = listen;

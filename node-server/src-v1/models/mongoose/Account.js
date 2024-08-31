@@ -1,7 +1,7 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
-const accountSchema = new Schema({
+const accountSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -22,7 +22,7 @@ const accountSchema = new Schema({
     }
   },
   userId: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
@@ -36,13 +36,10 @@ accountSchema.index({ user_id: 1 });
 accountSchema.index({ name: 1 });
 
 // Método de instancia para obtener una representación formateada
-accountSchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
-
+accountSchema.methods.toJSON = function() {
+  const { _id, ...others } = this.toObject();
+  return { id: _id, ...others };
+};
 
 // Método para formatear el saldo con el símbolo de la moneda
 accountSchema.methods.getFormattedBalance = function() {
@@ -53,4 +50,4 @@ accountSchema.methods.getFormattedBalance = function() {
 // Agregar métodos estáticos
 addMethods(accountSchema);
 
-module.exports = model('Account', accountSchema);
+module.exports = mongoose.model('Account', accountSchema);

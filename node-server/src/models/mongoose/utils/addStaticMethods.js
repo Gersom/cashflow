@@ -23,6 +23,10 @@ const addStaticMethods = (scheme) => {
     return this.deleteOne({ _id });
   });
 
+  scheme.static('removeMany', function (query) {
+    return this.deleteMany(query);
+  });
+
   scheme.static('createMany', function (data = []) {
     return this.insertMany(data);
   });
