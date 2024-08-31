@@ -1,9 +1,20 @@
+const { serv } = require("@config/env")
+
 const responseSuccess = (message = 'success', data=null) => {
   let response = { message, success: true };
-  if (data) {
-    response.data = data;
+
+  if (serv.nodeEnv === 'development') {
+    if (data) response.data = data
+    return response;
   }
-  return response;
+  else return response;
 };
 
-module.exports = { responseSuccess };
+const dataSuccess = (message = 'success', data=null) => {
+  return { message, data, success: true };
+};
+
+module.exports = {
+  responseSuccess,
+  dataSuccess
+};

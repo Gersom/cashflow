@@ -6,13 +6,9 @@ const RecoverController = {
   async requestCode (req, res) {
     const result = await RecoverService.requestCode(req.body);
 
-    const statusCode = 200;
     const message = 'Code generated successfully'
 
-    if (serv.nodeEnv === 'development')
-      res.status(statusCode).json(responseSuccess(message, result))
-    else
-      res.status(statusCode).json(responseSuccess(message))
+    res.status(200).json(responseSuccess(message, result))
   },
   
   async verifyCode (req, res) {
@@ -25,27 +21,19 @@ const RecoverController = {
   async resendCode (req, res) {
     const result = await RecoverService.resendCode(req.body);
 
-    const statusCode = 200;
     const message = result.generatedCode
     ? 'Code has been generated and sent correctly'
     : 'Code resend successfully'
 
-    if (serv.nodeEnv === 'development')
-      res.status(statusCode).json(responseSuccess(message, result))
-    else
-      res.status(statusCode).json(responseSuccess(message))
+    res.status(200).json(responseSuccess(message, result))
   },
   
   async resetPassword (req, res) {
     const result = await RecoverService.resetPassword(req.body);
 
-    const statusCode = 200;
     const message = 'Password reset successfully'
 
-    if (serv.nodeEnv === 'development')
-      res.status(statusCode).json(responseSuccess(message, result))
-    else
-      res.status(statusCode).json(responseSuccess(message))
+    res.status(200).json(responseSuccess(message, result))
   },
 }
 

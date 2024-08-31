@@ -23,7 +23,7 @@ const userSchema = new Schema({
     required: true, 
     trim: true 
   },
-  profile_pic: { 
+  profilePic: { 
     type: String, 
     required: false, 
     trim: true 
