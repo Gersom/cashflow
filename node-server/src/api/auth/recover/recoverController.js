@@ -1,5 +1,4 @@
 const RecoverService = require("./recoverService");
-const { serv } = require("@config/env")
 const { responseSuccess } = require("@utils/apiSuccess");
 
 const RecoverController = {

@@ -1,30 +1,32 @@
-const requiredEnvVars = [
-  'NODE_ENV',
-  'HOST',
-  'ALLOWED_ORIGINS',
-
-  'DB_URI',
-  'DB_NAME',
-  'DB_USER',
-  'DB_PASSWORD',
-
-  'JWT_REFRESH_SECRET',
-  'JWT_ACCESS_SECRET',
-  'JWT_ACCESS_EXPIRES_IN',
-  'JWT_REFRESH_EXPIRES_IN',
-  'SALT_ROUNDS',
-  'COOKIE_MAX_AGE',
-
-  'MAILER_EMAIL',
-  'MAILER_PASSWORD',
-];
-
-const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-
-if (missingVars.length > 0) {
-  throw new Error(
-    `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n${missingVars.join(', ')}\nMake sure that the .env file contains the necessary configuration.`
-  );
+const initEnv = () => {
+  const requiredEnvVars = [
+    'NODE_ENV',
+    'HOST',
+    'ALLOWED_ORIGINS',
+  
+    'DB_URI',
+    'DB_NAME',
+    'DB_USER',
+    'DB_PASSWORD',
+  
+    'JWT_REFRESH_SECRET',
+    'JWT_ACCESS_SECRET',
+    'JWT_ACCESS_EXPIRES_IN',
+    'JWT_REFRESH_EXPIRES_IN',
+    'SALT_ROUNDS',
+    'COOKIE_MAX_AGE',
+  
+    'MAILER_EMAIL',
+    'MAILER_PASSWORD',
+  ];
+  
+  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  
+  if (missingVars.length > 0) {
+    throw new Error(
+      `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n${missingVars.join(', ')}\nMake sure that the .env file contains the necessary configuration.`
+    );
+  }
 }
 
 const host = process.env.HOST;
@@ -62,4 +64,7 @@ const mailer = {
   password: process.env.MAILER_PASSWORD,
 }
 
-module.exports = { serv, db, jwt, mailer, auth };
+module.exports = { 
+  initEnv,
+  serv, db, jwt, mailer, auth
+};
