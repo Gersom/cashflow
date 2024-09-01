@@ -10,7 +10,7 @@ const LoginController = async (req, res) => {
     httpOnly: true,
     secure: serv.nodeEnv === 'production',
     sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
-    maxAge: auth.cookieMaxAge,
+    // maxAge: auth.cookieMaxAge,
   })
   .status(200)
   .json(responseSuccess('Loged in successfully'));

@@ -8,8 +8,10 @@ const requiredEnvVars = [
   'DB_USER',
   'DB_PASSWORD',
 
-  'JWT_SECRET',
-  'JWT_EXPIRES_IN',
+  'JWT_REFRESH_SECRET',
+  'JWT_ACCESS_SECRET',
+  'JWT_ACCESS_EXPIRES_IN',
+  'JWT_REFRESH_EXPIRES_IN',
   'SALT_ROUNDS',
   'COOKIE_MAX_AGE',
 
@@ -43,8 +45,10 @@ const db = {
 };
 
 const jwt = {
-  secret: process.env.JWT_SECRET,
-  expiration: process.env.JWT_EXPIRES_IN,
+  refreshSecret: process.env.JWT_REFRESH_SECRET,
+  refreshExpiration: process.env.REFRESH_JWT_EXPIRES_IN,
+  secret: process.env.JWT_ACCESS_SECRET,
+  expiration: process.env.JWT_ACCESS_EXPIRES_IN,
 };
 
 const checkInteger = require("@utils/checkInteger");
