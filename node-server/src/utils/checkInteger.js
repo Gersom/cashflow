@@ -8,7 +8,7 @@ function checkInteger(valor, name = '') {
   if (Number.isInteger(valor)) return valor
   
   // If not an integer, return error
-  throw new Error(`\n*** ERROR ***\n${name} should be an integer.`);
+  throw new Error(`\n*** ERROR ***\n${name || valor} should be an integer.`);
 }
 
 module.exports = checkInteger;

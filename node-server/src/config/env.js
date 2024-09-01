@@ -1,68 +1,76 @@
+const checkInteger = require("@utils/checkInteger");
+
+const ENV_VARS = {
+  NODE_ENV: 'NODE_ENV',
+  HOST: 'HOST',
+  PORT: 'PORT',
+  ALLOWED_ORIGINS: 'ALLOWED_ORIGINS',
+  DB_URI: 'DB_URI',
+  DB_NAME: 'DB_NAME',
+  DB_USER: 'DB_USER',
+  DB_PASSWORD: 'DB_PASSWORD',
+  JWT_REFRESH_SECRET: 'JWT_REFRESH_SECRET',
+  JWT_ACCESS_SECRET: 'JWT_ACCESS_SECRET',
+  JWT_ACCESS_EXPIRES_IN: 'JWT_ACCESS_EXPIRES_IN',
+  JWT_REFRESH_EXPIRES_IN: 'JWT_REFRESH_EXPIRES_IN',
+  SALT_ROUNDS: 'SALT_ROUNDS',
+  COOKIE_MAX_AGE: 'COOKIE_MAX_AGE',
+  MAILER_EMAIL: 'MAILER_EMAIL',
+  MAILER_PASSWORD: 'MAILER_PASSWORD',
+};
+
+
 const initEnv = () => {
-  const requiredEnvVars = [
-    'NODE_ENV',
-    'HOST',
-    'ALLOWED_ORIGINS',
-  
-    'DB_URI',
-    'DB_NAME',
-    'DB_USER',
-    'DB_PASSWORD',
-  
-    'JWT_REFRESH_SECRET',
-    'JWT_ACCESS_SECRET',
-    'JWT_ACCESS_EXPIRES_IN',
-    'JWT_REFRESH_EXPIRES_IN',
-    'SALT_ROUNDS',
-    'COOKIE_MAX_AGE',
-  
-    'MAILER_EMAIL',
-    'MAILER_PASSWORD',
-  ];
-  
-  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
+  const missingVars = Object.values(ENV_VARS).filter(varName => !process.env[varName]);
   
   if (missingVars.length > 0) {
     throw new Error(
-      `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n${missingVars.join(', ')}\nMake sure that the .env file contains the necessary configuration.`
+      `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n\n${missingVars.join('\n')}\n\nPlease ensure that the .env file contains the necessary configuration.`
     );
   }
-}
+};
 
-const host = process.env.HOST;
-const port = process.env.PORT;
+const getEnvVar = (key) => {
+  const value = process.env[ENV_VARS[key]];
+  // if (value === undefined) {
+  //   throw new Error(`Environment variable ${ENV_VARS[key]} is not configured.`);
+  // }
+  return value;
+};
+
 const serv = {
-  nodeEnv: process.env.NODE_ENV,
-  host,
-  port,
-  address: port ? `${host}:${port}` : host,
-  allowedOrigins: process.env.ALLOWED_ORIGINS,
+  nodeEnv: getEnvVar('NODE_ENV'),
+  host: getEnvVar('HOST'),
+  port: getEnvVar('PORT'),
+  get address() {
+    return this.port ? `${this.host}:${this.port}` : this.host;
+  },
+  allowedOrigins: getEnvVar('ALLOWED_ORIGINS'),
 };
 
 const db = {
-  uri: process.env.DB_URI,
-  name: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  uri: getEnvVar('DB_URI'),
+  name: getEnvVar('DB_NAME'),
+  user: getEnvVar('DB_USER'),
+  password: getEnvVar('DB_PASSWORD'),
 };
 
 const jwt = {
-  refreshSecret: process.env.JWT_REFRESH_SECRET,
-  refreshExpiration: process.env.REFRESH_JWT_EXPIRES_IN,
-  secret: process.env.JWT_ACCESS_SECRET,
-  expiration: process.env.JWT_ACCESS_EXPIRES_IN,
+  refreshSecret: getEnvVar('JWT_REFRESH_SECRET'),
+  refreshExpiration: getEnvVar('JWT_REFRESH_EXPIRES_IN'),
+  secret: getEnvVar('JWT_ACCESS_SECRET'),
+  expiration: getEnvVar('JWT_ACCESS_EXPIRES_IN'),
 };
 
-const checkInteger = require("@utils/checkInteger");
 const auth = {
-  saltRounds: checkInteger(process.env.SALT_ROUNDS),
-  cookieMaxAge: checkInteger(process.env.COOKIE_MAX_AGE),
+  saltRounds: checkInteger(getEnvVar('SALT_ROUNDS')),
+  cookieMaxAge: checkInteger(getEnvVar('COOKIE_MAX_AGE')),
 };
 
 const mailer = {
-  email: process.env.MAILER_EMAIL,
-  password: process.env.MAILER_PASSWORD,
-}
+  email: getEnvVar('MAILER_EMAIL'),
+  password: getEnvVar('MAILER_PASSWORD'),
+};
 
 module.exports = { 
   initEnv,
