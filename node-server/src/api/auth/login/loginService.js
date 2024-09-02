@@ -18,20 +18,21 @@ const LoginService = async (body = {}) => {
   }
 
   const userForToken = {
-    id: user.id,
-    email: user.email,
+    id: user.id
   };
 
   const token = jwt.sign(userForToken, envJwt.secret, {
     expiresIn: envJwt.expiration,
   });
 
+  const refresh = jwt.sign(userForToken, envJwt.refreshSecret, {
+    expiresIn: envJwt.refreshExpiration,
+  });
+
   user.password = undefined;
   delete user.password; // remove password from response  
 
-  return {
-   token: token,
-  };
+  return { access_token: token, refresh_token: refresh };
 };
 
 module.exports = LoginService;
