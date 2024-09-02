@@ -17,6 +17,7 @@ const ENV_VARS = {
   COOKIE_MAX_AGE: 'COOKIE_MAX_AGE',
   MAILER_EMAIL: 'MAILER_EMAIL',
   MAILER_PASSWORD: 'MAILER_PASSWORD',
+  CLIENT_URL: 'CLIENT_URL',
 };
 
 
@@ -36,6 +37,10 @@ const getEnvVar = (key) => {
   //   throw new Error(`Environment variable ${ENV_VARS[key]} is not configured.`);
   // }
   return value;
+};
+
+const client = {
+  url: getEnvVar('CLIENT_URL'),
 };
 
 const serv = {
@@ -74,5 +79,5 @@ const mailer = {
 
 module.exports = { 
   initEnv,
-  serv, db, jwt, mailer, auth
+  serv, db, jwt, mailer, auth, client
 };

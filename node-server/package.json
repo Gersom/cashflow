@@ -21,7 +21,7 @@
   "description": "cashflow",
   "license": "ISC",
   "scripts": {
-    "dev": "node --watch --env-file .env ./src/app.js",
+    "dev": "node --trace-warnings --watch --env-file .env ./src/app.js",
     "start": "node ./src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
