@@ -18,6 +18,8 @@ const ENV_VARS = {
   MAILER_EMAIL: 'MAILER_EMAIL',
   MAILER_PASSWORD: 'MAILER_PASSWORD',
   CLIENT_URL: 'CLIENT_URL',
+  JWT_EMAIL_SECRET: 'JWT_EMAIL_SECRET',
+  JWT_EMAIL_EXPIRES_IN: 'JWT_EMAIL_EXPIRES_IN',
 };
 
 
@@ -65,7 +67,10 @@ const jwt = {
   refreshExpiration: getEnvVar('JWT_REFRESH_EXPIRES_IN'),
   secret: getEnvVar('JWT_ACCESS_SECRET'),
   expiration: getEnvVar('JWT_ACCESS_EXPIRES_IN'),
+  emailSecret: getEnvVar('JWT_EMAIL_SECRET'),
+  emailExpiration: getEnvVar('JWT_EMAIL_EXPIRES_IN'),
 };
+
 
 const auth = {
   saltRounds: checkInteger(getEnvVar('SALT_ROUNDS')),

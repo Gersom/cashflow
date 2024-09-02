@@ -7,7 +7,12 @@ const userSchema = new Schema({
     required: true, 
     unique: true, 
     lowercase: true, 
-    trim: true 
+    trim: true,
+   
+  },
+  verified:{
+    type: Boolean,
+    default: false
   },
   whatsapp: {
     type: String,
