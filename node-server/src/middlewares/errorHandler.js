@@ -9,14 +9,27 @@ const errorHandler = (err, req, res, next) => {
     console.error('MESSAGE =>', err.message); 
     console.error('STACK =>', err.stack);
 
-    return res.status(isCustomError ? err.status : 500).json({
-      status: err.status,
-      success: false,
-      error: {
-        message: isCustomError ? err.message : 'An unexpected error occurred',
-        stack: isCustomError ? err.stack : ''
-      }
-    });
+    if (isCustomError) {
+      return res.status(isCustomError ? err.status : 500).json({
+        status: err.status,
+        success: false,
+        error: {
+          message: isCustomError ? err.message : 'An unexpected error occurred',
+          stack: isCustomError ? err.stack : ''
+        }
+      });
+    }
+
+    else {
+      return res.status(500).json({
+        status: err.status,
+        success: false,
+        error: {
+          message: err.message || 'An unexpected error occurred',
+          stack: err.stack || ''
+        }
+      });
+    }
   }
 
   console.error(err.message);
@@ -31,9 +44,9 @@ const errorHandler = (err, req, res, next) => {
 
   // In production, send a generic message for non-custom errors
   res.status(500).json({
-    status: err.status,
+    status: 500,
     success: false,
-    error: 'An unexpected error occurred'
+    error: err.message
   });
 };
 
