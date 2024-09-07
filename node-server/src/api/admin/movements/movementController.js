@@ -11,6 +11,12 @@ const MovementController = {
     const result = await MovementService.getMovement(id);
     res.status(200).json(result);
   },
+
+  async getAccountMovements (req, res) {
+    const { id } = req.params;
+    const result = await MovementService.getAccountMovements(id);
+    res.status(200).json(result);
+  },
   
   async createMovement (req, res) {
     const result = await MovementService.postMovement(req.body);
