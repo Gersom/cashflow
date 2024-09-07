@@ -14,6 +14,14 @@ class AuthorizationError extends Error {
   }
 }
 
+class UnauthorizedError extends Error {
+  constructor(message){
+    super(message);
+    this.name = 'UnauthorizedError';
+    this.status = 403;
+  }
+}
+
 class NotFoundError extends Error {
   constructor(message) {
     super(message);
@@ -43,5 +51,6 @@ module.exports = {
   ValidationError,
   ExpirationError,
   AuthorizationError,
-  EmailSendError 
+  UnauthorizedError,
+  EmailSendError
 };
