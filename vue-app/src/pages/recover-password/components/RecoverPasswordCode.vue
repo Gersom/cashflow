@@ -36,7 +36,7 @@ const handleSubmit = async(e) => {
       }
     })
 
-    if (response.statusText === 'OK') {
+    if (response.status === 200) {
       toast.success("Tu código de recuperación es correcto ^^")
       emit('next', { code: codeData.value.value })
     }

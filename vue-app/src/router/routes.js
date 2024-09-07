@@ -4,6 +4,7 @@ import Designs from '@pages/designs/DesignsPage.vue'
 import Login from '@pages/login/LoginPage.vue'
 import RecoverPassword from '@pages/recover-password/RecoverPasswordPage.vue'
 import Register from '@pages/register/RegisterPage.vue'
+import VerifyEmail from '@pages/verify-email/VerifyEmail.vue'
 
 export const routes = [
   {
@@ -27,6 +28,11 @@ export const routes = [
     name: 'Register',
     alias: ['/registro', '/register', '/signup'],
     component: Register
+  },
+  {
+    path: '/verify-email',
+    name: 'VerifyEmail',
+    component: VerifyEmail
   },
   {
     path: '/app',

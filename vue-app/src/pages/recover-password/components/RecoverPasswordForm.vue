@@ -29,7 +29,7 @@ const handleSubmit = async(e) => {
       data: { email: emailData.value.value }
     })
 
-    if (response.statusText === 'OK') {
+    if (response.status === 200) {
       toast.success("Se envio tu código de recuperación al correo electrónico ingresado")
       emit('next', { email: emailData.value.value })
     }

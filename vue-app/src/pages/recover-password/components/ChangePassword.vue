@@ -43,7 +43,7 @@ const handleSubmit = async(e) => {
       }
     })
 
-    if (response.statusText === 'OK') {
+    if (response.status === 200) {
       toast.success("Tu contraseña ha sido cambiada con éxito ^^")
       emit('next')
     }
