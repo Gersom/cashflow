@@ -1,6 +1,6 @@
 const { UserModel, AccountModel, CategoryModel, CurrencyModel } = require("@models");
 const { sendVerificationEmail } = require("./registerUtils");
-const { ValidationError } = require("@utils/apiErrors");
+const { ValidationError, NotFoundError } = require("@utils/apiErrors");
 const { client } = require("@config/env");
 const bcrypt = require("bcrypt");
 const jwtoken = require("jsonwebtoken");
@@ -23,32 +23,31 @@ const RegisterService = {
     return true;
   },
   
+  // TODO: pasar a transaction para evitar problemas de concurrencia
+
   verify: async (data) => {
     const { email } = jwtoken.verify(data.token, jwt.emailSecret);
-    const user = await UserModel.findOne({ email: email });
+    const user = await UserModel.findOne({ email: email }).select(['id', 'verified']);
     
     if (!user) throw new ValidationError('Invalid email');
     if (user.verified) throw new ValidationError('Email already verified');
+  
+    const currency = await CurrencyModel.findOne({ countryCode: 'US' }).select('_id');
     
-    user.verified = true;
-    await user.save();
+    if (!currency) throw new NotFoundError('Currency "US" not found');
     
-    const currency = await CurrencyModel.findOne({ countryCode: 'US' }).select('._id');
     const account = await AccountModel.create({ 
-      userId: user._id, 
+      userId: user.id, 
       currencyId: currency._id,
-      name: 'Principal' });
-      
-    await account.save();
+      name: 'Principal'
+    });
     
-    for (const category of defaultCategories) {
-      await CategoryModel.create({
-        name: category.name,
-        icon: category.icon,
-        color: category.color,
-        accountId: account._id
-      });
-    }
+    const categories = defaultCategories.map(category => ({
+      ...category, accountId: account._id
+    }));
+    await CategoryModel.createMany(categories);
+
+    await UserModel.updateData(user.id, { verified: true });
     
     return true;
   }
