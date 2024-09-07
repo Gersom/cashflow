@@ -7,19 +7,10 @@ const accountSchema = new Schema({
     required: true,
     trim: true
   },
-  currency: {
-    symbol: {
-      type: String,
-      required: true
-    },
-    code: {
-      type: String,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    }
+  currencyId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Currency',
+    required: true
   },
   userId: {
     type: Schema.Types.ObjectId,
@@ -43,12 +34,10 @@ accountSchema.set('toJSON', {
   }
 });
 
-
 // Método para formatear el saldo con el símbolo de la moneda
 accountSchema.methods.getFormattedBalance = function() {
   return `${this.currencySymbol}${this.amount.toFixed(2)}`;
 };
-
 
 // Agregar métodos estáticos
 addMethods(accountSchema);
