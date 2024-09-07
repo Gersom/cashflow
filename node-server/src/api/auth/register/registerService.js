@@ -1,4 +1,4 @@
-const { UserModel, AccountModel, CategoryModel } = require("@models");
+const { UserModel, AccountModel, CategoryModel, CurrencyModel } = require("@models");
 const { sendVerificationEmail } = require("./registerUtils");
 const { ValidationError } = require("@utils/apiErrors");
 const { client } = require("@config/env");
@@ -33,7 +33,7 @@ const RegisterService = {
     user.verified = true;
     await user.save();
     
-    const currency = await CurrencyModel.findOne({ countryCode: 'US' }).select('+_id');
+    const currency = await CurrencyModel.findOne({ countryCode: 'US' }).select('._id');
     const account = await AccountModel.create({ 
       userId: user._id, 
       currencyId: currency._id,
