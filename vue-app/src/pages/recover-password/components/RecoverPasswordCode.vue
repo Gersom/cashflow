@@ -1,4 +1,7 @@
 <script setup>
+import { API_URL } from "@src/config/env";
+import { apiPost } from "@src/services/api";
+import { getLocalStorage } from "@src/utils/localStorage";
 import { ref } from "vue"
 import { useToast } from "vue-toastification"
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
@@ -20,10 +23,34 @@ const handleNewCode = (e) => {
   toast.success('Se ha enviado un nuevo código')
 }
 
-const handleSubmit = (e) => {
+// Methods
+const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.success('Código verificado')
-  emit('next', 'changePassword')
+  toast.info("Espere un momento...");
+  try {
+    const response = await apiPost({
+      url: `${API_URL}/auth/recover-password/verify`,
+      data: {
+        email: getLocalStorage('recoveryCode').formData.email,
+        code: codeData.value.value
+      }
+    })
+
+    if (response.statusText === 'OK') {
+      toast.success("Tu código de recuperación es correcto ^^")
+      emit('next', { code: codeData.value.value })
+    }
+
+    else {
+      toast.warning('Algo ocurrió un problema mientras se verificaba tu código de recuperación.')
+      console.warn('Respuesta del servidor:', response.data)
+    }
+  }
+
+  catch (error) {
+    toast.error('Ocurrió un error mientras verificaba tu código de recuperación.')
+    console.error('Error:', error);
+  }
 }
 </script>
 

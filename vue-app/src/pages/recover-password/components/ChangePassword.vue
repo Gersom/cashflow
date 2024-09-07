@@ -1,6 +1,10 @@
 <script setup>
 import { ref, computed } from "vue"
 import { useToast } from 'vue-toastification'
+import { getLocalStorage } from "@src/utils/localStorage";
+import { apiPost } from "@src/services/api";
+import { API_URL } from "@src/config/env";
+
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import Password from "@components/FormInput/Password.vue"
@@ -9,7 +13,7 @@ import ConfirmPassword from "@components/FormInput/ConfirmPassword.vue";
 // Icons
 import IconPassword from '@icons/form/IconPassword.vue'
 
-const emit = defineEmits(["finish"]);
+const emit = defineEmits(["next"]);
 const toast = useToast()
 const formData = ref({
   password: { value: '', isValid: false },
@@ -24,10 +28,36 @@ const handleInput = (field, text, isValid) => {
   formData.value[field] = { value: text, isValid }
 }
 
-const handleSubmit = (e) => {
+// Methods
+const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.success("Contraseña cambiada")
-  emit('finish')
+  toast.info("Espere un momento...");
+  try {
+    const response = await apiPost({
+      url: `${API_URL}/auth/recover-password/verify`,
+      data: {
+        email: getLocalStorage('recoveryCode').formData.email,
+        code: getLocalStorage('recoveryCode').formData.code,
+        password: formData.value.password.value,
+        confirmPassword: formData.value.confirmPassword.value
+      }
+    })
+
+    if (response.statusText === 'OK') {
+      toast.success("Tu contraseña ha sido cambiada con éxito ^^")
+      emit('next')
+    }
+
+    else {
+      toast.warning('Ocurrio un problema mientras cambiaba tu contraseña.')
+      console.warn('Respuesta del servidor:', response.data)
+    }
+  }
+
+  catch (error) {
+    toast.error('Ocurrió un error mientras cambiaba tu contraseña.')
+    console.error('Error:', error);
+  }
 }
 </script>
 

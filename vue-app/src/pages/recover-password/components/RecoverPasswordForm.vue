@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue"
 import { useToast } from 'vue-toastification'
+import { apiPost } from '@src/services/api';
+import { API_URL } from "@src/config/env";
+
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import Email from "@components/FormInput/Email.vue"
@@ -16,10 +19,31 @@ const handleEmail = (text, isValid) => {
   emailData.value = { value: text, isValid }
 }
 
-const handleSubmit = (e) => {
+// Methods
+const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.success("Se envio tu código de recuperación")
-  emit('next', 'recoverPasswordCode')
+  toast.info("Espere un momento...");
+  try {
+    const response = await apiPost({
+      url: `${API_URL}/auth/recover-password/request`,
+      data: { email: emailData.value.value }
+    })
+
+    if (response.statusText === 'OK') {
+      toast.success("Se envio tu código de recuperación al correo electrónico ingresado")
+      emit('next', { email: emailData.value.value })
+    }
+
+    else {
+      toast.warning('Algo ocurrió un problema mientras se enviaba tu código de recuperación.')
+      console.warn('Respuesta del servidor:', response.data)
+    }
+  }
+
+  catch (error) {
+    toast.error('Ocurrió un error mientras enviaba tu código de recuperación.')
+    console.error('Error:', error);
+  }
 }
 </script>
 

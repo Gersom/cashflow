@@ -1,7 +1,7 @@
 <script setup>
 // Imports
 import { apiPost } from '@src/services/api';
-import { SERVER_URL } from "@src/config/env";
+import { API_AUTH } from "@src/config/env";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import LoginForm from './components/LoginForm.vue'
@@ -16,7 +16,7 @@ const handleSubmit = async(data) => {
   toast.info("Espere un momento...");
   try {
     const response = await apiPost({
-      url: `${SERVER_URL}/login`, data
+      url: `${API_AUTH}/login`, data
     })
 
     if (response.statusText === 'OK') {
