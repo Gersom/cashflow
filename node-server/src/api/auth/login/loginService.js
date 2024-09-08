@@ -23,7 +23,7 @@ const LoginService = async (body = {}) => {
   }
 
   const userForToken = {
-    id: user.id
+    id: user._id
   };
 
   const token = jwt.sign(userForToken, envJwt.secret, {

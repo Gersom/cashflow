@@ -40,14 +40,6 @@ movementSchema.index({ account_id: 1 });
 movementSchema.index({ date: 1 });
 movementSchema.index({ type: 1 });
 
-// Método de instancia para obtener una representación formateada
-movementSchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
-
 // Agregar métodos estáticos
 addMethods(movementSchema);
 

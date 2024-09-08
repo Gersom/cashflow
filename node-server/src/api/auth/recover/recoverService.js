@@ -13,9 +13,9 @@ const RecoverService = {
     const user = await verifyAndGetUser(data.email);
 
     // Delete previous codes
-    await RecoveryCodeModel.deleteMany({ userId: user.id });
+    await RecoveryCodeModel.deleteMany({ userId: user._id });
 
-    const code = await createAndSaveCode(user.id);
+    const code = await createAndSaveCode(user._id);
     
     const emailResponse = await sendEmailCode({ code, email: data.email });
 
@@ -28,7 +28,7 @@ const RecoverService = {
   async verifyCode(data) {
     const user = await verifyAndGetUser(data.email);
 
-    await verifyRecoveryCode({ code: data.code, userId: user.id });
+    await verifyRecoveryCode({ code: data.code, userId: user._id });
 
     return true;
   },
@@ -36,12 +36,12 @@ const RecoverService = {
   async resendCode(data) {
     const user = await verifyAndGetUser(data.email);
 
-    const recoveryCode = await RecoveryCodeModel.findOneData({ userId: user.id });
+    const recoveryCode = await RecoveryCodeModel.findOneData({ userId: user._id });
 
     // If the code exists
     if (recoveryCode) {
       // update its expiration date and send an email
-      await RecoveryCodeModel.updateData(recoveryCode.id, { expiresAt: expirationTime() })
+      await RecoveryCodeModel.updateData(recoveryCode._id, { expiresAt: expirationTime() })
       const emailResponse = await sendEmailCode({
         code: recoveryCode.code, email: data.email
       });
@@ -55,7 +55,7 @@ const RecoverService = {
     // If it doesn't exist
     else {
       // create a new one and send an email
-      const code = await createAndSaveCode(user.id);
+      const code = await createAndSaveCode(user._id);
       const emailResponse = await sendEmailCode({
         code, email: data.email
       });
@@ -70,7 +70,7 @@ const RecoverService = {
   async resetPassword(data) {
     const user = await verifyAndGetUser(data.email);
 
-    await verifyRecoveryCode({ code: data.code, userId: user.id });
+    await verifyRecoveryCode({ code: data.code, userId: user._id });
 
     const bcrypt = require("bcrypt");
     const { auth } = require("@config/env");
@@ -78,10 +78,10 @@ const RecoverService = {
     const passwordHashed = await bcrypt.hash(data.password, auth.saltRounds);
 
     // Update the user's password
-    await UserModel.updateData(user.id, { password: passwordHashed });
+    await UserModel.updateData(user._id, { password: passwordHashed });
     
     // Delete the recovery code
-    await RecoveryCodeModel.deleteMany({ userId: user.id });
+    await RecoveryCodeModel.deleteMany({ userId: user._id });
 
     const emailResponse = await sendEmailPasswordSuccess(user.email);
 

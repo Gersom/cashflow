@@ -42,14 +42,6 @@ const userSchema = new Schema({
 userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ name: 1 });
 
-// Método de instancia para obtener una representación formateada
-userSchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
-
 // Agregar métodos estáticos
 addMethods(userSchema);
 

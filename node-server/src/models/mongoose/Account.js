@@ -26,14 +26,6 @@ const accountSchema = new Schema({
 accountSchema.index({ user_id: 1 });
 accountSchema.index({ name: 1 });
 
-// Método de instancia para obtener una representación formateada
-accountSchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
-
 // Método para formatear el saldo con el símbolo de la moneda
 accountSchema.methods.getFormattedBalance = function() {
   return `${this.currencySymbol}${this.amount.toFixed(2)}`;

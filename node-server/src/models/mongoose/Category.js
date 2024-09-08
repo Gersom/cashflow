@@ -28,14 +28,6 @@ const categorySchema = new Schema({
 // Índices únicos para mejorar el rendimiento y garantizar la unicidad
 categorySchema.index({ name: 1 });
 
-// Método de instancia para obtener una representación formateada
-categorySchema.set('toJSON', {
-  transform: function(doc, ret) {
-    const { _id, ...others } = ret;
-    return { id: _id, ...others };
-  }
-});
-
 // Agregar métodos estáticos
 addMethods(categorySchema);
 
