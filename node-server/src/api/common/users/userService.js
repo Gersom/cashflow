@@ -1,5 +1,5 @@
 const { UserModel } = require("@models");
-const { UserDTO } = require("./usersDTOs");
+const { UserDTO } = require("./userDTOs");
 const { NotFoundError } = require("@utils/apiErrors");
 
 const UserService = {
