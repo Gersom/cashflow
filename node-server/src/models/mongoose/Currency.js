@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+const addMethods = require('./utils/addStaticMethods');
 
-const CurrencySchema = new mongoose.Schema({
+const CurrencySchema = new Schema({
   symbol: { 
     type: String, 
     required: true, 
@@ -72,10 +73,14 @@ CurrencySchema.statics.convert = async function(amount, fromCurrency, toCurrency
   return (amount / from.rate) * to.rate;
 };
 
+
+// Agregar métodos estáticos
+addMethods(CurrencySchema);
+
 //Middleware presave fo update lastUpdated field automatically
 CurrencySchema.pre('save', function(next) {
   this.lastUpdated = new Date();
   next();
 });
 
-module.exports = mongoose.model('Currency', CurrencySchema);
+module.exports = model('Currency', CurrencySchema);
