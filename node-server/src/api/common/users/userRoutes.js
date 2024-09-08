@@ -5,7 +5,7 @@ const UserController = require("./userController");
 
 const router = Router();
 
-router.get("/:id", authenticateAndAuthorize('user') ,asyncHandler(UserController.getUser));
+router.get("/me", authenticateAndAuthorize('user') ,asyncHandler(UserController.getUser));
 // router.put("/:id", asyncHandler(UserController.updateUser));
 // router.delete("/:id", asyncHandler(UserController.deleteUser));
 

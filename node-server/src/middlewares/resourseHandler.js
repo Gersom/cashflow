@@ -9,9 +9,8 @@ const resourceAuthorization = {
         return account;
     },
 
-    async user(userId, resourceId) {
-        const user = await UserModel.findById(userId);
-        if (userId !== resourceId) throw new UnauthorizedError('You do not have permission to access this user data');
+    async user(userId) {
+        const user =  UserModel.findById(userId);
         if (!user) throw new UnauthorizedError('User not found');
         return user;
     },
@@ -20,7 +19,9 @@ const resourceAuthorization = {
 
 const authorizeResource = (resourceType) => async (req, res, next) => {
     const userId = req.user.id;
-    const resourceId = req.params.id || req.body.id || req.query.id;
+    if (resourceType === 'user') {
+        resourceId = userId;
+    }
 
     if (!resourceId) {
         return next(new UnauthorizedError('Resource ID is required'));
@@ -38,7 +39,6 @@ const authorizeResource = (resourceType) => async (req, res, next) => {
         next(error);
     }
 };
-
 
 const authenticateAndAuthorize = (resourceType) => [
     authMiddleware,

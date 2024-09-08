@@ -3,7 +3,8 @@ const UserService = require("./userService");
 const UserController = {
   
   async getUser (req, res) {
-    const { id } = req.params;
+    const { id } = req.user;
+    
     const result = await UserService.getUser(id);
     res.status(200).json(result);
   },
