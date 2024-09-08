@@ -16,7 +16,7 @@ const addStaticMethods = (scheme) => {
   });
 
   scheme.static('updateData', function (_id, body) {
-    return this.findOneAndUpdate({ _id }, body);
+    return this.findOneAndUpdate({ _id }, { $set: body });  
   });
 
   scheme.static('removeData', function (_id) {
