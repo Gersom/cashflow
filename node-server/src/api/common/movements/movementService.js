@@ -49,7 +49,7 @@ const MovementService = {
         accountId: data.accountId,
         type: data.type,
         amount: data.amount,
-        categories: data.categories, // TODO: Verify if the categories exist and belong to the account
+        categories: data.categories,
       });
 
       await newMovement.save({ session });

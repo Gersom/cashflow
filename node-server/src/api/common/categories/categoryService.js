@@ -1,9 +1,22 @@
-const { CategoryModel } = require("@models");
+const { CategoryModel, UserModel } = require("@models");
 const { NotFoundError, ValidationError } = require("@utils/apiErrors");
 
 const CategoryService = {
-  async getAllCategories (query = {}) {
-    const categories = await CategoryModel.findAllData(query);
+  async getAllCategories (id) {
+    const { selectedAccount } = await UserModel.findDataById(id);
+    const categories = await CategoryModel.findAllDataQuery({accountId: selectedAccount});
+    
+    return {
+      data: categories,
+      count: categories.length,
+      success: 'Categories retrieved successfully'
+    };
+  },
+
+  //this exixts if we want to get all categories for a specific account
+  //but whitout change the selected account in the user model
+  async getAllCategoriesByAccountId (accountId) {
+    const categories = await CategoryModel.findAllDataQuery({accountId: accountId});
     return {
       data: categories,
       count: categories.length,

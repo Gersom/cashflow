@@ -2,7 +2,13 @@ const CategoryService = require("./categoryService.js");
 
 const CategoryController = {
   async getAllCategories (req, res) {
-    const result = await CategoryService.getAllCategories(req.query);
+    const result = await CategoryService.getAllCategories(req.user.id);
+    res.status(200).json(result);
+  },
+
+  async getAllCategoriesByAccountId (req, res) {
+    const { id } = req.body;
+    const result = await CategoryService.getAllCategoriesByAccountId(id);
     res.status(200).json(result);
   },
   
