@@ -11,7 +11,7 @@ const setupRoutes = (app) => {
   app.use('/storage', express.static(join(__dirname, '..', 'storage')));
 
   // Root route
-  app.get('/', (req, res) => res.send('Hello'));
+  app.get('/', (req, res) => res.send('HealtCheck OK'));
 
   // Not Found Routes
   app.use((req, res, next) => {
