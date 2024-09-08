@@ -17,6 +17,10 @@ const accountSchema = new Schema({
     ref: 'User',
     required: true
   },
+  balance:{
+    type: Number,
+    default: 0
+  }
 }, {
   timestamps: true,
   versionKey: false
