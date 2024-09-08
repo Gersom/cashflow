@@ -19,6 +19,7 @@ const resourceAuthorization = {
 
 const authorizeResource = (resourceType) => async (req, res, next) => {
     const userId = req.user.id;
+    let resourceId = req.params.id || req.body.id || req.query.id;
     if (resourceType === 'user') {
         resourceId = userId;
     }
