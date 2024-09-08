@@ -32,7 +32,12 @@ const userSchema = new Schema({
     type: String, 
     required: false, 
     trim: true 
-  }
+  },
+  selectedAccount: {
+    type: Schema.Types.ObjectId,
+    ref: 'Account',
+    required: false
+  },
 }, { 
   timestamps: true, 
   versionKey: false 
