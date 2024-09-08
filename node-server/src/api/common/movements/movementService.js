@@ -60,9 +60,9 @@ const MovementService = {
       }
 
       if (data.type === 'income') {
-        account.balance += data.amount;
+        account.balance += parseInt(data.amount);
       } else if (data.type === 'expense') {
-        account.balance -= data.amount;
+        account.balance -= parseInt(data.amount);
       }
 
       await account.save({ session });

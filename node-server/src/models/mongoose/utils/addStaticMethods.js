@@ -3,6 +3,10 @@ const addStaticMethods = (scheme) => {
     return this.find({});
   });
 
+  scheme.static('findAllDataQuery', function (query) {
+    return this.find( query );
+  });
+
   scheme.static('findDataById', function (_id) {
     return this.findById(_id);
   });
