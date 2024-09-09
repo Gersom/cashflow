@@ -3,8 +3,8 @@ const { NotFoundError, ValidationError } = require("@utils/apiErrors");
 
 const CategoryService = {
   async getAllCategories (id) {
-    const { selectedAccount } = await UserModel.findDataById(id);
-    const categories = await CategoryModel.findAllDataQuery({accountId: selectedAccount});
+    const { selectedAccountId } = await UserModel.findDataById(id);
+    const categories = await CategoryModel.findAllDataQuery({accountId: selectedAccountId});
     
     return {
       data: categories,

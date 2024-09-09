@@ -1,9 +1,10 @@
 const LoginService = require("./loginService");
 const { auth, serv } = require("@config/env");
-const { responseSuccess } = require("@utils/apiSuccess");
+const { responseSuccess, dataSuccess } = require("@utils/apiSuccess");
 
 const LoginController = async (req, res) => {
-  const {access_token, refresh_token} = await LoginService(req.body);
+  const {access_token, refresh_token, data} = await LoginService(req.body);
+
 
   res
   .cookie('access_token', access_token, {
@@ -19,7 +20,7 @@ const LoginController = async (req, res) => {
     // maxAge: auth.cookieMaxAge,
   })
   .status(200)
-  .json(responseSuccess('Loged in successfully'));
+  .json(!data.isNewUser? responseSuccess('Logged in successfully') : dataSuccess('Logged in successfully', data));
 };
 
 module.exports = LoginController;

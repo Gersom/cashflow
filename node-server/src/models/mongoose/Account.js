@@ -7,7 +7,7 @@ const accountSchema = new Schema({
     required: true,
     trim: true
   },
-  currencyId: {
+  selectedCurrencyId: {
     type: Schema.Types.ObjectId,
     ref: 'Currency',
     required: true

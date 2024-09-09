@@ -6,7 +6,7 @@ class UserDTO {
     this.name = data.name;
     this.whatsapp = data.whatsapp;
     this.profilePic = data.profilePic;
-    this.selectedAccount = data.selectedAccount;
+    this.selectedAccountId = data.selectedAccountId;
     this.createdAt = data.createdAt;
   }
 }

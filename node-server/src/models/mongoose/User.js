@@ -33,7 +33,7 @@ const userSchema = new Schema({
     required: false, 
     trim: true 
   },
-  selectedAccount: {
+  selectedAccountId: {
     type: Schema.Types.ObjectId,
     ref: 'Account',
     required: false

@@ -4,7 +4,7 @@ const { AccountDTO } = require("./accountDTOs");
 
 const AccountService = {
   async getAllAccounts (id) {
-    const accounts = await AccountModel.findAllDataQuery({ userId: id }).populate('currencyId');
+    const accounts = await AccountModel.findAllDataQuery({ userId: id }).populate('selectedCurrencyId');
 
     if (!accounts) throw new NotFoundError(`Accounts not found`);
 
@@ -15,18 +15,18 @@ const AccountService = {
     };
   },
 
-  async changeCurrecy(id, currencyId) {
-    const {selectedAccount} = await UserModel.findDataById(id);
-    const account = await AccountModel.findDataById(selectedAccount);
+  async changeCurrecy(id, selectedCurrencyId) {
+    const {selectedAccountId} = await UserModel.findDataById(id);
+    const account = await AccountModel.findDataById(selectedAccountId);
 
     //here is nedeed to update the account balance with the new currency using the currency rate
-    //but for now we will just update the currencyId
+    //but for now we will just update the selectedCurrencyId
 
     if (!account) {
       throw new NotFoundError(`Account with id ${id} not found`);
     }
 
-    account.currencyId = currencyId;
+    account.selectedCurrencyId = selectedCurrencyId;
     await account.save();
     return {
       success: 'Account updated successfully'

@@ -46,7 +46,7 @@ const RegisterService = {
 
       const account = await AccountModel.create([{
         userId: user._id,
-        currencyId: currency._id,
+        selectedCurrencyId: currency._id,
         name: 'Principal'
       }], { session });
 

@@ -10,6 +10,8 @@ const LoginService = async (body = {}) => {
 
   const user = await UserModel.findOne({ email });
 
+  
+
   if(!user.verified){
     throw new UnauthorizedError('Email not verified');
   }
@@ -37,7 +39,9 @@ const LoginService = async (body = {}) => {
   user.password = undefined;
   delete user.password; // remove password from response  
 
-  return { access_token: token, refresh_token: refresh };
+  const data = { isNewUser: user.selectedAccountId? false : true };  
+
+  return { access_token: token , refresh_token: refresh , data: data? data : null };
 };
 
 module.exports = LoginService;

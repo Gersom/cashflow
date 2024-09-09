@@ -6,11 +6,11 @@ const MovementService = {
 
   async getAccountMovements(id) {
 
-    const { selectedAccount } = await UserModel.findDataById(id);
-    if (!selectedAccount) throw new NotFoundError(`Account with for user ${id} not found`);
+    const { selectedAccountId } = await UserModel.findDataById(id);
+    if (!selectedAccountId) throw new NotFoundError(`Account with for user ${id} not found`);
 
     const movements = await MovementModel.findAllData({
-      accountId: selectedAccount
+      accountId: selectedAccountId
     });
 
     return {

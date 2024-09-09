@@ -18,8 +18,8 @@ class ResourceAuthorizer {
   static async preAuthorizeAccount(userId) {
     const user = await UserModel.findDataById(userId);
     if (!user) throw new UnauthorizedError('User not found');
-    if (!user.selectedAccount) throw new UnauthorizedError('You do not have permission to access this account');
-    return user.selectedAccount;
+    if (!user.selectedAccountId) throw new UnauthorizedError('You do not have permission to access this account');
+    return user.selectedAccountId;
   }
 }
 

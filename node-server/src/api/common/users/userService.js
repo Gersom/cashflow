@@ -20,8 +20,8 @@ const UserService = {
     if (!user) {
       throw new NotFoundError(`User with id ${id} not found`);
     }
-
-    await UserModel.updateData(id, { selectedAccount: accountId });
+    
+    await UserModel.updateData(id, { selectedAccountId: accountId });
     
     return {
       success: 'User updated successfully'
@@ -32,7 +32,7 @@ const UserService = {
     // Not allow to update sensitive data
     delete data.id;
     delete data.verified;
-    delete data.selectedAccount;
+    delete data.selectedAccountId;
 
     const updatedUser = await UserModel.updateData(id, data);
 
