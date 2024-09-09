@@ -1,4 +1,4 @@
-const { AccountModel } = require("@models");
+const { AccountModel, UserModel } = require("@models");
 const { NotFoundError, ValidationError } = require("@utils/apiErrors");
 const { AccountDTO } = require("./accountDTOs");
 
@@ -12,6 +12,24 @@ const AccountService = {
       data: accounts.map(account => new AccountDTO(account)),
       count: accounts.length,
       success: 'Accounts retrieved successfully'
+    };
+  },
+
+  async changeCurrecy(id, currencyId) {
+    const {selectedAccount} = await UserModel.findDataById(id);
+    const account = await AccountModel.findDataById(selectedAccount);
+
+    //here is nedeed to update the account balance with the new currency using the currency rate
+    //but for now we will just update the currencyId
+
+    if (!account) {
+      throw new NotFoundError(`Account with id ${id} not found`);
+    }
+
+    account.currencyId = currencyId;
+    await account.save();
+    return {
+      success: 'Account updated successfully'
     };
   },
   

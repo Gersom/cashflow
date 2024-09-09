@@ -6,6 +6,7 @@ const AccountController = require("./accountController.js");
 const router = Router();
 
 router.get("/", authenticateAndAuthorize('account') ,asyncHandler(AccountController.getAllAccounts));
+router.patch("/change-curreny", authenticateAndAuthorize('account') ,asyncHandler(AccountController.changeCurrecy));
 // router.get("/:id", asyncHandler(AccountController.getAccount));
 // router.post("/", asyncHandler(AccountController.createAccount));
 // router.put("/:id", asyncHandler(AccountController.updateAccount));
