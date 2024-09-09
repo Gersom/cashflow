@@ -8,7 +8,7 @@ const AccountController = {
   
   async changeCurrecy(req, res) {
     const { id } = req.user;
-    const result = await AccountService.changeCurrecy(id, req.body.selectedCurrencyId);
+    const result = await AccountService.changeCurrecy(id, req.body.currencyId);
     res.status(200).json(result);
   },
 //   async getAccount (req, res) {
