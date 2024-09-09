@@ -1,45 +1,46 @@
 <script setup>
 import { useThemeStore } from "@stores/theme";
 import IconSelect from "@icons/actions/IconSelect.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const props = defineProps({
-  itemSelectedplaceholder: {
+  placeholder: {
     type: String,
     default: 'Selecciona una opción'
   },
   items: {
     type: Array,
     default: () => [
-      { value: 'value1', text: 'Name 1' },
-      { value: 'value2', text: 'Name 2' },
-      { value: 'value3', text: 'Name 3' },
-      { value: 'value4', text: 'Name 4' },
-      { value: 'value5', text: 'Name 5' },
-      { value: 'value6', text: 'Name 6' },
-      { value: 'value7', text: 'Name 7' },
-      { value: 'value8', text: 'Name 8' },
-      { value: 'value9', text: 'Name 9' },
-      { value: 'value10', text: 'Name 10' },
-      { value: 'value11', text: 'Name 11' },
-      { value: 'value12', text: 'Name 12' },
+      { value: '0', text: 'Cargando...' },
     ]
+  },
+  modelValue: {
+    type: Object,
+    default: () => ({ value: '', text: 'Cargando...' })
   }
 })
+
+const emit = defineEmits(["update:modelValue"]);
 
 // Store
 const themeStore = useThemeStore();
 
 const isOpen = ref(false);
-const itemSelected = ref(null);
 
 const handleItemClick = (item) => {
-  itemSelected.value = item;
   isOpen.value = false;
+  emit("update:modelValue", item)
 }
 const toggleOpen = () => {
   isOpen.value = !isOpen.value;
 }
+
+const textSelect = computed(() => {
+  if (!props.modelValue.value)
+    return props.placeholder
+  else
+    return props.modelValue.text
+})  
 </script>
 
 <template>
@@ -52,7 +53,7 @@ const toggleOpen = () => {
   >
     <label class="label" @click="toggleOpen">
       <span>
-        {{ itemSelected ? itemSelected.text : props.itemSelectedplaceholder }}
+        {{ textSelect }}
       </span>
 
       <div class="icon-component">

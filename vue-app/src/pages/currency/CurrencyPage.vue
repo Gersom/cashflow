@@ -1,30 +1,35 @@
 <script setup>
 // Imports
-import { apiPost } from '@src/services/api';
-import { API_AUTH } from "@src/config/env";
+import { API_URL } from "@src/config/env";
+import { apiGet, apiPatch } from '@src/services/api';
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import { ref } from "vue";
-import CustomInputText from "@components/CustomInput/InputText.vue";
-import LoginLayout from '@layouts/LoginLayout.vue';
-import IconAccount from '@icons/others/IconAccount.vue';
-import CustomSelect from "@components/CustomSelect/SelectDefault.vue";
 import CustomButton from "@components/CustomButton/GeneralButton.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import CustomInputText from "@components/CustomInput/InputText.vue";
+import CustomSelect from "@components/CustomSelect/SelectDefault.vue";
+import IconAccount from '@icons/others/IconAccount.vue';
 import IconTriangle from '@icons/others/IconTriangle.vue';
+import IconWarning from "@icons/state/IconWarning.vue";
+import LoginLayout from '@layouts/LoginLayout.vue';
 
 // Data
 const router = useRouter()
 const toast = useToast()
 
 const inputAccountName = ref('Principal')
+const currencyList = ref([])
+const currencySelected = ref({})
+
+const isSelectedValue = computed(() => !currencySelected.value.value)
 
 // Methods
-const handleSubmit = async(data) => {
-  toast.info("Espere un momento...");
+const handleSubmit = async(e) => {
+  e.preventDefault()
   try {
-    const response = await apiPost({
-      url: `${API_AUTH}/login`, data
+    const response = await apiPatch({
+      url: `${API_URL}/common/accounts/change-currency`,
+      data: { currencyId: currencySelected.value.value }
     })
 
     if (response.statusText === 'OK') {
@@ -33,23 +38,56 @@ const handleSubmit = async(data) => {
     }
 
     else {
-      toast.warning('Algo ocurrió mientras se iniciaba tu sesión.')
+      toast.warning('Algo salió mal.')
       console.warn('Respuesta del servidor:', response.data)
     }
   }
   
   catch (error) {
-    toast.error('Ocurrió un error mientras se iniciaba tu sesión.')
+    toast.error('Ocurrió un error.')
     console.error('Error:', error);
   }
 }
+const getCurrency = async () => {
+  try {
+    const response = await apiGet({
+      url: `${API_URL}/common/currencies`
+    })
+
+    if (response.status === 200) {
+      if (response.data.data)
+        currencyList.value = formatedCurrencyList(response.data.data)
+      else
+        toast.warning('Algo ocurrió con la información de las monedas')
+    }
+    else {
+      toast.warning('Algo ocurrió mientras se obtenia las monedas locales.')
+    }
+  }
+  
+  catch (error) {
+    toast.error('Ocurrió un error mientras se obtenia tus monedas locales.')
+    console.error('Error:', error);
+  }
+}
+const formatedCurrencyList = (list) => {
+  return list.map(currency => {
+    return {
+      value: currency._id,
+      text: `${currency.name.charAt(0).toUpperCase() + currency.name.slice(1)} - ${currency.code} (${currency.symbol})`
+    }
+  })
+}
+
+onMounted(() => {
+  getCurrency()
+})
 </script>
 
 <template>
 <div class='currency-page'>
   <LoginLayout
     title="Selecciona tu moneda local"
-    logo-title="Bienvenid@ a CashFlow"
   >
     <form class="form-login" @submit="handleSubmit">
       <div class="input-container">
@@ -61,6 +99,7 @@ const handleSubmit = async(data) => {
         </div>
         <CustomInputText
           v-model="inputAccountName"
+          :disabled="true"
           :icon-component="IconAccount"
         />
         <div class="warning-text">
@@ -75,13 +114,18 @@ const handleSubmit = async(data) => {
         <div class="title">
           <span>Monedas:</span>
         </div>
-        <CustomSelect />
+        <CustomSelect
+          placeholder="Escoge tu moneda local"
+          v-model="currencySelected"
+          :items="currencyList"
+        />
       </div>
   
       <div class="submit-button">
         <CustomButton
           text="Ingresar"
           type="submit"
+          :disabled="isSelectedValue"
         />
       </div>
     </form>

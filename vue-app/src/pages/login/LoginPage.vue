@@ -13,15 +13,20 @@ const toast = useToast()
 
 // Methods
 const handleSubmit = async(data) => {
-  toast.info("Espere un momento...");
   try {
     const response = await apiPost({
       url: `${API_AUTH}/login`, data
     })
 
     if (response.statusText === 'OK') {
-      toast.success("Bienvenid@")
-      router.push({ name: 'AppHome' })
+      if (response.data?.data?.isNewUser) {
+        toast.success("Ya casi terminamos, solo falta tu moneda local")
+        router.push({ name: 'CurrencyPage' })
+      }
+      else {
+        toast.success("Bienvenid@")
+        router.push({ name: 'AppHome' })
+      }
     }
 
     else {

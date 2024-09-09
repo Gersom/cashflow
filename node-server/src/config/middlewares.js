@@ -9,7 +9,7 @@ const middlewares = (app) => {
   // CORS configuration
   app.use(cors({
     origin: serv.nodeEnv === 'production' ? serv.allowedOrigins : ['http://localhost:5173', 'http://localhost:3001'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true 
   }));

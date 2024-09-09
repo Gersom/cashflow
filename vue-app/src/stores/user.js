@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', {
     currencyAll: ({currency}) => `${currency.amount} ${currency.name}`,
   },
   actions: {
-    setGetUser() {
+    set() {
       // fetch get user
     }
   }
