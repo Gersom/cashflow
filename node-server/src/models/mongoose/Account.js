@@ -10,7 +10,7 @@ const accountSchema = new Schema({
   selectedCurrencyId: {
     type: Schema.Types.ObjectId,
     ref: 'Currency',
-    required: true
+    required: false
   },
   userId: {
     type: Schema.Types.ObjectId,

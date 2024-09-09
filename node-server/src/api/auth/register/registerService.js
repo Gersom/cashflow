@@ -38,15 +38,14 @@ const RegisterService = {
       if (!user) throw new ValidationError('Invalid email');
       if (user.verified) throw new ValidationError('Email already verified');
 
-      const currency = await CurrencyModel.findOne({ countryCode: 'US' })
-        .select('_id')
-        .session(session);
+      // const currency = await CurrencyModel.findOne({ countryCode: 'US' })
+      //   .select('_id')
+      //   .session(session);
 
-      if (!currency) throw new NotFoundError('Currency "US" not found');
+      // if (!currency) throw new NotFoundError('Currency "US" not found');
 
       const account = await AccountModel.create([{
         userId: user._id,
-        selectedCurrencyId: currency._id,
         name: 'Principal'
       }], { session });
 
@@ -57,8 +56,9 @@ const RegisterService = {
 
       await CategoryModel.insertMany(categories, { session });
 
-      await UserModel.updateOne(
+      await UserModel.findOneAndUpdate(
         { _id: user._id },
+        { selectedAccountId: account[0]._id },
         { verified: true },
         { session }
       );

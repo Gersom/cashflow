@@ -1,4 +1,4 @@
-const { UserModel } = require("@models");
+const { UserModel, AccountModel } = require("@models");
 const { AuthorizationError, UnauthorizedError } = require("@utils/apiErrors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -39,7 +39,9 @@ const LoginService = async (body = {}) => {
   user.password = undefined;
   delete user.password; // remove password from response  
 
-  const data = { isNewUser: user.selectedAccountId? false : true };  
+  const account = await AccountModel.findOneData({ _id: user.selectedAccountId });
+
+  const data = { isNewUser: account.selectedCurrencyId? false : true };  
 
   return { access_token: token , refresh_token: refresh , data: data? data : null };
 };
