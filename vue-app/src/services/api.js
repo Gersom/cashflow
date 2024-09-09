@@ -11,3 +11,4 @@ export const apiPost = createRequest('POST');
 export const apiGet = createRequest('GET');
 export const apiPut = createRequest('PUT');
 export const apiDel = createRequest('DELETE');
+export const apiPatch = createRequest('PATCH');
