@@ -22,6 +22,10 @@ const props = defineProps({
     type: [Boolean, Object],
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: true
+  }
 });
 
 // Store
@@ -53,6 +57,7 @@ const valueInput = computed({
         class="input-tag"
         v-model="valueInput"
         :placeholder="placeholder"
+        :disabled="disabled"
       />
     </label>
   </div>
@@ -60,20 +65,24 @@ const valueInput = computed({
 
 <style lang="scss" scoped>
 .custom-input-text {
-  .input-tag {
-    align-items: center;
-    background: var(--background-color);
-    border-radius: var(--border-radius);
-    border: none;
-    color: var(--text-color);
-    font-family: var(--font-poppins);
-    font-size: 16px;
-    min-height: 34px;
-    padding: 0 15px;
-    width: 100%;
-  }
   .label {
     position: relative;
+
+    .input-tag {
+      align-items: center;
+      background: var(--background-color);
+      border-radius: var(--border-radius);
+      border: none;
+      color: var(--text-color);
+      font-family: var(--font-poppins);
+      font-size: 16px;
+      min-height: 34px;
+      padding: 0 15px;
+      width: 100%;
+    }
+    .input-tag:disabled {
+      cursor: not-allowed;
+    }
   }
 
   &.is-icon {

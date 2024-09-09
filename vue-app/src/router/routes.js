@@ -5,6 +5,7 @@ import Login from '@pages/login/LoginPage.vue'
 import RecoverPassword from '@pages/recover-password/RecoverPasswordPage.vue'
 import Register from '@pages/register/RegisterPage.vue'
 import VerifyEmail from '@pages/verify-email/VerifyEmail.vue'
+import CurrencyPage from '@pages/currency/CurrencyPage.vue'
 
 export const routes = [
   {
@@ -33,6 +34,11 @@ export const routes = [
     path: '/verify-email',
     name: 'VerifyEmail',
     component: VerifyEmail
+  },
+  {
+    path: '/seleccionar-moneda',
+    name: 'CurrencyPage',
+    component: CurrencyPage
   },
   {
     path: '/app',

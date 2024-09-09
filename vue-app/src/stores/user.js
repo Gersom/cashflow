@@ -3,19 +3,18 @@ import { defineStore } from 'pinia'
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: {
-      id: '005454515120',
-      email: 'gersomalaja@gmail.com',
-      gender: 'male',
-      image: 'https://www.google.com/image.jpg',
-      name: 'Gersom',
-      whatsapp: '+51910868526',
+      email: '',
+      gender: '',
+      image: '',
+      name: '',
+      whatsapp: '',
     },
     currency: {
-      amount: '9999.45',
-      symbol: 'S/.',
-      name: 'sol peruano',
-      plural: 'soles',
-      currencyPosition: 'before',
+      amount: '0.00',
+      symbol: '$',
+      name: '',
+      plural: '',
+      currencyPosition: '',
       decimalPlaces: 2
     }
   }),

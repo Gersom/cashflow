@@ -6,7 +6,11 @@ const props = defineProps({
   title: {
     type: String,
     default: 'Iniciar sesión'
-  }
+  },
+  logoTitle: {
+    type: String,
+    default: ''
+  },
 })
 </script>
 
@@ -14,7 +18,12 @@ const props = defineProps({
   <div class='login-layout'>
     <div class="card">
       <div class="logo">
-        <LogoTitle />
+        <LogoTitle
+          :title="!props.logoTitle"
+        />
+        <p class="logo-subtitle" v-if="!!props.logoTitle">
+          {{ props.logoTitle }}
+        </p>
       </div>
       <CardTitle :title="props.title" />
       <slot />
@@ -39,6 +48,21 @@ const props = defineProps({
     border-radius: 15px;
     background: var(--background-color2);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    .logo-subtitle {
+      background: linear-gradient(
+        90deg,
+        var(--secondary-color) 15%,
+        var(--primary-color) 80%
+      );
+      background-clip: text;
+      color: transparent;
+      font-family: var(--font-poppins);
+      margin: 5px 0 0 0;
+      font-weight: 400;
+      font-size: 25px;
+      text-align: center;
+    }
   }
 
   .logo {

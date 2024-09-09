@@ -1,5 +1,20 @@
 <script setup>
 import IconLogo from '@icons/others/IconLogo.vue'
+
+const props = defineProps({
+  title: {
+    type: Boolean,
+    default: true
+  },
+  titlePrimary: {
+    type: String,
+    default: 'Cash'
+  },
+  titleSecondary: {
+    type: String,
+    default: 'Flow'
+  }
+})
 </script>
 
 <template>
@@ -7,12 +22,12 @@ import IconLogo from '@icons/others/IconLogo.vue'
     <div class="logo-icon">
       <IconLogo />
     </div>
-    <h2 class="title">
+    <h2 class="title" v-if="title">
       <span style="--clr-logo: var(--secondary-color)">
-        {{ 'Cash' }}
+        {{ titlePrimary }}
       </span>
       <span style="--clr-logo: var(--primary-color)">
-        {{ 'Flow' }}
+        {{ titleSecondary }}
       </span>
     </h2>
   </div>
