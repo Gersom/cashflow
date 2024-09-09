@@ -59,6 +59,11 @@ const RegisterService = {
       await UserModel.findOneAndUpdate(
         { _id: user._id },
         { selectedAccountId: account[0]._id },
+        { session }
+      );
+
+      await UserModel.updateOne(
+        { _id: user._id },
         { verified: true },
         { session }
       );
