@@ -69,7 +69,7 @@ const verifyAndGetUser = async (email) => {
 }
 
 const verifyRecoveryCode = async ({ code, userId}) => {
-  const recoveryCode = await RecoveryCodeModel.findOneData({ code, userId }).populate('userId');
+  const recoveryCode = await RecoveryCodeModel.findOneData({ code, userId });
 
   if (!recoveryCode)
     throw new ValidationError(`Code ${code} not found, please generate a new one`);
