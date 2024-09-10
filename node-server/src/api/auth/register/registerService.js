@@ -15,6 +15,7 @@ const RegisterService = {
     }
 
     data.password = await bcrypt.hash(data.password, auth.saltRounds);
+    !data.whatsapp? delete data.whatsapp : '';
     await UserModel.create(data);
 
     const token = jwtoken.sign({ email: data.email }, jwt.emailSecret, { expiresIn: jwt.emailExpiration });
