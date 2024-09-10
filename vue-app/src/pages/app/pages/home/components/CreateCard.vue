@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useCategoriesStore } from '@app-page/stores/categories';
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
@@ -15,6 +16,8 @@ import InputCategory from "@components/CustomInput/InputCategory/InputCategory.v
 // Icons
 import IconAdd from "@icons/actions/IconAdd.vue"
 
+const categoriesStore = useCategoriesStore()
+
 const inputTextDefault = ref('')
 const inputCurrencyExpense = ref('0.00')
 const inputTextareaDefault = ref('')
@@ -24,6 +27,10 @@ const inputRadioDataTwo = [
   { value: 'gasto', text: 'Gasto' },
   { value: 'ingreso', text: 'Ingreso' }
 ]
+
+onMounted(() => {
+  categoriesStore.fillCategories()
+})
 </script>
 
 <template>
