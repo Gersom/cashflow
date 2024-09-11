@@ -1,5 +1,6 @@
 const { CategoryModel, UserModel } = require("@models");
 const { NotFoundError, ValidationError } = require("@utils/apiErrors");
+const { CategoryDTO } = require("./categoryDTOs");
 
 const CategoryService = {
   async getAllCategories (id) {
@@ -7,7 +8,7 @@ const CategoryService = {
     const categories = await CategoryModel.findAllDataQuery({accountId: selectedAccountId});
     
     return {
-      data: categories,
+      data: categories.map(category => new CategoryDTO(category)),
       count: categories.length,
       success: 'Categories retrieved successfully'
     };
