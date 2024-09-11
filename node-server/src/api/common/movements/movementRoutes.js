@@ -4,7 +4,7 @@ const { authenticateAndAuthorize } = require("@middlewares/resourseHandler");
 const MovementController = require("./movementController.js");
 
 const router = Router();
-router.get("/account", authenticateAndAuthorize('account') ,asyncHandler(MovementController.getAccountMovements));
+router.get("/", authenticateAndAuthorize('account') ,asyncHandler(MovementController.getAccountMovements));
 router.post("/",authenticateAndAuthorize('account'), asyncHandler(MovementController.createMovement));
 
 module.exports = router;
