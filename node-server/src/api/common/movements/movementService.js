@@ -2,6 +2,8 @@ const { MovementModel, AccountModel, UserModel, CategoryModel } = require("@root
 const { NotFoundError, ValidationError } = require("@utils/apiErrors");
 const { default: mongoose } = require("mongoose");
 
+const { MovementDTO } = require("./movementDTOs");
+
 const MovementService = {
 
   async getAccountMovements(id) {
@@ -11,31 +13,37 @@ const MovementService = {
 
     const movements = await MovementModel.findAllData({
       accountId: selectedAccountId
-    });
+    }).populate('categories');;
 
     return {
-      data: movements,
+      data: movements.map(movement => new MovementDTO(movement)),
       count: movements.length,
       success: 'Movements retrieved successfully'
     };
   },
 
-  async postMovement(data) {
-    if (!data.amount || !data.title || !data.type || !data.accountId) {
-      throw new ValidationError("Amount, title, type and accountId are required");
+  async postMovement(req) {
+
+    const data = req.body;
+    const user = await UserModel.findDataById(req.user.id);
+    console.log(user);
+
+    if (!data.amount || !data.title || !data.type) {
+      throw new ValidationError("Amount, title, type  are required");
     }
 
     const session = await mongoose.startSession();
     
     try {
       session.startTransaction();
-
+      console.log("transaction", user.selectedAccountId.toString());
+      
       //this can be improved
       let verifiedCategories = [];
       if (data.categories && data.categories.length > 0) {
         verifiedCategories = await CategoryModel.find({
           _id: { $in: data.categories },
-          accountId: data.accountId
+          accountId: user.selectedAccountId
         }).session(session);
 
         if (verifiedCategories.length !== data.categories.length) {
@@ -46,7 +54,7 @@ const MovementService = {
       const newMovement = new MovementModel({
         title: data.title,
         description: data.description,
-        accountId: data.accountId,
+        accountId: user.selectedAccountId,
         type: data.type,
         amount: data.amount,
         categories: data.categories,
@@ -54,9 +62,9 @@ const MovementService = {
 
       await newMovement.save({ session });
 
-      const account = await AccountModel.findById(data.accountId).session(session);
+      const account = await AccountModel.findById(user.selectedAccountId).session(session);
       if (!account) {
-        throw new NotFoundError(`Account with id ${data.accountId} not found`);
+        throw new NotFoundError(`Account with id ${user.selectedAccountId} not found`);
       }
 
       if (data.type === 'income') {
@@ -68,7 +76,10 @@ const MovementService = {
       await account.save({ session });
 
       await session.commitTransaction();
-      return { success: 'Movement created successfully' };
+      return { 
+        success: 'Movement created successfully',
+        data: { id: newMovement._id }
+      };
     } catch (err) {
       await session.abortTransaction();
       throw err;

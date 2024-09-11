@@ -8,7 +8,7 @@ const MovementController = {
   },
 
   async createMovement (req, res) {
-    const result = await MovementService.postMovement(req.body);
+    const result = await MovementService.postMovement(req);
     res.status(201).json(result);
   },
 }
