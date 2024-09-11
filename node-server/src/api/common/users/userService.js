@@ -4,7 +4,14 @@ const { NotFoundError } = require("@utils/apiErrors");
 
 const UserService = {
   async getUser(id) {
-    const user = await UserModel.findDataById(id);
+    const user = await UserModel.findDataById(id)
+    .populate({
+      path: 'selectedAccountId',
+      populate: {
+        path: 'selectedCurrencyId'
+      }
+    });
+
     if (!user) {
       throw new NotFoundError(`User with id ${id} not found`);
     }
