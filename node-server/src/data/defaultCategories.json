@@ -1,37 +1,37 @@
 [
   {
     "name": "Alimentación",
-    "icon": "icon-coffee",
+    "icon": "coffee",
     "color": "#FFD1DC"
   },
   {
     "name": "Transporte",
-    "icon": "icon-truck",
+    "icon": "truck",
     "color": "#BDFCC9"
   },
   {
     "name": "Hogar",
-    "icon": "icon-home",
+    "icon": "home",
     "color": "#E6E6FA"
   },
   {
     "name": "Salud",
-    "icon": "icon-thermometer",
+    "icon": "thermometer",
     "color": "#FFE5B4"
   },
   {
     "name": "Ocio",
-    "icon": "icon-music",
+    "icon": "music",
     "color": "#B0E0E6"
   },
   {
     "name": "Compras",
-    "icon": "icon-shopping-cart",
+    "icon": "shopping-cart",
     "color": "#FFC0CB"
   },
   {
     "name": "Finanzas",
-    "icon": "icon-dollar-sign",
+    "icon": "dollar-sign",
     "color": "#98FB98"
   }
 ]
