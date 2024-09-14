@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useMovementsStore } from '@app-page/stores/movements';
 
 // components global
@@ -10,9 +10,9 @@ import DateCardTitle from './components/DateCardTitle/DateCardTitle.vue'
 import MovementCard from './components/MovementCard/MovementCard.vue';
 
 const movementsStore = useMovementsStore()
-
+const lengthMovements = computed(() => movementsStore.data?.length)
 onMounted(() => {
-  movementsStore.fillMovements()
+  movementsStore.loadMovements()
 })
 </script>
 
@@ -31,19 +31,19 @@ onMounted(() => {
       </div>
     </div>
 
-    <p class="no-movements" v-show="movementsStore?.data?.length === 0">
+    <p class="no-movements" v-show="lengthMovements === 0">
       Todavia no tienes ninguna transacción registrada.
     </p>
 
-    <div class="movements" v-if="movementsStore?.data?.length > 0">
+    <div class="movements">
       <MovementCard 
-        v-for="movement in movementsStore.data"
-        :key="movement.date.toISOString()"
-        :date="movement.date"
-        :text="movement.text"
-        :bookmarks="movement.bookmarks"
-        :isIncome="movement.isIncome "
-        :amount="movement.amount"
+        v-for="(movement, index) in movementsStore.data"
+        :key="`movement-card-${index}`"
+        :date="movement.date || new Date()"
+        :text="movement.title"
+        :bookmarks="movement.categories"
+        :isIncome="movement.type === 'income'"
+        :amount="parseFloat(movement.amount)"
       />
     </div>
      

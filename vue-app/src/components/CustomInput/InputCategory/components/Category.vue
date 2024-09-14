@@ -1,5 +1,6 @@
 <script setup>
 import IconClose from "@icons/actions/IconClose.vue";
+import { getContrastColor } from "@utils/color";
 
 // Props
 const props = defineProps({
@@ -22,7 +23,7 @@ const props = defineProps({
     <i
       :class="`icon icon-${props.data.iconName}`"
       :aria-label="`icono ${props.data.name}`"
-      :style="{ background: props.data.color }"
+      :style="{ background: props.data.color, color: getContrastColor(props.data.color) }"
     />
     <div class="icon trash-container">
       <div class="trash-content">
@@ -52,6 +53,7 @@ const props = defineProps({
     min-width: 30px;
     transition: 0.3s ease all;
     color: var(--title-color);
+    font-weight: 600;
 
     &.trash-container {
       background: var(--error-color);

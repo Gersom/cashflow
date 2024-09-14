@@ -1,5 +1,5 @@
 <script setup>
-import NavComponent from '@app-page/components/Nav/index.vue'
+import NavComponent from '@app-page/components/nav/Nav.vue'
 
 defineOptions({
   name: 'DashboardLayout'

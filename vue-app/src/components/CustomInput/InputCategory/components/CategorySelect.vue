@@ -1,59 +1,16 @@
 <script setup>
 import { ref, computed } from "vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
+import { useCategoriesStore } from "@src/pages/app/stores/categories";
 
 const emit = defineEmits(["select"]);
+const categoriesStore = useCategoriesStore();
 const props = defineProps({
   selectedCategories: {
     type: Array,
     default: () => [],
   },
 });
-
-const categories = ref([
-  {
-    id: 1,
-    color: "orange",
-    iconName: "shopping-bag",
-    name: "Compras",
-  },
-  {
-    id: 2,
-    color: "peru",
-    iconName: "credit-card",
-    name: "Tarjeta",
-  },
-  {
-    id: 3,
-    color: "peru",
-    iconName: "credit-card",
-    name: "Cartera",
-  },
-  {
-    id: 4,
-    color: "peru",
-    iconName: "credit-card",
-    name: "Pepe",
-  },
-  {
-    id: 5,
-    color: "peru",
-    iconName: "credit-card",
-    name: "Conserje",
-  },
-  {
-    id: 6,
-    color: "peru",
-    iconName: "credit-card",
-    name: "David",
-  },
-  {
-    id: 7,
-    color: "peru",
-    iconName: "credit-card",
-    name: "Jejeje",
-  },
-]);
 
 const isCategorySelected = (cat) => {
   return props.selectedCategories.includes(cat);
@@ -69,11 +26,12 @@ const addCategory = (cat) => {
     <ul class="category-list-content">
       <li
         class="category-item"
-        v-for="(cat, index) in categories"
+        v-for="(cat, index) in categoriesStore.data"
         :key="`category${index}`"
       >
         <button
           class="button"
+          type="button"
           @click="addCategory(cat)"
           v-if="!isCategorySelected(cat)"
         >

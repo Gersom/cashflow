@@ -53,6 +53,7 @@ const toogleCategorySelect = () => {
     <div class="container">
       <button
         class="item"
+        type="button"
         v-for="(cat, index) in categories"
         :key="`category${index}`"
         @click="removeCategorySelect(index)"
@@ -62,6 +63,7 @@ const toogleCategorySelect = () => {
 
       <button
         class="item"
+        type="button"
         @click="toogleCategorySelect"
         v-show="categories.length < 3"
       >

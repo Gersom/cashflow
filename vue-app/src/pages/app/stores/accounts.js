@@ -3,16 +3,39 @@ import { apiGet } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 
-export const useCategoriesStore = defineStore('categories', {
+export const useAccountsStore = defineStore('accounts', {
   state: () => ({
     data: [],
+    selected: {
+      id: '00001',
+      name: 'Principal',
+      balance: 0.00,
+      currency: {
+        id: "2aaae1",
+        symbol:"$",
+        name:"dolar",
+        code:"USD",
+        plural:"dolares",
+        countryCode:"USA",
+        decimalPlaces:2
+      } 
+    },
     isFilledData: false
   }),
   getters: {
-    categoriesAll: ({data}) => data
+    acccountsAll: ({ data }) => data,
+    accountSelected: ({ selected }) => ({
+      id: selected.id,
+      name: selected.name,
+      balance: selected.balance
+    }),
+    currentCurrency: ({ selected }) => selected.currency
   },
   actions: {
-    async fillCategories() {
+    fillSelectedAccount(account) {
+      this.selected = account
+    },
+    async loadAccounts() {
       if (!this.isFilledData) {
         await this.getCategoriesAll()
       }
@@ -21,7 +44,7 @@ export const useCategoriesStore = defineStore('categories', {
       const toast = useToast()
       try {
         const response = await apiGet({
-          url: `${API_URL}/common/categories`
+          url: `${API_URL}/common/accounts`
         })
     
         if (response.status === 200) {

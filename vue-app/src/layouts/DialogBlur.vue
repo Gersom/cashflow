@@ -53,9 +53,18 @@ const onClose = () => {
     }"
     v-show="props.show"
   >
-    <button class="blur" @click="onClose" />
+    <button
+      class="blur" 
+      type="button"
+      @click="onClose"
+    />
     <div class="content">
-      <button v-if="props.buttonClose" class="button-close" @click="onClose">
+      <button
+        class="button-close"
+        type="button"
+        v-if="props.buttonClose"
+        @click="onClose"
+      >
         <IconClose />
       </button>
       <slot></slot>

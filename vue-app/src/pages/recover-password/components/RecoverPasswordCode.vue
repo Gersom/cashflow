@@ -16,17 +16,36 @@ const handleCode = (text, isValid) => {
   codeData.value = { value: text, isValid }
 }
 
-const handleNewCode = (e) => {
-  e.preventDefault()
-  console.log('New code')
+const handleNewCode = async () => {
+  try {
+    const response = await apiPost({
+      url: `${API_URL}/auth/recover-password/request`,
+      data: {
+        email: getLocalStorage('recoveryCode').formData.email
+      }
+    })
 
-  toast.success('Se ha enviado un nuevo código')
+    if (response.status === 200) {
+      codeData.value.value = ''
+      toast.success("Tu nuevo código de recuperación se ha venviado a tu correo electrónico, revisa tu bandeja de entrada.")
+    }
+
+    else {
+      toast.warning('Algo ocurrió un problema mientras se generaba tu nuevo código de recuperación.')
+      console.warn('Respuesta del servidor:', response.data)
+    }
+  }
+
+  catch (error) {
+    toast.error('Ocurrió un error mientras generaba tu nuevo código de recuperación.')
+    console.error('Error:', error);
+  }
 }
 
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.info("Espere un momento...");
+  // toast.info("Espere un momento...");
   try {
     const response = await apiPost({
       url: `${API_URL}/auth/recover-password/verify`,
@@ -48,8 +67,16 @@ const handleSubmit = async(e) => {
   }
 
   catch (error) {
-    toast.error('Ocurrió un error mientras verificaba tu código de recuperación.')
-    console.error('Error:', error);
+    if (error.response.status === 400) {
+      toast.warning('El código de recuperación no es válido.')
+    }
+    else if (error.response.status === 410) {
+      toast.warning('El código de recuperación ha expirado, dale click en enviar un nuevo código.')
+    }
+    else {
+      toast.error('Ocurrió un error mientras verificaba tu código de recuperación.')
+      console.error('Error:', error);
+    }
   }
 }
 </script>

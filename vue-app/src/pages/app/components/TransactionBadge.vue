@@ -1,12 +1,12 @@
 <script setup>
 import { computed } from 'vue';
 import IconArrow from '@icons/state/IconArrowUp.vue';
-import { useUserStore } from '@stores/user';
+import { useAccountsStore } from '@app-page/stores/accounts';
 import { storeToRefs } from 'pinia';
 
 
-const userStore = useUserStore();
-const { currency } = storeToRefs(userStore);
+const useAccounts = useAccountsStore();
+const { currentCurrency } = storeToRefs(useAccounts);
 
 const props = defineProps({
   amount: {
@@ -20,12 +20,17 @@ const props = defineProps({
 });
 
 const sign = computed(() => props.isPositive ? '+' : '-');
-const formattedAmount = computed(() => Math.abs(props.amount).toFixed(currency.decimalPlaces));
+const formattedAmount = computed(() => {
+  return Math.abs(props.amount).toFixed(currentCurrency.decimalPlaces)
+})
 </script>
 
 <template>
   <div class="transaction-badge" :class="{ positive: isPositive }">
-    <template v-if="currency.currencyPosition === 'before'">
+    <p class="badge">
+      {{ sign }} {{ currentCurrency.symbol }} {{ formattedAmount }}
+    </p>
+    <!-- <template v-if="currency.currencyPosition === 'before'">
       <p class="badge">
         {{ sign }} {{ currency.symbol }} {{ formattedAmount }}
       </p>
@@ -34,14 +39,14 @@ const formattedAmount = computed(() => Math.abs(props.amount).toFixed(currency.d
       <p class="badge">
         {{ sign }} {{ formattedAmount }} {{ currency.symbol }}
       </p>
-    </template>
+    </template> -->
     <div class="arrow-icon" :class="{ 'rotate-180': !isPositive }">
       <IconArrow />
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .transaction-badge {
   display: flex;
   align-items: center;

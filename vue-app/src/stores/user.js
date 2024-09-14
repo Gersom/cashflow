@@ -2,18 +2,11 @@ import { API_URL } from "@src/config/env";
 import { apiGet } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
+import { useAccountsStore } from "@app-page/stores/accounts";
 
 export const useUserStore = defineStore('user', {
   state: () => ({
     user: {},
-    currency: {
-      amount: '0.00',
-      symbol: '$',
-      name: '',
-      plural: '',
-      currencyPosition: '',
-      decimalPlaces: 2
-    },
     isFilledData: false
   }),
   getters: {
@@ -21,21 +14,24 @@ export const useUserStore = defineStore('user', {
     currencyAll: ({currency}) => `${currency.amount} ${currency.name}`,
   },
   actions: {
-    async fillUserProfile() {
+    async setUserProfile() {
       if (!this.isFilledData) {
         await this.getUserProfile()
       }
     },
     async getUserProfile() {
       const toast = useToast()
+      const accountsStore = useAccountsStore()
       try {
         const response = await apiGet({
           url: `${API_URL}/common/users/profile`
         })
     
         if (response.status === 200) {
-          this.user = response.data.data
+          const { selectedAccount, ...userData } = response.data.data
+          this.user = userData
           this.isFilledData = true
+          accountsStore.fillSelectedAccount(selectedAccount)
         }
         else {
           toast.warning('Algo ocurrió mientras se obtenian los datos de tu perfil.')

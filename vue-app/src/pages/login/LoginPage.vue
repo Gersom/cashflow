@@ -36,8 +36,15 @@ const handleSubmit = async(data) => {
   }
   
   catch (error) {
-    toast.error('Ocurrió un error mientras se iniciaba tu sesión.')
-    console.error('Error:', error);
+    if (error.response.status === 401) {
+      toast.warning('El correo electrónico o la contraseña ingresados no son correctos. Por favor, verifica ambos datos e intenta nuevamente.')
+    } else if (error.response.status === 403) {
+      toast.warning('Tu correo electrónico no esta verificado, por favor verifica tu bandeja de entrada.')
+    }
+    else {
+      toast.error('Ocurrió un error mientras se iniciaba tu sesión.')
+      console.error('Error:', error);
+    }
   }
 }
 </script>

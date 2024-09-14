@@ -22,7 +22,7 @@ const handleEmail = (text, isValid) => {
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.info("Espere un momento...");
+  // toast.info("Espere un momento...");
   try {
     const response = await apiPost({
       url: `${API_URL}/auth/recover-password/request`,
@@ -41,8 +41,12 @@ const handleSubmit = async(e) => {
   }
 
   catch (error) {
-    toast.error('Ocurrió un error mientras enviaba tu código de recuperación.')
-    console.error('Error:', error);
+    if (error.response.status === 400) {
+      toast.warning('No tenemos registrado ese correo electrónico.')
+    } else {
+      toast.error('Ocurrió un error mientras enviaba tu código de recuperación.')
+      console.error('Error:', error);
+    }
   }
 }
 </script>

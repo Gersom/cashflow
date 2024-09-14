@@ -10,7 +10,7 @@ import ChartCard from './components/ChartCard.vue'
 import CreateCard from './components/CreateCard.vue'
 import HistoryCard from './components/HistoryCard/HistoryCard.vue'
 
-defineOptions({ name: 'Home' })
+const emit = defineEmits(['vnode-unmounted'])
 </script>
 
 <template>

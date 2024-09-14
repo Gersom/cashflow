@@ -6,9 +6,7 @@ import { useUserStore } from "@stores/user";
 
 const userStore = useUserStore()
 
-onMounted(() => {
-  userStore.fillUserProfile()
-})
+onMounted(() => userStore.setUserProfile())
 </script>
 
 <template>
