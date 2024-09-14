@@ -86,8 +86,125 @@ const MovementService = {
     } finally {
       session.endSession();
     }
+  },
+
+  async editMovement(req) {
+    const { id } = req.params;
+    const data = req.body;
+    const user = await UserModel.findDataById(req.user.id);
+
+    if (!data.amount && !data.title && !data.type && !data.categories) {
+      throw new ValidationError("At least one field (amount, title, type, or categories) is required for update");
+    }
+
+    const session = await mongoose.startSession();
+    try {
+      session.startTransaction();
+
+      const movement = await MovementModel.findOne({ _id: id, accountId: user.selectedAccountId }).session(session);
+      if (!movement) {
+        throw new NotFoundError(`Movement with id ${id} not found or doesn't belong to the selected account`);
+      }
+
+      let verifiedCategories = [];
+      if (data.categories && data.categories.length > 0) {
+        verifiedCategories = await CategoryModel.find({ _id: { $in: data.categories }, accountId: user.selectedAccountId }).session(session);
+        if (verifiedCategories.length !== data.categories.length) {
+          throw new ValidationError("One or more categories are invalid or do not belong to this account");
+        }
+      }
+
+      const account = await AccountModel.findById(user.selectedAccountId).session(session);
+      if (!account) {
+        throw new NotFoundError(`Account with id ${user.selectedAccountId} not found`);
+      }
+
+      // Adjust account balance if amount or type changed
+      if (data.amount || data.type) {
+        if (movement.type === 'income') {
+          account.balance -= parseInt(movement.amount);
+        } else if (movement.type === 'expense') {
+          account.balance += parseInt(movement.amount);
+        }
+
+        const newType = data.type || movement.type;
+        const newAmount = data.amount || movement.amount;
+
+        if (newType === 'income') {
+          account.balance += parseInt(newAmount);
+        } else if (newType === 'expense') {
+          account.balance -= parseInt(newAmount);
+        }
+
+        await account.save({ session });
+      }
+
+      // Update movement
+      Object.assign(movement, {
+        title: data.title || movement.title,
+        description: data.description || movement.description,
+        type: data.type || movement.type,
+        amount: data.amount || movement.amount,
+        categories: data.categories || movement.categories,
+      });
+
+      await movement.save({ session });
+
+      await session.commitTransaction();
+      return { 
+        success: 'Movement updated successfully', 
+        // data: new MovementDTO(movement) 
+      };
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      session.endSession();
+    }
+  },
+
+  async deleteMovement(req) {
+    const { id } = req.params;
+    const user = await UserModel.findDataById(req.user.id);
+
+    const session = await mongoose.startSession();
+    try {
+      session.startTransaction();
+
+      const movement = await MovementModel.findOne({ _id: id, accountId: user.selectedAccountId }).session(session);
+      if (!movement) {
+        throw new NotFoundError(`Movement with id ${id} not found or doesn't belong to the selected account`);
+      }
+
+      const account = await AccountModel.findById(user.selectedAccountId).session(session);
+      if (!account) {
+        throw new NotFoundError(`Account with id ${user.selectedAccountId} not found`);
+      }
+
+      // Adjust account balance
+      if (movement.type === 'income') {
+        account.balance -= parseInt(movement.amount);
+      } else if (movement.type === 'expense') {
+        account.balance += parseInt(movement.amount);
+      }
+
+      await account.save({ session });
+
+      // Delete movement
+      await MovementModel.deleteOne({ _id: id }).session(session);
+
+      await session.commitTransaction();
+      return { 
+        success: 'Movement deleted successfully'
+      };
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      session.endSession();
+    }
   }
 
-}
+};
 
 module.exports = MovementService;

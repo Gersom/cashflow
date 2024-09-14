@@ -11,6 +11,16 @@ const MovementController = {
     const result = await MovementService.postMovement(req);
     res.status(201).json(result);
   },
+
+  async editMovement (req, res) {
+    const result = await MovementService.editMovement(req);
+    res.status(200).json(result);
+  },
+
+  async deleteMovement (req, res) {
+    const result = await MovementService.deleteMovement(req);
+    res.status(200).json(result);
+  }
 }
 
 module.exports = MovementController;
