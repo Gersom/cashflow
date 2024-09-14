@@ -8,9 +8,9 @@ const middlewares = require('@config/middlewares');
 const setupRoutes = require('@config/setupRoutes');
 const { initEnv } = require('@config/env');
 
-initEnv();
 
 const startServer = async () => {
+  await initEnv();
   await connectDB();
   const app = express();
   middlewares(app);

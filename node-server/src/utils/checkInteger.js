@@ -1,4 +1,4 @@
-function checkInteger(valor, name = '') {
+function checkInteger(valor = 0, name = '') {
   // If it is a string and represents an integer
   if (typeof valor === 'string' && /^\d+$/.test(valor)) {
       return parseInt(valor, 10);
