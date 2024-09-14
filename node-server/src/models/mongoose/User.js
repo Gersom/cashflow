@@ -2,6 +2,11 @@ const { Schema, model } = require('mongoose');
 const addMethods = require('./utils/addStaticMethods');
 
 const userSchema = new Schema({
+  name: { 
+    type: String,
+    required: true, 
+    trim: true 
+  },
   email: { 
     type: String, 
     required: true, 
@@ -10,23 +15,22 @@ const userSchema = new Schema({
     trim: true,
    
   },
-  verified:{
-    type: Boolean,
-    default: false
+  password: {
+    type: String,
+    required: true
   },
   whatsapp: {
     type: String,
     required: false,
     trim: true,
   },
-  password: {
-    type: String,
-    required: true
+  isEmailVerified:{
+    type: Boolean,
+    default: false
   },
-  name: { 
-    type: String,
-    required: true, 
-    trim: true 
+  isWhatsappVerified:{
+    type: Boolean,
+    default: false
   },
   profilePic: { 
     type: String, 

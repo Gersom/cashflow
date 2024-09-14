@@ -1,20 +1,13 @@
-const { UserModel, AccountModel } = require("@models");
 const { AuthorizationError, UnauthorizedError } = require("@utils/apiErrors");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
 const { jwt: envJwt } = require("@config/env");
+const { UserModel, AccountModel } = require("@models");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const LoginService = async (body = {}) => {
-
   const { email, password } = body;
 
   const user = await UserModel.findOne({ email });
-
-  
-
-  if(!user.verified){
-    throw new UnauthorizedError('Email not verified');
-  }
 
   const passwordCorrect = user === null 
     ? false 
@@ -22,6 +15,10 @@ const LoginService = async (body = {}) => {
 
   if (!(user && passwordCorrect)) {
     throw new AuthorizationError('Invalid email or password');
+  }
+
+  if(!user?.isEmailVerified){
+    throw new UnauthorizedError('Email not verified');
   }
 
   const userForToken = {

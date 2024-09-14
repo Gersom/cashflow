@@ -1,25 +1,35 @@
 const checkInteger = require("@utils/checkInteger");
 
 const ENV_VARS = {
+  // serv
   NODE_ENV: 'NODE_ENV',
   HOST: 'HOST',
   PORT: 'PORT',
   ALLOWED_ORIGINS: 'ALLOWED_ORIGINS',
+  CLIENT_URL: 'CLIENT_URL',
+
+  // db
   DB_URI: 'DB_URI',
   DB_NAME: 'DB_NAME',
   DB_USER: 'DB_USER',
   DB_PASSWORD: 'DB_PASSWORD',
-  JWT_REFRESH_SECRET: 'JWT_REFRESH_SECRET',
-  JWT_ACCESS_SECRET: 'JWT_ACCESS_SECRET',
+
+  // jwt
   JWT_ACCESS_EXPIRES_IN: 'JWT_ACCESS_EXPIRES_IN',
+  JWT_ACCESS_SECRET: 'JWT_ACCESS_SECRET',
+  JWT_EMAIL_EXPIRES_IN: 'JWT_EMAIL_EXPIRES_IN',
+  JWT_EMAIL_SECRET: 'JWT_EMAIL_SECRET',
   JWT_REFRESH_EXPIRES_IN: 'JWT_REFRESH_EXPIRES_IN',
+  JWT_REFRESH_SECRET: 'JWT_REFRESH_SECRET',
+
+  // auth
   SALT_ROUNDS: 'SALT_ROUNDS',
   COOKIE_MAX_AGE: 'COOKIE_MAX_AGE',
+  RECOVER_CODE_EXPIRES_IN: 'RECOVER_CODE_EXPIRES_IN',
+
+  // mailer
   MAILER_EMAIL: 'MAILER_EMAIL',
   MAILER_PASSWORD: 'MAILER_PASSWORD',
-  CLIENT_URL: 'CLIENT_URL',
-  JWT_EMAIL_SECRET: 'JWT_EMAIL_SECRET',
-  JWT_EMAIL_EXPIRES_IN: 'JWT_EMAIL_EXPIRES_IN',
 };
 
 
@@ -47,6 +57,8 @@ const client = {
 
 const serv = {
   nodeEnv: getEnvVar('NODE_ENV'),
+  isProduction: this.nodeEnv === 'production',
+  isDevelopment: this.nodeEnv === 'development',
   host: getEnvVar('HOST'),
   port: getEnvVar('PORT'),
   get address() {
@@ -63,18 +75,19 @@ const db = {
 };
 
 const jwt = {
-  refreshSecret: getEnvVar('JWT_REFRESH_SECRET'),
-  refreshExpiration: getEnvVar('JWT_REFRESH_EXPIRES_IN'),
-  secret: getEnvVar('JWT_ACCESS_SECRET'),
-  expiration: getEnvVar('JWT_ACCESS_EXPIRES_IN'),
-  emailSecret: getEnvVar('JWT_EMAIL_SECRET'),
   emailExpiration: getEnvVar('JWT_EMAIL_EXPIRES_IN'),
+  emailSecret: getEnvVar('JWT_EMAIL_SECRET'),
+  expiration: getEnvVar('JWT_ACCESS_EXPIRES_IN'),
+  refreshExpiration: getEnvVar('JWT_REFRESH_EXPIRES_IN'),
+  refreshSecret: getEnvVar('JWT_REFRESH_SECRET'),
+  secret: getEnvVar('JWT_ACCESS_SECRET'),
 };
 
 
 const auth = {
   saltRounds: checkInteger(getEnvVar('SALT_ROUNDS')),
   cookieMaxAge: checkInteger(getEnvVar('COOKIE_MAX_AGE')),
+  codeExpiration: checkInteger(getEnvVar('RECOVER_CODE_EXPIRES_IN')),
 };
 
 const mailer = {

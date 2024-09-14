@@ -3,10 +3,10 @@ const { EmailSendError, ValidationError, ExpirationError } = require("@utils/api
 const { generateCode } = require("@utils/generateCode");
 const { generateHTML } = require("@utils/generateHTML");
 const { sendEmail } = require("@utils/emailSend");
-
+const { auth } = require("@config/env");
 
 const expirationTime = () => {
-  const time = 30; // minutes to expiration
+  const time = auth.codeExpiration; // minutes to expiration
   return new Date(Date.now() + (time * 60 * 1000));
 }
 

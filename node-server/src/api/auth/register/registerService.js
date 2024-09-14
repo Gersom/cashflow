@@ -1,21 +1,17 @@
-const { UserModel, AccountModel, CategoryModel, CurrencyModel } = require("@models");
-const { sendVerificationEmail } = require("./registerUtils");
-const { ValidationError, NotFoundError } = require("@utils/apiErrors");
-const { client } = require("@config/env");
-const bcrypt = require("bcrypt");
-const jwtoken = require("jsonwebtoken");
 const { auth, jwt } = require("@config/env");
-const mongoose = require("mongoose");
+const { client } = require("@config/env");
+const { sendVerificationEmail } = require("./registerUtils");
+const { UserModel, AccountModel, CategoryModel, CurrencyModel } = require("@models");
+const { ValidationError } = require("@utils/apiErrors");
+const bcrypt = require("bcrypt");
 const defaultCategories = require("@data/defaultCategories.json");
+const jwtoken = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 const RegisterService = {
   register: async (data) => {
-    if (!data.email || !data.password || !data.name) {
-      throw new ValidationError('Missing required fields');
-    }
-
     data.password = await bcrypt.hash(data.password, auth.saltRounds);
-    !data.whatsapp? delete data.whatsapp : '';
+    !data.whatsapp && delete data.whatsapp;
     await UserModel.create(data);
 
     const token = jwtoken.sign({ email: data.email }, jwt.emailSecret, { expiresIn: jwt.emailExpiration });
@@ -33,11 +29,11 @@ const RegisterService = {
       const { email } = jwtoken.verify(data.token, jwt.emailSecret);
 
       const user = await UserModel.findOne({ email: email })
-        .select(['_id', 'verified'])
+        .select(['_id', 'isEmailVerified'])
         .session(session);
 
       if (!user) throw new ValidationError('Invalid email');
-      if (user.verified) throw new ValidationError('Email already verified');
+      if (user.isEmailVerified) throw new ValidationError('Email already verified');
 
       // const currency = await CurrencyModel.findOne({ countryCode: 'US' })
       //   .select('_id')
@@ -65,7 +61,7 @@ const RegisterService = {
 
       await UserModel.updateOne(
         { _id: user._id },
-        { verified: true },
+        { isEmailVerified: true },
         { session }
       );
 
