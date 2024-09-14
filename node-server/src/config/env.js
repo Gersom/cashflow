@@ -85,9 +85,15 @@ const jwt = {
 
 
 const auth = {
-  saltRounds: checkInteger(getEnvVar('SALT_ROUNDS')),
-  cookieMaxAge: checkInteger(getEnvVar('COOKIE_MAX_AGE')),
-  codeExpiration: checkInteger(getEnvVar('RECOVER_CODE_EXPIRES_IN')),
+  get saltRounds() {
+    return checkInteger(getEnvVar('SALT_ROUNDS'));
+  },
+  get cookieMaxAge() {
+    return checkInteger(getEnvVar('COOKIE_MAX_AGE'));
+  },
+  get codeExpiration() {
+    return checkInteger(getEnvVar('RECOVER_CODE_EXPIRES_IN'));
+  },
 };
 
 const mailer = {
