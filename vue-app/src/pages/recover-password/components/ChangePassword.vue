@@ -34,7 +34,7 @@ const handleSubmit = async(e) => {
   toast.info("Espere un momento...");
   try {
     const response = await apiPost({
-      url: `${API_URL}/auth/recover-password/verify`,
+      url: `${API_URL}/auth/recover-password/reset`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
         code: getLocalStorage('recoveryCode').formData.code,
