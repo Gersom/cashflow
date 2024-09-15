@@ -6,7 +6,7 @@ class MovementDTO {
     this.title = data.title;
     this.description = data.description;
     this.type = data.type;
-    this.amount = data.amount;
+    this.amount = data.amount.toFixed(2);
     this.categories = data.categories.map(category => new CategoryDTO(category));
     this.createdAt = data.createdAt;
   }

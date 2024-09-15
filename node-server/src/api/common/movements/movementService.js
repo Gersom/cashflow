@@ -57,8 +57,8 @@ const MovementService = {
     return {
       data: {
         movements: movements.map(movement => new MovementDTO(movement)),
-        totalIncome: totalIncome,
-        totalExpenses: totalExpenses
+        totalIncome: totalIncome.toFixed(2),
+        totalExpenses: totalExpenses.toFixed(2)
       },
       count: movements.length,
       success: 'Movements retrieved successfully'
