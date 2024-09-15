@@ -14,15 +14,9 @@
       type: Object,
       default: () => {}
     },
-    data: {
+    options: {
       type: Array,
-      default: () => [{
-        value: 'value1',
-        text: 'Name 1'
-      }, {
-        value: 'value2',
-        text: 'Name 2'
-      }]
+      default: () => [] // { value: 'value1', text: 'Name 1' }
     },
     orientation: {
       type: String,
@@ -53,8 +47,8 @@
   >
     <label
       class="label-tag"
-      :class="{ 'is-selected': valueInput.value === item.value }"
-      v-for="(item, index) in data" 
+      :class="{ 'is-selected': valueInput?.value === item.value }"
+      v-for="(item, index) in props.options" 
       :key="`radio${index}`"
     >
       <input

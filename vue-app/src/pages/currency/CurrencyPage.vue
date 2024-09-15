@@ -1,7 +1,6 @@
 <script setup>
 // Imports
-import { API_URL } from "@src/config/env";
-import { apiGet, apiPatch } from '@src/services/api';
+import { apiGetAuth, apiPatchAuth } from '@src/services/api';
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -27,8 +26,8 @@ const isSelectedValue = computed(() => !currencySelected.value.value)
 const handleSubmit = async(e) => {
   e.preventDefault()
   try {
-    const response = await apiPatch({
-      url: `${API_URL}/common/accounts/change-currency`,
+    const response = await apiPatchAuth({
+      url: '/accounts/change-currency',
       data: { currencyId: currencySelected.value.value }
     })
 
@@ -50,8 +49,8 @@ const handleSubmit = async(e) => {
 }
 const getCurrency = async () => {
   try {
-    const response = await apiGet({
-      url: `${API_URL}/common/currencies`
+    const response = await apiGetAuth({
+      url: '/currencies'
     })
 
     if (response.status === 200) {

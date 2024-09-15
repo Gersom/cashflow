@@ -1,26 +1,40 @@
 <script setup>
 // Imports
-import { ref, nextTick } from "vue";
-import NewItem from "./components/NewItem.vue";
+import { ref, nextTick, onMounted, watch, computed } from "vue";
+import { useCategoriesStore } from '@app-page/stores/categories';
+import { useThemeStore } from "@stores/theme";
 import Category from "./components/Category.vue";
 import CategorySelect from "./components/CategorySelect.vue";
 import DialogBlur from "@layouts/DialogBlur.vue";
-import { useThemeStore } from "@stores/theme";
-
+import NewItem from "./components/NewItem.vue";
 // Vue defines
 defineOptions({ name: "CustomInputCategories" });
 const emit = defineEmits(["vnode-unmounted", "change-categories"]);
+
+const props = defineProps({
+  categories: {
+    type: Array,
+    default: () => []
+  }
+});
 
 // Data
 const showCategorySelect = ref(false);
 const categories = ref([]);
 
+const propCategories = computed(() => props.categories)
+
 // Store
 const themeStore = useThemeStore();
+const categoriesStore = useCategoriesStore()
+
+watch(propCategories, (newValue) => {
+  categories.value = newValue
+})
 
 // Methods
 const selectCategorySelect = (cat) => {
-  categories.value.push(cat);
+  categories.value = [...categories.value, cat];
   nextTick(() => {
     emit("change-categories", categories.value);
   });
@@ -40,6 +54,8 @@ const closeCategorySelect = () => {
 const toogleCategorySelect = () => {
   showCategorySelect.value = !showCategorySelect.value;
 };
+
+onMounted(() => categoriesStore.loadCategories())
 </script>
 
 <template>

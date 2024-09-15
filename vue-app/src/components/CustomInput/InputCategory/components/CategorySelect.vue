@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import { useCategoriesStore } from "@src/pages/app/stores/categories";
+import { getContrastColor } from "@utils/color";
 
 const emit = defineEmits(["select"]);
 const categoriesStore = useCategoriesStore();
@@ -38,7 +39,7 @@ const addCategory = (cat) => {
           <i
             :class="`icon icon-${cat.iconName}`"
             :aria-label="`icono ${cat.name}`"
-            :style="{ background: cat.color }"
+            :style="{ background: cat.color, color: getContrastColor(cat.color) }"
           />
           <span class="text">
             {{ cat.name }}
@@ -88,6 +89,7 @@ const addCategory = (cat) => {
       border-radius: var(--border-radius);
       display: flex;
       font-size: 20px;
+      font-weight: 600;
       height: 36px;
       justify-content: center;
       margin-right: 10px;

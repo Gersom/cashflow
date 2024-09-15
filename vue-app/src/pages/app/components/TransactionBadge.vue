@@ -21,7 +21,7 @@ const props = defineProps({
 
 const sign = computed(() => props.isPositive ? '+' : '-');
 const formattedAmount = computed(() => {
-  return Math.abs(props.amount).toFixed(currentCurrency.decimalPlaces)
+  return Math.abs(props.amount).toFixed(useAccounts.currentCurrency.decimalPlaces)
 })
 </script>
 

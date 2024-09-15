@@ -45,15 +45,15 @@ const props = defineProps({
 
   .icon {
     align-items: center;
-    display: flex;
-    justify-content: center;
     border-radius: var(--border-radius);
-    min-height: 30px;
+    color: var(--title-color);
+    display: flex;
     font-size: 20px;
+    font-weight: 600;
+    justify-content: center;
+    min-height: 30px;
     min-width: 30px;
     transition: 0.3s ease all;
-    color: var(--title-color);
-    font-weight: 600;
 
     &.trash-container {
       background: var(--error-color);

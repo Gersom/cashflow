@@ -1,19 +1,45 @@
-ww<script setup>
-import { computed, onMounted } from 'vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 import { useMovementsStore } from '@app-page/stores/movements';
+import MovementForm from '@app-page/components/MovementForm.vue'
 
 // components global
 import TransactionBadge from '@app-page/components/TransactionBadge.vue';
+import DialogBlur from '@layouts/DialogBlur.vue';
 
 // components local
 import DateCardTitle from './components/DateCardTitle/DateCardTitle.vue'
 import MovementCard from './components/MovementCard/MovementCard.vue';
 
 const movementsStore = useMovementsStore()
-const lengthMovements = computed(() => movementsStore.data?.length)
-onMounted(() => {
-  movementsStore.loadMovements()
+
+const showEditModal = ref(false)
+const currentMovement = ref({
+  title: '',
+  amount: '0.00',
+  type: 'expense',
+  description: '',
+  categories: [],
 })
+
+const lengthMovements = computed(() => movementsStore.data?.length)
+const closeEditModal = () => showEditModal.value = false;
+
+const openEditModal = (movement) => {
+  currentMovement.value = movement
+  showEditModal.value = true
+}
+
+const submitEditModal = (data) => {
+  movementsStore.editMovement(data)
+  closeEditModal()
+}
+const deleteMovement = (id) => {
+  movementsStore.deleteMovement(id)
+  closeEditModal()
+}
+
+onMounted(() => movementsStore.loadMovements())
 </script>
 
 <template>
@@ -22,11 +48,15 @@ onMounted(() => {
 
     <div class="movements-summary">
       <div class="income-info">
-        <TransactionBadge :amount="1000.00" :isPositive="true" />
+        <TransactionBadge
+          :amount="parseFloat(movementsStore.totalIncome)" :isPositive="true"
+        />
         <p class="paragraph">Ingresos</p>
       </div>
       <div class="expense-info">
-        <TransactionBadge :amount="1000.00" :isPositive="false" />
+        <TransactionBadge
+          :amount="parseFloat(movementsStore.totalExpenses)" :isPositive="false"
+        />
         <p class="paragraph">Gastos</p>
       </div>
     </div>
@@ -37,16 +67,29 @@ onMounted(() => {
 
     <div class="movements">
       <MovementCard 
-        v-for="(movement, index) in movementsStore.data"
+        v-for="(movement, index) in movementsStore.movementsAll"
         :key="`movement-card-${index}`"
-        :date="movement.date || new Date()"
-        :text="movement.title"
-        :bookmarks="movement.categories"
-        :isIncome="movement.type === 'income'"
-        :amount="parseFloat(movement.amount)"
+        :data="movement"
+        @on-edit="openEditModal(movement)"
       />
     </div>
-     
+    
+    <DialogBlur
+      :button-close="true"
+      :show="showEditModal"
+      background-color="var(--background-color2)"
+      @close="closeEditModal"
+    >
+      <div class="edit-modal">
+        <MovementForm
+          :dataform="currentMovement"
+          :is-edit="true"
+          :update-show="showEditModal"
+          @delete-movement="deleteMovement"
+          @data-submit="submitEditModal"
+        />
+      </div>
+    </DialogBlur>
   </div>
 </template>
 
@@ -83,7 +126,13 @@ onMounted(() => {
       gap: 13px;
       height: 439px;
       overflow-y: auto;
+      padding-right: 5px;
     }
 
+    .edit-modal {
+      padding: 20px;
+      min-width: 350px;
+      border-radius: 15px;
+    }
   }
 </style>

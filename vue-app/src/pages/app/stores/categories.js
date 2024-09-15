@@ -1,4 +1,3 @@
-import { API_URL } from "@src/config/env";
 import { apiGetAuth } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
@@ -12,7 +11,7 @@ export const useCategoriesStore = defineStore('categories', {
     categoriesAll: ({data}) => data
   },
   actions: {
-    async fillCategories() {
+    async loadCategories() {
       if (!this.isFilledData) {
         await this.getCategoriesAll()
       }

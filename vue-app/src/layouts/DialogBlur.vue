@@ -30,6 +30,10 @@ const props = defineProps({
     type: String,
     default: "center", // center, top or bottom
   },
+  backgroundColor: {
+    type: String,
+    default: "var(--background-color)",
+  },
 });
 
 // Store
@@ -58,7 +62,7 @@ const onClose = () => {
       type="button"
       @click="onClose"
     />
-    <div class="content">
+    <div class="content" :style="{ background: props.backgroundColor }">
       <button
         class="button-close"
         type="button"
@@ -97,7 +101,6 @@ const onClose = () => {
     z-index: 98;
   }
   .content {
-    background: var(--background-color);
     position: relative;
     border-radius: 10px;
     z-index: 99;

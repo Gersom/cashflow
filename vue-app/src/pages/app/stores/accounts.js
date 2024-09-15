@@ -17,7 +17,7 @@ export const useAccountsStore = defineStore('accounts', {
         code:"USD",
         plural:"dolares",
         countryCode:"USA",
-        decimalPlaces:2
+        decimalPlaces: 2
       } 
     },
     isFilledData: false

@@ -4,72 +4,73 @@ import IconEdit from '@icons/actions/IconEdit.vue';
 import { computed } from 'vue';
 import BookmarkTag from './components/BookmarkTag.vue';
 
-const emit = defineEmits(["click"]);
+const emit = defineEmits(["on-edit"]);
 const props = defineProps({
-    date: {
-        type: Date,
-        required: true
-    },
-    text: {
-        type: String,
-        default: "Honorarios trabajo del centro de la ciudad ",
-    },
-    bookmarks: {
-        type: Array,
-        default: () => [],
-        validator: (value) => value.length <= 3
-    },
-    isIncome: {
-        type: Boolean,
-        required: true,
-    },
-    amount:{
-        type: Number,
-        required: true,
-    }
+  data: {
+    type: Object,
+    default: () => ({
+      createdAt:"2024-09-15T00:02:51.385Z"
+    })
+  },
 });
 
-const isoDate = computed(() => props.date.toISOString().split('T')[0]);
+const isoDate = computed(() => {
+  const dateTemp = new Date(props.data?.createdAt)
+  return dateTemp.toISOString().split('T')[0]
+});
 
 const formattedDate = computed(() => {
-    return props.date.toLocaleDateString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    }).replace(/\//g, ' / ');
+  const dateTemp = new Date(props.data?.createdAt)
+  return dateTemp.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+  }).replace(/\//g, ' / ');
 });
 </script>
 
 <template>
-    <div class="movement-card">
-        <div class="bookmarks">
-            <BookmarkTag v-for="bookmark in props.bookmarks.slice(0, 3)" :key="bookmark.id" :data="bookmark" />
-        </div>
-        <div class="info-tag-wrapper">
-            <div class="info-tag">
-                <div class="content">
-                    <div class="description">
-                        <p class="details-text">{{ props.text }}</p>
-                    </div>
-                    <div class="badge-info">
-                        <time :datetime="isoDate" class="date">{{ formattedDate }}</time>
-                        <TransactionBadge :amount="props.amount" :isPositive="props.isIncome" />
-                    </div>
-                </div>
-                <button class="edit-button">
-                    <div class="edit-hover">
-                        <div class="icon">
-                            <IconEdit />
-                        </div>
-                        <div class="edit-text">
-                            <p class="name">Editar</p>
-                            <p class="description">{{ props.text }}</p>
-                        </div>
-                    </div>
-                </button>
-            </div>
-        </div>
+  <div class="movement-card">
+    <div class="bookmarks">
+      <BookmarkTag
+        v-for="bookmark in props.data?.categories?.slice(0, 3)"
+        :key="bookmark.id"
+        :data="bookmark"
+      />
     </div>
+    <div class="info-tag-wrapper">
+      <div class="info-tag">
+        <div class="content">
+          <div class="description">
+            <p class="details-text">{{ props.data?.title }}</p>
+          </div>
+          <div class="badge-info">
+            <time :datetime="isoDate" class="date">
+              {{ formattedDate }}
+            </time>
+            <TransactionBadge
+              :amount="props.data?.amount || 0"
+              :isPositive="props.data?.type === 'income'"
+            />
+          </div>
+        </div>
+        <button
+          class="edit-button"
+          @click="emit('on-edit')"
+        >
+          <div class="edit-hover">
+            <div class="icon">
+              <IconEdit />
+            </div>
+            <div class="edit-text">
+              <p class="name">Editar</p>
+              <p class="description">{{ props.data?.title }}</p>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>
