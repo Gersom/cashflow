@@ -9,14 +9,12 @@ const props = defineProps({
 
 <template>
   <div class="grid-cards">
-    <div class="card-item">
-      <slot name="first1" />
-    </div>
-    <div class="card-item">
-      <slot name="first2" />
-    </div>
-    <div class="card-item">
-      <slot name="third" />
+    <div
+      class="card-item"
+      v-for="index in props.itemCount"
+      :key="`grid-cards-${index}`"
+    >
+      <slot :name="`card-${index}`" />
     </div>
   </div>
 </template>

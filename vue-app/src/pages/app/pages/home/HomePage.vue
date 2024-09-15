@@ -18,16 +18,16 @@ const emit = defineEmits(['vnode-unmounted'])
     <main>
       <Head />
 
-      <GridCards>
-        <!-- <template v-slot:first>
+      <GridCards :item-count="2">
+        <!-- <template v-slot:card-1>
           <ChartCard />
         </template> -->
 
-        <template v-slot:first1>
+        <template v-slot:card-1>
           <CreateCard />
         </template>
 
-        <template v-slot:first2>
+        <template v-slot:card-2>
           <HistoryCard />
         </template>
       </GridCards>
