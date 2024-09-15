@@ -5,6 +5,10 @@ const { jwt: envJwt } = require("@config/env");
 
 const authMiddleware = (req, res, next) => {
   const token = req.cookies.access_token;
+
+  if (!token) {
+    throw new AuthorizationError('Missing token');
+  }
   
   if (token) {
     try {

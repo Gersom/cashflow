@@ -1,5 +1,5 @@
 import { API_URL } from "@src/config/env";
-import { apiGet } from '@src/services/api';
+import { apiGetAuth } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 import { useAccountsStore } from "@app-page/stores/accounts";
@@ -23,8 +23,8 @@ export const useUserStore = defineStore('user', {
       const toast = useToast()
       const accountsStore = useAccountsStore()
       try {
-        const response = await apiGet({
-          url: `${API_URL}/common/users/profile`
+        const response = await apiGetAuth({
+          url: `/users/profile`
         })
     
         if (response.status === 200) {

@@ -1,5 +1,5 @@
 import { API_URL } from "@src/config/env";
-import { apiGet } from '@src/services/api';
+import { apiGetAuth } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 
@@ -20,8 +20,8 @@ export const useCategoriesStore = defineStore('categories', {
     async getCategoriesAll() {
       const toast = useToast()
       try {
-        const response = await apiGet({
-          url: `${API_URL}/common/categories`
+        const response = await apiGetAuth({
+          url: `/categories`
         })
     
         if (response.status === 200) {

@@ -1,9 +1,15 @@
-import axios from 'axios';
+import { axiosApi, axiosAuth } from '@src/services/axiosConfig.js';
 
-const createRequest = (method) => (options) => 
-  axios({
+const createRequest = (method) => (options) =>
+  axiosAuth({
     method,
-    withCredentials: true,
+    ...options
+  });
+
+
+const createSpecialRequest = (method) => (options) =>
+  axiosApi({
+    method,
     ...options
   });
 
@@ -12,3 +18,9 @@ export const apiGet = createRequest('GET');
 export const apiPut = createRequest('PUT');
 export const apiDel = createRequest('DELETE');
 export const apiPatch = createRequest('PATCH');
+
+export const apiPostAuth = createSpecialRequest('POST');
+export const apiGetAuth = createSpecialRequest('GET');
+export const apiPutAuth = createSpecialRequest('PUT');
+export const apiDelAuth = createSpecialRequest('DELETE');
+export const apiPatchAuth = createSpecialRequest('PATCH');

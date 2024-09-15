@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { apiGet, apiPost } from '@src/services/api';
+import { apiGetAuth, apiPostAuth } from '@src/services/api';
 import { API_URL } from "@src/config/env";
 import { useToast } from 'vue-toastification'
 import { getLocalStorage, setLocalStorage } from '@utils/localStorage.js'
@@ -27,8 +27,8 @@ export const useMovementsStore = defineStore('movements', {
     async getMovementsAll() {
       const toast = useToast()
       try {
-        const response = await apiGet({
-          url: `${API_URL}/common/movements`
+        const response = await apiGetAuth({
+          url: `/movements`
         })
     
         if (response.status === 200) {
@@ -55,8 +55,8 @@ export const useMovementsStore = defineStore('movements', {
       setLocalStorage('app-movements', this.data)
 
       try {
-        const response = await apiPost({
-          url: `${API_URL}/common/movements`,
+        const response = await apiPostAuth({
+          url: `/movements`,
           data: {
             ...movement,
             categories: movement.categories.map(category => category.id)
