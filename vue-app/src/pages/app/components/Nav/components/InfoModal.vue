@@ -1,15 +1,19 @@
 <script setup>
 import { useAppStore } from "@stores/app";
+import LogoTitle from "@components/LogoTitle/LogoTitle.vue";
 
 const appStore = useAppStore();
 </script>
 
 <template>
   <div class="info-modal">
-    <h2 class="title">
+    <div class="logo-title">
+      <LogoTitle />
+    </div>
+    <!-- <h2 class="title">
       <span class="secondary">Cash</span>
       <span class="primary">Flow</span>
-    </h2>
+    </h2> -->
     <p class="description">
       {{ appStore.description }}
     </p>
@@ -41,6 +45,9 @@ const appStore = useAppStore();
   color: var(--text-color);
   padding: 50px 30px;
   text-align: center;
+  .logo-title {
+    margin-bottom: 15px;
+  }
   .title {
     font-family: var(--font-poppins);
     font-weight: 400;

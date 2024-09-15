@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useCategoriesStore } from '@app-page/stores/categories';
 import { useMovementsStore } from '@app-page/stores/movements';
+import { useAccountsStore } from '@app-page/stores/accounts';
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
@@ -13,7 +14,6 @@ import CustomInputRadio from "@components/CustomInput/InputRadio.vue"
 import CustomInputText from "@components/CustomInput/InputText.vue"
 import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue"
 import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue"
-import { useAccountsStore } from '@app-page/stores/accounts';
 
 // Icons
 import IconAdd from "@icons/actions/IconAdd.vue"
@@ -36,6 +36,13 @@ const selectedCategories = ref([])
 const handleChangeCategories = (categories) => {
   selectedCategories.value = categories
 }
+const toDataReset = () => {
+  inputTextDefault.value = ''
+  inputCurrencyExpense.value = '0.00'
+  inputTextareaDefault.value = ''
+  // inputRadioTwo.value = inputRadioDataTwo[0]
+  selectedCategories.value = []
+}
 const submitMovement = async (e) => {
   e.preventDefault()
   const dataForm = {
@@ -46,6 +53,7 @@ const submitMovement = async (e) => {
     categories: [...selectedCategories.value],
     accountId: accountsStore.selected.id
   }
+  toDataReset()
   await movementsStore.createMovement(dataForm)
 }
 
@@ -67,6 +75,7 @@ onMounted(() => {
         <p>Monto</p>
         <CustomInputCurrency
           :transaction-type="inputRadioTwo.value"
+          :currency-symbol="accountsStore.currentCurrency.symbol"
           v-model="inputCurrencyExpense"
         />
       </div>

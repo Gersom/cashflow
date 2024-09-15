@@ -25,7 +25,7 @@
     },
     currencySymbol: {
       type: String,
-      default: 'S/.'
+      default: '$'
     },
   })
 

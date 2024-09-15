@@ -1,4 +1,4 @@
-<script setup>
+ww<script setup>
 import { computed, onMounted } from 'vue';
 import { useMovementsStore } from '@app-page/stores/movements';
 

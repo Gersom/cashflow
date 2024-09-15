@@ -1,17 +1,19 @@
 <script setup>
-
-defineOptions({
-  name: 'GridCards'
+const props = defineProps({
+  itemCount: {
+    type: Number,
+    default: 3
+  }
 })
 </script>
 
 <template>
   <div class="grid-cards">
     <div class="card-item">
-      <slot name="first" />
+      <slot name="first1" />
     </div>
     <div class="card-item">
-      <slot name="second" />
+      <slot name="first2" />
     </div>
     <div class="card-item">
       <slot name="third" />
