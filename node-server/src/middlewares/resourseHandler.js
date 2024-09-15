@@ -2,64 +2,54 @@ const { UnauthorizedError } = require("@utils/apiErrors");
 const { AccountModel, UserModel } = require("@root/src/models");
 const authMiddleware = require("@middlewares/jwtAuthorization");
 
-class ResourceAuthorizer {
-  static async authorizeAccount(userId, resourceId) {
-    const account = await AccountModel.findOne({ _id: resourceId, userId });
-    if (!account) throw new UnauthorizedError('You do not have permission to access this account');
-    return account;
-  }
-
-  static async authorizeUser(userId) {
-    const user = await UserModel.findById(userId);
-    if (!user) throw new UnauthorizedError('User not found');
-    return user;
-  }
-
-  static async preAuthorizeAccount(userId) {
-    const user = await UserModel.findDataById(userId);
-    if (!user) throw new UnauthorizedError('User not found');
-    if (!user.selectedAccountId) throw new UnauthorizedError('You do not have permission to access this account');
-    return user.selectedAccountId;
-  }
-}
-
-class ResourceIdExtractor {
-  static extractId(req, resourceType) {
-    const strategies = {
-      user: () => req.user.id,
-      account: () => req.body.accountId || req.params.id || req.body.id || req.query.id,
-      default: () => req.params.id || req.body.id || req.query.id
-    };
-
-    return (strategies[resourceType] || strategies.default)();
-  }
-}
-
 const authorizeResource = (resourceType) => async (req, res, next) => {
-  const userId = req.user.id;
-  let resourceId = ResourceIdExtractor.extractId(req, resourceType);
-
-  if (resourceType === 'account' && !resourceId) {
-    resourceId = await ResourceAuthorizer.preAuthorizeAccount(userId);
-  }
-
-  if (!resourceId) {
-    return next(new UnauthorizedError('Resource ID is required'));
-  }
-
   try {
-    const authorizeMethod = `authorize${resourceType.charAt(0).toUpperCase() + resourceType.slice(1)}`;
-    if (!ResourceAuthorizer[authorizeMethod]) {
-      return next(new UnauthorizedError('Invalid resource type'));
+    const userId = req.user.id;
+    let resourceId = getResourceId(req, resourceType);
+
+    if (!resourceId && ['account', 'movement'].includes(resourceType)) {
+      const user = await UserModel.findDataById(userId);
+      if (!user) {
+        throw new UnauthorizedError('User not found');
+      }
+      resourceId = user.selectedAccountId;
     }
 
-    const authorizedResource = await ResourceAuthorizer[authorizeMethod](userId, resourceId);
-    req[resourceType] = authorizedResource;
+    if (!resourceId) {
+      throw new UnauthorizedError('Resource ID is required');
+    }
+
+    const resource = await authorizeResourceAccess(userId, resourceId, resourceType);
+    req[resourceType] = resource;
     next();
   } catch (error) {
     next(error);
   }
 };
+
+function getResourceId(req, resourceType) {
+  const idSources = {
+    user: () => req.user.id,
+    account: () => req.body.accountId || req.body.id || req.query.id,
+    default: () => req.params.id || req.body.id || req.query.id
+  };
+  return (idSources[resourceType] || idSources.default)();
+}
+
+async function authorizeResourceAccess(userId, resourceId, resourceType) {
+  switch (resourceType) {
+    case 'account':
+      const account = await AccountModel.findOne({ _id: resourceId, userId });
+      if (!account) throw new UnauthorizedError('You do not have permission to access this account');
+      return account;
+    case 'user':
+      const user = await UserModel.findById(userId);
+      if (!user) throw new UnauthorizedError('User not found');
+      return user;
+    default:
+      throw new UnauthorizedError('Invalid resource type');
+  }
+}
 
 const authenticateAndAuthorize = (resourceType) => [
   authMiddleware,

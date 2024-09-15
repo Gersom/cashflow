@@ -7,13 +7,14 @@ const { MovementDTO } = require("./movementDTOs");
 const MovementService = {
 
   async getAccountMovements(id) {
-
+    
     const { selectedAccountId } = await UserModel.findDataById(id);
+    console.log('cuenta', selectedAccountId);
     if (!selectedAccountId) throw new NotFoundError(`Account with for user ${id} not found`);
 
-    const movements = await MovementModel.findAllData({
+    const movements = await MovementModel.findAllDataQuery({
       accountId: selectedAccountId
-    }).populate('categories');;
+    }).populate('categories');
 
     return {
       data: movements.map(movement => new MovementDTO(movement)),
