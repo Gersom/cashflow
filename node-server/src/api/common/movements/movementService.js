@@ -6,18 +6,60 @@ const { MovementDTO } = require("./movementDTOs");
 
 const MovementService = {
 
-  async getAccountMovements(id) {
-    
-    const { selectedAccountId } = await UserModel.findDataById(id);
-    console.log('cuenta', selectedAccountId);
-    if (!selectedAccountId) throw new NotFoundError(`Account with for user ${id} not found`);
+  async getAccountMovements(id, year = null, month = null) {
 
-    const movements = await MovementModel.findAllDataQuery({
-      accountId: selectedAccountId
-    }).populate('categories');
+    const { selectedAccountId } = await UserModel.findDataById(id);
+    if (!selectedAccountId) throw new NotFoundError(`Account for user ${id} not found`);
+
+
+    // const movements = await MovementModel.findAllDataQuery({
+    //   accountId: selectedAccountId
+    // }).populate('categories');
+
+    
+
+    // Establecer fecha de inicio y fin del mes
+    const now = new Date();
+    const startDate = new Date(year || now.getFullYear(), (month || now.getMonth()) , 1);
+    const endDate = new Date(year || now.getFullYear(), (month || now.getMonth() + 1), 0 , 23, 59, 59);
+    // const startDate = new Date('2024-09-01');
+    // const endDate = new Date('2024','09','20');
+
+    // console.log('startDate', startDate);
+    // console.log('endDate', endDate);
+    
+
+    const dateFilter = {
+      accountId: selectedAccountId,
+      createdAt: { $gte: startDate, $lte: endDate }
+    };
+
+    const [movements, totals] = await Promise.all([
+      MovementModel.find(dateFilter).populate('categories'),
+      MovementModel.aggregate([
+        { $match: dateFilter },
+        {
+          $group: {
+            _id: null,
+            totalExpenses: {
+              $sum: { $cond: [{ $eq: ["$type", "expense"] }, "$amount", 0] }
+            },
+            totalIncome: {
+              $sum: { $cond: [{ $eq: ["$type", "income"] }, "$amount", 0] }
+            }
+          }
+        }
+      ])
+    ]);
+
+    const { totalExpenses = 0, totalIncome = 0 } = totals[0] || {};
 
     return {
-      data: movements.map(movement => new MovementDTO(movement)),
+      data: {
+        movements: movements.map(movement => new MovementDTO(movement)),
+        totalIncome: totalIncome,
+        totalExpenses: totalExpenses
+      },
       count: movements.length,
       success: 'Movements retrieved successfully'
     };
@@ -34,11 +76,11 @@ const MovementService = {
     }
 
     const session = await mongoose.startSession();
-    
+
     try {
       session.startTransaction();
       console.log("transaction", user.selectedAccountId.toString());
-      
+
       //this can be improved
       let verifiedCategories = [];
       if (data.categories && data.categories.length > 0) {
@@ -77,7 +119,7 @@ const MovementService = {
       await account.save({ session });
 
       await session.commitTransaction();
-      return { 
+      return {
         success: 'Movement created successfully',
         data: { id: newMovement._id }
       };
@@ -152,8 +194,8 @@ const MovementService = {
       await movement.save({ session });
 
       await session.commitTransaction();
-      return { 
-        success: 'Movement updated successfully', 
+      return {
+        success: 'Movement updated successfully',
         // data: new MovementDTO(movement) 
       };
     } catch (err) {
@@ -195,7 +237,7 @@ const MovementService = {
       await MovementModel.deleteOne({ _id: id }).session(session);
 
       await session.commitTransaction();
-      return { 
+      return {
         success: 'Movement deleted successfully'
       };
     } catch (err) {
