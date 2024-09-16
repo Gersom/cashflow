@@ -57,8 +57,8 @@ const client = {
 
 const serv = {
   nodeEnv: getEnvVar('NODE_ENV'),
-  isProduction: this.nodeEnv === 'production',
-  isDevelopment: this.nodeEnv === 'development',
+  get isProduction () {return this.nodeEnv === 'production'},
+  get isDevelopment () {return this.nodeEnv === 'development'},
   host: getEnvVar('HOST'),
   port: getEnvVar('PORT'),
   get address() {
