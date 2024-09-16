@@ -17,21 +17,22 @@ const handleSubmit = async(data) => {
       url: `/login`, data
     })
 
-    if (response.statusText === 'OK') {
-      if (response.data?.data?.isNewUser) {
-        toast.success("Ya casi terminamos, solo falta tu moneda local")
-        router.push({ name: 'CurrencyPage' })
-      }
-      else {
-        toast.success("Bienvenid@")
-        router.push({ name: 'AppHome' })
-      }
+    console.log('Respuesta del servidor Login:', response)
+    if (response.data?.data?.isNewUser) {
+      toast.success("Ya casi terminamos, solo falta tu moneda local")
+      router.push({ name: 'CurrencyPage' })
     }
-
     else {
-      toast.warning('Algo ocurrió mientras se iniciaba tu sesión.')
-      console.warn('Respuesta del servidor:', response.data)
+      toast.success("Bienvenid@")
+      router.push({ name: 'AppHome' })
     }
+    // if (response.statusText === 'OK') {
+    // }
+
+    // else {
+    //   toast.warning('Algo ocurrió mientras se iniciaba tu sesión.')
+    //   console.warn('Respuesta del servidor:', response.data)
+    // }
   }
   
   catch (error) {
