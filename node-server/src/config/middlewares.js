@@ -10,15 +10,15 @@ const middlewares = (app) => {
   const generateOrigin = () => {
     try {
       if (serv.isProduction) {
-        return JSON.parse(serv.allowedProdOrigins);
+        return JSON.parse(serv.allowedProdOrigins.replace(";", ""));
       } else {
-        return JSON.parse(serv.allowedDevOrigins);
+        return JSON.parse(serv.allowedDevOrigins.replace(";", ""));
       }
     } catch (error) {
       if (serv.isProduction) {
-        return serv.allowedProdOrigins;
+        return serv.allowedProdOrigins.replace(";", "");
       } else {
-        return serv.allowedDevOrigins;
+        return serv.allowedDevOrigins.replace(";", "");
       }
     }
   }
