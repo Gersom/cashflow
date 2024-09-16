@@ -25,16 +25,16 @@ const middlewares = (app) => {
 
   // const originResult = generateOrigin();
 
-  const corsOptions = {
-    origin: 'https://cashflow-application.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-    credentials: true 
-  }
+  // const corsOptions = {
+  //   origin: 'https://cashflow-application.vercel.app',
+  //   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  //   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+  //   credentials: true 
+  // }
   
-  if (serv.isDevelopment) console.log('CORS options:', corsOptions);
+  // if (serv.isDevelopment) console.log('CORS options:', corsOptions);
 
-  app.use(cors(corsOptions));
+  app.use(cors());
 
   // Additional security
   app.use(helmet());
