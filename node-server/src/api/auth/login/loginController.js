@@ -11,12 +11,16 @@ const LoginController = async (req, res) => {
     httpOnly: true,
     secure: serv.isProduction,
     sameSite: serv.isDevelopment ? 'strict' : '',
+    path: '/',
+    domain: req.hostname
     // maxAge: auth.cookieMaxAge,
   })
   .cookie('refresh_token', refresh_token, {
     httpOnly: true,
     secure: serv.isProduction,
     sameSite: serv.isDevelopment ? 'strict' : '',
+    path: '/',
+    domain: req.hostname
     // maxAge: auth.cookieMaxAge,
   })
   .status(200)
