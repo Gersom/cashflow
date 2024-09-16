@@ -9,12 +9,12 @@ export const useAppStore = defineStore('app', {
       gersom: {
         name: 'Gersom Alaja', 
         role: 'CEO', 
-        link: 'https://google.com'
+        link: 'https://www.linkedin.com/in/gersomalaja/'
       },
       david: {
         name: 'David Romero', 
         role: 'FullStack Developer', 
-        link: 'https://google.com'
+        link: 'https://www.linkedin.com/in/david-romero-s-s/'
       }
     }
   }),
