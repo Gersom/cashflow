@@ -12,12 +12,16 @@ const tokenController = {
       httpOnly: true,
       secure: serv.nodeEnv === 'production',
       sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
+      path: '/',
+      domain: req.hostname
     //   maxAge: auth.cookieMaxAge,
     })
     res.cookie('refresh_token', refresh_token, {
       httpOnly: true,
       secure: serv.nodeEnv === 'production',
       sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
+      path: '/',
+      domain: req.hostname
     //   maxAge: auth.cookieMaxAge,
     })
     res.status(200).json(responseSuccess('Token refreshed successfully'));
