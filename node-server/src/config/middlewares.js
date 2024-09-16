@@ -6,33 +6,29 @@ const helmet = require('helmet');
 const { serv } = require("@config/env.js");
 
 const middlewares = (app) => {
-  // CORS configuration
-  // const generateOrigin = () => {
-  //   try {
-  //     if (serv.isProduction) {
-  //       return JSON.parse(serv.allowedProdOrigins.replace(";", ""));
-  //     } else {
-  //       return JSON.parse(serv.allowedDevOrigins.replace(";", ""));
-  //     }
-  //   } catch (error) {
-  //     if (serv.isProduction) {
-  //       return serv.allowedProdOrigins.replace(";", "");
-  //     } else {
-  //       return serv.allowedDevOrigins.replace(";", "");
-  //     }
-  //   }
-  // }
-
-  // const originResult = generateOrigin();
-
+  const generateOrigin = () => {
+    try {
+      if (serv.isProduction) {
+        return JSON.parse(serv.allowedProdOrigins);
+      } else {
+        return JSON.parse(serv.allowedDevOrigins);
+      }
+    } catch (error) {
+      if (serv.isProduction) {
+        return serv.allowedProdOrigins;
+      } else {
+        return serv.allowedDevOrigins;
+      }
+    }
+  }
   const corsOptions = {
-    origin: '*',
+    origin: generateOrigin(),
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true 
   }
   
-  // if (serv.isDevelopment) console.log('CORS options:', corsOptions);
+  if (serv.isDevelopment) console.log('CORS options:', corsOptions);
 
   app.use(cors(corsOptions));
 
