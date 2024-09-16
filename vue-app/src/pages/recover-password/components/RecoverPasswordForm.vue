@@ -2,7 +2,6 @@
 import { ref } from "vue"
 import { useToast } from 'vue-toastification'
 import { apiPost } from '@src/services/api';
-import { API_URL } from "@src/config/env";
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
@@ -25,7 +24,7 @@ const handleSubmit = async(e) => {
   // toast.info("Espere un momento...");
   try {
     const response = await apiPost({
-      url: `${API_URL}/auth/recover-password/request`,
+      url: `/auth/recover-password/request`,
       data: { email: emailData.value.value }
     })
 

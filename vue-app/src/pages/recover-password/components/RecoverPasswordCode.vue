@@ -1,5 +1,4 @@
 <script setup>
-import { API_URL } from "@src/config/env";
 import { apiPost } from "@src/services/api";
 import { getLocalStorage } from "@src/utils/localStorage";
 import { ref } from "vue"
@@ -19,7 +18,7 @@ const handleCode = (text, isValid) => {
 const handleNewCode = async () => {
   try {
     const response = await apiPost({
-      url: `${API_URL}/auth/recover-password/request`,
+      url: `/auth/recover-password/request`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email
       }
@@ -48,7 +47,7 @@ const handleSubmit = async(e) => {
   // toast.info("Espere un momento...");
   try {
     const response = await apiPost({
-      url: `${API_URL}/auth/recover-password/verify`,
+      url: `/auth/recover-password/verify`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
         code: codeData.value.value
