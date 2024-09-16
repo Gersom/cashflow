@@ -22,7 +22,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "node --trace-warnings --watch --env-file .env ./src/app.js",
-    "start": "node ./src/app.js",
+    "start": "node ./src/app.js --omit=dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
