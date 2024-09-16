@@ -11,7 +11,7 @@ const tokenController = {
     res.cookie('access_token', access_token, {
       httpOnly: true,
       secure: serv.nodeEnv === 'production',
-      sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
+      sameSite: serv.nodeEnv === 'development' ? 'none' : '',
       path: '/',
       domain: req.hostname
     //   maxAge: auth.cookieMaxAge,
@@ -19,7 +19,7 @@ const tokenController = {
     res.cookie('refresh_token', refresh_token, {
       httpOnly: true,
       secure: serv.nodeEnv === 'production',
-      sameSite: serv.nodeEnv === 'development' ? 'strict' : '',
+      sameSite: serv.nodeEnv === 'development' ? 'none' : '',
       path: '/',
       domain: req.hostname
     //   maxAge: auth.cookieMaxAge,
