@@ -22,8 +22,11 @@ const middlewares = (app) => {
       }
     }
   }
+
+  const originResult = generateOrigin();
+
   const corsOptions = {
-    origin: generateOrigin(),
+    origin: originResult,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true 
