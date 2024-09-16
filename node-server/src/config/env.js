@@ -5,7 +5,8 @@ const ENV_VARS = {
   NODE_ENV: 'NODE_ENV',
   HOST: 'HOST',
   PORT: 'PORT',
-  ALLOWED_ORIGINS: 'ALLOWED_ORIGINS',
+  ALLOWED_PROD_ORIGINS: 'ALLOWED_PROD_ORIGINS',
+  ALLOWED_DEV_ORIGINS: 'ALLOWED_DEV_ORIGINS',
   CLIENT_URL: 'CLIENT_URL',
 
   // db
@@ -41,6 +42,8 @@ const initEnv = () => {
       `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n\n${missingVars.join('\n')}\n\nPlease ensure that the .env file contains the necessary configuration.`
     );
   }
+
+  console.log('Server mode:', process.env.NODE_ENV);
 };
 
 const getEnvVar = (key) => {
@@ -64,7 +67,8 @@ const serv = {
   get address() {
     return this.port ? `${this.host}:${this.port}` : this.host;
   },
-  allowedOrigins: getEnvVar('ALLOWED_ORIGINS'),
+  allowedDevOrigins: getEnvVar('ALLOWED_DEV_ORIGINS'),
+  allowedProdOrigins: getEnvVar('ALLOWED_PROD_ORIGINS'),
 };
 
 const db = {
