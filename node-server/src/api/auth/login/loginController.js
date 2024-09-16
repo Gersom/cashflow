@@ -10,7 +10,7 @@ const LoginController = async (req, res) => {
   .cookie('access_token', access_token, {
     httpOnly: true,
     secure: serv.isProduction,
-    sameSite: serv.nodeEnv === 'development' ? 'None' : '',
+    sameSite: serv.nodeEnv === 'production' ? 'strict' : '',
     path: '/',
     domain: req.hostname
     // maxAge: auth.cookieMaxAge,
@@ -18,7 +18,7 @@ const LoginController = async (req, res) => {
   .cookie('refresh_token', refresh_token, {
     httpOnly: true,
     secure: serv.isProduction,
-    sameSite: serv.nodeEnv === 'development' ? 'None' : '',
+    sameSite: serv.nodeEnv === 'production' ? 'strict' : '',
     path: '/',
     domain: req.hostname
     // maxAge: auth.cookieMaxAge,
