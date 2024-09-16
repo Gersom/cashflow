@@ -8,11 +8,11 @@ export default [
     text: 'Inicio',
     icon: IconHome,
   },
-  {
-    pageName: 'AppProfile',
-    text: 'Perfil',
-    icon: IconPerson,
-  },
+  // {
+  //   pageName: 'AppProfile',
+  //   text: 'Perfil',
+  //   icon: IconPerson,
+  // },
   // {
   //   pageName: 'AppCategories',
   //   text: 'Categorías',
