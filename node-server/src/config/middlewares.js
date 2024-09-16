@@ -7,26 +7,26 @@ const { serv } = require("@config/env.js");
 
 const middlewares = (app) => {
   // CORS configuration
-  const generateOrigin = () => {
-    try {
-      if (serv.isProduction) {
-        return JSON.parse(serv.allowedProdOrigins.replace(";", ""));
-      } else {
-        return JSON.parse(serv.allowedDevOrigins.replace(";", ""));
-      }
-    } catch (error) {
-      if (serv.isProduction) {
-        return serv.allowedProdOrigins.replace(";", "");
-      } else {
-        return serv.allowedDevOrigins.replace(";", "");
-      }
-    }
-  }
+  // const generateOrigin = () => {
+  //   try {
+  //     if (serv.isProduction) {
+  //       return JSON.parse(serv.allowedProdOrigins.replace(";", ""));
+  //     } else {
+  //       return JSON.parse(serv.allowedDevOrigins.replace(";", ""));
+  //     }
+  //   } catch (error) {
+  //     if (serv.isProduction) {
+  //       return serv.allowedProdOrigins.replace(";", "");
+  //     } else {
+  //       return serv.allowedDevOrigins.replace(";", "");
+  //     }
+  //   }
+  // }
 
-  const originResult = generateOrigin();
+  // const originResult = generateOrigin();
 
   const corsOptions = {
-    origin: originResult,
+    origin: 'https://cashflow-application.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true 
