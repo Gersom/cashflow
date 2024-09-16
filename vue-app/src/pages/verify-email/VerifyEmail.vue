@@ -11,21 +11,14 @@ const toast = useToast()
 // Methods
 const handleSubmit = async () => {
   try {
-    const response = await apiPost({
+    await apiPost({
       url: `/register/verify`,
       data: { token: route.query.token || '' }
     })
 
     
-    if (response.status === 200) {
-      toast.success("Correo electrónico verificado con éxito ^^")
-      router.push({ name: 'Login' })
-    }
-    
-    else {
-      toast.warning('Algo ocurrió un problema mientras se verificaba tu correo electrónico.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Correo electrónico verificado con éxito ^^")
+    router.push({ name: 'Login' })
   }
   
   catch (error) {

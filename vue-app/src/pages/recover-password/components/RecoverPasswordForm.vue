@@ -23,20 +23,13 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   // toast.info("Espere un momento...");
   try {
-    const response = await apiPost({
+    await apiPost({
       url: `/auth/recover-password/request`,
       data: { email: emailData.value.value }
     })
 
-    if (response.status === 200) {
-      toast.success("Se envio tu código de recuperación al correo electrónico ingresado")
-      emit('next', { email: emailData.value.value })
-    }
-
-    else {
-      toast.warning('Algo ocurrió un problema mientras se enviaba tu código de recuperación.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Se envio tu código de recuperación al correo electrónico ingresado")
+    emit('next', { email: emailData.value.value })
   }
 
   catch (error) {

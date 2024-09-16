@@ -32,7 +32,7 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   toast.info("Espere un momento...");
   try {
-    const response = await apiPost({
+    await apiPost({
       url: `/auth/recover-password/reset`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
@@ -42,15 +42,8 @@ const handleSubmit = async(e) => {
       }
     })
 
-    if (response.status === 200) {
-      toast.success("Tu contraseña ha sido cambiada con éxito ^^")
-      emit('next')
-    }
-
-    else {
-      toast.warning('Ocurrio un problema mientras cambiaba tu contraseña.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Tu contraseña ha sido cambiada con éxito ^^")
+    emit('next')
   }
 
   catch (error) {

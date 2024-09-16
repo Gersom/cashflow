@@ -27,15 +27,10 @@ export const useUserStore = defineStore('user', {
           url: `/users/profile`
         })
     
-        if (response.status === 200) {
-          const { selectedAccount, ...userData } = response.data.data
-          this.user = userData
-          this.isFilledData = true
-          accountsStore.fillSelectedAccount(selectedAccount)
-        }
-        else {
-          toast.warning('Algo ocurrió mientras se obtenian los datos de tu perfil.')
-        }
+        const { selectedAccount, ...userData } = response.data.data
+        this.user = userData
+        this.isFilledData = true
+        accountsStore.fillSelectedAccount(selectedAccount)
       }
       
       catch (error) {

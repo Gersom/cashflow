@@ -41,19 +41,12 @@ export const useMovementsStore = defineStore('movements', {
           url: `/movements`
         })
     
-        if (response.status === 200) {
-          this.data = response.data.data?.movements
-          this.totalExpenses = response.data.data?.totalExpenses
-          this.totalIncome = response.data.data?.totalIncome
-          this.isFilledData = true
-          setLocalStorage('app-movements', response.data.data)
-        }
-        else {
-          toast.warning('Algo ocurrió mientras se obtenian los movimientos.')
-          console.warn('Respuesta inesperada:', response)
-        }
+        this.data = response.data.data?.movements
+        this.totalExpenses = response.data.data?.totalExpenses
+        this.totalIncome = response.data.data?.totalIncome
+        this.isFilledData = true
+        setLocalStorage('app-movements', response.data.data)
       }
-      
       catch (error) {
         console.error('Error:', error);
         toast.error('Ocurrió un error al obtener los movimientos.')
@@ -85,14 +78,8 @@ export const useMovementsStore = defineStore('movements', {
           }
         })
     
-        if (response.status === 201) {
-          this.data[0] = { ...this.data[0], id: response.data?.data?.id, sync: true }
-          toast.success(`"${movement.title}" creado exitosamente.`)
-        }
-        else {
-          toast.warning('Algo ocurrió mientras se creaba el movimiento.')
-          console.warn('Respuesta inesperada:', response)
-        }
+        this.data[0] = { ...this.data[0], id: response.data?.data?.id, sync: true }
+        toast.success(`"${movement.title}" creado exitosamente.`)
       }
       
       catch (error) {

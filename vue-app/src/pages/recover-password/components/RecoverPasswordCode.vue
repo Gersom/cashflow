@@ -17,22 +17,15 @@ const handleCode = (text, isValid) => {
 
 const handleNewCode = async () => {
   try {
-    const response = await apiPost({
+    await apiPost({
       url: `/auth/recover-password/request`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email
       }
     })
 
-    if (response.status === 200) {
-      codeData.value.value = ''
-      toast.success("Tu nuevo código de recuperación se ha venviado a tu correo electrónico, revisa tu bandeja de entrada.")
-    }
-
-    else {
-      toast.warning('Algo ocurrió un problema mientras se generaba tu nuevo código de recuperación.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    codeData.value.value = ''
+    toast.success("Tu nuevo código de recuperación se ha venviado a tu correo electrónico, revisa tu bandeja de entrada.")
   }
 
   catch (error) {
@@ -46,7 +39,7 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   // toast.info("Espere un momento...");
   try {
-    const response = await apiPost({
+    await apiPost({
       url: `/auth/recover-password/verify`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
@@ -54,15 +47,8 @@ const handleSubmit = async(e) => {
       }
     })
 
-    if (response.status === 200) {
-      toast.success("Tu código de recuperación es correcto ^^")
-      emit('next', { code: codeData.value.value })
-    }
-
-    else {
-      toast.warning('Algo ocurrió un problema mientras se verificaba tu código de recuperación.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Tu código de recuperación es correcto ^^")
+    emit('next', { code: codeData.value.value })
   }
 
   catch (error) {

@@ -26,20 +26,13 @@ const isSelectedValue = computed(() => !currencySelected.value.value)
 const handleSubmit = async(e) => {
   e.preventDefault()
   try {
-    const response = await apiPatchAuth({
+    await apiPatchAuth({
       url: '/accounts/change-currency',
       data: { currencyId: currencySelected.value.value }
     })
 
-    if (response.statusText === 'OK') {
-      toast.success("Bienvenid@")
-      router.push({ name: 'AppHome' })
-    }
-
-    else {
-      toast.warning('Algo salió mal.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Bienvenid@")
+    router.push({ name: 'AppHome' })
   }
   
   catch (error) {
@@ -53,15 +46,10 @@ const getCurrency = async () => {
       url: '/currencies'
     })
 
-    if (response.status === 200) {
-      if (response.data.data)
-        currencyList.value = formatedCurrencyList(response.data.data)
-      else
-        toast.warning('Algo ocurrió con la información de las monedas')
-    }
-    else {
-      toast.warning('Algo ocurrió mientras se obtenia las monedas locales.')
-    }
+    if (response?.data?.data)
+      currencyList.value = formatedCurrencyList(response?.data?.data)
+    else
+      toast.warning('Algo ocurrió con la información de las monedas')
   }
   
   catch (error) {

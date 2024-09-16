@@ -47,13 +47,8 @@ export const useAccountsStore = defineStore('accounts', {
           url: `${API_URL}/common/accounts`
         })
     
-        if (response.status === 200) {
-          this.data = response.data.data
-          this.isFilledData = true
-        }
-        else {
-          toast.warning('Algo ocurrió mientras se obtenian las categorias.')
-        }
+        this.data = response.data.data
+        this.isFilledData = true
       }
       
       catch (error) {

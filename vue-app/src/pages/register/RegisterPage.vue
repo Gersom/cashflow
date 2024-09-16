@@ -15,19 +15,10 @@ const toast = useToast()
 const handleSubmit = async(data) => {
   toast.info("Espere un momento...");
   try {
-    const response = await apiPost({
-      url: `/register`, data
-    })
+    await apiPost({ url: `/register`, data })
 
-    if (response.statusText === 'OK') {
-      toast.success("Te has registrado con éxito. Bienvenid@")
-      router.push({ name: 'Login' })
-    }
-
-    else {
-      toast.warning('Algo ocurrió mientras te registrabas.')
-      console.warn('Respuesta del servidor:', response.data)
-    }
+    toast.success("Te has registrado con éxito. Bienvenid@")
+    router.push({ name: 'Login' })
   }
   
   catch (error) {
