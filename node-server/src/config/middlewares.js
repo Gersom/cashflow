@@ -1,24 +1,22 @@
 const { json, urlencoded } = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 
 const { serv } = require("@config/env.js");
 
 const middlewares = (app) => {
   const generateOrigin = () => {
     try {
-      if (serv.isProduction) {
+      if (serv.isProduction)
         return JSON.parse(serv.allowedProdOrigins);
-      } else {
+      else
         return JSON.parse(serv.allowedDevOrigins);
-      }
     } catch (error) {
-      if (serv.isProduction) {
+      if (serv.isProduction)
         return serv.allowedProdOrigins;
-      } else {
+      else
         return serv.allowedDevOrigins;
-      }
     }
   }
   const corsOptions = {
@@ -28,7 +26,7 @@ const middlewares = (app) => {
     credentials: true 
   }
   
-  if (serv.isDevelopment) console.log('CORS options:', corsOptions);
+  if (serv.isDevelopment) console.log('CORS origins:', corsOptions.origin);
 
   app.use(cors(corsOptions));
 
