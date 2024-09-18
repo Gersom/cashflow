@@ -1,8 +1,10 @@
 <script setup>
 import { apiPost } from '@src/services/api';
-import { useToast } from 'vue-toastification'
-import { useRouter, useRoute } from 'vue-router'
 import { onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useToast } from 'vue-toastification'
+import IconLogo from '@icons/others/IconLogo.vue'
+import LoadingComponent from '@components/Loading/Loading.vue'
 
 const router = useRouter()
 const route = useRoute();
@@ -16,7 +18,6 @@ const handleSubmit = async () => {
       data: { token: route.query.token || '' }
     })
 
-    
     toast.success("Correo electrónico verificado con éxito ^^")
     router.push({ name: 'Login' })
   }
@@ -34,21 +35,46 @@ const handleSubmit = async () => {
 }
 
 onMounted(() => {
-  handleSubmit()
+  if (route.query.token) {
+    handleSubmit()
+  } else {
+    router.push({ name: 'Login' })
+  }
 })
 </script>
 
 <template>
   <div class='verify-email-container'>
-    <h2>Verificando tu correo electrónico, espere un momento...</h2>
+    <div class="logo-icon">
+      <IconLogo />
+    </div>
+    <h2 class="title">
+      Verificando tu correo electrónico, espere un momento...
+    </h2>
+    <div class="loading-container">
+      <LoadingComponent />
+    </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
   .verify-email-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    .title {
+      font-weight: 400;
+      font-size: 16px;
+      // font-family: var(--font-nunito);
+      // font-style: italic;
+    }
+    .logo-icon {
+      height: 60px;
+    }
+    .loading-container {
+      height: 30px;
+    }
   }
 </style>

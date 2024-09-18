@@ -5,13 +5,16 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import LoginForm from './components/LoginForm.vue'
 import LoginLayout from '@layouts/LoginLayout.vue';
+import { ref } from 'vue'
 
 // Data
 const router = useRouter()
 const toast = useToast()
+const isLoading = ref(false)
 
 // Methods
 const handleSubmit = async(data) => {
+  isLoading.value = true
   try {
     const response = await apiPost({
       url: `/login`, data
@@ -38,13 +41,20 @@ const handleSubmit = async(data) => {
       console.error('Error:', error);
     }
   }
+
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
 <template>
 <div class='login-page'>
   <LoginLayout title="Iniciar sesión">
-    <LoginForm @submit="handleSubmit" />
+    <LoginForm
+      :is-loading="isLoading"
+      @submit="handleSubmit"
+    />
   </LoginLayout>
 </div>
 </template>

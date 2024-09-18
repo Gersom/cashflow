@@ -10,12 +10,14 @@ import InputCode from "./InputCode.vue"
 const toast = useToast()
 const emit = defineEmits(["next"])
 const codeData = ref({ value: '', isValid: false })
+const isLoading = ref(false)
 
 const handleCode = (text, isValid) => {
   codeData.value = { value: text, isValid }
 }
 
 const handleNewCode = async () => {
+  isLoading.value = true
   try {
     await apiPost({
       url: `/auth/recover-password/request`,
@@ -32,11 +34,16 @@ const handleNewCode = async () => {
     toast.error('Ocurrió un error mientras generaba tu nuevo código de recuperación.')
     console.error('Error:', error);
   }
+
+  finally {
+    isLoading.value = false
+  }
 }
 
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
+  isLoading.value = true
   // toast.info("Espere un momento...");
   try {
     await apiPost({
@@ -63,6 +70,10 @@ const handleSubmit = async(e) => {
       console.error('Error:', error);
     }
   }
+
+  finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -87,6 +98,7 @@ const handleSubmit = async(e) => {
       <CustomButtom
         text="Verificar código"
         type="submit"
+        :loading="isLoading"
         :disabled="!codeData.isValid"
         :animation="true"
         :icon-component="IconGeometricFigures"

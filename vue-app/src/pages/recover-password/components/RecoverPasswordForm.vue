@@ -13,6 +13,7 @@ import IconGeometricFigures from '@icons/nav/IconGeometricFigures.vue'
 const emit = defineEmits(["next"]);
 const toast = useToast()
 const emailData = ref({ value: '', isValid: false })
+const isLoading = ref(false)
 
 const handleEmail = (text, isValid) => {
   emailData.value = { value: text, isValid }
@@ -21,6 +22,7 @@ const handleEmail = (text, isValid) => {
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
+  isLoading.value = true
   // toast.info("Espere un momento...");
   try {
     await apiPost({
@@ -39,6 +41,10 @@ const handleSubmit = async(e) => {
       toast.error('Ocurrió un error mientras enviaba tu código de recuperación.')
       console.error('Error:', error);
     }
+  }
+
+  finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -61,6 +67,7 @@ const handleSubmit = async(e) => {
       <CustomButtom
         text="Enviar codigo"
         type="submit"
+        :loading="isLoading"
         :disabled="!emailData.isValid"
         :animation="true"
         :icon-component="IconGeometricFigures"

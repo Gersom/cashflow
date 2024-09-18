@@ -1,4 +1,6 @@
 <script setup>
+import LoadingComponent from '@components/Loading/Loading.vue'
+
 const emit = defineEmits(["click"]);
 const props = defineProps({
   size: {
@@ -25,6 +27,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  loading: {
+    type: Boolean,
+    default: false,
+  },
   color: {
     type: String,
     default: '',
@@ -38,17 +44,36 @@ const props = defineProps({
 
 <template>
   <button
-    :class="['custom-button', `is-${size}`, {'is-solid': !transparent}, {'is-disabled': disabled}, {'is-animation': animation}]"
+    :class="[
+      'custom-button',
+      `is-${size}`,
+      { 'is-solid': !transparent },
+      { 'is-disabled': disabled },
+      { 'is-animation': animation },
+      { 'is-loading': loading }
+    ]"
     :style="props.color ? { '--custom-btn-color': props.color } : {}"
     :type="type"
-    :disabled="disabled"
+    :disabled="disabled || loading"
     @click="emit('click')"
   >
-    <div class="icon-component">
+    <div
+      class="loading-container"
+      v-show="loading"
+    >
+      <LoadingComponent />
+    </div>
+    <div
+      class="icon-component"
+      v-show="!loading"
+    >
       <component :is="iconComponent" />
     </div>
 
-    <span class="span-text">
+    <span
+      class="span-text"
+      v-show="!loading"
+    >
       {{ text }}
     </span>
   </button>
@@ -70,6 +95,9 @@ const props = defineProps({
   .icon-component {
     height: 20px;
     margin-right: 5px;
+  }
+  .loading-container {
+    height: calc(100% - 20px);
   }
   &:hover {
     background-color: var(--custom-btn-color, var(--button-background));
@@ -131,6 +159,17 @@ const props = defineProps({
       opacity: 1;
       right: 0;
     }
+  }
+}
+
+.custom-button.is-loading {
+  border: none;
+  background-color: var(--button-background-disabled);
+  color: var(--button-color-disabled);
+  cursor: wait;
+  &:hover {
+    background-color: var(--button-background-disabled);
+    color: var(--button-color-disabled);
   }
 }
 </style>

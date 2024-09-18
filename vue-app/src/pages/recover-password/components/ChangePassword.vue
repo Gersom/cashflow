@@ -18,6 +18,7 @@ const formData = ref({
   password: { value: '', isValid: false },
   confirmPassword: { value: '', isValid: false },
 })
+const isLoading = ref(false)
 
 const isFormValid = computed(() => 
   Object.values(formData.value).every(field => field.isValid)
@@ -30,7 +31,8 @@ const handleInput = (field, text, isValid) => {
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
-  toast.info("Espere un momento...");
+  isLoading.value = true
+  // toast.info("Espere un momento...");
   try {
     await apiPost({
       url: `/auth/recover-password/reset`,
@@ -49,6 +51,10 @@ const handleSubmit = async(e) => {
   catch (error) {
     toast.error('Ocurrió un error mientras cambiaba tu contraseña.')
     console.error('Error:', error);
+  }
+
+  finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -79,6 +85,7 @@ const handleSubmit = async(e) => {
       <CustomButtom
         text="Cambiar contraseña"
         type="submit"
+        :loading="isLoading"
         :disabled="!isFormValid"
         :animation="true"
         :icon-component="IconPassword"

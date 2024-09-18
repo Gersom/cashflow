@@ -16,15 +16,17 @@ import LoginLayout from '@layouts/LoginLayout.vue';
 const router = useRouter()
 const toast = useToast()
 
-const inputAccountName = ref('Principal')
 const currencyList = ref([])
 const currencySelected = ref({})
+const inputAccountName = ref('Principal')
+const isLoading = ref(false)
 
 const isSelectedValue = computed(() => !currencySelected.value.value)
 
 // Methods
 const handleSubmit = async(e) => {
   e.preventDefault()
+  isLoading.value = true
   try {
     await apiPatchAuth({
       url: '/accounts/change-currency',
@@ -38,6 +40,10 @@ const handleSubmit = async(e) => {
   catch (error) {
     toast.error('Ocurrió un error.')
     console.error('Error:', error);
+  }
+
+  finally {
+    isLoading.value = false
   }
 }
 const getCurrency = async () => {
@@ -112,6 +118,7 @@ onMounted(() => {
         <CustomButton
           text="Ingresar"
           type="submit"
+          :loading="isLoading"
           :disabled="isSelectedValue"
         />
       </div>

@@ -10,6 +10,12 @@ import Password from "@components/FormInput/Password.vue";
 import IconLogin from '@icons/login/IconLogIn.vue'
 
 const emit = defineEmits(["submit"]);
+const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 // Data
 const formData = ref({
@@ -58,6 +64,7 @@ const handleSubmit = async(e) => {
         text="Iniciar Sesión"
         type="submit"
         :disabled="!isFormValid"
+        :loading="isLoading"
         :animation="true"
         :icon-component="IconLogin"
       />

@@ -12,6 +12,9 @@ import NroWhatsapp from "@components/FormInput/NroWhatsapp.vue";
 import IconSuccess from '@icons/state/IconSuccess.vue'
 
 const emit = defineEmits(["submit"]);
+const props = defineProps({
+  isLoading: { type: Boolean, default: false }
+});
 
 // Data
 const componentMap = {
@@ -33,6 +36,7 @@ const isFormValid = computed(() =>
     .filter(([key]) => key !== 'whatsapp')
     .every(([, field]) => field.isValid)
 )
+const isLoadingProp = computed(() => props.isLoading)
 
 // Methods
 const handleInput = (field, text, isValid) => {
@@ -66,6 +70,7 @@ const handleSubmit = async(e) => {
         text="Registrarme"
         type="submit"
         :disabled="!isFormValid"
+        :loading="isLoadingProp"
         :animation="true"
         :icon-component="IconSuccess"
       />
