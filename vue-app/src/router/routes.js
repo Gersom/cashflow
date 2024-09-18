@@ -1,11 +1,12 @@
 import { routesApp } from './routesApp'
 import App from '@pages/app/AppPage.vue'
+import CurrencyPage from '@pages/currency/CurrencyPage.vue'
 import Designs from '@pages/designs/DesignsPage.vue'
 import Login from '@pages/login/LoginPage.vue'
+import NotFound from '@pages/not-found/NotFound.vue'
 import RecoverPassword from '@pages/recover-password/RecoverPasswordPage.vue'
 import Register from '@pages/register/RegisterPage.vue'
 import VerifyEmail from '@pages/verify-email/VerifyEmail.vue'
-import CurrencyPage from '@pages/currency/CurrencyPage.vue'
 
 export const routes = [
   {
@@ -52,4 +53,9 @@ export const routes = [
     component: Designs,
     alias: ['/designs', '/disenos', '/my-designs'],
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound
+  }
 ]
