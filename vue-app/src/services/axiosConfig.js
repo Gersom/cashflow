@@ -1,20 +1,23 @@
 import axios from 'axios';
 
-console.log('ENV:', import.meta.env.VITE_ENV);
-console.log('DEV BACK URL:', import.meta.env.VITE_DEV_BACKEND_URL);
-console.log('PROD BACK URL:', import.meta.env.VITE_PROD_BACKEND_URL);
+if (import.meta.env.VITE_ENV === 'development') {
 
-console.log('authURL:', 
+  console.log('ENV:', import.meta.env.VITE_ENV);
+  console.log('DEV BACK URL:', import.meta.env.VITE_DEV_BACKEND_URL);
+  console.log('PROD BACK URL:', import.meta.env.VITE_PROD_BACKEND_URL);
+  
+  console.log('authURL:', 
     `${import.meta.env.VITE_ENV === 'production' 
       ? import.meta.env.VITE_PROD_BACKEND_URL 
       : import.meta.env.VITE_DEV_BACKEND_URL}/api/auth`
   );
-  
+    
   console.log('commonURL:', 
     `${import.meta.env.VITE_ENV === 'production' 
       ? import.meta.env.VITE_PROD_BACKEND_URL 
       : import.meta.env.VITE_DEV_BACKEND_URL}/api/common`
   );
+}
   
 const axiosApiConfig = {
   baseURL:     `${import.meta.env.VITE_ENV === 'production' 
