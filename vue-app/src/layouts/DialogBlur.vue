@@ -1,7 +1,7 @@
 <script setup>
 // Imports
 import IconTriangle from "@icons/others/IconTriangle.vue";
-import IconClose from "@icons/actions/IconClose.vue";
+import IconCross from "@icons/actions/IconCross.vue";
 import { useThemeStore } from "@stores/theme";
 
 // Vue defines
@@ -69,7 +69,7 @@ const onClose = () => {
         v-if="props.buttonClose"
         @click="onClose"
       >
-        <IconClose />
+        <IconCross />
       </button>
       <slot></slot>
       <div class="icon" v-if="props.dependent">
@@ -109,12 +109,13 @@ const onClose = () => {
     background: none;
     border: none;
     color: var(--subtitle-color);
-    height: 25px;
+    height: 20px;
     position: absolute;
     right: 15px;
     top: 15px;
+    transition: .3s ease color;
     &:hover {
-      color: var(--primary-color);
+      color: var(--error-color);
     }
   }
 
