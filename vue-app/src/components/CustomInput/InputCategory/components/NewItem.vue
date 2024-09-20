@@ -38,6 +38,8 @@ const props = defineProps({
   .text {
     font-size: 14px;
     margin-top: 2px;
+    line-height: 1;
+    margin-top: 7px;
   }
   .text,
   .icon {

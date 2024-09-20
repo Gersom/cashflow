@@ -57,8 +57,8 @@
       color: var(--text-color);
       field-sizing: content;
       font-family: var(--font-poppins);
-      font-size: 16px;
-      min-height: 54px;
+      font-size: 14px;
+      min-height: 64px;
       max-height: 138px;
       padding: 10px 15px;
       resize: none; /* vertical */

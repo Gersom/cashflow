@@ -16,4 +16,7 @@ const submitMovement = (dataForm) => {
 </template>
 
 <style lang="scss" scoped>
+.create-card {
+  height: 100%;
+}
 </style>

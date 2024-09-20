@@ -49,7 +49,7 @@ const formattedDate = computed(() => {
               {{ formattedDate }}
             </time>
             <TransactionBadge
-              :amount="props.data?.amount || 0"
+              :amount="parseFloat(props.data?.amount) || 0"
               :isPositive="props.data?.type === 'income'"
             />
           </div>

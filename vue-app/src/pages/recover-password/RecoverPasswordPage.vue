@@ -28,7 +28,7 @@ const handleNextStep = async (data) => {
     router.push({ name: 'Login' })
   }
   else {
-    await changeFormData(data)
+    changeFormData(data)
     setLocalStorage('recoveryCode', {
       step: currentStep.value + 1,
       formData: formData.value

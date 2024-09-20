@@ -109,11 +109,11 @@ onMounted(() => categoriesStore.loadCategories())
     background: var(--background-color);
     border-radius: var(--border-radius);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 10px 15px;
     position: relative;
     width: 100%;
-    height: 66px;
+    // height: 66px;
     .item {
       background: none;
       border: none;

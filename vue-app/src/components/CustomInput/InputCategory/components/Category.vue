@@ -68,6 +68,8 @@ const props = defineProps({
     font-size: 14px;
     margin-top: 2px;
     transition: 0.3s ease all;
+    line-height: 1;
+    margin-top: 7px;
   }
 
   &:hover {

@@ -64,10 +64,11 @@ const updateState = (notification, validationState, emitValue = inputValue.value
 <style lang="scss" scoped>
 .user-name {
   .title {
-    font-size: 14px;
+    align-items: center;
     color: var(--text-color);
-    margin: 0 0 5px 5px;
     display: flex;
+    font-size: 14px;
+    margin: 0 0 5px 5px;
   }
   .icon {
     height: 16px;

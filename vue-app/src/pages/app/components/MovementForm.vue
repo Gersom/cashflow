@@ -3,6 +3,7 @@ import { ref, watch, computed } from 'vue'
 import { useAccountsStore } from '@app-page/stores/accounts';
 import IconAdd from "@icons/actions/IconAdd.vue"
 import IconClose from "@icons/actions/IconClose.vue"
+import IconSave from "@icons/actions/IconSave.vue"
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
@@ -12,6 +13,7 @@ import CustomInputRadio from "@components/CustomInput/InputRadio.vue"
 import CustomInputText from "@components/CustomInput/InputText.vue"
 import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue"
 import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue"
+import InputCheckBox from "@components/CustomInput/InputCheckBox.vue"
 
 const dataTypeMovement = {
   expense: { value: 'expense', text: 'Gasto' },
@@ -41,6 +43,9 @@ const props = defineProps({
   }
 })
 
+const checkboxDescription = ref(false)
+const checkboxCategories = ref(false)
+
 const titleInput = ref('')
 const amountInput = ref('0.00')
 const expenseInput = ref(radioData[1])
@@ -57,6 +62,14 @@ watch(propDataForm, (newValue) => {
 
 watch(propUpdateShow, (newValue) => {
   if (!newValue) toDataChange(props.dataform)
+})
+
+watch(checkboxDescription, (newValue) => {
+  if (newValue) descriptionInput.value = ''
+})
+
+watch(checkboxCategories, (newValue) => {
+  if (newValue) selectedCategories.value = []
 })
 
 const handleChangeCategories = (categories) => {
@@ -125,12 +138,29 @@ const handleDeleteMovement = () => {
           v-model="expenseInput"
         />
       </div>
+
       <div class="input-group">
-        <p>Descripción</p>
-        <CustomInputTextarea v-model="descriptionInput" />
+        <p>Mas detalles</p>
       </div>
       <div class="input-group">
-        <p>Categoria</p>
+        <InputCheckBox
+        :text="checkboxDescription ? 'Descripción' : 'Agregar una descripción'"
+        v-model="checkboxDescription"
+        />
+      </div>
+      <div class="input-group" v-show="checkboxDescription">
+        <CustomInputTextarea
+        placeholder="Movimiento nuevo..."
+        v-model="descriptionInput"
+        />
+      </div>
+      <div class="input-group">        
+        <InputCheckBox
+        :text="checkboxCategories ? 'Categorias' : 'Agregar categorias'"
+        v-model="checkboxCategories"
+        />
+      </div>
+      <div class="input-group" v-show="checkboxCategories">
         <InputCategory
           :categories="selectedCategories"
           @change-categories="handleChangeCategories"
@@ -141,10 +171,11 @@ const handleDeleteMovement = () => {
     <div class="buttons">
       <div class="button-submit">
         <CustomButton
-          :text="isEdit ? 'Editar' : 'Guardar'"
+          :text="isEdit ? 'Editar' : 'Crear'"
           type="submit"
           :animation="true"
-          :icon-component="IconAdd"
+          :disabled="!titleInput || amountInput === 0 || amountInput === '0' || amountInput === '0.00' || amountInput === ''"
+          :icon-component="isEdit ? IconAdd : IconSave"
         />
       </div>
       <div class="button-delete" v-if="props.isEdit">
@@ -162,8 +193,10 @@ const handleDeleteMovement = () => {
 </template>
 
 <style lang="scss" scoped>
-.card {
-  &.create-card {
+  .create-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
     & .form {
       padding: 0px 0 20px 0;
       display: flex;
@@ -191,5 +224,6 @@ const handleDeleteMovement = () => {
       max-width: 100px;
     }
   }
-}
+// .card {
+// }
 </style>

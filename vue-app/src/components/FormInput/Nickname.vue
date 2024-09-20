@@ -13,17 +13,19 @@ const text = ref("Nombre / apodo");
 const textNotification = ref("");
 
 const validateValue = () => {
-  const regexEspecial = /^[a-zA-Z0-9\s]+$/;
-  const regexNumber = /^.*[0-9].*$/;
+  // const regexEspecial = /^[a-zA-Z0-9\s]+$/;
+  // const regexNumber = /^.*[0-9].*$/;
 
   if (inputValue.value === "") {
     updateState("", null, "");
   } else if (inputValue.value.length < 3) {
     updateState("El nombre debe tener al menos 3 caracteres", false);
-  } else if (regexNumber.test(inputValue.value)) {
-    updateState("El nombre no puede contener números", false);
-  } else if (!regexEspecial.test(inputValue.value)) {
-    updateState("El nombre no puede contener caracteres especiales", false);
+  } else if (inputValue.value.length > 20) {
+    updateState("El nombre debe tener máximo 20 caracteres", false);
+  // } else if (regexNumber.test(inputValue.value)) {
+  //   updateState("El nombre no puede contener números", false);
+  // } else if (!regexEspecial.test(inputValue.value)) {
+  //   updateState("El nombre no puede contener caracteres especiales", false);
   } else {
     updateState("Nombre / apodo válido", true);
   }
@@ -63,11 +65,11 @@ const updateState = (notification, validationState, emitValue = inputValue.value
 <style lang="scss" scoped>
 .user-name {
   .title {
-    font-size: 14px;
-    color: var(--text-color);
-    margin: 0 0 5px 5px;
-    display: flex;
     align-items: center;
+    color: var(--text-color);
+    display: flex;
+    font-size: 14px;
+    margin: 0 0 5px 5px;
 
     .icon {
       height: 16px;
