@@ -1,9 +1,9 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import { useAccountsStore } from '@app-page/stores/accounts';
-import IconAdd from "@icons/actions/IconAdd.vue"
-import IconClose from "@icons/actions/IconClose.vue"
 import IconSave from "@icons/actions/IconSave.vue"
+import IconClose from "@icons/actions/IconClose.vue"
+import IconEdit from "@icons/actions/IconEdit.vue"
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
@@ -57,6 +57,8 @@ const propDataForm = computed(() => props.dataform)
 const propUpdateShow = computed(() => props.updateShow)
 
 watch(propDataForm, (newValue) => {
+  checkboxDescription.value = !!newValue.description
+  checkboxCategories.value = newValue.categories?.length > 0
   toDataChange(newValue)
 })
 
@@ -65,11 +67,11 @@ watch(propUpdateShow, (newValue) => {
 })
 
 watch(checkboxDescription, (newValue) => {
-  if (newValue) descriptionInput.value = ''
+  if (!newValue) descriptionInput.value = ''
 })
 
 watch(checkboxCategories, (newValue) => {
-  if (newValue) selectedCategories.value = []
+  if (!newValue) selectedCategories.value = []
 })
 
 const handleChangeCategories = (categories) => {
@@ -174,8 +176,8 @@ const handleDeleteMovement = () => {
           :text="isEdit ? 'Editar' : 'Crear'"
           type="submit"
           :animation="true"
-          :disabled="!titleInput || amountInput === 0 || amountInput === '0' || amountInput === '0.00' || amountInput === ''"
-          :icon-component="isEdit ? IconAdd : IconSave"
+          :disabled="!titleInput || (parseFloat(amountInput) === 0 && parseFloat(amountInput) !== NaN)"
+          :icon-component="isEdit ? IconEdit : IconSave"
         />
       </div>
       <div class="button-delete" v-if="props.isEdit">
