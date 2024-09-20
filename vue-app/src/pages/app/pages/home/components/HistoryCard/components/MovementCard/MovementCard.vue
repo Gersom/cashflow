@@ -33,9 +33,10 @@ const formattedDate = computed(() => {
   <div class="movement-card">
     <div class="bookmarks">
       <BookmarkTag
-        v-for="bookmark in props.data?.categories?.slice(0, 3)"
-        :key="bookmark.id"
+        v-for="(bookmark, index) in props.data?.categories?.slice(0, 3)"
+        :key="bookmark.id + index"
         :data="bookmark"
+        :index-item="index"
       />
     </div>
     <div class="info-tag-wrapper">

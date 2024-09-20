@@ -4,6 +4,7 @@ import MasonryCards from '@app-page/layouts/MasonryCards.vue'
 
 // Components global
 import Head from '@app-page/components/Head.vue'
+import MainContainer from '@app-page/layouts/MainContainer.vue'
 
 // Components local
 import ActionCard from './components/ActionCard/ActionCard.vue'
@@ -14,7 +15,7 @@ import ProfileCard from './components/ProfileCard.vue'
 
 <template>
   <div class="profile-page">
-    <main>
+    <MainContainer>
       <Head />
       <MasonryCards>
         <template v-slot:profile>
@@ -30,28 +31,9 @@ import ProfileCard from './components/ProfileCard.vue'
             <ActionCard/>
         </template>
       </MasonryCards>
-    </main>
+    </MainContainer>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.profile-page {
-  width: 100%;
-  height: 100svh;
-  overflow-y: auto;
-  background-color: var(--background-color);
-
-  main {
-    height: 100%;
-    padding: 2rem;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 2rem;
-  }
-
-  h2 {
-    color: var(--primary-color);
-    margin: 0;
-  }
-}
 </style>

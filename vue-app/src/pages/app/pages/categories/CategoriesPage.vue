@@ -1,17 +1,17 @@
 <script setup>
+import MainContainer from '@app-page/layouts/MainContainer.vue'
+import Head from '@app-page/components/Head.vue'
+
 defineEmits(['vnode-unmounted'])
-defineOptions({
-  name: 'CategoriesPage'
-})
-import { ref } from 'vue'
-const count = ref(0)
 </script>
 
 <template>
   <div class="categories-page">
-    <h1>Categories Page</h1>
-
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <MainContainer>
+      <Head />
+  
+      <P>Categories page</P>
+    </MainContainer>
   </div>
 </template>
 

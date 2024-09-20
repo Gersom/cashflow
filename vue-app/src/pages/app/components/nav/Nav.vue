@@ -2,32 +2,34 @@
 defineOptions({ name: "Nav" });
 import { ref } from "vue";
 import { useAppStore } from "@stores/app";
-import { useRouter } from "vue-router";
 import DialogBlur from "@layouts/DialogBlur.vue";
 import IconInfo from "@icons/nav/IconInfo.vue";
 import IconLogo from "@icons/others/IconLogo.vue";
 import InfoModal from "./components/InfoModal.vue";
 import links from "./data/link-list.js";
 import NavLink from "./components/NavLink.vue";
+import IconOpenNav from "@icons/nav/IconOpenNav.vue";
 
 const appStore = useAppStore();
-const router = useRouter();
 
 const showInfoModal = ref(false);
+const openNav = ref(false);
 
 const openInfoModal = () => {
   showInfoModal.value = true;
+  openNav.value = false;
 };
 const closeInfoModal = () => {
   showInfoModal.value = false;
 };
-const toHome = () => {
-  router.push("/");
-};
 </script>
 
 <template>
-  <nav class="nav">
+  <nav :class="['nav', { 'is-open': openNav }]">
+    <button class="open-nav" type="button">
+      <IconOpenNav @click="openNav = true" />
+    </button>
+
     <div class="nav-content">
       <div class="logo" type="button">
         <div class="icon-logo">
@@ -35,6 +37,7 @@ const toHome = () => {
         </div>
         <span class="version">{{ appStore.version }}</span>
       </div>
+
       <div class="items">
         <NavLink
           v-for="(link, index) in links"
@@ -42,14 +45,19 @@ const toHome = () => {
           :icon-component="link.icon"
           :page-name="link.pageName"
           :text="link.text"
+          @change-route="openNav = false"
         />
       </div>
+
       <button class="button-info" type="button" @click="openInfoModal">
         <div class="icon-info">
           <IconInfo />
         </div>
       </button>
     </div>
+
+    <button class="nav-blur" type="button" @click="openNav = false" />
+
     <DialogBlur
       :button-close="true"
       :show="showInfoModal"
@@ -62,24 +70,28 @@ const toHome = () => {
 
 <style lang="scss" scoped>
 .nav {
-  height: 100%;
-  width: 61px;
+  --nav-width: 58px;
+  height: 100vh;
+  width: var(--nav-width);
   position: relative;
+  .open-nav { display: none; }
+  .nav-blur { display: none; }
   .nav-content {
+    align-items: center;
     background: var(--background-color2);
-    width: 61px;
-    padding: 15px 0;
-    height: 100%;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    height: 100%;
     justify-content: flex-start;
+    left: 0px;
+    padding: 15px 0;
     position: fixed;
     top: 0;
-    left: 0px;
+    width: var(--nav-width);
   }
   .logo {
+    position: relative;
     .icon-logo {
       height: 20px;
     }
@@ -111,11 +123,70 @@ const toHome = () => {
   .items {
     width: 100%;
   }
-  // .items > * {
-  //   margin-top: 25px;
-  // }
-  // .items > *:first-child {
-  //   margin-top: 0px;
-  // }
+  
+  @media (width >= 1400px) {
+    --nav-width: 75px;
+  }
+  @media (width <= 720px) {
+    .nav-content {
+      justify-content: center;
+    }
+    .logo {
+      &:after { display: none; }
+      .version {
+        position: absolute;
+        top: calc(100% + 5px);
+      }
+    }
+    .items {
+      margin: auto 0;
+    }
+    .button-info {
+      margin-top: initial;
+    }
+  }
+  @media (width <= 600px) {
+    width: 0px;
+    transition: .3s ease width;
+    .open-nav {
+      display: block;
+      border: none;
+      background: none;
+      height: 30px;
+      color: var(--primary-color);
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-blur {
+      background: rgb(var(--primary-color-rgb) / 10%);
+      backdrop-filter: blur(3px);
+      height: 100%;
+      left: 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-content {
+      transition: .3s ease transform;
+      transform: translateX(-100%);
+      z-index: 101;
+      // box-shadow: 6px 0px 7px 2px #282a3600;
+    }
+    &.is-open {
+      // width: var(--nav-width);
+      .nav-blur { display: block; }
+      .nav-content {
+        transform: translateX(0);
+        // box-shadow: 6px 0px 7px 2px #282a36;
+      }
+    }
+  }
 }
 </style>

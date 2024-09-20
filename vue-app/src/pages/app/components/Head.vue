@@ -19,7 +19,7 @@ const { user } = storeToRefs(userStore);
     <div class="header-content">
       <div class="info">
         <h1 class="page-title">{{ route.meta.title }}</h1>
-        <p class="user-name">{{ user.name}}</p>
+        <p class="user-name">{{ user.name }}</p>
       </div>
       <div class="user-avatar">
         <img
@@ -43,17 +43,17 @@ const { user } = storeToRefs(userStore);
   display: flex;
   justify-content: space-between;
   gap: 20px;
+
   .header-content {
-    height: 10vh;
+    // height: 10vh;
     display: flex;
     gap: 25px;
-    align-items: center;
+    align-items: flex-start;
 
     .info {
       display: flex;
       flex-direction: column;
       justify-content: center;
-
       .page-title {
         color: var(--primary-color);
         display: block;
@@ -62,8 +62,8 @@ const { user } = storeToRefs(userStore);
         padding: 0;
         font-size: 40px;
         font-family: var(--font-secular);
+        font-weight: 400;
       }
-      
       .user-name {
         margin: 0;
         font-size: 16px;
@@ -77,26 +77,28 @@ const { user } = storeToRefs(userStore);
 
     .user-avatar {
       position: relative;
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       overflow: hidden;
       border-radius: 50%;
       border: none;
       background-color: var(--primary-color);
       box-shadow: 0px 0px 0px 0.5vh var(--primary-color);
+      box-sizing: content-box;
     }
   }
 
   .header-date {
     color: var(--subtitle-color);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-weight:500;
+    padding-top: 5px;
 
     .month {
-      font-size: 32px;
+      font-size: 20px;
+      line-height: 20px;
       text-transform: capitalize;
-
       &::after {
         content: " ";
       }
@@ -104,6 +106,45 @@ const { user } = storeToRefs(userStore);
 
     .year {
       font-size: 40px;
+      line-height: 40px;
+    }
+  }
+
+  @media (width <= 720px) {
+    .header-content {
+      .info {
+        .page-title {
+          font-size: 30px;
+        }
+        .user-name {
+          font-size: 16px;
+        }
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .header-date {
+      .month {
+        font-size: 16px;
+      }
+      .year {
+        font-size: 30px;
+      }
+    }
+  }
+  @media (width <= 600px) {
+    .header-content {
+      flex-direction: row-reverse;
+      margin-left: auto;
+      gap: 15px;
+      .info {
+        align-items: flex-end;
+      }
+    }
+    .header-date {
+      display: none;
     }
   }
 }

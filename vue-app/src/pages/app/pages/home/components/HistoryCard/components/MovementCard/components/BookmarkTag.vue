@@ -14,19 +14,26 @@ const props = defineProps({
       };
     },
   },
+  indexItem: {
+    type: Number,
+    default: 0
+  }
 });
 
 const textColor = computed(() => getContrastColor(props.data.color))
 </script>
 
 <template>
-    <div  :style="{ background: props.data.color, color:textColor}" class="bookmark">
-        <span class="bookmark-data"> 
-            <i :class="`icon icon-${props.data.iconName}`"/>
-            <p class="bookmark-name"> {{ props.data?.name?.toUpperCase() }}</p>
-        </span>
-        <span  :style="{ background: props.data.color }" class="fix" />
-    </div>
+  <div
+    :class="['bookmark', { 'is-first': indexItem === 0 }]"
+    :style="{ background: props.data.color, color:textColor}"
+  >
+    <p class="bookmark-data"> 
+      <i :class="`icon icon-${props.data.iconName}`"/>
+      <span class="bookmark-name"> {{ props.data?.name?.toUpperCase() }}</span>
+    </p>
+    <span  :style="{ background: props.data.color }" class="fix" />
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -48,6 +55,8 @@ const textColor = computed(() => getContrastColor(props.data.color))
     display: flex;
     align-items: flex-end;
     gap: 4px;
+    padding: 0;
+    margin: 0;
 
     & > i{
       font-size: 15px;
@@ -63,6 +72,10 @@ const textColor = computed(() => getContrastColor(props.data.color))
       padding: 0;
       text-align: center;
     }
+
+    .icon {
+      font-weight: 600;
+    }
   }
 
   .fix {
@@ -72,6 +85,19 @@ const textColor = computed(() => getContrastColor(props.data.color))
     left: 0;
     width: 100%;
     height: 15px;
+  }
+
+  @media (width <= 700px) {
+    &:not(.is-first) {
+      .bookmark-data .bookmark-name {
+        display: none;
+      }
+    }
+  }
+  @media (width <= 500px) {
+    .bookmark-data .bookmark-name {
+      display: none;
+    }
   }
 }
 </style>

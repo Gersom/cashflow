@@ -142,7 +142,17 @@
     &.is-dark-theme {
       color: var(--text-color);
       background: rgb(var(--background-color-rgb) / 30%);
-    }    
+    }
+    
+    @media (width <= 720px) {
+      align-items: flex-start;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      .label-tag {
+        padding-left: 0px;
+      }
+    }
   }
 
 </style>
