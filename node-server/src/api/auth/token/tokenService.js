@@ -24,7 +24,7 @@ const tokenService = {
         try {
             const payload = jwt.verify(refresh_token, envJwt.refreshSecret);
             return payload;
-        } catch (error) {
+        } catch {
             throw new AuthorizationError("Invalid access token");
         }
     }

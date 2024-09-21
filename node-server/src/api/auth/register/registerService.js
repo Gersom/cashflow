@@ -1,7 +1,7 @@
 const { auth, jwt } = require("@config/env");
 const { client } = require("@config/env");
 const { sendVerificationEmail } = require("./registerUtils");
-const { UserModel, AccountModel, CategoryModel, CurrencyModel } = require("@models");
+const { UserModel, AccountModel, CategoryModel } = require("@models");
 const { ValidationError } = require("@utils/apiErrors");
 const bcrypt = require("bcrypt");
 const defaultCategories = require("@data/defaultCategories.json");

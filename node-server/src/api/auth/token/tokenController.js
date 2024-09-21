@@ -1,5 +1,5 @@
 const tokenService = require("./tokenService");
-const { auth, serv } = require("@config/env");
+const { serv } = require("@config/env");
 const { responseSuccess } = require("@utils/apiSuccess");
 
 

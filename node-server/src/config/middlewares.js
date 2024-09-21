@@ -12,7 +12,7 @@ const middlewares = (app) => {
         return JSON.parse(serv.allowedProdOrigins);
       else
         return JSON.parse(serv.allowedDevOrigins);
-    } catch (error) {
+    } catch {
       if (serv.isProduction)
         return serv.allowedProdOrigins;
       else

@@ -2,7 +2,17 @@
   "name": "cashflow-node",
   "version": "1.0.0",
   "author": "Gersom",
+  "description": "cashflow",
   "main": "./src/app.js",
+  "license": "ISC",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "dev": "node --trace-warnings --watch --env-file .env ./src/app.js",
+    "dev:lint": "eslint src/**/*.{js} && node --trace-warnings --watch --env-file .env ./src/app.js",
+    "lint": "eslint src/**/*.{js}",
+    "lint:fix": "eslint --fix src/**/*.{js}",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
@@ -18,11 +28,9 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.14"
   },
-  "description": "cashflow",
-  "license": "ISC",
-  "scripts": {
-    "dev": "node --trace-warnings --watch --env-file .env ./src/app.js",
-    "start": "node ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "@eslint/js": "^9.11.0",
+    "eslint": "^9.11.0",
+    "globals": "^15.9.0"
   }
 }

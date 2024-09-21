@@ -38,14 +38,16 @@ function getResourceId(req, resourceType) {
 
 async function authorizeResourceAccess(userId, resourceId, resourceType) {
   switch (resourceType) {
-    case 'account':
+    case 'account': {
       const account = await AccountModel.findOne({ _id: resourceId, userId });
       if (!account) throw new UnauthorizedError('You do not have permission to access this account');
       return account;
-    case 'user':
+    }
+    case 'user': {
       const user = await UserModel.findById(userId);
       if (!user) throw new UnauthorizedError('User not found');
       return user;
+    }
     default:
       throw new UnauthorizedError('Invalid resource type');
   }

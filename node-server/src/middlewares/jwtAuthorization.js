@@ -15,7 +15,7 @@ const authMiddleware = (req, res, next) => {
       const decoded = verify(token, envJwt.secret);
       req.user = decoded;
       next();
-    } catch (error) {
+    } catch {
       throw new AuthorizationError('Invalid token');
     }
   } else {

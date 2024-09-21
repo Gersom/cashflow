@@ -2,7 +2,6 @@ const { Router } = require('express');
 const routeAdmin = require("./admin");
 const routeAuth = require("./auth");
 const routeCommon = require("./common");
-const authMiddleware = require("@middlewares/jwtAuthorization");
 
 const router = Router();
 

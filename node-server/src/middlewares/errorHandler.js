@@ -1,7 +1,7 @@
 // Custom error array
 const customErrors = require('@utils/apiErrors');
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, ) => {
   
   const isCustomError = Object.values(customErrors).some(ErrorType => err instanceof ErrorType);
   

@@ -2,7 +2,7 @@ const { transporter } = require('@config/mailer');
 const { mailer } = require('@config/env');
 
 const sendEmail = (options) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, ) => {
     const mailOptions = {
       from: `"CashFlow" <${mailer.email}>`,
       ...options

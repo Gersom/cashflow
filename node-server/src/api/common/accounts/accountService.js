@@ -1,5 +1,5 @@
 const { AccountModel, UserModel } = require("@models");
-const { NotFoundError, ValidationError } = require("@utils/apiErrors");
+const { NotFoundError } = require("@utils/apiErrors");
 const { AccountDTO } = require("./accountDTOs");
 
 const AccountService = {

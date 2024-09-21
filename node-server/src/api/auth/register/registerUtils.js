@@ -1,4 +1,4 @@
-const { EmailSendError, ValidationError, ExpirationError } = require("@utils/apiErrors");
+const { EmailSendError } = require("@utils/apiErrors");
 const { generateHTML } = require("@utils/generateHTML");
 const { sendEmail } = require("@utils/emailSend");
 

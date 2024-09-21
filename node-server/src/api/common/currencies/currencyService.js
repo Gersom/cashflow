@@ -1,6 +1,5 @@
 const { CurrencyModel } = require("@root/src/models");
 // const { NotFoundError, ValidationError } = require("@utils/apiErrors");
-const { default: mongoose } = require("mongoose");
 
 const CurrencyService = {
   async getAllCurrencies() {
