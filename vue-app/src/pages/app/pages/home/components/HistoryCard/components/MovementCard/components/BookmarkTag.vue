@@ -29,10 +29,13 @@ const textColor = computed(() => getContrastColor(props.data.color))
     :style="{ background: props.data.color, color:textColor}"
   >
     <p class="bookmark-data"> 
-      <i :class="`icon icon-${props.data.iconName}`"/>
+      <i :class="`icon icon-${props.data.iconName}`" />
       <span class="bookmark-name"> {{ props.data?.name?.toUpperCase() }}</span>
     </p>
-    <span  :style="{ background: props.data.color }" class="fix" />
+    <span
+      :style="{ background: props.data.color }"
+      class="fix"
+    />
   </div>
 </template>
 

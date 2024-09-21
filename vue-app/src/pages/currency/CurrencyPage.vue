@@ -1,6 +1,6 @@
 <script setup>
 // Imports
-import { apiAuth } from '@src/services/api';
+import { apiApp } from '@src/services/api';
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -28,7 +28,7 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   isLoading.value = true
   try {
-    await apiAuth.patch({
+    await apiApp.patch({
       url: '/accounts/change-currency',
       data: { currencyId: currencySelected.value.value }
     })
@@ -48,7 +48,7 @@ const handleSubmit = async(e) => {
 }
 const getCurrency = async () => {
   try {
-    const response = await apiAuth.get({
+    const response = await apiApp.get({
       url: '/currencies'
     })
 
@@ -78,53 +78,57 @@ onMounted(() => {
 </script>
 
 <template>
-<div class='currency-page'>
-  <LoginLayout
-    title="Selecciona tu moneda local"
-  >
-    <form class="form-login" @submit="handleSubmit">
-      <div class="input-container">
-        <div class="title">
-          <span>Cuenta actual:</span>
-          <div class="warning-icon">
-            <IconWarning />
+  <div class="currency-page">
+    <LoginLayout
+      title="Selecciona tu moneda local"
+    >
+      <form
+        class="form-login"
+        @submit="handleSubmit"
+      >
+        <div class="input-container">
+          <div class="title">
+            <span>Cuenta actual:</span>
+            <div class="warning-icon">
+              <IconWarning />
+            </div>
+          </div>
+          <CustomInputText
+            v-model="inputAccountName"
+            :disabled="true"
+            :icon-component="IconAccount"
+          />
+          <div class="warning-text">
+            <p>
+              La creación de cuentas adicionales es una característica exclusiva del <strong>plan Premium</strong>. Puedes suscribirte a este plan directamente desde la aplicación para disfrutar de esta y otras ventajas.
+            </p>
+            <div class="icon-component">
+              <IconTriangle />
+            </div>
           </div>
         </div>
-        <CustomInputText
-          v-model="inputAccountName"
-          :disabled="true"
-          :icon-component="IconAccount"
-        />
-        <div class="warning-text">
-          <p>
-            La creación de cuentas adicionales es una característica exclusiva del <strong>plan Premium</strong>. Puedes suscribirte a este plan directamente desde la aplicación para disfrutar de esta y otras ventajas.</p>
-          <div class="icon-component">
-            <IconTriangle />
+        <div class="input-container">
+          <div class="title">
+            <span>Monedas:</span>
           </div>
+          <CustomSelect
+            v-model="currencySelected"
+            placeholder="Escoge tu moneda local"
+            :items="currencyList"
+          />
         </div>
-      </div>
-      <div class="input-container">
-        <div class="title">
-          <span>Monedas:</span>
-        </div>
-        <CustomSelect
-          placeholder="Escoge tu moneda local"
-          v-model="currencySelected"
-          :items="currencyList"
-        />
-      </div>
   
-      <div class="submit-button">
-        <CustomButton
-          text="Ingresar"
-          type="submit"
-          :loading="isLoading"
-          :disabled="isSelectedValue"
-        />
-      </div>
-    </form>
-  </LoginLayout>
-</div>
+        <div class="submit-button">
+          <CustomButton
+            text="Ingresar"
+            type="submit"
+            :loading="isLoading"
+            :disabled="isSelectedValue"
+          />
+        </div>
+      </form>
+    </LoginLayout>
+  </div>
 </template>
 
 <style lang="scss" scoped>

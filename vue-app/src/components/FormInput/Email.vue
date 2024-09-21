@@ -5,6 +5,7 @@ import IconEmail from "@icons/form/IconEmail.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
+defineOptions({ name: "FormInputEmail" });
 const emit = defineEmits(["validate"]);
 
 const inputValue = ref("");
@@ -48,17 +49,20 @@ const updateState = (notification, validationState, emitValue = inputValue.value
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation !== null">
+      <div
+        v-if="stateValidation !== null"
+        class="icon"
+      >
         <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
 
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
-      @input="validateValue"
-      placeholder="david@cashflow.com"
       v-model="inputValue"
+      placeholder="david@cashflow.com"
       :icon-component="IconEmail"
+      @input="validateValue"
     />
   </div>
 </template>

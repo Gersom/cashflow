@@ -56,13 +56,19 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="register-form" @submit="handleSubmit">
+  <form
+    class="register-form"
+    @submit="handleSubmit"
+  >
     <div
+      v-for="(inputComponent, key) in componentMap"
+      :key="key"
       class="input-container"
-      v-for="(inputComponent, key) in componentMap" :key="key">
+    >
       <component
         :is="inputComponent"
-        @validate="(txt, valid) => handleInput(key, txt, valid)" />
+        @validate="(txt, valid) => handleInput(key, txt, valid)"
+      />
     </div>
 
     <div class="submit-button">

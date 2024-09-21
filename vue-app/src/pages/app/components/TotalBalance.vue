@@ -17,7 +17,9 @@ defineOptions({
   <div class="balance">
     <small>Saldo total</small>
     <br>
-    <h3 class="underlined"> $ {{ props.balance }} </h3>
+    <h3 class="underlined">
+      $ {{ props.balance }}
+    </h3>
   </div>
 </template>
 

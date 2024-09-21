@@ -45,7 +45,10 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="form-login" @submit="handleSubmit">
+  <form
+    class="form-login"
+    @submit="handleSubmit"
+  >
     <div class="input-container">
       <Email @validate="(txt, valid) => handleInput('email', txt, valid)" />
     </div>

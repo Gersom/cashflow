@@ -60,7 +60,10 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="change-password" @submit="handleSubmit">
+  <form
+    class="change-password"
+    @submit="handleSubmit"
+  >
     <p class="recover-password-description">
       <strong>Paso 3/3:</strong> Ingresa tu nueva contraseña, ya casi terminamos.
     </p>
@@ -68,13 +71,15 @@ const handleSubmit = async(e) => {
     <div class="input-container">
       <Password
         text-input="Nueva contraseña"
-        @validate="(txt, valid) => handleInput('password', txt, valid)" />
+        @validate="(txt, valid) => handleInput('password', txt, valid)"
+      />
     </div>
     <div class="input-container">
       <ConfirmPassword
         text-input="Confirmar nueva contraseña"
         :password="formData.password.value"
-        @validate="(txt, valid) => handleInput('confirmPassword', txt, valid)" />
+        @validate="(txt, valid) => handleInput('confirmPassword', txt, valid)"
+      />
     </div>
 
     <p class="recover-password-description">

@@ -26,7 +26,10 @@ const formattedAmount = computed(() => {
 </script>
 
 <template>
-  <div class="transaction-badge" :class="{ positive: isPositive }">
+  <div
+    class="transaction-badge"
+    :class="{ positive: isPositive }"
+  >
     <p class="badge">
       {{ sign }} {{ currentCurrency.symbol }} {{ formattedAmount }}
     </p>
@@ -40,7 +43,10 @@ const formattedAmount = computed(() => {
         {{ sign }} {{ formattedAmount }} {{ currency.symbol }}
       </p>
     </template> -->
-    <div class="arrow-icon" :class="{ 'rotate-180': !isPositive }">
+    <div
+      class="arrow-icon"
+      :class="{ 'rotate-180': !isPositive }"
+    >
       <IconArrow />
     </div>
   </div>

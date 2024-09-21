@@ -72,7 +72,11 @@ const chartOptions = ref({
 </script>
 
 <template>
-        <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
+  <apexchart
+    type="donut"
+    :options="chartOptions"
+    :series="series"
+  />
 </template>
 
 <style scoped>

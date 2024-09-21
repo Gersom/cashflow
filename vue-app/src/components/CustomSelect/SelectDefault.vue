@@ -51,7 +51,10 @@ const textSelect = computed(() => {
       'is-open': isOpen
     }"
   >
-    <label class="label" @click="toggleOpen">
+    <label
+      class="label"
+      @click="toggleOpen"
+    >
       <span>
         {{ textSelect }}
       </span>
@@ -62,11 +65,14 @@ const textSelect = computed(() => {
     </label>
 
 
-    <ul class='list' v-show="isOpen">
+    <ul
+      v-show="isOpen"
+      class="list"
+    >
       <li
-        class="item"
         v-for="(item, index) in props.items"
         :key="index + item.value"
+        class="item"
         @click="handleItemClick(item)"
       >
         {{ item.text }}

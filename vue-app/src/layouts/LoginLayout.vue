@@ -39,13 +39,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class='login-layout'>
+  <div class="login-layout">
     <div class="card">
       <div class="logo">
         <LogoTitle
           :title="!props.logoTitle"
         />
-        <p class="logo-subtitle" v-if="!!props.logoTitle">
+        <p
+          v-if="!!props.logoTitle"
+          class="logo-subtitle"
+        >
           {{ props.logoTitle }}
         </p>
       </div>

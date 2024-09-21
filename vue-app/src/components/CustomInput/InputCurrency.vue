@@ -159,7 +159,7 @@
 
 <template>
   <div
-    class='custom-input-currency'
+    class="custom-input-currency"
     :class="{
       'is-dark-theme': themeStore.currentTheme === 'dark',
       'is-expense-transaction': props.transactionType === 'expense',
@@ -172,8 +172,8 @@
         {{ props.currencySymbol }}
       </span>
       <input
-        class="input-tag"
         ref="inputRef"
+        class="input-tag"
         :value="valueInput"
         @blur="handleBlur"
         @focus="handleFocus"

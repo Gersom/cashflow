@@ -28,15 +28,20 @@ const props = defineProps({
     :class="{ 'is-edit': props.isEdit }"
     :style="{ marginBottom: props.marginBottom }"
   >
-    <h3 class="title" v-if="!props.isEdit">
+    <h3
+      v-if="!props.isEdit"
+      class="title"
+    >
       <span class="normal-title">
         {{ props.title }}
       </span>
       <span class="two-point-title"> :</span>
     </h3>
 
-    <button class="title" 
-      v-if="props.isEdit" @click="emit('edit')"
+    <button
+      v-if="props.isEdit" 
+      class="title"
+      @click="emit('edit')"
     >
       <span class="normal-title">
         {{ props.title }}

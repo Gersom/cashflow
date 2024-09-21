@@ -116,7 +116,10 @@ const handleDeleteMovement = () => {
 </script>
 
 <template>
-  <form class="card create-card" @submit="submitMovement">
+  <form
+    class="card create-card"
+    @submit="submitMovement"
+  >
     <CardTitle
       :title="`${isEdit ? 'Editar' : 'Crear nuevo'} movimiento`"
     />
@@ -128,16 +131,16 @@ const handleDeleteMovement = () => {
       <div class="input-group">
         <p>Monto</p>
         <CustomInputCurrency
+          v-model="amountInput"
           :transaction-type="expenseInput.value"
           :currency-symbol="accountsStore.currentCurrency.symbol"
-          v-model="amountInput"
         />
       </div>
       <div class="input-group">
         <p>Tipo</p>
         <CustomInputRadio
-          :options="radioData"
           v-model="expenseInput"
+          :options="radioData"
         />
       </div>
 
@@ -146,23 +149,29 @@ const handleDeleteMovement = () => {
       </div>
       <div class="input-group">
         <InputCheckBox
-        :text="checkboxDescription ? 'Descripción' : 'Agregar una descripción'"
-        v-model="checkboxDescription"
+          v-model="checkboxDescription"
+          :text="checkboxDescription ? 'Descripción' : 'Agregar una descripción'"
         />
       </div>
-      <div class="input-group" v-show="checkboxDescription">
+      <div
+        v-show="checkboxDescription"
+        class="input-group"
+      >
         <CustomInputTextarea
-        placeholder="Movimiento nuevo..."
-        v-model="descriptionInput"
+          v-model="descriptionInput"
+          placeholder="Movimiento nuevo..."
         />
       </div>
       <div class="input-group">        
         <InputCheckBox
-        :text="checkboxCategories ? 'Categorias' : 'Agregar categorias'"
-        v-model="checkboxCategories"
+          v-model="checkboxCategories"
+          :text="checkboxCategories ? 'Categorias' : 'Agregar categorias'"
         />
       </div>
-      <div class="input-group" v-show="checkboxCategories">
+      <div
+        v-show="checkboxCategories"
+        class="input-group"
+      >
         <InputCategory
           :categories="selectedCategories"
           @change-categories="handleChangeCategories"
@@ -180,7 +189,10 @@ const handleDeleteMovement = () => {
           :icon-component="isEdit ? IconEdit : IconSave"
         />
       </div>
-      <div class="button-delete" v-if="props.isEdit">
+      <div
+        v-if="props.isEdit"
+        class="button-delete"
+      >
         <CustomButton
           color="var(--error-color)"
           text="Eliminar"

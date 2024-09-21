@@ -10,14 +10,14 @@ defineOptions({
 
 <template>
   <div class="card chart-card">
-    <TotalBalance/>
+    <TotalBalance />
     <div class="chart-container">
-      <DoughnutChart></DoughnutChart>
+      <DoughnutChart />
     </div>
     <div class="reserved">
-      <Stat/>
-      <Stat/>
-      <Stat/>
+      <Stat />
+      <Stat />
+      <Stat />
     </div>
   </div>
 </template>

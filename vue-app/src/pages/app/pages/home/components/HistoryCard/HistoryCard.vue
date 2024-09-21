@@ -49,19 +49,28 @@ onMounted(() => movementsStore.loadMovements())
     <div class="movements-summary">
       <div class="income-info">
         <TransactionBadge
-          :amount="parseFloat(movementsStore.totalIncome)" :isPositive="true"
+          :amount="parseFloat(movementsStore.totalIncome)"
+          :is-positive="true"
         />
-        <p class="paragraph">Ingresos</p>
+        <p class="paragraph">
+          Ingresos
+        </p>
       </div>
       <div class="expense-info">
         <TransactionBadge
-          :amount="parseFloat(movementsStore.totalExpenses)" :isPositive="false"
+          :amount="parseFloat(movementsStore.totalExpenses)"
+          :is-positive="false"
         />
-        <p class="paragraph">Gastos</p>
+        <p class="paragraph">
+          Gastos
+        </p>
       </div>
     </div>
 
-    <p class="no-movements" v-show="lengthMovements === 0">
+    <p
+      v-show="lengthMovements === 0"
+      class="no-movements"
+    >
       Todavia no tienes ninguna transacción registrada.
     </p>
 

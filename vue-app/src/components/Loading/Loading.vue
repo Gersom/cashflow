@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class='loading' />
+  <div class="loading" />
 </template>
 
 <style scoped>

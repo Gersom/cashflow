@@ -5,6 +5,7 @@ import IconWhtasapp from "@icons/form/IconWhatsapp.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
+defineOptions({ name: "FormInputNroWhatsapp" });
 const emit = defineEmits(["validate"]);
 
 const inputValue = ref("");
@@ -52,17 +53,20 @@ const updateState = (notification, validationState, emitValue = inputValue.value
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation !== null">
+      <div
+        v-if="stateValidation !== null"
+        class="icon"
+      >
         <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
 
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
-      @input="validateValue"
       v-model="inputValue"
       placeholder="+519********"
       :icon-component="IconWhtasapp"
+      @input="validateValue"
     />
   </div>
 </template>

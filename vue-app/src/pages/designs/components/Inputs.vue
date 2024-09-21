@@ -61,15 +61,18 @@ const onChangeCategories = (categories) => {
     <!-- Input Text Placeholder -->
     <li>
       <p><strong>Text</strong> placeholder</p>
-      <CustomInputText v-model="inputTextPlaceholder" placeholder="Ola 👌" />
+      <CustomInputText
+        v-model="inputTextPlaceholder"
+        placeholder="Ola 👌"
+      />
     </li>
 
     <!-- Input Text Default -->
     <li>
       <p>text icon</p>
       <CustomInputText
-        placeholder="https://..."
         v-model="inputTextIcon"
+        placeholder="https://..."
         :icon-component="IconUrl"
       />
     </li>
@@ -86,8 +89,8 @@ const onChangeCategories = (categories) => {
       <CustomInputCurrency v-model="inputCurrencyIncome" />
       <p><strong>Currency</strong> Expense</p>
       <CustomInputCurrency
-        transaction-type="expense"
         v-model="inputCurrencyExpense"
+        transaction-type="expense"
       />
     </li>
 
@@ -121,22 +124,28 @@ const onChangeCategories = (categories) => {
     <!-- Input Radio two option -->
     <li>
       <p><strong>Radio</strong> two option</p>
-      <CustomInputRadio :data="inputRadioDataTwo" v-model="inputRadioTwo" />
+      <CustomInputRadio
+        v-model="inputRadioTwo"
+        :data="inputRadioDataTwo"
+      />
     </li>
 
     <!-- Input Radio seven options -->
     <li>
       <p><strong>Radio</strong> seven options</p>
-      <CustomInputRadio :data="inputRadioDataSeven" v-model="inputRadioSeven" />
+      <CustomInputRadio
+        v-model="inputRadioSeven"
+        :data="inputRadioDataSeven"
+      />
     </li>
 
     <!-- Input Radio vertical four options -->
     <li>
       <p><strong>Radio vertical</strong> four options</p>
       <CustomInputRadio
+        v-model="inputRadioFour"
         :data="inputRadioDataFour"
         orientation="vertical"
-        v-model="inputRadioFour"
       />
     </li>
   </ul>

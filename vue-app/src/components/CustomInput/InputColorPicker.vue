@@ -47,7 +47,7 @@
 
 <template>
   <div
-    class='custom-input-color-picker'
+    class="custom-input-color-picker"
     :class="{ 'is-color-picker': showColorPicker }"
   >
     <div class="input-container">
@@ -71,11 +71,11 @@
         mode="solid"
         theme="dark"
         type="HEX"
-        inputType="RGB"
-        :showAlpha="false"
-        :showInputSet="false"
-        :showInputMenu="false"
-        :showPickerMode="false"
+        input-type="RGB"
+        :show-alpha="false"
+        :show-input-set="false"
+        :show-input-menu="false"
+        :show-picker-mode="false"
       />
     </DialogBlur>
 

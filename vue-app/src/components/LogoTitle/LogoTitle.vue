@@ -18,11 +18,14 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class='logo-title'>
+  <div class="logo-title">
     <div class="logo-icon">
       <IconLogo />
     </div>
-    <h2 class="title" v-if="title">
+    <h2
+      v-if="title"
+      class="title"
+    >
       <span style="--clr-logo: var(--secondary-color)">
         {{ titlePrimary }}
       </span>

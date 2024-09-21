@@ -54,20 +54,21 @@ onMounted(() => {
 </script>
 
 <template>
-<div class='recover-password'>
-  <LoginLayout title="Recuperar contraseña">
-    <component
-      @next="handleNextStep"
-      :is="componentsList[currentStep]" />
+  <div class="recover-password">
+    <LoginLayout title="Recuperar contraseña">
+      <component
+        :is="componentsList[currentStep]"
+        @next="handleNextStep"
+      />
     
-    <p class="register-link">
-      Ya te acordaste de tu contraseña?
-      <router-link :to="{ name: 'Login' }">
-        Inicia sesión.
-      </router-link> 
-    </p>
-  </LoginLayout>
-</div>
+      <p class="register-link">
+        Ya te acordaste de tu contraseña?
+        <router-link :to="{ name: 'Login' }">
+          Inicia sesión.
+        </router-link> 
+      </p>
+    </LoginLayout>
+  </div>
 </template>
 
 <style lang='scss' scoped>

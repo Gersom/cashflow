@@ -36,8 +36,11 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="card card-profile" @submit="handleSubmit">
-    <CardTitle title="Crear nueva contraseña "/>
+  <form
+    class="card card-profile"
+    @submit="handleSubmit"
+  >
+    <CardTitle title="Crear nueva contraseña " />
     <div class="card-pwds">
       <Password
         text-input="Contraseña actual"

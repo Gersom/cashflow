@@ -17,7 +17,7 @@ const props = defineProps({
   },
   iconComponent: {
     type: Object,
-    required: false,
+    default: null,
   },
   disabled: {
     type: Boolean,
@@ -58,21 +58,21 @@ const props = defineProps({
     @click="emit('click')"
   >
     <div
-      class="loading-container"
       v-show="loading"
+      class="loading-container"
     >
       <LoadingComponent />
     </div>
     <div
-      class="icon-component"
       v-show="!loading"
+      class="icon-component"
     >
       <component :is="iconComponent" />
     </div>
 
     <span
-      class="span-text"
       v-show="!loading"
+      class="span-text"
     >
       {{ text }}
     </span>

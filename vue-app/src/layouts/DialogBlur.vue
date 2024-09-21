@@ -47,6 +47,7 @@ const onClose = () => {
 
 <template>
   <div
+    v-show="props.show"
     class="dialog-blur"
     :class="{
       'is-dependent': props.dependent,
@@ -55,24 +56,29 @@ const onClose = () => {
       'is-top': props.positionY === 'top',
       'is-dark-theme': themeStore.currentTheme === 'dark',
     }"
-    v-show="props.show"
   >
     <button
       class="blur" 
       type="button"
       @click="onClose"
     />
-    <div class="content" :style="{ background: props.backgroundColor }">
+    <div
+      class="content"
+      :style="{ background: props.backgroundColor }"
+    >
       <button
+        v-if="props.buttonClose"
         class="button-close"
         type="button"
-        v-if="props.buttonClose"
         @click="onClose"
       >
         <IconCross />
       </button>
-      <slot></slot>
-      <div class="icon" v-if="props.dependent">
+      <slot />
+      <div
+        v-if="props.dependent"
+        class="icon"
+      >
         <IconTriangle />
       </div>
     </div>

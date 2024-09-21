@@ -50,14 +50,13 @@ const onFileChange = (e) => {
       </span>
     </button>
     <input
-      type="file"
       ref="fileInput"
+      type="file"
       :accept="props.acceptFile"
-      @change="onFileChange"
       style="display: none;"
-    />
+      @change="onFileChange"
+    >
   </div>
-
 </template>
 
 <style lang="scss" scoped>

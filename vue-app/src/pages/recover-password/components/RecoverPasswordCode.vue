@@ -78,18 +78,26 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class='recover-password-code' @submit="handleSubmit">
-
+  <form
+    class="recover-password-code"
+    @submit="handleSubmit"
+  >
     <p class="recover-password-description">
       <strong>Paso 2 de 3:</strong> Ingresa el código de verificación que te hemos enviado a tu correo electrónico.
     </p>
 
     <div class="input-container">
-      <InputCode :input-value="codeData.value" @validate="handleCode" />
+      <InputCode
+        :input-value="codeData.value"
+        @validate="handleCode"
+      />
     </div>
     <p class="recover-password-description">
       {{ 'Si no lo encuentras en  tu bandeja de entrada o en la carpeta de spam, podemos' }}
-      <a href="#" @click="handleNewCode">
+      <a
+        href="#"
+        @click="handleNewCode"
+      >
         enviarte un nuevo código.
       </a>
     </p>

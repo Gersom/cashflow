@@ -4,7 +4,7 @@ import LoadingComponent from '@components/Loading/Loading.vue'
 </script>
 
 <template>
-  <div class='logo-title'>
+  <div class="logo-title">
     <div class="logo-icon">
       <IconLogo />
     </div>

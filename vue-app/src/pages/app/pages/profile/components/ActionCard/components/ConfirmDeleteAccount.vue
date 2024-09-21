@@ -19,7 +19,7 @@ const handleClose = () => {
 </script>
 
 <template>
-  <div class='confirm-delete-account'>
+  <div class="confirm-delete-account">
     <h2 class="title">
       Borrar cuenta de usuario
     </h2>

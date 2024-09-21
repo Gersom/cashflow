@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class='verify-email-container'>
+  <div class="verify-email-container">
     <div class="logo-icon">
       <IconLogo />
     </div>

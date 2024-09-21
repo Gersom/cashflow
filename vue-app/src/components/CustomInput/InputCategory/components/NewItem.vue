@@ -11,7 +11,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="new-item" :class="{ 'is-selected': props.showClose }">
+  <div
+    class="new-item"
+    :class="{ 'is-selected': props.showClose }"
+  >
     <span class="icon">
       <IconAdd v-show="!props.showClose" />
       <IconClose v-show="props.showClose" />

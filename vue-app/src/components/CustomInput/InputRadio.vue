@@ -39,24 +39,24 @@
 
 <template>
   <div
-    class='custom-input-radio'
+    class="custom-input-radio"
     :class="{ 
       'is-dark-theme': currentTheme === 'dark',
       'is-vertical': orientation === 'vertical'
     }"
   >
     <label
-      class="label-tag"
-      :class="{ 'is-selected': valueInput?.value === item.value }"
-      v-for="(item, index) in props.options" 
+      v-for="(item, index) in props.options"
       :key="`radio${index}`"
+      class="label-tag" 
+      :class="{ 'is-selected': valueInput?.value === item.value }"
     >
       <input
+        v-model="valueInput"
         class="input-tab"
         type="radio"
         :value="item"
-        v-model="valueInput"
-      />
+      >
       <span class="radio" />
       <span class="input-text">
         {{ item.text }}

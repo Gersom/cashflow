@@ -64,31 +64,32 @@ const handleSubmit = async (fileBase64) => {
 
 <template>
   <div class="card card-profile">
-    <CardTitle title="Foto de perfil "/>
+    <CardTitle title="Foto de perfil " />
     <div class="card-content">
-
       <div class="upload">
-          <p class="upload-title">
-            <IconPicture/> Sube tu imagen</p>
+        <p class="upload-title">
+          <IconPicture /> Sube tu imagen
+        </p>
 
-          <div class="upload-content">
-            <p  class="upload-terms">
-              {{ newImage ? newImage.name : textformat }}
-            </p>
-            <div class="upload-button">
-              <UploadButton
-                :text="newImage ? 'Cambiar imagen' : textButtonUpload"
-                @upload-file="handleUploadFile"
-              />
-            </div>
+        <div class="upload-content">
+          <p class="upload-terms">
+            {{ newImage ? newImage.name : textformat }}
+          </p>
+          <div class="upload-button">
+            <UploadButton
+              :text="newImage ? 'Cambiar imagen' : textButtonUpload"
+              @upload-file="handleUploadFile"
+            />
           </div>
+        </div>
       </div>
 
       <div class="flex-avatar">
         <div class="user-avatar">
           <img
             :src="currentImage"
-            alt="User profile image">
+            alt="User profile image"
+          >
         </div>
       </div>
 
@@ -96,12 +97,11 @@ const handleSubmit = async (fileBase64) => {
 
       <div v-show="isButtonEnabled">
         <GeneralButton
-          @click="convertToBase64"
           :icon-component="IconSave"
           text="Guardar imagen"
+          @click="convertToBase64"
         />
       </div>
-        
     </div>
   </div>
 </template>

@@ -29,21 +29,21 @@
 
 <template>
   <div
-    class='custom-input-color'
+    class="custom-input-color"
     :class="{
       'is-dark-theme': themeStore.currentTheme === 'dark'
     }"
   >
     <label class="label-tab">
       <input
-        class="input-tag"
         v-model="valueInput"
+        class="input-tag"
         :style="{borderColor: valueInput}"
       >
       <button
         class="button-color"
-        @click="emit('select-color')"
         :style="{backgroundColor: valueInput}"
+        @click="emit('select-color')"
       />
     </label>
   </div>

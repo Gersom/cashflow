@@ -3,7 +3,7 @@ defineOptions({ name: "NavLink" });
 const props = defineProps({
   iconComponent: {
     type: Object,
-    required: false,
+    default: null,
   },
   pageName: {
     type: String,

@@ -3,26 +3,26 @@
 </script>
 
 <template>
-    <div class="masonry">
-        <div class="profile-actions">
-            <div class="item profile-area">
-                <slot name="profile" />
-            </div>
-            <div class="item actions-area">
-                <slot name="actions" />
-            </div>
-        </div>
-        <div class="personal-empty">
-            <div class="item personal-area">
-                <slot name="personal" />
-            </div>
-        </div>
-        <div class="password-empty">
-            <div class="item password-area">
-                <slot name="password" />
-            </div>
-        </div>
+  <div class="masonry">
+    <div class="profile-actions">
+      <div class="item profile-area">
+        <slot name="profile" />
+      </div>
+      <div class="item actions-area">
+        <slot name="actions" />
+      </div>
     </div>
+    <div class="personal-empty">
+      <div class="item personal-area">
+        <slot name="personal" />
+      </div>
+    </div>
+    <div class="password-empty">
+      <div class="item password-area">
+        <slot name="password" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style lang="scss" scoped>

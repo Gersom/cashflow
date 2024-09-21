@@ -10,9 +10,9 @@ const props = defineProps({
 <template>
   <div class="grid-cards">
     <div
-      class="card-item"
       v-for="index in props.itemCount"
       :key="`grid-cards-${index}`"
+      class="card-item"
     >
       <slot :name="`card-${index}`" />
     </div>

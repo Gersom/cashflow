@@ -58,19 +58,25 @@ const validateValue = (e) => {
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation == true">
+      <div
+        v-if="stateValidation == true"
+        class="icon"
+      >
         <IconSuccess />
       </div>
-      <div class="icon" v-if="stateValidation == false">
+      <div
+        v-if="stateValidation == false"
+        class="icon"
+      >
         <IconWarning />
       </div>
       <span>{{ textNotification || text }}</span>
     </div>
     <InputText
-      @input="validateValue"
       placeholder="* * * * *"
       :model-value="props.inputValue"
       :icon-component="IconSheet"
+      @input="validateValue"
     />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-defineOptions({ name: "Nav" });
+defineOptions({ name: "NavCustom" });
 import { ref } from "vue";
 import { useAppStore } from "@stores/app";
 import DialogBlur from "@layouts/DialogBlur.vue";
@@ -26,12 +26,18 @@ const closeInfoModal = () => {
 
 <template>
   <nav :class="['nav', { 'is-open': openNav }]">
-    <button class="open-nav" type="button">
+    <button
+      class="open-nav"
+      type="button"
+    >
       <IconOpenNav @click="openNav = true" />
     </button>
 
     <div class="nav-content">
-      <div class="logo" type="button">
+      <div
+        class="logo"
+        type="button"
+      >
         <div class="icon-logo">
           <IconLogo />
         </div>
@@ -49,14 +55,22 @@ const closeInfoModal = () => {
         />
       </div>
 
-      <button class="button-info" type="button" @click="openInfoModal">
+      <button
+        class="button-info"
+        type="button"
+        @click="openInfoModal"
+      >
         <div class="icon-info">
           <IconInfo />
         </div>
       </button>
     </div>
 
-    <button class="nav-blur" type="button" @click="openNav = false" />
+    <button
+      class="nav-blur"
+      type="button"
+      @click="openNav = false"
+    />
 
     <DialogBlur
       :button-close="true"

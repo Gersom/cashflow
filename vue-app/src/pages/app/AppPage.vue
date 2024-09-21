@@ -27,8 +27,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class='app-page'>
-    <div class="app-loading" v-if="!userStore.isFilled">
+  <div class="app-page">
+    <div
+      v-if="!userStore.isFilled"
+      class="app-loading"
+    >
       <LogoLoading />
     </div>
 

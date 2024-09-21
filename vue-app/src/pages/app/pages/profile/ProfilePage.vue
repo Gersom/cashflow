@@ -18,17 +18,17 @@ import ProfileCard from './components/ProfileCard.vue'
     <MainContainer>
       <Head />
       <MasonryCards>
-        <template v-slot:profile>
-          <ProfileCard/>
+        <template #profile>
+          <ProfileCard />
         </template>
-        <template v-slot:personal>
-            <PersonalCard/>
+        <template #personal>
+          <PersonalCard />
         </template>
-        <template v-slot:password>
-            <PasswordCard/>
+        <template #password>
+          <PasswordCard />
         </template>
-        <template v-slot:actions>
-            <ActionCard/>
+        <template #actions>
+          <ActionCard />
         </template>
       </MasonryCards>
     </MainContainer>

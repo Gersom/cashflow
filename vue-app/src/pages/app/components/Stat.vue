@@ -24,16 +24,25 @@ defineOptions({
 
 <template>
   <div class="stat">
-    <div :style="{backgroundColor: props.color }" class="color"/>
+    <div
+      :style="{backgroundColor: props.color }"
+      class="color"
+    />
     <section class="info">
-        <div class="top">
-            <p>{{label}}</p>
-            <p>{{currency}} $</p>
-        </div>
-        <div class="bot">
-            <progress id="file" max="100" :value="currency/100" >70%</progress>
-            <small :style="{ color: props.color }">{{currency/100}}%</small>
-        </div>
+      <div class="top">
+        <p>{{ label }}</p>
+        <p>{{ currency }} $</p>
+      </div>
+      <div class="bot">
+        <progress
+          id="file"
+          max="100"
+          :value="currency/100"
+        >
+          70%
+        </progress>
+        <small :style="{ color: props.color }">{{ currency/100 }}%</small>
+      </div>
     </section>
   </div>
 </template>

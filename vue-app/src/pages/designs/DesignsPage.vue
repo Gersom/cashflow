@@ -17,7 +17,9 @@ const toggleTheme = () => {
 
 <template>
   <div class="designs-page">
-    <h1 class="title">Desing Page</h1>
+    <h1 class="title">
+      Desing Page
+    </h1>
     <p>Tema actual: {{ themeStore.currentTheme }}</p>
     <CustomButton
       text="Cambiar tema"
@@ -25,13 +27,19 @@ const toggleTheme = () => {
       :transparent="true"
       @click="toggleTheme"
     />
-    <h2 class="title">FORM</h2>
+    <h2 class="title">
+      FORM
+    </h2>
     <FormSection />
 
-    <h2 class="title">INPUTS</h2>
+    <h2 class="title">
+      INPUTS
+    </h2>
     <InputsSection />
 
-    <h2 class="title">BUTTONS</h2>
+    <h2 class="title">
+      BUTTONS
+    </h2>
     <ButtonsSection />
   </div>
 </template>

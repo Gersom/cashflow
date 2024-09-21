@@ -50,15 +50,18 @@ const valueInput = computed({
     }"
   >
     <label class="label">
-      <div class="icon-component" v-if="iconComponent">
+      <div
+        v-if="iconComponent"
+        class="icon-component"
+      >
         <component :is="iconComponent" />
       </div>
       <input
-        class="input-tag"
         v-model="valueInput"
+        class="input-tag"
         :placeholder="placeholder"
         :disabled="disabled"
-      />
+      >
     </label>
   </div>
 </template>

@@ -20,32 +20,32 @@ const props = defineProps({
 
 // Data
 const showCategorySelect = ref(false);
-const categories = ref([]);
+const categoriesState = ref([]);
 
-const propCategories = computed(() => props.categories)
+const categoriesProp = computed(() => props.categories)
 
 // Store
 const themeStore = useThemeStore();
 const categoriesStore = useCategoriesStore()
 
-watch(propCategories, (newValue) => {
-  categories.value = newValue
+watch(categoriesProp, (newValue) => {
+  categoriesState.value = newValue
 })
 
 // Methods
 const selectCategorySelect = (cat) => {
-  categories.value = [...categories.value, cat];
+  categoriesState.value = [...categoriesState.value, cat];
   nextTick(() => {
-    emit("change-categories", categories.value);
+    emit("change-categories", categoriesState.value);
   });
-  if (categories.value.length >= 3) {
+  if (categoriesState.value.length >= 3) {
     showCategorySelect.value = false;
   }
 };
 const removeCategorySelect = (index) => {
-  categories.value.splice(index, 1);
+  categoriesState.value.splice(index, 1);
   nextTick(() => {
-    emit("change-categories", categories.value);
+    emit("change-categories", categoriesState.value);
   });
 };
 const closeCategorySelect = () => {
@@ -68,20 +68,20 @@ onMounted(() => categoriesStore.loadCategories())
   >
     <div class="container">
       <button
+        v-for="(cat, index) in categoriesState"
+        :key="`category${index}`"
         class="item"
         type="button"
-        v-for="(cat, index) in categories"
-        :key="`category${index}`"
         @click="removeCategorySelect(index)"
       >
         <Category :data="cat" />
       </button>
 
       <button
+        v-show="categoriesState.length < 3"
         class="item"
         type="button"
         @click="toogleCategorySelect"
-        v-show="categories.length < 3"
       >
         <NewItem :show-close="showCategorySelect" />
       </button>
@@ -94,7 +94,7 @@ onMounted(() => categoriesStore.loadCategories())
       @close="closeCategorySelect"
     >
       <CategorySelect
-        :selected-categories="categories"
+        :selected-categories="categoriesState"
         @select="selectCategorySelect"
       />
     </DialogBlur>

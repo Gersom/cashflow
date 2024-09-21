@@ -18,7 +18,9 @@ const appStore = useAppStore();
       {{ appStore.description }}
     </p>
 
-    <h3 class="developers-title">Developers</h3>
+    <h3 class="developers-title">
+      Developers
+    </h3>
     <p class="developers-paragraph">
       <a
         :href="appStore.devGersom.link"
@@ -28,12 +30,18 @@ const appStore = useAppStore();
         {{ appStore.devGersom.name }}
       </a>
       <span class="separator"> - </span>
-      <a :href="appStore.devDavid.link" class="developers-link" target="_blank">
+      <a
+        :href="appStore.devDavid.link"
+        class="developers-link"
+        target="_blank"
+      >
         {{ appStore.devDavid.name }}
       </a>
     </p>
 
-    <h3 class="version-title">Versión</h3>
+    <h3 class="version-title">
+      Versión
+    </h3>
     <p class="version-paragraph">
       {{ appStore.version }}
     </p>

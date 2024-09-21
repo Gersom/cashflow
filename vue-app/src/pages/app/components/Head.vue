@@ -4,6 +4,7 @@ import { useUserStore } from '@stores/user';
 import { storeToRefs } from 'pinia';
 import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
 
+defineOptions({ name: "HeadCustom" });
 const route = useRoute()
 
 const month = getCurrentMonthName()
@@ -18,13 +19,18 @@ const { user } = storeToRefs(userStore);
   <header class="page-header">
     <div class="header-content">
       <div class="info">
-        <h1 class="page-title">{{ route.meta.title }}</h1>
-        <p class="user-name">{{ user.name }}</p>
+        <h1 class="page-title">
+          {{ route.meta.title }}
+        </h1>
+        <p class="user-name">
+          {{ user.name }}
+        </p>
       </div>
       <div class="user-avatar">
         <img
           src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="User profile image">
+          alt="User profile image"
+        >
       </div>
     </div>
 

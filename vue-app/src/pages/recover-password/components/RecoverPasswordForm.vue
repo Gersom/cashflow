@@ -50,7 +50,10 @@ const handleSubmit = async(e) => {
 </script>
 
 <template>
-  <form class="recover-password-form" @submit="handleSubmit">
+  <form
+    class="recover-password-form"
+    @submit="handleSubmit"
+  >
     <p class="recover-password-description">
       <strong>Paso 1 de 3:</strong> Ingresa tu correo electrónico para recibir un código de verificación
     </p>

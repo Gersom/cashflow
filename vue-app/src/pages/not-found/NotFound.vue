@@ -10,7 +10,10 @@ const themeStore = useThemeStore()
 </script>
 
 <template>
-  <div class='not-found' :class="`is-${themeStore.currentTheme}-theme`">
+  <div
+    class="not-found"
+    :class="`is-${themeStore.currentTheme}-theme`"
+  >
     <div class="logo-icon">
       <IconLogo />
     </div>

@@ -5,6 +5,7 @@ import IconUserEdit from "@icons/form/IconUserEdit.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
+defineOptions({ name: "FormInputNickname" });
 const emit = defineEmits(["validate"]);
 
 const inputValue = ref("");
@@ -47,7 +48,10 @@ const updateState = (notification, validationState, emitValue = inputValue.value
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation !== null">
+      <div
+        v-if="stateValidation !== null"
+        class="icon"
+      >
         <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
 
@@ -56,8 +60,8 @@ const updateState = (notification, validationState, emitValue = inputValue.value
     <InputText
       v-model="inputValue"
       placeholder="David"
-      @input="validateValue"
       :icon-component="IconUserEdit"
+      @input="validateValue"
     />
   </div>
 </template>

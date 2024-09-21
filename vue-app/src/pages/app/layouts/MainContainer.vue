@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <main class='main-container'>
+  <main class="main-container">
     <slot />
   </main>
 </template>

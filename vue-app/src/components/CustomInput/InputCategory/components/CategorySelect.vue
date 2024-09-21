@@ -26,15 +26,15 @@ const addCategory = (cat) => {
   <div class="category-list">
     <ul class="category-list-content">
       <li
-        class="category-item"
         v-for="(cat, index) in categoriesStore.data"
         :key="`category${index}`"
+        class="category-item"
       >
         <button
+          v-if="!isCategorySelected(cat)"
           class="button"
           type="button"
           @click="addCategory(cat)"
-          v-if="!isCategorySelected(cat)"
         >
           <i
             :class="`icon icon-${cat.iconName}`"
@@ -46,9 +46,9 @@ const addCategory = (cat) => {
           </span>
         </button>
         <div
+          v-if="isCategorySelected(cat)"
           class="button"
           :class="{ 'is-selected': isCategorySelected(cat) }"
-          v-if="isCategorySelected(cat)"
         >
           <div class="icon">
             <div class="icon-svg">

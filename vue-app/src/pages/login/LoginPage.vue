@@ -49,15 +49,15 @@ const handleSubmit = async(data) => {
 </script>
 
 <template>
-<div class='login-page'>
-  <LoginLayout
-    title="Iniciar sesión"
-    :verify-session="true"
-  >
-    <LoginForm
-      :is-loading="isLoading"
-      @submit="handleSubmit"
-    />
-  </LoginLayout>
-</div>
+  <div class="login-page">
+    <LoginLayout
+      title="Iniciar sesión"
+      :verify-session="true"
+    >
+      <LoginForm
+        :is-loading="isLoading"
+        @submit="handleSubmit"
+      />
+    </LoginLayout>
+  </div>
 </template>

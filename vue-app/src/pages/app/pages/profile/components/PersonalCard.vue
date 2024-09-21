@@ -37,16 +37,16 @@ const isButtonEnabled = computed(() => {
 
 <template>
   <div class="card card-profile">
-    <CardTitle title="Datos personales"/>
+    <CardTitle title="Datos personales" />
     <div class="card-inputs">
-      <Nickname @validate="handlerNickname"/>
-      <Email @validate="handlerEmail"/>
+      <Nickname @validate="handlerNickname" />
+      <Email @validate="handlerEmail" />
       <NroWhatsapp @validate="handlerNroWhatsapp" />
       <CustomButton
-            :disabled="!isButtonEnabled"
-            :icon-component="IconSave"
-            text="Cambiar contraseña"
-            />
+        :disabled="!isButtonEnabled"
+        :icon-component="IconSave"
+        text="Cambiar contraseña"
+      />
     </div>
   </div>
 </template>

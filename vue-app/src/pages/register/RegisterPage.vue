@@ -35,12 +35,12 @@ const handleSubmit = async(data) => {
 </script>
 
 <template>
-<div class='register-page'>
-  <LoginLayout title="Crear una cuenta">
-    <RegisterForm
-      :is-loading="isLoading"
-      @submit="handleSubmit"
-    />
-  </LoginLayout>
-</div>
+  <div class="register-page">
+    <LoginLayout title="Crear una cuenta">
+      <RegisterForm
+        :is-loading="isLoading"
+        @submit="handleSubmit"
+      />
+    </LoginLayout>
+  </div>
 </template>

@@ -35,14 +35,14 @@
 
 <template>
   <div
-    class='custom-input-textarea'
+    class="custom-input-textarea"
     :class="{ 'is-dark-theme': currentTheme === 'dark' }"
   >
     <textarea
-      class="textarea-tag"
       v-model="valueInput"
+      class="textarea-tag"
       :placeholder="placeholder"
-    ></textarea>
+    />
   </div>
 </template>
 

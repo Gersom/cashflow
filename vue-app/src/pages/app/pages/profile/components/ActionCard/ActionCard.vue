@@ -37,7 +37,7 @@ const handleCloseDialog = () => {
 
 <template>
   <div class="card card-profile">
-    <CardTitle title="Acciones"/>
+    <CardTitle title="Acciones" />
 
     <h4 class="title">
       Sesión
@@ -55,7 +55,10 @@ const handleCloseDialog = () => {
 
     <span class="separador" />
 
-    <h4 class="title" style="--action-card-color: var(--error-color)">
+    <h4
+      class="title"
+      style="--action-card-color: var(--error-color)"
+    >
       Cuenta de usuario
     </h4>
     <p class="paragraph">

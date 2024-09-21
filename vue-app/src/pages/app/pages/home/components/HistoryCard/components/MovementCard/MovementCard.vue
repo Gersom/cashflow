@@ -43,15 +43,20 @@ const formattedDate = computed(() => {
       <div class="info-tag">
         <div class="content">
           <div class="description">
-            <p class="details-text">{{ props.data?.title }}</p>
+            <p class="details-text">
+              {{ props.data?.title }}
+            </p>
           </div>
           <div class="badge-info">
-            <time :datetime="isoDate" class="date">
+            <time
+              :datetime="isoDate"
+              class="date"
+            >
               {{ formattedDate }}
             </time>
             <TransactionBadge
               :amount="parseFloat(props.data?.amount) || 0"
-              :isPositive="props.data?.type === 'income'"
+              :is-positive="props.data?.type === 'income'"
             />
           </div>
         </div>
@@ -64,8 +69,12 @@ const formattedDate = computed(() => {
               <IconEdit />
             </div>
             <div class="edit-text">
-              <p class="name">Editar</p>
-              <p class="description">{{ props.data?.title }}</p>
+              <p class="name">
+                Editar
+              </p>
+              <p class="description">
+                {{ props.data?.title }}
+              </p>
             </div>
           </div>
         </button>

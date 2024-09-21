@@ -5,6 +5,7 @@ import IconPassword from "@icons/form/IconPassword.vue";
 import IconSuccess from "@icons/state/IconSuccess.vue";
 import IconWarning from "@icons/state/IconWarning.vue";
 
+defineOptions({ name: "FormInputPassword" });
 const props = defineProps({
   textInput: {
     type: String,
@@ -49,16 +50,19 @@ const updateState = (notification, validationState, emitValue = inputValue.value
     }"
   >
     <div class="title">
-      <div class="icon" v-if="stateValidation !== null">
+      <div
+        v-if="stateValidation !== null"
+        class="icon"
+      >
         <component :is="stateValidation ? IconSuccess : IconWarning" />
       </div>
 
       <span>{{ textNotification || props.textInput }}</span>
     </div>
     <InputPassword
-      @input="validateValue"
       v-model="inputValue"
       :icon-component="IconPassword"
+      @input="validateValue"
     />
   </div>
 </template>

@@ -38,15 +38,21 @@ const valueInput = computed({
     :class="{ 'is-check': modelValue }"
   >
     <div class="checkmark-container">
-      <span class="checkmark"></span>
-      <div class="icon" v-show="modelValue">
+      <span class="checkmark" />
+      <div
+        v-show="modelValue"
+        class="icon"
+      >
         <IconCheck />
       </div>
     </div>
     <span class="text">
       {{ text }}
     </span>
-    <input type="checkbox" v-model="valueInput" />
+    <input
+      v-model="valueInput"
+      type="checkbox"
+    >
   </label>
 </template>
 

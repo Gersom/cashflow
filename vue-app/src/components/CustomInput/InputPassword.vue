@@ -47,33 +47,36 @@ const valueInput = computed({
     }"
   >
     <label class="label">
-      <div class="icon-component" v-if="iconComponent">
+      <div
+        v-if="iconComponent"
+        class="icon-component"
+      >
         <component :is="iconComponent" />
       </div>
       <input
+        v-if="showPassword"
+        v-model="valueInput"
         class="input-tag"
         type="text"
-        v-model="valueInput"
-        v-if="showPassword"
-      />
+      >
       <input
+        v-if="!showPassword"
+        v-model="valueInput"
         class="input-tag"
         placeholder="* * * * * *"
         type="password"
-        v-model="valueInput"
-        v-if="!showPassword"
-      />
+      >
       <button
-        class="showEye"
         v-show="showPassword"
+        class="showEye"
         type="button"
         @click="showPassword = !showPassword"
       >
         <IconEye />
       </button>
       <button
-        class="showEye"
         v-show="!showPassword"
+        class="showEye"
         type="button"
         @click="showPassword = !showPassword"
       >

@@ -1,11 +1,12 @@
 <script setup>
 import IconSuccess from '@icons/state/IconSuccess.vue';
 import CustomButton from '@components/CustomButton/GeneralButton.vue';
+import { ref } from 'vue';
 
 const emit = defineEmits(['selected-year', 'selected-month', 'close']);
 
-const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-const years = ['2021', '2022', '2023', '2024'];
+const months = ref(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']);
+const years = ref(['2021', '2022', '2023', '2024']);
 
 const props = defineProps({
   year: {
@@ -20,71 +21,71 @@ const props = defineProps({
 </script>
 
 <template>
-<div class="select-date">
-  <div class='select-date-content'>
-    <ul class="years-list">
-      <li
-        v-for="(year, index) in years"
-        :key="`year-${index}`"
-        :class="{ 'year-selected': year.toLowerCase() === props.year.toLowerCase() }"
-      >
-        <button
-          class="year-button"
-          @click="emit('selected-year', year)"
-          v-if="year.toLowerCase() !== props.year.toLowerCase()"
+  <div class="select-date">
+    <div class="select-date-content">
+      <ul class="years-list">
+        <li
+          v-for="(yearItem, index) in years"
+          :key="`year-${index}`"
+          :class="{ 'year-selected': yearItem.toLowerCase() === props.year.toLowerCase() }"
         >
-          {{ year }}
-        </button>
+          <button
+            v-if="yearItem.toLowerCase() !== props.year.toLowerCase()"
+            class="year-button"
+            @click="emit('selected-year', yearItem)"
+          >
+            {{ yearItem }}
+          </button>
 
-        <div
-          class="year-button"
-          v-if="year.toLowerCase() === props.year.toLowerCase()"
-        >
-          <div class="icon">
-            <IconSuccess />
+          <div
+            v-if="year.toLowerCase() === props.year.toLowerCase()"
+            class="year-button"
+          >
+            <div class="icon">
+              <IconSuccess />
+            </div>
+            <label>{{ yearItem }}</label>
           </div>
-          <label>{{ year }}</label>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
 
-    <span class="separator" />
+      <span class="separator" />
 
-    <ul class="months-list">
-      <li
-        v-for="(month, index) in months"
-        :key="`month-${index}`"
-        :class="{ 'month-selected': month.toLowerCase() === props.month.toLowerCase() }"
-      >
-        <button
-          class="month-button"
-          v-if="month.toLowerCase() !== props.month.toLowerCase()"
-          @click="emit('selected-month', month)"
+      <ul class="months-list">
+        <li
+          v-for="(monthItem, index) in months"
+          :key="`month-${index}`"
+          :class="{ 'month-selected': monthItem.toLowerCase() === props.month.toLowerCase() }"
         >
-          {{ month }}
-        </button>
-        <div
-          class="month-button"
-          v-if="month.toLowerCase() === props.month.toLowerCase()"
-        >
-          <div class="icon">
-            <IconSuccess />
+          <button
+            v-if="monthItem.toLowerCase() !== props.month.toLowerCase()"
+            class="month-button"
+            @click="emit('selected-month', monthItem)"
+          >
+            {{ monthItem }}
+          </button>
+          <div
+            v-if="monthItem.toLowerCase() === props.month.toLowerCase()"
+            class="month-button"
+          >
+            <div class="icon">
+              <IconSuccess />
+            </div>
+            <label>{{ monthItem }}</label>
           </div>
-          <label>{{ month }}</label>
-        </div>
-      </li>
-    </ul>
-  </div>
+        </li>
+      </ul>
+    </div>
 
-  <div class="button-accept">
-    <CustomButton
-      :transparent="true"
-      @click="emit('close')"
-      size="small"
-      text="Ok"
-    />
+    <div class="button-accept">
+      <CustomButton
+        :transparent="true"
+        size="small"
+        text="Ok"
+        @click="emit('close')"
+      />
+    </div>
   </div>
-</div>
 </template>
 
 <style lang="scss" scoped>
