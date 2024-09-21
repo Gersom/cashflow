@@ -27,8 +27,8 @@ const tokenController = {
     res.status(200).json(responseSuccess('Token refreshed successfully'));
   },
   async verify(req, res) {
-    const { access_token } = req.cookies;
-    await tokenService.verify(access_token);
+    const { refresh_token } = req.cookies;
+    await tokenService.verify(refresh_token);
     res.status(200).json(responseSuccess('Token verified successfully'));
   },
 };

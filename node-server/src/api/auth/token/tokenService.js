@@ -20,9 +20,9 @@ const tokenService = {
             throw new AuthorizationError("Invalid refresh token");
         }
     },
-    verify : async (access_token) => {
+    verify : async (refresh_token) => {
         try {
-            const payload = jwt.verify(access_token, envJwt.secret);
+            const payload = jwt.verify(refresh_token, envJwt.refreshSecret);
             return payload;
         } catch (error) {
             throw new AuthorizationError("Invalid access token");
