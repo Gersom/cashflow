@@ -1,8 +1,8 @@
 <script setup>
+import { apiAuth } from "@src/services/api";
+import { getLocalStorage } from "@src/utils/localStorage";
 import { ref, computed } from "vue"
 import { useToast } from 'vue-toastification'
-import { getLocalStorage } from "@src/utils/localStorage";
-import { apiPost } from "@src/services/api";
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
@@ -34,7 +34,7 @@ const handleSubmit = async(e) => {
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
-    await apiPost({
+    await apiAuth.post({
       url: `/auth/recover-password/reset`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,

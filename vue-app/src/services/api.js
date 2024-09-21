@@ -1,26 +1,35 @@
-import { axiosApi, axiosAuth } from '@src/services/axiosConfig.js';
+import { axiosDefault, axiosInterceptors } from '@src/services/axiosConfig.js';
 
-const createRequest = (method) => (options) =>
-  axiosAuth({
+const createRequest = (method, path = '') => (options = {}) =>
+  axiosDefault({
     method,
-    ...options
+    ...options,
+    url: path + (options.url || '')
   });
 
-
-const createSpecialRequest = (method) => (options) =>
-  axiosApi({
+const createSpecialRequest = (method, path = '') => (options = {}) =>
+  axiosInterceptors({
     method,
-    ...options
+    ...options,
+    url: path + (options.url || '')
   });
 
-export const apiPost = createRequest('POST');
-export const apiGet = createRequest('GET');
-export const apiPut = createRequest('PUT');
-export const apiDel = createRequest('DELETE');
-export const apiPatch = createRequest('PATCH');
+const createApiObject = (createRequestFunc, basePath = '') => ({
+  get: createRequestFunc('GET', basePath),
+  post: createRequestFunc('POST', basePath),
+  put: createRequestFunc('PUT', basePath),
+  patch: createRequestFunc('PATCH', basePath),
+  delete: createRequestFunc('DELETE', basePath)
+});
 
-export const apiPostAuth = createSpecialRequest('POST');
-export const apiGetAuth = createSpecialRequest('GET');
-export const apiPutAuth = createSpecialRequest('PUT');
-export const apiDelAuth = createSpecialRequest('DELETE');
-export const apiPatchAuth = createSpecialRequest('PATCH');
+export const apiDefault = createApiObject(createRequest);
+export const apiAuth = createApiObject(createRequest, '/auth');
+export const apiAuthToken = createApiObject(createSpecialRequest, '/auth');
+export const apiApp = createApiObject(createSpecialRequest, '/common');
+
+export default {
+  apiDefault,
+  apiAuth,
+  apiAuthToken,
+  apiApp
+};

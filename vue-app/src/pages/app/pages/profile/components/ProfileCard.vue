@@ -5,8 +5,7 @@ import UploadButton from "@components/CustomButton/UploadButton.vue"
 import GeneralButton from "@components/CustomButton/GeneralButton.vue"
 import IconSave from '@icons/actions/IconSave.vue';
 import IconPicture from '@icons/form/IconPicture.vue';
-import { apiPut } from '@src/services/api.js';
-import { SERVER_URL } from '@src/config/env.js';
+import { apiAuth } from '@src/services/api.js';
 import { useToast } from 'vue-toastification';
 
 // import Url from '@components/FormInput/Url.vue';
@@ -46,8 +45,8 @@ const handleSubmit = async (fileBase64) => {
   toast.info('Subiendo imagen...');
   isButtonEnabled.value = false;
   try {
-    await apiPut({
-      url: `${SERVER_URL}/profile/image`,
+    await apiAuth.put({
+      url: `/profile/image`,
       data: { image: fileBase64 }
     })
     URL.revokeObjectURL(currentImage.value);

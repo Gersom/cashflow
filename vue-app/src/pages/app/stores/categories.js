@@ -1,4 +1,4 @@
-import { apiGetAuth } from '@src/services/api';
+import { apiApp } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 
@@ -19,7 +19,7 @@ export const useCategoriesStore = defineStore('categories', {
     async getCategoriesAll() {
       const toast = useToast()
       try {
-        const response = await apiGetAuth({
+        const response = await apiApp.get({
           url: `/categories`
         })
     

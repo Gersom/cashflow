@@ -1,6 +1,6 @@
 <script setup>
 // Imports
-import { apiGetAuth, apiPatchAuth } from '@src/services/api';
+import { apiAuth } from '@src/services/api';
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -28,7 +28,7 @@ const handleSubmit = async(e) => {
   e.preventDefault()
   isLoading.value = true
   try {
-    await apiPatchAuth({
+    await apiAuth.patch({
       url: '/accounts/change-currency',
       data: { currencyId: currencySelected.value.value }
     })
@@ -48,7 +48,7 @@ const handleSubmit = async(e) => {
 }
 const getCurrency = async () => {
   try {
-    const response = await apiGetAuth({
+    const response = await apiAuth.get({
       url: '/currencies'
     })
 

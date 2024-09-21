@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { apiGetAuth, apiPostAuth, apiPutAuth, apiDelAuth } from '@src/services/api';
+import { apiApp } from '@src/services/api';
 import { useToast } from 'vue-toastification'
 import { getLocalStorage, setLocalStorage } from '@utils/localStorage.js'
 
@@ -37,7 +37,7 @@ export const useMovementsStore = defineStore('movements', {
     async getMovementsAll() {
       const toast = useToast()
       try {
-        const response = await apiGetAuth({
+        const response = await apiApp.get({
           url: `/movements`
         })
     
@@ -70,7 +70,7 @@ export const useMovementsStore = defineStore('movements', {
       const toast = useToast()
 
       try {
-        const response = await apiPostAuth({
+        const response = await apiApp.post({
           url: `/movements`,
           data: {
             ...movement,
@@ -121,7 +121,7 @@ export const useMovementsStore = defineStore('movements', {
 
       try {
         const { id, ...data } = movement
-        await apiPutAuth({
+        await apiApp.put({
           url: `/movements/${id}`,
           data: {
             ...data,
@@ -162,7 +162,7 @@ export const useMovementsStore = defineStore('movements', {
 
       const toast = useToast()
       try {
-        await apiDelAuth({
+        await apiApp.delete({
           url: `/movements/${id}`
         })
         toast.success(`"${this.data[indexMovement].title}" ha sido eliminado.`)

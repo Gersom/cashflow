@@ -1,7 +1,5 @@
-import { API_URL } from "@src/config/env";
-import { apiGetAuth } from '@src/services/api';
+import { apiApp } from '@src/services/api';
 import { defineStore } from 'pinia'
-import { useToast } from 'vue-toastification'
 import { useAccountsStore } from "@app-page/stores/accounts";
 
 export const useUserStore = defineStore('user', {
@@ -10,32 +8,27 @@ export const useUserStore = defineStore('user', {
     isFilledData: false
   }),
   getters: {
-    currencyNormal: ({currency}) => `${currency.symbol} ${currency.amount}`,
-    currencyAll: ({currency}) => `${currency.amount} ${currency.name}`,
+    isFilled: ({isFilledData}) => isFilledData
   },
   actions: {
-    async setUserProfile() {
-      if (!this.isFilledData) {
-        await this.getUserProfile()
-      }
-    },
     async getUserProfile() {
-      const toast = useToast()
-      const accountsStore = useAccountsStore()
       try {
-        const response = await apiGetAuth({
+        const response = await apiApp.get({
           url: `/users/profile`
         })
-    
+        
         const { selectedAccount, ...userData } = response.data.data
         this.user = userData
         this.isFilledData = true
+
+        const accountsStore = useAccountsStore()
         accountsStore.fillSelectedAccount(selectedAccount)
+        return { success: true, error: null }
       }
       
       catch (error) {
-        console.error('Error:', error);
-        toast.error('Ocurrió un error al obtener los datos de tu perfil.')
+        // console.error('Error:', error);
+        return { success: false, error }
       }
     }
   }

@@ -1,4 +1,7 @@
 <script setup>
+import { apiAuth } from '@src/services/api';
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
 import LogoTitle from '@components/LogoTitle/LogoTitle.vue'
 
@@ -11,6 +14,27 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  verifySession: {
+    type: Boolean,
+    default: false
+  }
+})
+
+const router = useRouter()
+
+onMounted(async () => {
+  if (props.verifySession) {
+    try {
+      const { data } = await apiAuth.post({ url: '/token/verify' })
+      if (data?.success) {
+        router.push({ name: 'AppHome' })
+      }
+    } catch (error) {
+      if (error.request.status === 401) {
+        console.log('Session expired')
+      }
+    }
+  }
 })
 </script>
 

@@ -1,5 +1,5 @@
 <script setup>
-import { apiPost } from '@src/services/api';
+import { apiAuth } from '@src/services/api';
 import { onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -13,7 +13,7 @@ const toast = useToast()
 // Methods
 const handleSubmit = async () => {
   try {
-    await apiPost({
+    await apiAuth.post({
       url: `/register/verify`,
       data: { token: route.query.token || '' }
     })

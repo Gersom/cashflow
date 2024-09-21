@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue"
 import { useToast } from 'vue-toastification'
-import { apiPost } from '@src/services/api';
+import { apiAuth } from '@src/services/api';
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
@@ -25,7 +25,7 @@ const handleSubmit = async(e) => {
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
-    await apiPost({
+    await apiAuth.post({
       url: `/auth/recover-password/request`,
       data: { email: emailData.value.value }
     })

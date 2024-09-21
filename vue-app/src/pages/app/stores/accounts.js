@@ -1,5 +1,4 @@
-import { API_URL } from "@src/config/env";
-import { apiGet } from '@src/services/api';
+import { apiApp } from '@src/services/api';
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 
@@ -43,8 +42,8 @@ export const useAccountsStore = defineStore('accounts', {
     async getCategoriesAll() {
       const toast = useToast()
       try {
-        const response = await apiGet({
-          url: `${API_URL}/common/accounts`
+        const response = await apiApp.get({
+          url: `/accounts`
         })
     
         this.data = response.data.data

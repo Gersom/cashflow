@@ -26,9 +26,9 @@ export const routes = [
     component: RecoverPassword
   },
   {
-    path: '/registrarse',
+    path: '/crear-cuenta',
     name: 'Register',
-    alias: ['/registro', '/register', '/signup'],
+    alias: ['/registro', '/registrarse', '/register', '/signup'],
     component: Register
   },
   {

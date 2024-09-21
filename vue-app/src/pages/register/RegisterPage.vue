@@ -1,6 +1,6 @@
 <script setup>
 // Imports
-import { apiPost } from '@src/services/api';
+import { apiAuth } from '@src/services/api';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -17,7 +17,7 @@ const handleSubmit = async(data) => {
   isLoading.value = true
   toast.info("Espere un momento...");
   try {
-    await apiPost({ url: `/register`, data })
+    await apiAuth.post({ url: `/register`, data })
     
     toast.success("Te has registrado con éxito. Bienvenid@")
     router.push({ name: 'Login' })

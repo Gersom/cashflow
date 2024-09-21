@@ -1,6 +1,6 @@
 <script setup>
 // Imports
-import { apiPost } from '@src/services/api';
+import { apiAuth } from '@src/services/api';
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import LoginForm from './components/LoginForm.vue'
@@ -16,7 +16,7 @@ const isLoading = ref(false)
 const handleSubmit = async(data) => {
   isLoading.value = true
   try {
-    const response = await apiPost({
+    const response = await apiAuth.post({
       url: `/login`, data
     })
 
@@ -50,7 +50,10 @@ const handleSubmit = async(data) => {
 
 <template>
 <div class='login-page'>
-  <LoginLayout title="Iniciar sesión">
+  <LoginLayout
+    title="Iniciar sesión"
+    :verify-session="true"
+  >
     <LoginForm
       :is-loading="isLoading"
       @submit="handleSubmit"

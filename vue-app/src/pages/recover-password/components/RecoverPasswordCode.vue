@@ -1,5 +1,5 @@
 <script setup>
-import { apiPost } from "@src/services/api";
+import { apiAuth } from "@src/services/api";
 import { getLocalStorage } from "@src/utils/localStorage";
 import { ref } from "vue"
 import { useToast } from "vue-toastification"
@@ -19,7 +19,7 @@ const handleCode = (text, isValid) => {
 const handleNewCode = async () => {
   isLoading.value = true
   try {
-    await apiPost({
+    await apiAuth.post({
       url: `/auth/recover-password/request`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email
@@ -46,7 +46,7 @@ const handleSubmit = async(e) => {
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
-    await apiPost({
+    await apiAuth.post({
       url: `/auth/recover-password/verify`,
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
