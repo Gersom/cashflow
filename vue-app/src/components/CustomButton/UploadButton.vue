@@ -1,26 +1,26 @@
 <script setup>
-import { ref } from 'vue';
-import IconUpload from '@icons/form/IconUpload.vue';
+import { ref } from 'vue'
+import IconUpload from '@icons/form/IconUpload.vue'
 
-const emit = defineEmits(["upload-file"]);
+const emit = defineEmits(['upload-file'])
 const props = defineProps({
   size: {
     type: String,
-    default: "normal", // small, normal
+    default: 'normal' // small, normal
   },
   text: {
     type: String,
-    default: "button",
+    default: 'button'
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   acceptFile: {
     type: String,
-    default: 'image/*',
-  },
-});
+    default: 'image/*'
+  }
+})
 
 const fileInput = ref(null)
 
@@ -44,7 +44,7 @@ const onFileChange = (e) => {
       <div class="icon-component">
         <IconUpload />
       </div>
-  
+
       <span class="span-text">
         {{ text }}
       </span>
@@ -91,7 +91,6 @@ const onFileChange = (e) => {
 .custom-button.is-small {
   height: var(--button-height-small);
 }
-
 
 .custom-button.is-disabled {
   border-color: var(--button-color-disabled);

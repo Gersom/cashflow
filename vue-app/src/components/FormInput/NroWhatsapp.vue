@@ -1,47 +1,46 @@
 <script setup>
-import { ref } from "vue";
-import InputText from "@components/CustomInput/InputText.vue";
-import IconWhtasapp from "@icons/form/IconWhatsapp.vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import { ref } from 'vue'
+import InputText from '@components/CustomInput/InputText.vue'
+import IconWhtasapp from '@icons/form/IconWhatsapp.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
 
-defineOptions({ name: "FormInputNroWhatsapp" });
-const emit = defineEmits(["validate"]);
+defineOptions({ name: 'FormInputNroWhatsapp' })
+const emit = defineEmits(['validate'])
 
-const inputValue = ref("");
-const stateValidation = ref(null);
-const text = ref("Nro de whatsapp");
-const textNotification = ref("");
+const inputValue = ref('')
+const stateValidation = ref(null)
+const text = ref('Nro de whatsapp')
+const textNotification = ref('')
 
 const validateValue = () => {
-  const characterRegex = /[^\w\s+]/;
-  const lettersRegex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]+/g;
+  const characterRegex = /[^\w\s+]/
+  const lettersRegex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ]+/g
 
-  if (inputValue.value === "") {
-    updateState("", null, "");
-  } else if (inputValue.value[0] !== "+" && inputValue.value[0] !== "0") {
-    updateState('El número de whatsapp debe empezar con "+" ó "0"', false);
-  } else if (inputValue.value.includes(" ")) {
-    updateState("El número de whatsapp no puede contener espacios", false);
+  if (inputValue.value === '') {
+    updateState('', null, '')
+  } else if (inputValue.value[0] !== '+' && inputValue.value[0] !== '0') {
+    updateState('El número de whatsapp debe empezar con "+" ó "0"', false)
+  } else if (inputValue.value.includes(' ')) {
+    updateState('El número de whatsapp no puede contener espacios', false)
   } else if (lettersRegex.test(inputValue.value)) {
-    updateState("El número de whatsapp no puede contener letras", false);
+    updateState('El número de whatsapp no puede contener letras', false)
   } else if (characterRegex.test(inputValue.value)) {
-    updateState("El número de whatsapp no puede contener caracteres especiales", false);
+    updateState('El número de whatsapp no puede contener caracteres especiales', false)
   } else if (inputValue.value.length < 9) {
-    updateState("El número de whatsapp debe tener al menos 9 dígitos", false);
+    updateState('El número de whatsapp debe tener al menos 9 dígitos', false)
   } else if (inputValue.value.length > 14) {
-    updateState("El número de whatsapp no debe tener más de 14 dígitos", false);
+    updateState('El número de whatsapp no debe tener más de 14 dígitos', false)
   } else {
-    updateState("Número de whatsapp válido", true);
+    updateState('Número de whatsapp válido', true)
   }
-};
-
+}
 
 const updateState = (notification, validationState, emitValue = inputValue.value) => {
-  textNotification.value = notification;
-  stateValidation.value = validationState;
-  emit('validate', emitValue, validationState === true);
-};
+  textNotification.value = notification
+  stateValidation.value = validationState
+  emit('validate', emitValue, validationState === true)
+}
 </script>
 
 <template>

@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix 'src/**/*.{js,vue}'"
+    "lint": "eslint src/**/*.{js,vue}",
+    "lint:fix": "eslint --fix src/**/*.{js,vue}"
   },
   "dependencies": {
     "@cyhnkckali/vue3-color-picker": "^2.0.2",
@@ -15,17 +16,23 @@
     "axios": "^1.7.3",
     "chroma-js": "^2.6.0",
     "pinia": "^2.2.0",
-    "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.4.31",
     "vue-router": "^4.4.2",
     "vue-toastification": "^2.0.0-rc.5",
     "vue3-apexcharts": "^1.5.3"
   },
   "devDependencies": {
+    "@eslint/js": "^9.11.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "eslint": "^9.11.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-n": "^17.10.3",
+    "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-vue": "^9.28.0",
+    "globals": "^15.9.0",
     "sass": "^1.77.8",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

@@ -1,33 +1,33 @@
 <script setup>
 // Imports
-import { computed } from "vue";
-import IconCheck from '@icons/actions/IconCheck.vue';
+import { computed } from 'vue'
+import IconCheck from '@icons/actions/IconCheck.vue'
 
 // Vue defines
-defineOptions({ name: "CustomCheckBox" });
-const emit = defineEmits(["vnode-unmounted", "update:modelValue"]);
+defineOptions({ name: 'CustomCheckBox' })
+const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
 // Props
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: false,
+    default: false
   },
   text: {
     type: String,
-    default: "",
+    default: ''
   },
   disabled: {
     type: Boolean,
     default: false
   }
-});
+})
 
 // Computed
 const valueInput = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
-});
+  set: (value) => emit('update:modelValue', value)
+})
 
 // Methods
 </script>

@@ -1,21 +1,20 @@
 <script setup>
-import IconClose from "@icons/actions/IconClose.vue";
-import { getContrastColor } from "@utils/color";
+import IconClose from '@icons/actions/IconClose.vue'
+import { getContrastColor } from '@utils/color'
 
-// Props
 const props = defineProps({
   data: {
     type: Object,
-    default() {
+    default () {
       return {
         id: 0,
-        color: "orange",
-        iconName: "shopping-bag",
-        name: "Compras",
-      };
-    },
-  },
-});
+        color: 'orange',
+        iconName: 'shopping-bag',
+        name: 'Compras'
+      }
+    }
+  }
+})
 </script>
 
 <template>

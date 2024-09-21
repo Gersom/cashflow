@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  name: "IconTriangle",
-};
+  name: 'IconTriangle'
+}
 </script>

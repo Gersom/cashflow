@@ -1,11 +1,11 @@
 <script setup>
-import "./styles/icomoon.css";
-import { onMounted } from "vue";
-import { useRouter } from "vue-router";
+import './styles/icomoon.css'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import { useUserStore } from "@stores/user"; 
-import DashboardLayout from "./layouts/Dashboard.vue";
-import LogoLoading from "@components/Loading/LogoLoading.vue";
+import { useUserStore } from '@stores/user'
+import DashboardLayout from './layouts/Dashboard.vue'
+import LogoLoading from '@components/Loading/LogoLoading.vue'
 
 defineEmits(['vnode-unmounted'])
 const toast = useToast()
@@ -17,8 +17,7 @@ onMounted(async () => {
   if (!success) {
     if (error.request.status === 401) {
       toast.warning('Tu sesión ha expirado, por favor inicia sesión nuevamente')
-    }
-    else {
+    } else {
       toast.error('Ocurrió un error al iniciar la Aplicación')
     }
     router.push({ name: 'Login' })

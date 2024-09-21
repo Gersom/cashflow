@@ -1,4 +1,4 @@
-import { apiApp } from '@src/services/api';
+import { apiApp } from '@src/services/api'
 import { defineStore } from 'pinia'
 import { useToast } from 'vue-toastification'
 
@@ -10,14 +10,14 @@ export const useAccountsStore = defineStore('accounts', {
       name: 'Principal',
       balance: 0.00,
       currency: {
-        id: "2aaae1",
-        symbol:"$",
-        name:"dolar",
-        code:"USD",
-        plural:"dolares",
-        countryCode:"USA",
+        id: '2aaae1',
+        symbol: '$',
+        name: 'dolar',
+        code: 'USD',
+        plural: 'dolares',
+        countryCode: 'USA',
         decimalPlaces: 2
-      } 
+      }
     },
     isFilledData: false
   }),
@@ -31,27 +31,25 @@ export const useAccountsStore = defineStore('accounts', {
     currentCurrency: ({ selected }) => selected.currency
   },
   actions: {
-    fillSelectedAccount(account) {
+    fillSelectedAccount (account) {
       this.selected = account
     },
-    async loadAccounts() {
+    async loadAccounts () {
       if (!this.isFilledData) {
         await this.getCategoriesAll()
       }
     },
-    async getCategoriesAll() {
+    async getCategoriesAll () {
       const toast = useToast()
       try {
         const response = await apiApp.get({
-          url: `/accounts`
+          url: '/accounts'
         })
-    
+
         this.data = response.data.data
         this.isFilledData = true
-      }
-      
-      catch (error) {
-        console.error('Error:', error);
+      } catch (error) {
+        console.error('Error:', error)
         toast.error('Ocurrió un error al obtener las categorias.')
       }
     }

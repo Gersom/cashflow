@@ -1,48 +1,54 @@
 <script setup>
-  // Imports
-  import '@cyhnkckali/vue3-color-picker/dist/style.css'
-  import { ref } from 'vue'
-  import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
-  import CustomButton from '@components/CustomButton/GeneralButton.vue'
-  import DialogBlur from "@layouts/DialogBlur.vue";
-  import IconEdit from '@icons/actions/IconEdit.vue'
-  import InputColor from '@components/CustomInput/InputColor.vue'
+// Imports
+import '@cyhnkckali/vue3-color-picker/dist/style.css'
+import { ref, computed, watch } from 'vue'
+import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import DialogBlur from '@layouts/DialogBlur.vue'
+import IconEdit from '@icons/actions/IconEdit.vue'
+import InputColor from '@components/CustomInput/InputColor.vue'
 
-  // Vue defines
-  defineOptions({name: 'CustomInputColor'})
-  const emit = defineEmits([
-    'vnode-unmounted', 'update:modelValue'
-  ])
-  
-  // Props
-  const props = defineProps({
-    modelValue: {
-      type: String,
-      default: '#90A4AE'
-    }
-  })
+// Vue defines
+defineOptions({ name: 'CustomInputColor' })
+const emit = defineEmits([
+  'vnode-unmounted', 'update:modelValue'
+])
 
-  // Data
-  const colorValue = ref('#90A4AE')
-  const showColorPicker = ref(false)
+// Props
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: '#90A4AE'
+  }
+})
 
-  // Methods
-  const toggleColorPicker = () => {
-    showColorPicker.value = !showColorPicker.value
-    if (
-      showColorPicker.value  
-      && colorValue.value[0] !== '#' 
-      && colorValue.value.slice(0, 3) !== 'rgb'
-    ) {
-      colorValue.value = '#ff8e38'
-    }
+// Data
+const colorValue = ref('#90A4AE')
+const showColorPicker = ref(false)
+
+const valueProp = computed(() => props.modelValue)
+
+// Methods
+const toggleColorPicker = () => {
+  showColorPicker.value = !showColorPicker.value
+  if (
+    showColorPicker.value &&
+      colorValue.value[0] !== '#' &&
+      colorValue.value.slice(0, 3) !== 'rgb'
+  ) {
+    updateColorValue('#ff8e38')
   }
-  const closeColorPicker = () => {
-    showColorPicker.value = false
-  }
-  const updateColorValue = (value) => {
-    emit('update:modelValue', value)
-  }
+}
+const closeColorPicker = () => {
+  showColorPicker.value = false
+}
+const updateColorValue = (value) => {
+  emit('update:modelValue', value)
+}
+
+watch(valueProp, (newValue) => {
+  colorValue.value = newValue
+})
 </script>
 
 <template>
@@ -106,7 +112,7 @@
     .button-container {
       width: 100px;
     }
-    
+
     &.is-color-picker {
       .input-container {
         z-index: 12;
@@ -116,5 +122,5 @@
       }
     }
   }
-  
+
 </style>

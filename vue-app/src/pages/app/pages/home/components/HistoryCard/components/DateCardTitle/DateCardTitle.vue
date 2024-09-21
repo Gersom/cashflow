@@ -1,43 +1,30 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 // Layout
-import DialogBlur from '@layouts/DialogBlur.vue';
+import DialogBlur from '@layouts/DialogBlur.vue'
 
 // Components Global
-import CardTitle from '@components/CardTitle/CardTitle.vue';
+import CardTitle from '@components/CardTitle/CardTitle.vue'
 
 // Components local
-import SelectDate from './components/SelectDate.vue';
+import SelectDate from './components/SelectDate.vue'
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: 'Place holder'
-  },
-  array: {
-    type: Array,
-    default() {
-      return [{ name: 'value' }]
-    }
-  }
-});
-
-const monthCurrent = ref('Junio');
-const yearCurrent = ref('2024');
-const showSelectDate = ref(false);
+const monthCurrent = ref('Junio')
+const yearCurrent = ref('2024')
+const showSelectDate = ref(false)
 
 const toggleShowSelectDate = () => {
-  showSelectDate.value = !showSelectDate.value;
+  showSelectDate.value = !showSelectDate.value
 }
 const closeSelectDate = () => {
   showSelectDate.value = false
 }
 const handleSelectedYear = (year) => {
-  yearCurrent.value = year;
+  yearCurrent.value = year
 }
 const handleSelectedMonth = (month) => {
-  monthCurrent.value = month;
+  monthCurrent.value = month
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script setup>
-import { apiAuth } from '@src/services/api';
-import { onMounted } from 'vue';
+import { apiAuth } from '@src/services/api'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
 import LogoTitle from '@components/LogoTitle/LogoTitle.vue'

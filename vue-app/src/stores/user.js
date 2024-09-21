@@ -1,6 +1,6 @@
-import { apiApp } from '@src/services/api';
+import { apiApp } from '@src/services/api'
 import { defineStore } from 'pinia'
-import { useAccountsStore } from "@app-page/stores/accounts";
+import { useAccountsStore } from '@app-page/stores/accounts'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -8,15 +8,15 @@ export const useUserStore = defineStore('user', {
     isFilledData: false
   }),
   getters: {
-    isFilled: ({isFilledData}) => isFilledData
+    isFilled: ({ isFilledData }) => isFilledData
   },
   actions: {
-    async getUserProfile() {
+    async getUserProfile () {
       try {
         const response = await apiApp.get({
-          url: `/users/profile`
+          url: '/users/profile'
         })
-        
+
         const { selectedAccount, ...userData } = response.data.data
         this.user = userData
         this.isFilledData = true
@@ -24,9 +24,7 @@ export const useUserStore = defineStore('user', {
         const accountsStore = useAccountsStore()
         accountsStore.fillSelectedAccount(selectedAccount)
         return { success: true, error: null }
-      }
-      
-      catch (error) {
+      } catch (error) {
         // console.error('Error:', error);
         return { success: false, error }
       }

@@ -1,7 +1,7 @@
 <script setup>
-import { useThemeStore } from "@stores/theme";
-import IconSelect from "@icons/actions/IconSelect.vue";
-import { ref, computed } from "vue";
+import { useThemeStore } from '@stores/theme'
+import IconSelect from '@icons/actions/IconSelect.vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps({
   placeholder: {
@@ -11,7 +11,7 @@ const props = defineProps({
   items: {
     type: Array,
     default: () => [
-      { value: '0', text: 'Cargando...' },
+      { value: '0', text: 'Cargando...' }
     ]
   },
   modelValue: {
@@ -20,27 +20,24 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue'])
 
 // Store
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
 
-const isOpen = ref(false);
+const isOpen = ref(false)
 
 const handleItemClick = (item) => {
-  isOpen.value = false;
-  emit("update:modelValue", item)
+  isOpen.value = false
+  emit('update:modelValue', item)
 }
 const toggleOpen = () => {
-  isOpen.value = !isOpen.value;
+  isOpen.value = !isOpen.value
 }
 
 const textSelect = computed(() => {
-  if (!props.modelValue.value)
-    return props.placeholder
-  else
-    return props.modelValue.text
-})  
+  if (!props.modelValue.value) { return props.placeholder } else { return props.modelValue.text }
+})
 </script>
 
 <template>
@@ -63,7 +60,6 @@ const textSelect = computed(() => {
         <IconSelect />
       </div>
     </label>
-
 
     <ul
       v-show="isOpen"
@@ -112,7 +108,7 @@ const textSelect = computed(() => {
       display: block;
     }
   }
-  
+
   .list {
     position: absolute;
     top: calc(100% + 5px);

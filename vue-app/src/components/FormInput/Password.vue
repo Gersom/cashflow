@@ -1,44 +1,44 @@
 <script setup>
-import { ref } from "vue";
-import InputPassword from "@components/CustomInput/InputPassword.vue";
-import IconPassword from "@icons/form/IconPassword.vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import { ref } from 'vue'
+import InputPassword from '@components/CustomInput/InputPassword.vue'
+import IconPassword from '@icons/form/IconPassword.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
 
-defineOptions({ name: "FormInputPassword" });
+defineOptions({ name: 'FormInputPassword' })
 const props = defineProps({
   textInput: {
     type: String,
-    default: "Contraseña",
+    default: 'Contraseña'
   }
-});
+})
 
-const emit = defineEmits(["validate"]);
+const emit = defineEmits(['validate'])
 
-const inputValue = ref("");
-const stateValidation = ref(null);
-const textNotification = ref("");
+const inputValue = ref('')
+const stateValidation = ref(null)
+const textNotification = ref('')
 
 const validateValue = () => {
-  const regexEspecial = /^[a-zA-Z0-9\s]+$/;
-  const regexNumber = /^.*[0-9].*$/;
+  const regexEspecial = /^[a-zA-Z0-9\s]+$/
+  const regexNumber = /^.*[0-9].*$/
 
-  if (inputValue.value === "") {
-    updateState("", null, "");
+  if (inputValue.value === '') {
+    updateState('', null, '')
   } else if (!regexNumber.test(inputValue.value)) {
-    updateState("La contraseña debe contener al menos un número", false);
+    updateState('La contraseña debe contener al menos un número', false)
   } else if (regexEspecial.test(inputValue.value)) {
-    updateState("La contraseña debe contener al menos un caracter especial", false);
+    updateState('La contraseña debe contener al menos un caracter especial', false)
   } else {
-    updateState("Contraseña válida", true);
+    updateState('Contraseña válida', true)
   }
-};
+}
 
 const updateState = (notification, validationState, emitValue = inputValue.value) => {
-  textNotification.value = notification;
-  stateValidation.value = validationState;
-  emit('validate', emitValue, validationState === true);
-};
+  textNotification.value = notification
+  stateValidation.value = validationState
+  emit('validate', emitValue, validationState === true)
+}
 </script>
 
 <template>

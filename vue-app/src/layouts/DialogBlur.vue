@@ -1,48 +1,48 @@
 <script setup>
 // Imports
-import IconTriangle from "@icons/others/IconTriangle.vue";
-import IconCross from "@icons/actions/IconCross.vue";
-import { useThemeStore } from "@stores/theme";
+import IconTriangle from '@icons/others/IconTriangle.vue'
+import IconCross from '@icons/actions/IconCross.vue'
+import { useThemeStore } from '@stores/theme'
 
 // Vue defines
-defineOptions({ name: "CustomDialog" });
-const emit = defineEmits(["vnode-unmounted", "close"]);
+defineOptions({ name: 'CustomDialog' })
+const emit = defineEmits(['vnode-unmounted', 'close'])
 
 // Props
 const props = defineProps({
   show: {
     type: Boolean,
-    default: true,
+    default: true
   },
   dependent: {
     type: Boolean,
-    default: false,
+    default: false
   },
   buttonClose: {
     type: Boolean,
-    default: false,
+    default: false
   },
   positionX: {
     type: String,
-    default: "center", // center, left, right
+    default: 'center' // center, left, right
   },
   positionY: {
     type: String,
-    default: "center", // center, top or bottom
+    default: 'center' // center, top or bottom
   },
   backgroundColor: {
     type: String,
-    default: "var(--background-color)",
-  },
-});
+    default: 'var(--background-color)'
+  }
+})
 
 // Store
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
 
 // Methods
 const onClose = () => {
-  emit("close");
-};
+  emit('close')
+}
 </script>
 
 <template>
@@ -58,7 +58,7 @@ const onClose = () => {
     }"
   >
     <button
-      class="blur" 
+      class="blur"
       type="button"
       @click="onClose"
     />

@@ -1,42 +1,42 @@
 <script setup>
-import { ref } from "vue";
-import InputPassword from "@components/CustomInput/InputPassword.vue";
-import IconPassword from "@icons/form/IconPassword.vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import { ref } from 'vue'
+import InputPassword from '@components/CustomInput/InputPassword.vue'
+import IconPassword from '@icons/form/IconPassword.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
 
-defineOptions({ name: "FormInputConfirmPassword" });
-const emit = defineEmits(["validate"]);
+defineOptions({ name: 'FormInputConfirmPassword' })
+const emit = defineEmits(['validate'])
 const props = defineProps({
   password: {
     type: String,
-    default: "",
+    default: ''
   },
   textInput: {
     type: String,
-    default: "Confirmar contraseña",
+    default: 'Confirmar contraseña'
   }
-});
+})
 
-const inputValue = ref("");
-const stateValidation = ref(null);
-const textNotification = ref("");
+const inputValue = ref('')
+const stateValidation = ref(null)
+const textNotification = ref('')
 
 const validateValue = () => {
-  if (inputValue.value === "") {
-    updateState("", null, "");
+  if (inputValue.value === '') {
+    updateState('', null, '')
   } else if (inputValue.value !== props.password) {
-    updateState("La contraseña no coincide", false);
+    updateState('La contraseña no coincide', false)
   } else {
-    updateState("Contraseña coincide", true);
+    updateState('Contraseña coincide', true)
   }
-};
+}
 
 const updateState = (notification, validationState, emitValue = inputValue.value) => {
-  textNotification.value = notification;
-  stateValidation.value = validationState;
-  emit('validate', emitValue, validationState === true);
-};
+  textNotification.value = notification
+  stateValidation.value = validationState
+  emit('validate', emitValue, validationState === true)
+}
 </script>
 
 <template>

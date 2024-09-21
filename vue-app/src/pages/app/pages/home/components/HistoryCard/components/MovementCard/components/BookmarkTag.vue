@@ -1,24 +1,24 @@
 <script setup>
-import { getContrastColor} from '@utils/color.js';
-import { computed } from 'vue';
+import { getContrastColor } from '@utils/color.js'
+import { computed } from 'vue'
 
 const props = defineProps({
   data: {
     type: Object,
-    default() {
+    default () {
       return {
         id: 0,
-        color: "orange",
-        iconName: "shopping-bag",
-        name: "Compras",
-      };
-    },
+        color: 'orange',
+        iconName: 'shopping-bag',
+        name: 'Compras'
+      }
+    }
   },
   indexItem: {
     type: Number,
     default: 0
   }
-});
+})
 
 const textColor = computed(() => getContrastColor(props.data.color))
 </script>
@@ -28,7 +28,7 @@ const textColor = computed(() => getContrastColor(props.data.color))
     :class="['bookmark', { 'is-first': indexItem === 0 }]"
     :style="{ background: props.data.color, color:textColor}"
   >
-    <p class="bookmark-data"> 
+    <p class="bookmark-data">
       <i :class="`icon icon-${props.data.iconName}`" />
       <span class="bookmark-name"> {{ props.data?.name?.toUpperCase() }}</span>
     </p>
@@ -48,7 +48,7 @@ const textColor = computed(() => getContrastColor(props.data.color))
   padding: 0px 12px;
   border-radius: 8px 8px 0 0;
   font-weight: 500;
-  
+
   z-index: 0;
   width: fit-content;
   text-align: end;

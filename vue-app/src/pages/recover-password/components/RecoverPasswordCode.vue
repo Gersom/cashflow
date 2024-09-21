@@ -1,14 +1,14 @@
 <script setup>
-import { apiAuth } from "@src/services/api";
-import { getLocalStorage } from "@src/utils/localStorage";
-import { ref } from "vue"
-import { useToast } from "vue-toastification"
+import { apiAuth } from '@src/services/api'
+import { getLocalStorage } from '@src/utils/localStorage'
+import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
 import IconGeometricFigures from '@icons/nav/IconGeometricFigures.vue'
-import InputCode from "./InputCode.vue"
+import InputCode from './InputCode.vue'
 
 const toast = useToast()
-const emit = defineEmits(["next"])
+const emit = defineEmits(['next'])
 const codeData = ref({ value: '', isValid: false })
 const isLoading = ref(false)
 
@@ -20,58 +20,48 @@ const handleNewCode = async () => {
   isLoading.value = true
   try {
     await apiAuth.post({
-      url: `/auth/recover-password/request`,
+      url: '/auth/recover-password/request',
       data: {
         email: getLocalStorage('recoveryCode').formData.email
       }
     })
 
     codeData.value.value = ''
-    toast.success("Tu nuevo código de recuperación se ha venviado a tu correo electrónico, revisa tu bandeja de entrada.")
-  }
-
-  catch (error) {
+    toast.success('Tu nuevo código de recuperación se ha venviado a tu correo electrónico, revisa tu bandeja de entrada.')
+  } catch (error) {
     toast.error('Ocurrió un error mientras generaba tu nuevo código de recuperación.')
-    console.error('Error:', error);
-  }
-
-  finally {
+    console.error('Error:', error)
+  } finally {
     isLoading.value = false
   }
 }
 
 // Methods
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
     await apiAuth.post({
-      url: `/auth/recover-password/verify`,
+      url: '/auth/recover-password/verify',
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
         code: codeData.value.value
       }
     })
 
-    toast.success("Tu código de recuperación es correcto ^^")
+    toast.success('Tu código de recuperación es correcto ^^')
     emit('next', { code: codeData.value.value })
-  }
-
-  catch (error) {
+  } catch (error) {
     if (error.response.status === 400) {
       toast.warning('El código de recuperación no es válido.')
-    }
-    else if (error.response.status === 410) {
+    } else if (error.response.status === 410) {
       toast.warning('El código de recuperación ha expirado, dale click en enviar un nuevo código.')
-    }
-    else {
+    } else {
       toast.error('Ocurrió un error mientras verificaba tu código de recuperación.')
-      console.error('Error:', error);
+      console.error('Error:', error)
     }
-  }
-
-  finally {
+  } finally {
     isLoading.value = false
   }
 }

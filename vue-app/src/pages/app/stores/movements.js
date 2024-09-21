@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
-import { apiApp } from '@src/services/api';
+import { apiApp } from '@src/services/api'
 import { useToast } from 'vue-toastification'
 import { getLocalStorage, setLocalStorage } from '@utils/localStorage.js'
 
-const dataMovements = getLocalStorage('app-movements') 
+const dataMovements = getLocalStorage('app-movements')
 
 export const useMovementsStore = defineStore('movements', {
   state: () => ({
@@ -14,53 +14,52 @@ export const useMovementsStore = defineStore('movements', {
     isLoading: false
   }),
   getters: {
-    movementsAll: ({data}) => data,
-    sumExpenses: ({data}) => {
+    movementsAll: ({ data }) => data,
+    sumExpenses: ({ data }) => {
       return data
-        .filter(item => item.type === "expense")
-        .reduce((sum, item) => sum + item.amount, 0);
+        .filter(item => item.type === 'expense')
+        .reduce((sum, item) => sum + item.amount, 0)
     }
   },
   actions: {
-    increaseIncome(amount) {
+    increaseIncome (amount) {
       this.totalIncome = parseFloat(this.totalIncome) + parseFloat(amount)
     },
-    increaseExpense(amount) {
+    increaseExpense (amount) {
       this.totalExpenses = parseFloat(this.totalExpenses) + parseFloat(amount)
     },
-    decreaseIncome(amount) {
+    decreaseIncome (amount) {
       this.totalIncome = parseFloat(this.totalIncome) - parseFloat(amount)
     },
-    decreaseExpense(amount) {
+    decreaseExpense (amount) {
       this.totalExpenses = parseFloat(this.totalExpenses) - parseFloat(amount)
     },
-    async getMovementsAll() {
+    async getMovementsAll () {
       const toast = useToast()
       try {
         const response = await apiApp.get({
-          url: `/movements`
+          url: '/movements'
         })
-    
+
         this.data = response.data.data?.movements
         this.totalExpenses = response.data.data?.totalExpenses
         this.totalIncome = response.data.data?.totalIncome
         this.isFilledData = true
         setLocalStorage('app-movements', response.data.data)
-      }
-      catch (error) {
-        console.error('Error:', error);
+      } catch (error) {
+        console.error('Error:', error)
         toast.error('Ocurrió un error al obtener los movimientos.')
       }
     },
-    async loadMovements() {
+    async loadMovements () {
       if (!this.isFilledData) {
         await this.getMovementsAll()
       }
     },
-    async createMovement(movement) {
+    async createMovement (movement) {
       this.isLoading = true
-      this.data = [{...movement, sync: false }, ...this.data]
-      
+      this.data = [{ ...movement, sync: false }, ...this.data]
+
       if (movement.type === 'income') {
         this.increaseIncome(movement.amount)
       } else if (movement.type === 'expense') {
@@ -71,52 +70,47 @@ export const useMovementsStore = defineStore('movements', {
 
       try {
         const response = await apiApp.post({
-          url: `/movements`,
+          url: '/movements',
           data: {
             ...movement,
             categories: movement.categories.map(category => category.id)
           }
         })
-    
+
         this.data[0] = { ...this.data[0], id: response.data?.data?.id, sync: true }
         toast.success(`"${movement.title}" creado exitosamente.`)
-      }
-      
-      catch (error) {
-        console.error('Error:', error);
+      } catch (error) {
+        console.error('Error:', error)
         toast.error('Ocurrió un error al crear el movimiento.')
-      }
-
-      finally {
+      } finally {
         this.isLoading = false
-        setLocalStorage('app-movements', { 
+        setLocalStorage('app-movements', {
           data: this.data, totalExpenses: this.totalExpenses, totalIncome: this.totalIncome
         })
       }
     },
-    async editMovement(movement) {
+    async editMovement (movement) {
       this.isLoading = true
       const indexMovement = this.data.findIndex(item => item.id === movement.id)
-      
-      const originalMovement = this.data[indexMovement];
-  
+
+      const originalMovement = this.data[indexMovement]
+
       if (String(movement.amount) !== String(originalMovement.amount) || movement.type !== originalMovement.type) {
-        
         if (originalMovement.type === 'income') {
-          this.decreaseIncome(originalMovement.amount);
+          this.decreaseIncome(originalMovement.amount)
         } else if (originalMovement.type === 'expense') {
-          this.decreaseExpense(originalMovement.amount);
+          this.decreaseExpense(originalMovement.amount)
         }
-        
+
         if (movement.type === 'income') {
-          this.increaseIncome(movement.amount);
+          this.increaseIncome(movement.amount)
         } else if (movement.type === 'expense') {
-          this.increaseExpense(movement.amount);
+          this.increaseExpense(movement.amount)
         }
       }
-      
+
       this.data[indexMovement] = { ...movement, sync: false }
-      
+
       const toast = useToast()
 
       try {
@@ -128,35 +122,30 @@ export const useMovementsStore = defineStore('movements', {
             categories: data.categories.map(category => category.id)
           }
         })
-    
+
         this.data[indexMovement] = { ...movement, sync: true }
         toast.success(`"${movement.title}" ha sido editado exitosamente.`)
-      }
-      
-      catch (error) {
-        console.error('Error:', error);
+      } catch (error) {
+        console.error('Error:', error)
         toast.error('Ocurrió un error al editar el movimiento.')
-      }
-
-      finally {
+      } finally {
         this.isLoading = false
-        setLocalStorage('app-movements', { 
+        setLocalStorage('app-movements', {
           data: this.data, totalExpenses: this.totalExpenses, totalIncome: this.totalIncome
         })
       }
     },
-    async deleteMovement(id) {
+    async deleteMovement (id) {
       this.isLoading = true
       const indexMovement = this.data.findIndex(item => item.id === id)
-      
-      
+
       if (this.data[indexMovement].type === 'income') {
         this.decreaseIncome(this.data[indexMovement].amount)
       } else if (this.data[indexMovement].type === 'expense') {
         this.decreaseExpense(this.data[indexMovement].amount)
       }
-      
-      let originalData = this.data;
+
+      const originalData = this.data
       originalData.splice(indexMovement, 1)
       this.data = originalData
 
@@ -166,16 +155,12 @@ export const useMovementsStore = defineStore('movements', {
           url: `/movements/${id}`
         })
         toast.success(`"${this.data[indexMovement].title}" ha sido eliminado.`)
-      }
-      
-      catch (error) {
-        console.error('Error:', error);
+      } catch (error) {
+        console.error('Error:', error)
         toast.error('Ocurrió un error al editar el movimiento.')
-      }
-
-      finally {
+      } finally {
         this.isLoading = false
-        setLocalStorage('app-movements', { 
+        setLocalStorage('app-movements', {
           data: this.data, totalExpenses: this.totalExpenses, totalIncome: this.totalIncome
         })
       }

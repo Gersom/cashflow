@@ -28,6 +28,6 @@
 
 <script>
 export default {
-  name: "IconInfo",
-};
+  name: 'IconInfo'
+}
 </script>

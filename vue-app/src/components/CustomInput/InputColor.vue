@@ -1,30 +1,30 @@
 <script setup>
-  // Imports
-  import { ref, computed } from 'vue'
-  import { useThemeStore } from '@stores/theme'
-  
-  // Vue defines
-  defineOptions({name: 'CustomInputColor'})
-  const emit = defineEmits([
-    'vnode-unmounted', 'update:modelValue', 'select-color'
-  ])
-  
-  // Props
-  const props = defineProps({
-    modelValue: {
-      type: String,
-      default: '#90A4AE'
-    }
-  })
+// Imports
+import { computed } from 'vue'
+import { useThemeStore } from '@stores/theme'
 
-  // Store
-  const themeStore = useThemeStore()
+// Vue defines
+defineOptions({ name: 'CustomInputColor' })
+const emit = defineEmits([
+  'vnode-unmounted', 'update:modelValue', 'select-color'
+])
 
-  // Computed
-  const valueInput = computed({
-    get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
-  })
+// Props
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: '#90A4AE'
+  }
+})
+
+// Store
+const themeStore = useThemeStore()
+
+// Computed
+const valueInput = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+})
 </script>
 
 <template>
@@ -84,7 +84,7 @@
       min-width: 34px;
       width: 34px;
     }
-    
+
     /* Dark Theme */
     &.is-dark-theme {
       .input-tag {
@@ -95,7 +95,7 @@
         background: rgb(var(--background-color-rgb) / 70%);
         color: var(--title-color);
       }
-    }  
+    }
   }
 
 </style>

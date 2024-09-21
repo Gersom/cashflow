@@ -1,39 +1,39 @@
 <script setup>
 // Imports
-import { ref, computed } from "vue";
-import { storeToRefs } from "pinia";
-import { useThemeStore } from "@stores/theme";
-import IconEye from "@icons/form/IconEye.vue";
-import IconEyeSlash from "@icons/form/IconEyeSlash.vue";
+import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useThemeStore } from '@stores/theme'
+import IconEye from '@icons/form/IconEye.vue'
+import IconEyeSlash from '@icons/form/IconEyeSlash.vue'
 
 // Vue defines
-defineOptions({ name: "CustomInputPassword" });
-const emit = defineEmits(["vnode-unmounted", "update:modelValue"]);
+defineOptions({ name: 'CustomInputPassword' })
+const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
 // Props
 const props = defineProps({
   modelValue: {
     type: String,
-    default: "",
+    default: ''
   },
   iconComponent: {
     type: [Boolean, Object],
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
 // Store
-const themeStore = useThemeStore();
-const { currentTheme } = storeToRefs(themeStore);
+const themeStore = useThemeStore()
+const { currentTheme } = storeToRefs(themeStore)
 
 // Data
-const showPassword = ref(false);
+const showPassword = ref(false)
 
 // Computed
 const valueInput = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
-});
+  set: (value) => emit('update:modelValue', value)
+})
 
 // Methods
 </script>

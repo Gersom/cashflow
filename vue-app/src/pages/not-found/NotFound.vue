@@ -45,8 +45,8 @@ const themeStore = useThemeStore()
   align-items: center;
   height: 100vh;
   background: var(--background-color2);
-  background: linear-gradient(16deg, 
-    var(--background-color) 20%, 
+  background: linear-gradient(16deg,
+    var(--background-color) 20%,
     var(--background-color2) 100%);
   .logo-icon {
     height: 60px;

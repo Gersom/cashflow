@@ -1,13 +1,13 @@
 <script setup>
-import IconAdd from "@icons/actions/IconAdd.vue";
-import IconClose from "@icons/actions/IconClose.vue";
+import IconAdd from '@icons/actions/IconAdd.vue'
+import IconClose from '@icons/actions/IconClose.vue'
 
 const props = defineProps({
   showClose: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 </script>
 
 <template>

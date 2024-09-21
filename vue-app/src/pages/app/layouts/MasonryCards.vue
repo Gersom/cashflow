@@ -36,7 +36,7 @@
     padding: 22px;
     border-radius: 10px;
     background-color: var(--background-color2)
-    
+
     }
 
     .profile-actions {
@@ -46,7 +46,7 @@
         .profile-area {
             min-height: 460px;
         }
-        
+
         .actions-area {
            min-height: 382px;
         }
@@ -58,7 +58,7 @@
 
     .password-area {
        min-height: 306px;
-        
+
     }
 
 }

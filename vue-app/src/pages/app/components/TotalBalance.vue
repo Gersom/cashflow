@@ -5,7 +5,7 @@ const props = defineProps({
     type: String,
     default: '25,442.86'
   }
-});
+})
 
 defineOptions({
   name: 'TotalBalance'

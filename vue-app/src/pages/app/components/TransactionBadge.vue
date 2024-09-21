@@ -1,12 +1,11 @@
 <script setup>
-import { computed } from 'vue';
-import IconArrow from '@icons/state/IconArrowUp.vue';
-import { useAccountsStore } from '@app-page/stores/accounts';
-import { storeToRefs } from 'pinia';
+import { computed } from 'vue'
+import IconArrow from '@icons/state/IconArrowUp.vue'
+import { useAccountsStore } from '@app-page/stores/accounts'
+import { storeToRefs } from 'pinia'
 
-
-const useAccounts = useAccountsStore();
-const { currentCurrency } = storeToRefs(useAccounts);
+const useAccounts = useAccountsStore()
+const { currentCurrency } = storeToRefs(useAccounts)
 
 const props = defineProps({
   amount: {
@@ -17,9 +16,9 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
-});
+})
 
-const sign = computed(() => props.isPositive ? '+' : '-');
+const sign = computed(() => props.isPositive ? '+' : '-')
 const formattedAmount = computed(() => {
   return Math.abs(props.amount).toFixed(useAccounts.currentCurrency.decimalPlaces)
 })
@@ -58,7 +57,7 @@ const formattedAmount = computed(() => {
   align-items: center;
   padding: 0;
   margin: 0;
-  
+
   .badge {
     padding: 0 0 0 0;
     margin: 0 0 0 0;

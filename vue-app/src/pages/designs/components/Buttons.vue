@@ -1,6 +1,6 @@
 <script setup>
-import CustomButton from "@components/CustomButton/GeneralButton.vue";
-import IconAdd from "@icons/actions/IconAdd.vue";
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import IconAdd from '@icons/actions/IconAdd.vue'
 </script>
 
 <template>
@@ -11,14 +11,14 @@ import IconAdd from "@icons/actions/IconAdd.vue";
       <CustomButton
         text="Crear movimiento"
       />
-    
+
       <!--  -->
       <p>With icon</p>
       <CustomButton
         :icon-component="IconAdd"
         text="Crear movimiento"
       />
-    
+
       <!--  -->
       <p>Animated</p>
       <CustomButton
@@ -26,7 +26,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
         :icon-component="IconAdd"
         text="Crear movimiento"
       />
-    
+
       <!--  -->
       <p>Transparent</p>
       <CustomButton
@@ -34,7 +34,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
         :transparent="true"
         text="Boton"
       />
-    
+
       <!--  -->
       <p>Small</p>
       <CustomButton
@@ -44,7 +44,7 @@ import IconAdd from "@icons/actions/IconAdd.vue";
         size="small"
         text="Boton"
       />
-      
+
       <!--  -->
       <p>Disabled</p>
       <CustomButton

@@ -1,25 +1,24 @@
 <script setup>
-import { ref, computed } from "vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import { useCategoriesStore } from "@src/pages/app/stores/categories";
-import { getContrastColor } from "@utils/color";
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import { useCategoriesStore } from '@src/pages/app/stores/categories'
+import { getContrastColor } from '@utils/color'
 
-const emit = defineEmits(["select"]);
-const categoriesStore = useCategoriesStore();
+const emit = defineEmits(['select'])
+const categoriesStore = useCategoriesStore()
 const props = defineProps({
   selectedCategories: {
     type: Array,
-    default: () => [],
-  },
-});
+    default: () => []
+  }
+})
 
 const isCategorySelected = (cat) => {
-  return props.selectedCategories.includes(cat);
-};
+  return props.selectedCategories.includes(cat)
+}
 
 const addCategory = (cat) => {
-  emit("select", cat);
-};
+  emit('select', cat)
+}
 </script>
 
 <template>

@@ -1,18 +1,18 @@
 <script setup>
-defineOptions({ name: "DesignsPage" });
-defineEmits(["vnode-unmounted"]);
+defineOptions({ name: 'DesignsPage' })
+defineEmits(['vnode-unmounted'])
 
-import { useThemeStore } from "@stores/theme";
-import ButtonsSection from "./components/Buttons.vue";
-import CustomButton from "@components/CustomButton/GeneralButton.vue";
-import IconAdd from "@icons/actions/IconAdd.vue";
-import InputsSection from "./components/Inputs.vue";
-import FormSection from "./components/Form.vue";
+import { useThemeStore } from '@stores/theme'
+import ButtonsSection from './components/Buttons.vue'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import IconAdd from '@icons/actions/IconAdd.vue'
+import InputsSection from './components/Inputs.vue'
+import FormSection from './components/Form.vue'
 
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
 const toggleTheme = () => {
-  themeStore.toggleTheme();
-};
+  themeStore.toggleTheme()
+}
 </script>
 
 <template>

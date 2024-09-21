@@ -1,20 +1,20 @@
-function getCurrentMonthName (locale = 'es-ES'){
-    const date = new Date();
-    return date.toLocaleString(locale, { month: 'long' });
+function getCurrentMonthName (locale = 'es-ES') {
+  const date = new Date()
+  return date.toLocaleString(locale, { month: 'long' })
 }
 
 const getCurrentDayName = (locale = 'es-ES') => {
-    const date = new Date();
-    return date.toLocaleString(locale, { weekday: 'long' });
-};
+  const date = new Date()
+  return date.toLocaleString(locale, { weekday: 'long' })
+}
 
 const getCurrentYear = (locale = 'es-ES') => {
-    const date = new Date();
-    return date.toLocaleString(locale, { year: 'numeric' });
-};
+  const date = new Date()
+  return date.toLocaleString(locale, { year: 'numeric' })
+}
 
 export {
-    getCurrentMonthName,
-    getCurrentDayName,
-    getCurrentYear
+  getCurrentMonthName,
+  getCurrentDayName,
+  getCurrentYear
 }

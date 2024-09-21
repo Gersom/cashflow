@@ -1,26 +1,26 @@
 <script setup>
-import { apiAuth } from "@src/services/api";
-import { getLocalStorage } from "@src/utils/localStorage";
-import { ref, computed } from "vue"
+import { apiAuth } from '@src/services/api'
+import { getLocalStorage } from '@src/utils/localStorage'
+import { ref, computed } from 'vue'
 import { useToast } from 'vue-toastification'
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
-import Password from "@components/FormInput/Password.vue"
-import ConfirmPassword from "@components/FormInput/ConfirmPassword.vue";
+import Password from '@components/FormInput/Password.vue'
+import ConfirmPassword from '@components/FormInput/ConfirmPassword.vue'
 
 // Icons
 import IconPassword from '@icons/form/IconPassword.vue'
 
-const emit = defineEmits(["next"]);
+const emit = defineEmits(['next'])
 const toast = useToast()
 const formData = ref({
   password: { value: '', isValid: false },
-  confirmPassword: { value: '', isValid: false },
+  confirmPassword: { value: '', isValid: false }
 })
 const isLoading = ref(false)
 
-const isFormValid = computed(() => 
+const isFormValid = computed(() =>
   Object.values(formData.value).every(field => field.isValid)
 )
 
@@ -29,13 +29,13 @@ const handleInput = (field, text, isValid) => {
 }
 
 // Methods
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
     await apiAuth.post({
-      url: `/auth/recover-password/reset`,
+      url: '/auth/recover-password/reset',
       data: {
         email: getLocalStorage('recoveryCode').formData.email,
         code: getLocalStorage('recoveryCode').formData.code,
@@ -44,16 +44,12 @@ const handleSubmit = async(e) => {
       }
     })
 
-    toast.success("Tu contraseña ha sido cambiada con éxito ^^")
+    toast.success('Tu contraseña ha sido cambiada con éxito ^^')
     emit('next')
-  }
-
-  catch (error) {
+  } catch (error) {
     toast.error('Ocurrió un error mientras cambiaba tu contraseña.')
-    console.error('Error:', error);
-  }
-
-  finally {
+    console.error('Error:', error)
+  } finally {
     isLoading.value = false
   }
 }

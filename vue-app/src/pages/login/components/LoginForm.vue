@@ -3,27 +3,27 @@ import { ref, computed } from 'vue'
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
-import Email from "@components/FormInput/Email.vue"
-import Password from "@components/FormInput/Password.vue";
+import Email from '@components/FormInput/Email.vue'
+import Password from '@components/FormInput/Password.vue'
 
 // Icons
 import IconLogin from '@icons/login/IconLogIn.vue'
 
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(['submit'])
 const props = defineProps({
   isLoading: {
     type: Boolean,
-    default: false,
-  },
-});
+    default: false
+  }
+})
 
 // Data
 const formData = ref({
   email: { value: '', isValid: false },
-  password: { value: '', isValid: false },
+  password: { value: '', isValid: false }
 })
 
-const isFormValid = computed(() => 
+const isFormValid = computed(() =>
   Object.values(formData.value).every(field => field.isValid)
 )
 
@@ -32,13 +32,13 @@ const handleInput = (field, text, isValid) => {
   formData.value[field] = { value: text, isValid }
 }
 
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
 
   const data = {}
   Object.keys(formData.value).forEach(key => {
-    data[key] = formData.value[key].value;
-  });
+    data[key] = formData.value[key].value
+  })
 
   emit('submit', data)
 }
@@ -59,7 +59,7 @@ const handleSubmit = async(e) => {
     <div class="recover-password-link">
       <router-link :to="{ name: 'RecoverPassword' }">
         ¿Olvidaste tu contraseña?
-      </router-link> 
+      </router-link>
     </div>
 
     <div class="submit-button">
@@ -67,17 +67,17 @@ const handleSubmit = async(e) => {
         text="Iniciar Sesión"
         type="submit"
         :disabled="!isFormValid"
-        :loading="isLoading"
+        :loading="props.isLoading"
         :animation="true"
         :icon-component="IconLogin"
       />
     </div>
 
     <p class="register-link">
-      ¿No tienes una cuenta? 
+      ¿No tienes una cuenta?
       <router-link :to="{ name: 'Register' }">
         Registrate.
-      </router-link> 
+      </router-link>
     </p>
   </form>
 </template>
@@ -90,7 +90,7 @@ const handleSubmit = async(e) => {
         margin-top: 0px;
       }
     }
-    
+
     .submit-button {
       margin-top: 15px;
     }
@@ -98,7 +98,7 @@ const handleSubmit = async(e) => {
     .register-link {
       text-align: center;
     }
-      
+
     .recover-password-link,
     .register-link {
       margin-top: 7px;

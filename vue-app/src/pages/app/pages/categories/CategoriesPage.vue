@@ -9,7 +9,7 @@ defineEmits(['vnode-unmounted'])
   <div class="categories-page">
     <MainContainer>
       <Head />
-  
+
       <P>Categories page</P>
     </MainContainer>
   </div>

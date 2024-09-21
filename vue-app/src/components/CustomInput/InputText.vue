@@ -1,42 +1,42 @@
 <script setup>
 // Imports
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
-import { useThemeStore } from "@stores/theme";
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useThemeStore } from '@stores/theme'
 
 // Vue defines
-defineOptions({ name: "CustomInputText" });
-const emit = defineEmits(["vnode-unmounted", "update:modelValue"]);
+defineOptions({ name: 'CustomInputText' })
+const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
 // Props
 const props = defineProps({
   modelValue: {
     type: String,
-    default: "",
+    default: ''
   },
   placeholder: {
     type: String,
-    default: "",
+    default: ''
   },
   iconComponent: {
     type: [Boolean, Object],
-    default: false,
+    default: false
   },
   disabled: {
     type: Boolean,
     default: false
   }
-});
+})
 
 // Store
-const themeStore = useThemeStore();
-const { currentTheme } = storeToRefs(themeStore);
+const themeStore = useThemeStore()
+const { currentTheme } = storeToRefs(themeStore)
 
 // Computed
 const valueInput = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
-});
+  set: (value) => emit('update:modelValue', value)
+})
 
 // Methods
 </script>

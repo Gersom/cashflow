@@ -1,32 +1,32 @@
 <script setup>
-defineOptions({ name: "NavLink" });
+defineOptions({ name: 'NavLink' })
 const props = defineProps({
   iconComponent: {
     type: Object,
-    default: null,
+    default: null
   },
   pageName: {
     type: String,
-    default: "Home",
+    default: 'Home'
   },
   text: {
     type: String,
-    default: "button",
-  },
-});
+    default: 'button'
+  }
+})
 
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-const emit = defineEmits(["change-route"]);
-const route = useRoute();
+const emit = defineEmits(['change-route'])
+const route = useRoute()
 const isRouteCurrent = computed(() => {
-  return route?.name?.toLowerCase() === props?.pageName?.toLowerCase();
-});
+  return route?.name?.toLowerCase() === props?.pageName?.toLowerCase()
+})
 
 const handleToRoute = () => {
-  emit("change-route");
-};
+  emit('change-route')
+}
 </script>
 
 <template>

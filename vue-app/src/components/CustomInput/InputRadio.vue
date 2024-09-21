@@ -1,46 +1,46 @@
 <script setup>
-  // Imports
-  import { computed } from 'vue'
-  import { storeToRefs } from 'pinia'
-  import { useThemeStore } from '@stores/theme'
+// Imports
+import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useThemeStore } from '@stores/theme'
 
-  // Vue defines
-  defineOptions({name: 'CustomInputRadio'})
-  const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
+// Vue defines
+defineOptions({ name: 'CustomInputRadio' })
+const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
-  // Props
-  const props = defineProps({
-    modelValue: {
-      type: Object,
-      default: () => {}
-    },
-    options: {
-      type: Array,
-      default: () => [] // { value: 'value1', text: 'Name 1' }
-    },
-    orientation: {
-      type: String,
-      default: 'horizontal' // vertical
-    }
-  })
+// Props
+const props = defineProps({
+  modelValue: {
+    type: Object,
+    default: () => {}
+  },
+  options: {
+    type: Array,
+    default: () => [] // { value: 'value1', text: 'Name 1' }
+  },
+  orientation: {
+    type: String,
+    default: 'horizontal' // vertical
+  }
+})
 
-  // Store
-  const themeStore = useThemeStore()
-  const { currentTheme } = storeToRefs(themeStore)
+// Store
+const themeStore = useThemeStore()
+const { currentTheme } = storeToRefs(themeStore)
 
-  // Computed
-  const valueInput = computed({
-    get: () => props.modelValue,
-    set: (value) => emit('update:modelValue', value)
-  })
+// Computed
+const valueInput = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+})
 
-  // Methods
+// Methods
 </script>
 
 <template>
   <div
     class="custom-input-radio"
-    :class="{ 
+    :class="{
       'is-dark-theme': currentTheme === 'dark',
       'is-vertical': orientation === 'vertical'
     }"
@@ -48,7 +48,7 @@
     <label
       v-for="(item, index) in props.options"
       :key="`radio${index}`"
-      class="label-tag" 
+      class="label-tag"
       :class="{ 'is-selected': valueInput?.value === item.value }"
     >
       <input
@@ -143,7 +143,7 @@
       color: var(--text-color);
       background: rgb(var(--background-color-rgb) / 30%);
     }
-    
+
     @media (width <= 720px) {
       align-items: flex-start;
       flex-direction: column;

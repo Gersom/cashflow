@@ -3,18 +3,18 @@ import { ref, computed } from 'vue'
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
-import Email from "@components/FormInput/Email.vue"
-import Password from "@components/FormInput/Password.vue";
-import Nickname from "@components/FormInput/Nickname.vue";
-import NroWhatsapp from "@components/FormInput/NroWhatsapp.vue";
+import Email from '@components/FormInput/Email.vue'
+import Password from '@components/FormInput/Password.vue'
+import Nickname from '@components/FormInput/Nickname.vue'
+import NroWhatsapp from '@components/FormInput/NroWhatsapp.vue'
 
 // Icons
 import IconSuccess from '@icons/state/IconSuccess.vue'
 
-const emit = defineEmits(["submit"]);
+const emit = defineEmits(['submit'])
 const props = defineProps({
   isLoading: { type: Boolean, default: false }
-});
+})
 
 // Data
 const componentMap = {
@@ -31,7 +31,7 @@ const formData = ref({
   whatsapp: { value: '', isValid: false }
 })
 
-const isFormValid = computed(() => 
+const isFormValid = computed(() =>
   Object.entries(formData.value)
     .filter(([key]) => key !== 'whatsapp')
     .every(([, field]) => field.isValid)
@@ -43,13 +43,13 @@ const handleInput = (field, text, isValid) => {
   formData.value[field] = { value: text, isValid }
 }
 
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
 
   const data = {}
   Object.keys(formData.value).forEach(key => {
-    data[key] = formData.value[key].value;
-  });
+    data[key] = formData.value[key].value
+  })
 
   emit('submit', data)
 }
@@ -86,7 +86,7 @@ const handleSubmit = async(e) => {
       Ya tienes una cuenta?
       <router-link :to="{ name: 'Login' }">
         Inicia sesión.
-      </router-link> 
+      </router-link>
     </p>
   </form>
 </template>
@@ -99,7 +99,7 @@ const handleSubmit = async(e) => {
         margin-top: 0px;
       }
     }
-    
+
     .submit-button {
       margin-top: 15px;
     }

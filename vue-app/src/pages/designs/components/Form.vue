@@ -1,53 +1,53 @@
 <script setup>
-import NroWhatsapp from "@components/FormInput/NroWhatsapp.vue";
-import Nickname from "@components/FormInput/Nickname.vue";
-import Email from "@components/FormInput/Email.vue";
-import Url from "@components/FormInput/Url.vue";
-import Password from "@components/FormInput/Password.vue";
-import ConfirmPassword from "@components/FormInput/ConfirmPassword.vue";
-import { ref } from "vue";
+import NroWhatsapp from '@components/FormInput/NroWhatsapp.vue'
+import Nickname from '@components/FormInput/Nickname.vue'
+import Email from '@components/FormInput/Email.vue'
+import Url from '@components/FormInput/Url.vue'
+import Password from '@components/FormInput/Password.vue'
+import ConfirmPassword from '@components/FormInput/ConfirmPassword.vue'
+import { ref } from 'vue'
 
-const nicknameValue = ref("");
-const nicknameValidate = ref(false);
+const nicknameValue = ref('')
+const nicknameValidate = ref(false)
 const handlerNickname = (text, isValid) => {
-  nicknameValue.value = text;
-  nicknameValidate.value = isValid;
-};
+  nicknameValue.value = text
+  nicknameValidate.value = isValid
+}
 
-const nroWhatsappValue = ref("");
-const nroWhatsappValidate = ref(false);
+const nroWhatsappValue = ref('')
+const nroWhatsappValidate = ref(false)
 const handlerNroWhatsapp = (text, isValid) => {
-  nroWhatsappValue.value = text;
-  nroWhatsappValidate.value = isValid;
-};
+  nroWhatsappValue.value = text
+  nroWhatsappValidate.value = isValid
+}
 
-const emailValue = ref("");
-const emailValidate = ref(false);
+const emailValue = ref('')
+const emailValidate = ref(false)
 const handlerEmail = (text, isValid) => {
-  emailValue.value = text;
-  emailValidate.value = isValid;
-};
+  emailValue.value = text
+  emailValidate.value = isValid
+}
 
-const urlValue = ref("");
-const urlValidate = ref(false);
+const urlValue = ref('')
+const urlValidate = ref(false)
 const handlerUrl = (text, isValid) => {
-  urlValue.value = text;
-  urlValidate.value = isValid;
-};
+  urlValue.value = text
+  urlValidate.value = isValid
+}
 
-const passwordValue = ref("");
-const passwordValidate = ref(false);
+const passwordValue = ref('')
+const passwordValidate = ref(false)
 const handlerPassword = (text, isValid) => {
-  passwordValue.value = text;
-  passwordValidate.value = isValid;
-};
+  passwordValue.value = text
+  passwordValidate.value = isValid
+}
 
-const confirmPasswordValue = ref("");
-const confirmPasswordValidate = ref(false);
+const confirmPasswordValue = ref('')
+const confirmPasswordValidate = ref(false)
 const handlerConfirmPassword = (text, isValid) => {
-  confirmPasswordValue.value = text;
-  confirmPasswordValidate.value = isValid;
-};
+  confirmPasswordValue.value = text
+  confirmPasswordValidate.value = isValid
+}
 </script>
 
 <template>

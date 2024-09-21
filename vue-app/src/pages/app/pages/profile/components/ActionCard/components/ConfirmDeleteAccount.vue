@@ -1,5 +1,5 @@
 <script setup>
-import IconClose from "@icons/actions/IconClose.vue"
+import IconClose from '@icons/actions/IconClose.vue'
 import CustomButton from '@components/CustomButton/GeneralButton.vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -65,7 +65,7 @@ const handleClose = () => {
     font-weight: 400;
     color: var(--error-color)
   }
-  
+
   .emoji-container {
     display: flex;
     flex-direction: column;

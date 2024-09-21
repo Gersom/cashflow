@@ -1,31 +1,31 @@
 <script setup>
 // Imports
-import { ref, nextTick, onMounted, watch, computed } from "vue";
-import { useCategoriesStore } from '@app-page/stores/categories';
-import { useThemeStore } from "@stores/theme";
-import Category from "./components/Category.vue";
-import CategorySelect from "./components/CategorySelect.vue";
-import DialogBlur from "@layouts/DialogBlur.vue";
-import NewItem from "./components/NewItem.vue";
+import { ref, nextTick, onMounted, watch, computed } from 'vue'
+import { useCategoriesStore } from '@app-page/stores/categories'
+import { useThemeStore } from '@stores/theme'
+import Category from './components/Category.vue'
+import CategorySelect from './components/CategorySelect.vue'
+import DialogBlur from '@layouts/DialogBlur.vue'
+import NewItem from './components/NewItem.vue'
 // Vue defines
-defineOptions({ name: "CustomInputCategories" });
-const emit = defineEmits(["vnode-unmounted", "change-categories"]);
+defineOptions({ name: 'CustomInputCategories' })
+const emit = defineEmits(['vnode-unmounted', 'change-categories'])
 
 const props = defineProps({
   categories: {
     type: Array,
     default: () => []
   }
-});
+})
 
 // Data
-const showCategorySelect = ref(false);
-const categoriesState = ref([]);
+const showCategorySelect = ref(false)
+const categoriesState = ref([])
 
 const categoriesProp = computed(() => props.categories)
 
 // Store
-const themeStore = useThemeStore();
+const themeStore = useThemeStore()
 const categoriesStore = useCategoriesStore()
 
 watch(categoriesProp, (newValue) => {
@@ -34,26 +34,26 @@ watch(categoriesProp, (newValue) => {
 
 // Methods
 const selectCategorySelect = (cat) => {
-  categoriesState.value = [...categoriesState.value, cat];
+  categoriesState.value = [...categoriesState.value, cat]
   nextTick(() => {
-    emit("change-categories", categoriesState.value);
-  });
+    emit('change-categories', categoriesState.value)
+  })
   if (categoriesState.value.length >= 3) {
-    showCategorySelect.value = false;
+    showCategorySelect.value = false
   }
-};
+}
 const removeCategorySelect = (index) => {
-  categoriesState.value.splice(index, 1);
+  categoriesState.value.splice(index, 1)
   nextTick(() => {
-    emit("change-categories", categoriesState.value);
-  });
-};
+    emit('change-categories', categoriesState.value)
+  })
+}
 const closeCategorySelect = () => {
-  showCategorySelect.value = false;
-};
+  showCategorySelect.value = false
+}
 const toogleCategorySelect = () => {
-  showCategorySelect.value = !showCategorySelect.value;
-};
+  showCategorySelect.value = !showCategorySelect.value
+}
 
 onMounted(() => categoriesStore.loadCategories())
 </script>

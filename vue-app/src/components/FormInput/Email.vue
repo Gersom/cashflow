@@ -1,43 +1,43 @@
 <script setup>
-import { ref } from "vue";
-import InputText from "@components/CustomInput/InputText.vue";
-import IconEmail from "@icons/form/IconEmail.vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import { ref } from 'vue'
+import InputText from '@components/CustomInput/InputText.vue'
+import IconEmail from '@icons/form/IconEmail.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
 
-defineOptions({ name: "FormInputEmail" });
-const emit = defineEmits(["validate"]);
+defineOptions({ name: 'FormInputEmail' })
+const emit = defineEmits(['validate'])
 
-const inputValue = ref("");
-const stateValidation = ref(null);
-const text = ref("Correo electrónico");
-const textNotification = ref("");
+const inputValue = ref('')
+const stateValidation = ref(null)
+const text = ref('Correo electrónico')
+const textNotification = ref('')
 
 const validateValue = () => {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   const validatePoint = (text) => {
-    const parts = text.split("@");
-    const domain = parts[1];
-    return domain.split(".").length <= 2;
-  };
-
-  if (inputValue.value === "") {
-    updateState("", null, "");
-  } else if (!regex.test(inputValue.value)) {
-    updateState("Correo electrónico no es válido", false);
-  } else if (!validatePoint(inputValue.value)) {
-    updateState("Correo electrónico no es válido", false);
-  } else {
-    updateState("Correo electrónico válido", true);
+    const parts = text.split('@')
+    const domain = parts[1]
+    return domain.split('.').length <= 2
   }
-};
+
+  if (inputValue.value === '') {
+    updateState('', null, '')
+  } else if (!regex.test(inputValue.value)) {
+    updateState('Correo electrónico no es válido', false)
+  } else if (!validatePoint(inputValue.value)) {
+    updateState('Correo electrónico no es válido', false)
+  } else {
+    updateState('Correo electrónico válido', true)
+  }
+}
 
 const updateState = (notification, validationState, emitValue = inputValue.value) => {
-  textNotification.value = notification;
-  stateValidation.value = validationState;
-  emit('validate', emitValue, validationState === true);
-};
+  textNotification.value = notification
+  stateValidation.value = validationState
+  emit('validate', emitValue, validationState === true)
+}
 </script>
 
 <template>

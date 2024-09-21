@@ -7,11 +7,11 @@ import MainContainer from '@app-page/layouts/MainContainer.vue'
 import Head from '@app-page/components/Head.vue'
 
 // Components local
-import ChartCard from './components/ChartCard.vue'
+// import ChartCard from './components/ChartCard.vue'
 import CreateCard from './components/CreateCard.vue'
 import HistoryCard from './components/HistoryCard/HistoryCard.vue'
 
-const emit = defineEmits(['vnode-unmounted'])
+defineEmits(['vnode-unmounted'])
 </script>
 
 <template>

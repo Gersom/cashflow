@@ -1,11 +1,11 @@
 import './assets/styles/main.css'
 
-import { createApp } from 'vue';
+import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { toastOptions } from './config/toast.js'
-import App from './App.vue';
-import router from './router/index.js';
-import Toast from "vue-toastification"
+import App from './App.vue'
+import router from './router/index.js'
+import Toast from 'vue-toastification'
 import VueApexCharts from 'vue3-apexcharts'
 
 const pinia = createPinia()

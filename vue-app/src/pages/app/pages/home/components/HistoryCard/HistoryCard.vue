@@ -1,15 +1,15 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { useMovementsStore } from '@app-page/stores/movements';
+import { ref, computed, onMounted } from 'vue'
+import { useMovementsStore } from '@app-page/stores/movements'
 import MovementForm from '@app-page/components/MovementForm.vue'
 
 // components global
-import TransactionBadge from '@app-page/components/TransactionBadge.vue';
-import DialogBlur from '@layouts/DialogBlur.vue';
+import TransactionBadge from '@app-page/components/TransactionBadge.vue'
+import DialogBlur from '@layouts/DialogBlur.vue'
 
 // components local
 import DateCardTitle from './components/DateCardTitle/DateCardTitle.vue'
-import MovementCard from './components/MovementCard/MovementCard.vue';
+import MovementCard from './components/MovementCard/MovementCard.vue'
 
 const movementsStore = useMovementsStore()
 
@@ -19,11 +19,11 @@ const currentMovement = ref({
   amount: '0.00',
   type: 'expense',
   description: '',
-  categories: [],
+  categories: []
 })
 
 const lengthMovements = computed(() => movementsStore.data?.length)
-const closeEditModal = () => showEditModal.value = false;
+const closeEditModal = () => { showEditModal.value = false }
 
 const openEditModal = (movement) => {
   currentMovement.value = movement
@@ -75,14 +75,14 @@ onMounted(() => movementsStore.loadMovements())
     </p>
 
     <div class="movements">
-      <MovementCard 
+      <MovementCard
         v-for="(movement, index) in movementsStore.movementsAll"
         :key="`movement-card-${index}`"
         :data="movement"
         @on-edit="openEditModal(movement)"
       />
     </div>
-    
+
     <DialogBlur
       :button-close="true"
       :show="showEditModal"
@@ -103,8 +103,8 @@ onMounted(() => movementsStore.loadMovements())
 </template>
 
 <style lang="scss" scoped>
-  .history-card {   
-  
+  .history-card {
+
     .movements-summary {
       display: flex;
       justify-content:space-around;

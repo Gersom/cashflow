@@ -1,7 +1,7 @@
 <script setup>
-import IconEdit from "@icons/actions/IconEdit.vue";
+import IconEdit from '@icons/actions/IconEdit.vue'
 
-const emit = defineEmits(['edit']);
+const emit = defineEmits(['edit'])
 const props = defineProps({
   title: {
     type: String,
@@ -19,7 +19,7 @@ const props = defineProps({
     type: String,
     default: '25px'
   }
-});
+})
 </script>
 
 <template>
@@ -39,7 +39,7 @@ const props = defineProps({
     </h3>
 
     <button
-      v-if="props.isEdit" 
+      v-if="props.isEdit"
       class="title"
       @click="emit('edit')"
     >

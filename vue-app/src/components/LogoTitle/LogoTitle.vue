@@ -23,14 +23,14 @@ const props = defineProps({
       <IconLogo />
     </div>
     <h2
-      v-if="title"
+      v-if="props.title"
       class="title"
     >
       <span style="--clr-logo: var(--secondary-color)">
-        {{ titlePrimary }}
+        {{ props.titlePrimary }}
       </span>
       <span style="--clr-logo: var(--primary-color)">
-        {{ titleSecondary }}
+        {{ props.titleSecondary }}
       </span>
     </h2>
   </div>

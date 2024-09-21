@@ -7,20 +7,20 @@ export const useAppStore = defineStore('app', {
     version: 'v' + version,
     developers: {
       gersom: {
-        name: 'Gersom Alaja', 
-        role: 'CEO', 
+        name: 'Gersom Alaja',
+        role: 'CEO',
         link: 'https://www.linkedin.com/in/gersomalaja/'
       },
       david: {
-        name: 'David Romero', 
-        role: 'FullStack Developer', 
+        name: 'David Romero',
+        role: 'FullStack Developer',
         link: 'https://www.linkedin.com/in/david-romero-s-s/'
       }
     }
   }),
   getters: {
     devGersom: state => state.developers.gersom,
-    devDavid: state => state.developers.david,
+    devDavid: state => state.developers.david
   },
   actions: {
   }

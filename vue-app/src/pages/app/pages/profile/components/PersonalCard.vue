@@ -1,37 +1,36 @@
 <script setup>
 import { ref, computed } from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import Nickname from '@components/FormInput/Nickname.vue';
-import Email from '@components/FormInput/Email.vue';
-import NroWhatsapp from '@components/FormInput/NroWhatsapp.vue';
-import CustomButton from '@components/CustomButton/GeneralButton.vue';
-import IconSave from '@icons/actions/IconSave.vue';
+import Nickname from '@components/FormInput/Nickname.vue'
+import Email from '@components/FormInput/Email.vue'
+import NroWhatsapp from '@components/FormInput/NroWhatsapp.vue'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import IconSave from '@icons/actions/IconSave.vue'
 
-
-const nicknameValue = ref("");
-const nicknameValidate = ref(false);
+const nicknameValue = ref('')
+const nicknameValidate = ref(false)
 const handlerNickname = (text, isValid) => {
-  nicknameValue.value = text;
-  nicknameValidate.value = isValid;
-};
+  nicknameValue.value = text
+  nicknameValidate.value = isValid
+}
 
-const emailValue = ref("");
-const emailValidate = ref(false);
+const emailValue = ref('')
+const emailValidate = ref(false)
 const handlerEmail = (text, isValid) => {
-  emailValue.value = text;
-  emailValidate.value = isValid;
-};
+  emailValue.value = text
+  emailValidate.value = isValid
+}
 
-const nroWhatsappValue = ref("");
-const nroWhatsappValidate = ref(false);
+const nroWhatsappValue = ref('')
+const nroWhatsappValidate = ref(false)
 const handlerNroWhatsapp = (text, isValid) => {
-  nroWhatsappValue.value = text;
-  nroWhatsappValidate.value = isValid;
-};
+  nroWhatsappValue.value = text
+  nroWhatsappValidate.value = isValid
+}
 
 const isButtonEnabled = computed(() => {
-  return nroWhatsappValidate.value && emailValidate.value && nicknameValidate.value;
-});
+  return nroWhatsappValidate.value && emailValidate.value && nicknameValidate.value
+})
 
 </script>
 

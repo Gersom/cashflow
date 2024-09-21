@@ -1,5 +1,5 @@
 export const toastOptions = {
-  closeButton: "button",
+  closeButton: 'button',
   closeOnClick: false,
   draggable: false,
   draggablePercent: 0.6,
@@ -9,9 +9,9 @@ export const toastOptions = {
   newestOnTop: true,
   pauseOnFocusLoss: false,
   pauseOnHover: true,
-  position: "top-right",
+  position: 'top-right',
   rtl: false,
   showCloseButtonOnHover: false,
   timeout: 5000,
-  transition: "Vue-Toastification__bounce",
+  transition: 'Vue-Toastification__bounce'
 }

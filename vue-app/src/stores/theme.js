@@ -8,13 +8,13 @@ export const useThemeStore = defineStore('theme', {
     currentTheme: (state) => state.isDarkTheme ? 'dark' : 'light'
   },
   actions: {
-    setLightMode() {
+    setLightMode () {
       this.isDarkTheme = false
     },
-    setDarkMode() {
+    setDarkMode () {
       this.isDarkTheme = true
     },
-    toggleTheme() {
+    toggleTheme () {
       this.isDarkTheme = !this.isDarkTheme
     }
   }

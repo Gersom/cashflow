@@ -1,27 +1,27 @@
 <script setup>
-defineOptions({ name: "NavCustom" });
-import { ref } from "vue";
-import { useAppStore } from "@stores/app";
-import DialogBlur from "@layouts/DialogBlur.vue";
-import IconInfo from "@icons/nav/IconInfo.vue";
-import IconLogo from "@icons/others/IconLogo.vue";
-import InfoModal from "./components/InfoModal.vue";
-import links from "./data/link-list.js";
-import NavLink from "./components/NavLink.vue";
-import IconOpenNav from "@icons/nav/IconOpenNav.vue";
+defineOptions({ name: 'NavCustom' })
+import { ref } from 'vue'
+import { useAppStore } from '@stores/app'
+import DialogBlur from '@layouts/DialogBlur.vue'
+import IconInfo from '@icons/nav/IconInfo.vue'
+import IconLogo from '@icons/others/IconLogo.vue'
+import InfoModal from './components/InfoModal.vue'
+import links from './data/link-list.js'
+import NavLink from './components/NavLink.vue'
+import IconOpenNav from '@icons/nav/IconOpenNav.vue'
 
-const appStore = useAppStore();
+const appStore = useAppStore()
 
-const showInfoModal = ref(false);
-const openNav = ref(false);
+const showInfoModal = ref(false)
+const openNav = ref(false)
 
 const openInfoModal = () => {
-  showInfoModal.value = true;
-  openNav.value = false;
-};
+  showInfoModal.value = true
+  openNav.value = false
+}
 const closeInfoModal = () => {
-  showInfoModal.value = false;
-};
+  showInfoModal.value = false
+}
 </script>
 
 <template>
@@ -137,7 +137,7 @@ const closeInfoModal = () => {
   .items {
     width: 100%;
   }
-  
+
   @media (width >= 1400px) {
     --nav-width: 75px;
   }

@@ -1,16 +1,16 @@
 <script setup>
-import { ref } from "vue"
+import { ref } from 'vue'
 import { useToast } from 'vue-toastification'
-import { apiAuth } from '@src/services/api';
+import { apiAuth } from '@src/services/api'
 
 // Components
 import CustomButtom from '@components/CustomButton/GeneralButton.vue'
-import Email from "@components/FormInput/Email.vue"
+import Email from '@components/FormInput/Email.vue'
 
 // Icons
 import IconGeometricFigures from '@icons/nav/IconGeometricFigures.vue'
 
-const emit = defineEmits(["next"]);
+const emit = defineEmits(['next'])
 const toast = useToast()
 const emailData = ref({ value: '', isValid: false })
 const isLoading = ref(false)
@@ -20,30 +20,26 @@ const handleEmail = (text, isValid) => {
 }
 
 // Methods
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
   isLoading.value = true
   // toast.info("Espere un momento...");
   try {
     await apiAuth.post({
-      url: `/auth/recover-password/request`,
+      url: '/auth/recover-password/request',
       data: { email: emailData.value.value }
     })
 
-    toast.success("Se envio tu código de recuperación al correo electrónico ingresado")
+    toast.success('Se envio tu código de recuperación al correo electrónico ingresado')
     emit('next', { email: emailData.value.value })
-  }
-
-  catch (error) {
+  } catch (error) {
     if (error.response.status === 400) {
       toast.warning('No tenemos registrado ese correo electrónico.')
     } else {
       toast.error('Ocurrió un error mientras enviaba tu código de recuperación.')
-      console.error('Error:', error);
+      console.error('Error:', error)
     }
-  }
-
-  finally {
+  } finally {
     isLoading.value = false
   }
 }
@@ -93,11 +89,11 @@ const handleSubmit = async(e) => {
       text-align: center;
       margin-top: 10px;
     }
-    
+
     .submit-button {
       margin-top: 15px;
     }
-      
+
     .recover-password-link{
       margin-top: 7px;
       font-size: 14px;

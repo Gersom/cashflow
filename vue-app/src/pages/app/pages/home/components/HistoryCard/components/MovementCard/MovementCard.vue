@@ -1,32 +1,32 @@
 <script setup>
-import TransactionBadge from '@app-page/components/TransactionBadge.vue';
-import IconEdit from '@icons/actions/IconEdit.vue';
-import { computed } from 'vue';
-import BookmarkTag from './components/BookmarkTag.vue';
+import TransactionBadge from '@app-page/components/TransactionBadge.vue'
+import IconEdit from '@icons/actions/IconEdit.vue'
+import { computed } from 'vue'
+import BookmarkTag from './components/BookmarkTag.vue'
 
-const emit = defineEmits(["on-edit"]);
+const emit = defineEmits(['on-edit'])
 const props = defineProps({
   data: {
     type: Object,
     default: () => ({
-      createdAt:"2024-09-15T00:02:51.385Z"
+      createdAt: '2024-09-15T00:02:51.385Z'
     })
-  },
-});
+  }
+})
 
 const isoDate = computed(() => {
   const dateTemp = new Date(props.data?.createdAt)
   return dateTemp.toISOString().split('T')[0]
-});
+})
 
 const formattedDate = computed(() => {
   const dateTemp = new Date(props.data?.createdAt)
   return dateTemp.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-  }).replace(/\//g, ' / ');
-});
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  }).replace(/\//g, ' / ')
+})
 </script>
 
 <template>

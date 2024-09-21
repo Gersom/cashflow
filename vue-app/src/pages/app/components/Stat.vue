@@ -5,16 +5,16 @@ const props = defineProps({
     type: String,
     default: 'Home'
   },
-  currency:{
+  currency: {
     type: String,
     default: '8000'
   },
-  color:{
+  color: {
     type: String,
-    default: "#fda"
+    default: '#fda'
   }
 
-});
+})
 
 defineOptions({
   name: 'Stat'
@@ -73,7 +73,7 @@ defineOptions({
 .top{
   display: flex;
   justify-content: space-between;
- 
+
 }
 
 .top > p {

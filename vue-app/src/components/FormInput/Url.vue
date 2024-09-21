@@ -1,36 +1,36 @@
 <script setup>
-import { ref } from "vue";
-import InputText from "@components/CustomInput/InputText.vue";
-import IconUrl from "@icons/form/IconUrl.vue";
-import IconSuccess from "@icons/state/IconSuccess.vue";
-import IconWarning from "@icons/state/IconWarning.vue";
+import { ref } from 'vue'
+import InputText from '@components/CustomInput/InputText.vue'
+import IconUrl from '@icons/form/IconUrl.vue'
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
 
-defineOptions({ name: "FormInputURL" });
-const emit = defineEmits(["validate"]);
+defineOptions({ name: 'FormInputURL' })
+const emit = defineEmits(['validate'])
 
-const inputValue = ref("");
-const stateValidation = ref(null);
-const text = ref("Url externo");
-const textNotification = ref("");
+const inputValue = ref('')
+const stateValidation = ref(null)
+const text = ref('Url externo')
+const textNotification = ref('')
 
 const validateValue = () => {
-  const regex =
-    /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+  // eslint-disable-next-line no-useless-escape
+  const regex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/
 
-  if (inputValue.value === "") {
-    updateState("", null, "");
+  if (inputValue.value === '') {
+    updateState('', null, '')
   } else if (!regex.test(inputValue.value)) {
-    updateState("Url no es válida", false);
+    updateState('Url no es válida', false)
   } else {
-    updateState("Url válido", true);
+    updateState('Url válido', true)
   }
-};
+}
 
 const updateState = (notification, validationState, emitValue = inputValue.value) => {
-  textNotification.value = notification;
-  stateValidation.value = validationState;
-  emit('validate', emitValue, validationState === true);
-};
+  textNotification.value = notification
+  stateValidation.value = validationState
+  emit('validate', emitValue, validationState === true)
+}
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup>
-import { useThemeStore } from "@stores/theme";
-import { storeToRefs } from "pinia";
+import { useThemeStore } from '@stores/theme'
+import { storeToRefs } from 'pinia'
 
-const themeStore = useThemeStore();
-const { isDarkTheme } = storeToRefs(themeStore);
+const themeStore = useThemeStore()
+const { isDarkTheme } = storeToRefs(themeStore)
 </script>
 
 <template>

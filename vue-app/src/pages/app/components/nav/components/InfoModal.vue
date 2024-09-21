@@ -1,8 +1,8 @@
 <script setup>
-import { useAppStore } from "@stores/app";
-import LogoTitle from "@components/LogoTitle/LogoTitle.vue";
+import { useAppStore } from '@stores/app'
+import LogoTitle from '@components/LogoTitle/LogoTitle.vue'
 
-const appStore = useAppStore();
+const appStore = useAppStore()
 </script>
 
 <template>

@@ -1,12 +1,12 @@
 <script setup>
-import IconSuccess from '@icons/state/IconSuccess.vue';
-import CustomButton from '@components/CustomButton/GeneralButton.vue';
-import { ref } from 'vue';
+import IconSuccess from '@icons/state/IconSuccess.vue'
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import { ref } from 'vue'
 
-const emit = defineEmits(['selected-year', 'selected-month', 'close']);
+const emit = defineEmits(['selected-year', 'selected-month', 'close'])
 
-const months = ref(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']);
-const years = ref(['2021', '2022', '2023', '2024']);
+const months = ref(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'])
+const years = ref(['2021', '2022', '2023', '2024'])
 
 const props = defineProps({
   year: {
@@ -17,7 +17,7 @@ const props = defineProps({
     type: String,
     default: 'Enero'
   }
-});
+})
 </script>
 
 <template>

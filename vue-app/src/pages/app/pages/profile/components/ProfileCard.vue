@@ -1,12 +1,12 @@
 <script setup>
-import { ref, computed} from 'vue'
+import { ref } from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import UploadButton from "@components/CustomButton/UploadButton.vue"
-import GeneralButton from "@components/CustomButton/GeneralButton.vue"
-import IconSave from '@icons/actions/IconSave.vue';
-import IconPicture from '@icons/form/IconPicture.vue';
-import { apiAuth } from '@src/services/api.js';
-import { useToast } from 'vue-toastification';
+import UploadButton from '@components/CustomButton/UploadButton.vue'
+import GeneralButton from '@components/CustomButton/GeneralButton.vue'
+import IconSave from '@icons/actions/IconSave.vue'
+import IconPicture from '@icons/form/IconPicture.vue'
+import { apiAuth } from '@src/services/api.js'
+import { useToast } from 'vue-toastification'
 
 // import Url from '@components/FormInput/Url.vue';
 // const urlValue = ref("");
@@ -26,36 +26,36 @@ const isButtonEnabled = ref(false)
 
 const handleUploadFile = (file) => {
   if (currentImage.value) {
-    URL.revokeObjectURL(currentImage.value);
+    URL.revokeObjectURL(currentImage.value)
   }
-  newImage.value = file;
-  currentImage.value = URL.createObjectURL(file);
-  isButtonEnabled.value = true;
+  newImage.value = file
+  currentImage.value = URL.createObjectURL(file)
+  isButtonEnabled.value = true
 }
 
 const convertToBase64 = () => {
-  const reader = new FileReader();
+  const reader = new FileReader()
   reader.onload = (e) => {
-    handleSubmit(e.target.result);
-  };
-  reader.readAsDataURL(newImage.value);
+    handleSubmit(e.target.result)
+  }
+  reader.readAsDataURL(newImage.value)
 }
 
 const handleSubmit = async (fileBase64) => {
-  toast.info('Subiendo imagen...');
-  isButtonEnabled.value = false;
+  toast.info('Subiendo imagen...')
+  isButtonEnabled.value = false
   try {
     await apiAuth.put({
-      url: `/profile/image`,
+      url: '/profile/image',
       data: { image: fileBase64 }
     })
-    URL.revokeObjectURL(currentImage.value);
-    currentImage.value = fileBase64;
-    newImage.value = null;
-    toast.success('Imagen guardada correctamente');
+    URL.revokeObjectURL(currentImage.value)
+    currentImage.value = fileBase64
+    newImage.value = null
+    toast.success('Imagen guardada correctamente')
   } catch (error) {
-    isButtonEnabled.value = true;
-    toast.error('Error al guardar imagen');
+    isButtonEnabled.value = true
+    toast.error('Error al guardar imagen')
     console.error(error)
   }
 }

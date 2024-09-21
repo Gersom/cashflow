@@ -1,5 +1,5 @@
 <script setup>
-import { useMovementsStore } from '@app-page/stores/movements';
+import { useMovementsStore } from '@app-page/stores/movements'
 import MovementForm from '@app-page/components/MovementForm.vue'
 
 const movementsStore = useMovementsStore()

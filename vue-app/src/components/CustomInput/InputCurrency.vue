@@ -1,160 +1,158 @@
 <script setup>
-  // ------------
-  // Imports
-  // ------------
-  import { ref, computed } from 'vue'
-  import { useThemeStore } from '@stores/theme'
-  
-  // ------------
-  // Vue defines
-  // ------------
-  defineOptions({name: 'CustomInputCurrency'})
-  const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
-  
-  // ------------
-  // Props
-  // ------------
-  const props = defineProps({
-    modelValue: {
-      type: String,
-      default: ''
-    },
-    transactionType: {
-      type: String,
-      default: 'income' // income, expense
-    },
-    currencySymbol: {
-      type: String,
-      default: '$'
-    },
-  })
+// ------------
+// Imports
+// ------------
+import { ref, computed } from 'vue'
+import { useThemeStore } from '@stores/theme'
 
-  // ------------
-  // Store
-  // ------------
-  const themeStore = useThemeStore()
-  
-  // ------------
-  // Data references
-  // ------------
-  const inputRef = ref(null)
-  const pressedShift = ref(false)
-  const pressedShiftTab = ref(true)
-  const pressedTab = ref(false)
+// ------------
+// Vue defines
+// ------------
+defineOptions({ name: 'CustomInputCurrency' })
+const emit = defineEmits(['vnode-unmounted', 'update:modelValue'])
 
-  // Computed
-  const valueInput = computed(() => props.modelValue)
+// ------------
+// Props
+// ------------
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: ''
+  },
+  transactionType: {
+    type: String,
+    default: 'income' // income, expense
+  },
+  currencySymbol: {
+    type: String,
+    default: '$'
+  }
+})
 
-  // ------------
-  // Methods
-  // ------------
-  const handleBlur = (event) => {
-    // presseds initialized
-    pressedShift.value = false
-    pressedShiftTab.value = true
-    pressedTab.value = false
+// ------------
+// Store
+// ------------
+const themeStore = useThemeStore()
 
-    // format number
-    const str = event.target.value
-    let parts = str.split('.');
-    let integerPart = parts[0] || '0';
-    let decimalPart = parts[1] || '00';
-    decimalPart = decimalPart.length === 1 ? decimalPart + '0' : decimalPart.substring(0, 2);
-    parts = `${integerPart}.${decimalPart}`
-    emitInput(parts)
-    event.target.value = parts;
+// ------------
+// Data references
+// ------------
+const inputRef = ref(null)
+const pressedShift = ref(false)
+const pressedShiftTab = ref(true)
+const pressedTab = ref(false)
+
+// Computed
+const valueInput = computed(() => props.modelValue)
+
+// ------------
+// Methods
+// ------------
+const handleBlur = (event) => {
+  // presseds initialized
+  pressedShift.value = false
+  pressedShiftTab.value = true
+  pressedTab.value = false
+
+  // format number
+  const str = event.target.value
+  let parts = str.split('.')
+  const integerPart = parts[0] || '0'
+  let decimalPart = parts[1] || '00'
+  decimalPart = decimalPart.length === 1 ? decimalPart + '0' : decimalPart.substring(0, 2)
+  parts = `${integerPart}.${decimalPart}`
+  emitInput(parts)
+  event.target.value = parts
+}
+
+const handleFocus = () => {
+  const dotIndex = inputRef.value.value.indexOf('.')
+  inputRef.value.setSelectionRange(0, dotIndex)
+}
+
+const handleInput = (event) => {
+  const regex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*(),?":{}|<>]/g
+  let cursorPosition = event.target.selectionStart
+  if (regex.test(event.target.value)) {
+    cursorPosition -= 1
   }
 
-  const handleFocus = () => {
-    const dotIndex = inputRef.value.value.indexOf('.')
-    inputRef.value.setSelectionRange(0, dotIndex)
+  let newValue = event.target.value.replace(/[^\d.]/g, '')
+  newValue = formatNumber(newValue)
+  emitInput(newValue)
+  event.target.value = newValue
+
+  inputRef.value.setSelectionRange(cursorPosition, cursorPosition)
+}
+
+const handleKeyDown = (event) => {
+  if (event.key === 'Shift') { pressedShift.value = true }
+
+  if (event.key === '.') {
+    event.preventDefault()
+    selectDecimals()
   }
 
-  const handleInput = (event) => {
-    const regex = /[a-zA-ZñÑáéíóúÁÉÍÓÚüÜ!@#$%^&*(),?":{}|<>]/g
-    let cursorPosition = event.target.selectionStart
-    if(regex.test(event.target.value)) {
-      cursorPosition -= 1
-    }
-
-    let newValue = event.target.value.replace(/[^\d.]/g, '')
-    newValue = formatNumber(newValue)
-    emitInput(newValue)
-    event.target.value = newValue
-
-    inputRef.value.setSelectionRange(cursorPosition, cursorPosition)
-  }
-
-  const handleKeyDown = (event) => {
-    if(event.key === 'Shift')
-      pressedShift.value = true
-
-    if(event.key === '.') {
-      event.preventDefault()
-      selectDecimals()
-    }
-
-    if(event.key === 'Tab') {
-      if(pressedShift.value) {
-        if(!pressedShiftTab.value) {
-          pressedShiftTab.value = true
-          pressedTab.value = false
-          event.preventDefault()
-          // console.log('selectIntegers')
-          selectIntegers()
-        }
-      } else {
-        if(!pressedTab.value) {
-          pressedShiftTab.value = false
-          pressedTab.value = true
-          event.preventDefault()
-          // console.log('selectDecimals')
-          selectDecimals()
-        }
+  if (event.key === 'Tab') {
+    if (pressedShift.value) {
+      if (!pressedShiftTab.value) {
+        pressedShiftTab.value = true
+        pressedTab.value = false
+        event.preventDefault()
+        // console.log('selectIntegers')
+        selectIntegers()
+      }
+    } else {
+      if (!pressedTab.value) {
+        pressedShiftTab.value = false
+        pressedTab.value = true
+        event.preventDefault()
+        // console.log('selectDecimals')
+        selectDecimals()
       }
     }
   }
+}
 
-  const handleKeyUp = (event) => {
-    if(event.key === 'Shift') {
-      pressedShift.value = false
-    }
+const handleKeyUp = (event) => {
+  if (event.key === 'Shift') {
+    pressedShift.value = false
   }
+}
 
-  // ------------
-  // Utils Funtions
-  // ------------
-  const emitInput = (value) => {
-    emit('update:modelValue', value)
+// ------------
+// Utils Funtions
+// ------------
+const emitInput = (value) => {
+  emit('update:modelValue', value)
+}
+
+const selectDecimals = () => {
+  const dotIndex = inputRef.value.value.indexOf('.')
+  if (dotIndex === -1) {
+    emitInput(inputRef.value.value + '.00')
+    inputRef.value.value = inputRef.value.value + '.00'
+    inputRef.value.setSelectionRange(inputRef.value.value.length - 2, inputRef.value.value.length)
+  } else {
+    inputRef.value.setSelectionRange(dotIndex + 1, dotIndex + 3)
   }
+}
 
-  const selectDecimals = () => {
-    const dotIndex = inputRef.value.value.indexOf('.')
-    if(dotIndex === -1) {
-      emitInput(inputRef.value.value + '.00')
-      inputRef.value.value = inputRef.value.value + '.00'
-      inputRef.value.setSelectionRange(inputRef.value.value.length - 2, inputRef.value.value.length)
-    } else {
-      inputRef.value.setSelectionRange(dotIndex + 1, dotIndex + 3)
-    }
-  }
+const selectIntegers = () => {
+  const dotIndex = inputRef.value.value.indexOf('.')
+  inputRef.value.setSelectionRange(0, dotIndex)
+}
 
-  const selectIntegers = () => {
-    const dotIndex = inputRef.value.value.indexOf('.')
-    inputRef.value.setSelectionRange(0, dotIndex)
-  }
+const formatNumber = (str) => {
+  const parts = str.split('.')
+  const integerPart = parts[0]
+  let decimalPart = parts[1]
 
-  const formatNumber = (str) => {
-    let parts = str.split('.');
-    let integerPart = parts[0];
-    let decimalPart = parts[1];
-
-    if(decimalPart) {
-      decimalPart = decimalPart.length > 1 ? decimalPart.substring(0, 2) : decimalPart;
-      return `${integerPart}.${decimalPart}`;
-    }
-    else return integerPart
-  }
+  if (decimalPart) {
+    decimalPart = decimalPart.length > 1 ? decimalPart.substring(0, 2) : decimalPart
+    return `${integerPart}.${decimalPart}`
+  } else return integerPart
+}
 </script>
 
 <template>
@@ -231,7 +229,7 @@
         color: var(--error-color);
       }
     }
-    
+
     /* Dark Theme */
     &.is-dark-theme {
       .input-tag {
@@ -243,7 +241,7 @@
       .input-tag {
         font-weight: 500;
       }
-    }  
+    }
   }
 
 </style>

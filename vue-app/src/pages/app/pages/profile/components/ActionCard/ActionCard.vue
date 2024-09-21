@@ -7,8 +7,8 @@ import { useToast } from 'vue-toastification'
 import DialogBlur from '@layouts/DialogBlur.vue'
 
 // Icons components
-import IconClose from "@icons/actions/IconClose.vue"
-import IconLogOut from "@icons/login/IconLogOut.vue"
+import IconClose from '@icons/actions/IconClose.vue'
+import IconLogOut from '@icons/login/IconLogOut.vue'
 
 // Components global
 import CardTitle from '@components/CardTitle/CardTitle.vue'

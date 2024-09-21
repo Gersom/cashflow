@@ -51,7 +51,7 @@ export const routes = [
     path: '/mis-disenos',
     name: 'Designs',
     component: Designs,
-    alias: ['/designs', '/disenos', '/my-designs'],
+    alias: ['/designs', '/disenos', '/my-designs']
   },
   {
     path: '/:pathMatch(.*)*',

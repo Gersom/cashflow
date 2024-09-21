@@ -1,16 +1,16 @@
 <script setup>
 // Imports
-import { apiApp } from '@src/services/api';
-import { ref, computed, onMounted } from "vue";
+import { apiApp } from '@src/services/api'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-import CustomButton from "@components/CustomButton/GeneralButton.vue";
-import CustomInputText from "@components/CustomInput/InputText.vue";
-import CustomSelect from "@components/CustomSelect/SelectDefault.vue";
-import IconAccount from '@icons/others/IconAccount.vue';
-import IconTriangle from '@icons/others/IconTriangle.vue';
-import IconWarning from "@icons/state/IconWarning.vue";
-import LoginLayout from '@layouts/LoginLayout.vue';
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import CustomInputText from '@components/CustomInput/InputText.vue'
+import CustomSelect from '@components/CustomSelect/SelectDefault.vue'
+import IconAccount from '@icons/others/IconAccount.vue'
+import IconTriangle from '@icons/others/IconTriangle.vue'
+import IconWarning from '@icons/state/IconWarning.vue'
+import LoginLayout from '@layouts/LoginLayout.vue'
 
 // Data
 const router = useRouter()
@@ -24,7 +24,7 @@ const isLoading = ref(false)
 const isSelectedValue = computed(() => !currencySelected.value.value)
 
 // Methods
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
   isLoading.value = true
   try {
@@ -33,16 +33,12 @@ const handleSubmit = async(e) => {
       data: { currencyId: currencySelected.value.value }
     })
 
-    toast.success("Bienvenid@")
+    toast.success('Bienvenid@')
     router.push({ name: 'AppHome' })
-  }
-  
-  catch (error) {
+  } catch (error) {
     toast.error('Ocurrió un error.')
-    console.error('Error:', error);
-  }
-
-  finally {
+    console.error('Error:', error)
+  } finally {
     isLoading.value = false
   }
 }
@@ -52,15 +48,10 @@ const getCurrency = async () => {
       url: '/currencies'
     })
 
-    if (response?.data?.data)
-      currencyList.value = formatedCurrencyList(response?.data?.data)
-    else
-      toast.warning('Algo ocurrió con la información de las monedas')
-  }
-  
-  catch (error) {
+    if (response?.data?.data) { currencyList.value = formatedCurrencyList(response?.data?.data) } else { toast.warning('Algo ocurrió con la información de las monedas') }
+  } catch (error) {
     toast.error('Ocurrió un error mientras se obtenia tus monedas locales.')
-    console.error('Error:', error);
+    console.error('Error:', error)
   }
 }
 const formatedCurrencyList = (list) => {
@@ -117,7 +108,7 @@ onMounted(() => {
             :items="currencyList"
           />
         </div>
-  
+
         <div class="submit-button">
           <CustomButton
             text="Ingresar"

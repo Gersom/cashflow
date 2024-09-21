@@ -1,5 +1,5 @@
 <script setup>
-import { apiAuth } from '@src/services/api';
+import { apiAuth } from '@src/services/api'
 import { onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useToast } from 'vue-toastification'
@@ -7,29 +7,26 @@ import IconLogo from '@icons/others/IconLogo.vue'
 import LoadingComponent from '@components/Loading/Loading.vue'
 
 const router = useRouter()
-const route = useRoute();
+const route = useRoute()
 const toast = useToast()
 
 // Methods
 const handleSubmit = async () => {
   try {
     await apiAuth.post({
-      url: `/register/verify`,
+      url: '/register/verify',
       data: { token: route.query.token || '' }
     })
 
-    toast.success("Correo electrónico verificado con éxito ^^")
+    toast.success('Correo electrónico verificado con éxito ^^')
     router.push({ name: 'Login' })
-  }
-  
-  catch (error) {
+  } catch (error) {
     if (error.response.status === 400) {
       toast.warning('Tu correo electrónico ya habia sido verificado con anterioridad.')
       router.push({ name: 'Login' })
-    }
-    else {
+    } else {
       toast.error('Ocurrió un error mientras verificaba tu correo electrónico.')
-      console.log('Error:', error);
+      console.log('Error:', error)
     }
   }
 }

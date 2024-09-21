@@ -1,18 +1,17 @@
 <script setup>
 import { useRoute } from 'vue-router'
-import { useUserStore } from '@stores/user';
-import { storeToRefs } from 'pinia';
-import {getCurrentMonthName, getCurrentYear} from '@utils/date.js'
+import { useUserStore } from '@stores/user'
+import { storeToRefs } from 'pinia'
+import { getCurrentMonthName, getCurrentYear } from '@utils/date.js'
 
-defineOptions({ name: "HeadCustom" });
+defineOptions({ name: 'HeadCustom' })
 const route = useRoute()
 
 const month = getCurrentMonthName()
 const year = getCurrentYear()
 
-
-const userStore = useUserStore();
-const { user } = storeToRefs(userStore);
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 </script>
 
 <template>

@@ -1,45 +1,45 @@
 <script setup>
 import LoadingComponent from '@components/Loading/Loading.vue'
 
-const emit = defineEmits(["click"]);
+const emit = defineEmits(['click'])
 const props = defineProps({
   size: {
     type: String,
-    default: "normal", // small, normal
+    default: 'normal' // small, normal
   },
   text: {
     type: String,
-    default: "button",
+    default: 'button'
   },
   transparent: {
     type: Boolean,
-    default: false,
+    default: false
   },
   iconComponent: {
     type: Object,
-    default: null,
+    default: null
   },
   disabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   animation: {
     type: Boolean,
-    default: false,
+    default: false
   },
   loading: {
     type: Boolean,
-    default: false,
+    default: false
   },
   color: {
     type: String,
-    default: '',
+    default: ''
   },
   type: {
     type: String,
-    default: 'button',
-  },
-});
+    default: 'button'
+  }
+})
 </script>
 
 <template>
@@ -138,7 +138,6 @@ const props = defineProps({
 .custom-button.is-small {
   height: var(--button-height-small);
 }
-
 
 .custom-button.is-disabled {
   border: none;

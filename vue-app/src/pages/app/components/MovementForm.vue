@@ -1,25 +1,25 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
-import { useAccountsStore } from '@app-page/stores/accounts';
-import IconSave from "@icons/actions/IconSave.vue"
-import IconClose from "@icons/actions/IconClose.vue"
-import IconEdit from "@icons/actions/IconEdit.vue"
+import { useAccountsStore } from '@app-page/stores/accounts'
+import IconSave from '@icons/actions/IconSave.vue'
+import IconClose from '@icons/actions/IconClose.vue'
+import IconEdit from '@icons/actions/IconEdit.vue'
 
 // Components
 import CardTitle from '@components/CardTitle/CardTitle.vue'
-import CustomButton from "@components/CustomButton/GeneralButton.vue"
-import CustomInputCurrency from "@components/CustomInput/InputCurrency.vue"
-import CustomInputRadio from "@components/CustomInput/InputRadio.vue"
-import CustomInputText from "@components/CustomInput/InputText.vue"
-import CustomInputTextarea from "@components/CustomInput/InputTextarea.vue"
-import InputCategory from "@components/CustomInput/InputCategory/InputCategory.vue"
-import InputCheckBox from "@components/CustomInput/InputCheckBox.vue"
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
+import CustomInputCurrency from '@components/CustomInput/InputCurrency.vue'
+import CustomInputRadio from '@components/CustomInput/InputRadio.vue'
+import CustomInputText from '@components/CustomInput/InputText.vue'
+import CustomInputTextarea from '@components/CustomInput/InputTextarea.vue'
+import InputCategory from '@components/CustomInput/InputCategory/InputCategory.vue'
+import InputCheckBox from '@components/CustomInput/InputCheckBox.vue'
 
 const dataTypeMovement = {
   expense: { value: 'expense', text: 'Gasto' },
   income: { value: 'income', text: 'Ingreso' }
 }
-const radioData = [ dataTypeMovement.income, dataTypeMovement.expense ]
+const radioData = [dataTypeMovement.income, dataTypeMovement.expense]
 
 const emit = defineEmits(['data-submit', 'delete-movement'])
 const props = defineProps({
@@ -30,7 +30,7 @@ const props = defineProps({
       amount: '0.00',
       type: 'expense',
       description: '',
-      categories: [],
+      categories: []
     })
   },
   isEdit: {
@@ -162,7 +162,7 @@ const handleDeleteMovement = () => {
           placeholder="Movimiento nuevo..."
         />
       </div>
-      <div class="input-group">        
+      <div class="input-group">
         <InputCheckBox
           v-model="checkboxCategories"
           :text="checkboxCategories ? 'Categorias' : 'Agregar categorias'"

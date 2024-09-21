@@ -1,19 +1,18 @@
 <script setup>
-import { ref , computed } from 'vue'
+import { ref, computed } from 'vue'
 import CardTitle from '@components/CardTitle/CardTitle.vue'
 import ConfirmPassword from '@components/FormInput/ConfirmPassword.vue'
-import CustomButton from "@components/CustomButton/GeneralButton.vue"
+import CustomButton from '@components/CustomButton/GeneralButton.vue'
 import IconSave from '@icons/actions/IconSave.vue'
 import Password from '@components/FormInput/Password.vue'
-
 
 const formData = ref({
   currentPassword: { value: '', isValid: false },
   newPassword: { value: '', isValid: false },
-  confirmPassword: { value: '', isValid: false },
+  confirmPassword: { value: '', isValid: false }
 })
 
-const isFormValid = computed(() => 
+const isFormValid = computed(() =>
   Object.values(formData.value).every(field => field.isValid)
 )
 
@@ -22,13 +21,13 @@ const handleInput = (field, text, isValid) => {
   formData.value[field] = { value: text, isValid }
 }
 
-const handleSubmit = async(e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
 
   const data = {}
   Object.keys(formData.value).forEach(key => {
-    data[key] = formData.value[key].value;
-  });
+    data[key] = formData.value[key].value
+  })
 
   console.log('data', data)
 }
