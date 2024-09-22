@@ -1,8 +1,5 @@
-const ILoginService = require('./login.types')
-
-class LoginService extends ILoginService {
+class LoginService {
   constructor (dependencies) {
-    super()
     this.UserModel = dependencies.UserModel
     this.AccountModel = dependencies.AccountModel
     this.bcrypt = dependencies.bcrypt
