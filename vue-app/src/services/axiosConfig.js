@@ -61,7 +61,7 @@ export function createAxiosInstanceWithInterceptors () {
           const axiosAuth = createAxiosInstance()
           const { data } = await axiosAuth.post('/auth/token/refresh')
 
-          processQueue(null, data.access_token)
+          processQueue(null, data.accessToken)
           return axiosInstance(originalRequest)
         } catch (refreshError) {
           processQueue(refreshError, null)

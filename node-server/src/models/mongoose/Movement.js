@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const addMethods = require('./utils/addStaticMethods');
+const { Schema, model } = require('mongoose')
+const addMethods = require('./utils/addStaticMethods')
 
 const movementSchema = new Schema({
   title: {
@@ -33,14 +33,14 @@ const movementSchema = new Schema({
 }, {
   timestamps: true,
   versionKey: false
-});
+})
 
 // Índices para mejorar el rendimiento de las consultas
-movementSchema.index({ account_id: 1 });
-movementSchema.index({ date: 1 });
-movementSchema.index({ type: 1 });
+movementSchema.index({ account_id: 1 })
+movementSchema.index({ date: 1 })
+movementSchema.index({ type: 1 })
 
 // Agregar métodos estáticos
-addMethods(movementSchema);
+addMethods(movementSchema)
 
-module.exports = model('Movement', movementSchema);
+module.exports = model('Movement', movementSchema)

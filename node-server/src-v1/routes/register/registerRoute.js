@@ -1,10 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const { asyncHandler } = require("@middlewares/asyncHandler");
+const express = require('express')
+const router = express.Router()
+const { asyncHandler } = require('@middlewares/asyncHandler')
 const {
-  register,
-} = require("./registerHandler");
+  register
+} = require('./registerHandler')
 
-router.post("/", asyncHandler(register));
+router.post('/', asyncHandler(register))
 
-module.exports = router;
+module.exports = router

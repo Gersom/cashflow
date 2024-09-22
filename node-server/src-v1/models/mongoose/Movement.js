@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const addMethods = require('./utils/addStaticMethods');
+const mongoose = require('mongoose')
+const addMethods = require('./utils/addStaticMethods')
 
 const movementSchema = new mongoose.Schema({
   title: {
@@ -33,20 +33,20 @@ const movementSchema = new mongoose.Schema({
 }, {
   timestamps: true,
   versionKey: false
-});
+})
 
 // Índices para mejorar el rendimiento de las consultas
-movementSchema.index({ account_id: 1 });
-movementSchema.index({ date: 1 });
-movementSchema.index({ type: 1 });
+movementSchema.index({ account_id: 1 })
+movementSchema.index({ date: 1 })
+movementSchema.index({ type: 1 })
 
 // Método de instancia para obtener una representación formateada
-movementSchema.methods.toJSON = function() {
-  const { _id, ...others } = this.toObject();
-  return { id: _id, ...others };
-};
+movementSchema.methods.toJSON = function () {
+  const { _id, ...others } = this.toObject()
+  return { id: _id, ...others }
+}
 
 // Agregar métodos estáticos
-addMethods(movementSchema);
+addMethods(movementSchema)
 
-module.exports = mongoose.model('Movement', movementSchema);
+module.exports = mongoose.model('Movement', movementSchema)

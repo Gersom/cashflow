@@ -1,4 +1,4 @@
-const checkInteger = require("@utils/checkInteger");
+const checkInteger = require('@utils/checkInteger')
 
 const ENV_VARS = {
   // serv
@@ -30,53 +30,52 @@ const ENV_VARS = {
 
   // mailer
   MAILER_EMAIL: 'MAILER_EMAIL',
-  MAILER_PASSWORD: 'MAILER_PASSWORD',
-};
-
+  MAILER_PASSWORD: 'MAILER_PASSWORD'
+}
 
 const initEnv = () => {
-  const missingVars = Object.values(ENV_VARS).filter(varName => !process.env[varName]);
-  
+  const missingVars = Object.values(ENV_VARS).filter(varName => !process.env[varName])
+
   if (missingVars.length > 0) {
     throw new Error(
       `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n\n${missingVars.join('\n')}\n\nPlease ensure that the .env file contains the necessary configuration.`
-    );
+    )
   }
 
-  console.log('Server mode:', process.env.NODE_ENV);
-};
+  console.log('Server mode:', process.env.NODE_ENV)
+}
 
 const getEnvVar = (key) => {
-  const value = process.env[ENV_VARS[key]];
+  const value = process.env[ENV_VARS[key]]
   // if (value === undefined) {
   //   throw new Error(`Environment variable ${ENV_VARS[key]} is not configured.`);
   // }
-  return value;
-};
+  return value
+}
 
 const client = {
-  url: getEnvVar('CLIENT_URL'),
-};
+  url: getEnvVar('CLIENT_URL')
+}
 
 const serv = {
   nodeEnv: getEnvVar('NODE_ENV'),
-  get isProduction () {return this.nodeEnv === 'production'},
-  get isDevelopment () {return this.nodeEnv === 'development'},
+  get isProduction () { return this.nodeEnv === 'production' },
+  get isDevelopment () { return this.nodeEnv === 'development' },
   host: getEnvVar('HOST'),
   port: getEnvVar('PORT'),
-  get address() {
-    return this.port ? `${this.host}:${this.port}` : this.host;
+  get address () {
+    return this.port ? `${this.host}:${this.port}` : this.host
   },
   allowedDevOrigins: getEnvVar('ALLOWED_DEV_ORIGINS'),
-  allowedProdOrigins: getEnvVar('ALLOWED_PROD_ORIGINS'),
-};
+  allowedProdOrigins: getEnvVar('ALLOWED_PROD_ORIGINS')
+}
 
 const db = {
   uri: getEnvVar('DB_URI'),
   name: getEnvVar('DB_NAME'),
   user: getEnvVar('DB_USER'),
-  password: getEnvVar('DB_PASSWORD'),
-};
+  password: getEnvVar('DB_PASSWORD')
+}
 
 const jwt = {
   emailExpiration: getEnvVar('JWT_EMAIL_EXPIRES_IN'),
@@ -84,28 +83,32 @@ const jwt = {
   expiration: getEnvVar('JWT_ACCESS_EXPIRES_IN'),
   refreshExpiration: getEnvVar('JWT_REFRESH_EXPIRES_IN'),
   refreshSecret: getEnvVar('JWT_REFRESH_SECRET'),
-  secret: getEnvVar('JWT_ACCESS_SECRET'),
-};
-
+  secret: getEnvVar('JWT_ACCESS_SECRET')
+}
 
 const auth = {
-  get saltRounds() {
-    return checkInteger(getEnvVar('SALT_ROUNDS'));
+  get saltRounds () {
+    return checkInteger(getEnvVar('SALT_ROUNDS'))
   },
-  get cookieMaxAge() {
-    return checkInteger(getEnvVar('COOKIE_MAX_AGE'));
+  get cookieMaxAge () {
+    return checkInteger(getEnvVar('COOKIE_MAX_AGE'))
   },
-  get codeExpiration() {
-    return checkInteger(getEnvVar('RECOVER_CODE_EXPIRES_IN'));
-  },
-};
+  get codeExpiration () {
+    return checkInteger(getEnvVar('RECOVER_CODE_EXPIRES_IN'))
+  }
+}
 
 const mailer = {
   email: getEnvVar('MAILER_EMAIL'),
-  password: getEnvVar('MAILER_PASSWORD'),
-};
+  password: getEnvVar('MAILER_PASSWORD')
+}
 
-module.exports = { 
+module.exports = {
   initEnv,
-  serv, db, jwt, mailer, auth, client
-};
+  serv,
+  db,
+  jwt,
+  mailer,
+  auth,
+  client
+}

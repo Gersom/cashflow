@@ -1,13 +1,12 @@
 // Custom error array
-const customErrors = require('@utils/apiErrors');
+const customErrors = require('@utils/apiErrors')
 
-const errorHandler = (err, req, res, ) => {
-  
-  const isCustomError = Object.values(customErrors).some(ErrorType => err instanceof ErrorType);
-  
+const errorHandler = (err, req, res) => {
+  const isCustomError = Object.values(customErrors).some(ErrorType => err instanceof ErrorType)
+
   if (process.env.NODE_ENV === 'development') {
-    console.error('MESSAGE =>', err.message); 
-    console.error('STACK =>', err.stack);
+    console.error('MESSAGE =>', err.message)
+    console.error('STACK =>', err.stack)
 
     if (isCustomError) {
       return res.status(isCustomError ? err.status : 500).json({
@@ -17,10 +16,8 @@ const errorHandler = (err, req, res, ) => {
           message: isCustomError ? err.message : 'An unexpected error occurred',
           stack: isCustomError ? err.stack : ''
         }
-      });
-    }
-
-    else {
+      })
+    } else {
       return res.status(500).json({
         status: err.status,
         success: false,
@@ -28,18 +25,18 @@ const errorHandler = (err, req, res, ) => {
           message: err.message || 'An unexpected error occurred',
           stack: err.stack || ''
         }
-      });
+      })
     }
   }
 
-  console.error(err.message);
+  console.error(err.message)
 
   if (isCustomError) {
     return res.status(err.status).json({
       status: err.status,
       success: false,
       error: err.message
-    });
+    })
   }
 
   // In production, send a generic message for non-custom errors
@@ -47,7 +44,7 @@ const errorHandler = (err, req, res, ) => {
     status: 500,
     success: false,
     error: err.message
-  });
-};
+  })
+}
 
-module.exports = errorHandler;
+module.exports = errorHandler

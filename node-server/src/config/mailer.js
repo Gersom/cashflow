@@ -1,5 +1,5 @@
-const nodemailer = require('nodemailer');
-const { mailer } = require('@config/env');
+const nodemailer = require('nodemailer')
+const { mailer } = require('@config/env')
 
 // Configurar el transporte de correo
 const transporter = nodemailer.createTransport({
@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 587,
   auth: {
     user: mailer.email,
-    pass: mailer.password,
+    pass: mailer.password
   }
-});
+})
 
-module.exports = { transporter };
+module.exports = { transporter }

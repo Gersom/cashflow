@@ -35,14 +35,14 @@
 // v4 separado
 const asyncHandler = (fn) => {
   return (req, res, next) => {
-    Promise.resolve(fn(req, res, next)).catch(next);
-  };
-};
+    Promise.resolve(fn(req, res, next)).catch(next)
+  }
+}
 
 const asyncErrorHandler = (fn) => {
   return (err, req, res, next) => {
-    Promise.resolve(fn(err, req, res, next)).catch(next);
-  };
-};
+    Promise.resolve(fn(err, req, res, next)).catch(next)
+  }
+}
 
-module.exports = { asyncHandler, asyncErrorHandler };
+module.exports = { asyncHandler, asyncErrorHandler }

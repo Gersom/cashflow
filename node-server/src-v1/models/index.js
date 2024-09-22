@@ -2,7 +2,7 @@ const DB_ENGINE = process.env.DB_ENGINE
 let pathModel = ''
 
 switch (DB_ENGINE) {
-  case "mongodb":
+  case 'mongodb':
     pathModel = 'mongoose'
     break
   default:
@@ -13,7 +13,7 @@ const models = {
   UserModel: require(`./${pathModel}/User`),
   AccountModel: require(`./${pathModel}/Account`),
   CategoryModel: require(`./${pathModel}/Category`),
-  MovementModel: require(`./${pathModel}/Movement`),
+  MovementModel: require(`./${pathModel}/Movement`)
 }
 
 module.exports = models

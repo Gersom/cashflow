@@ -1,14 +1,14 @@
-const { CategoryModel, AccountModel, MovementModel } = require("@models")
-const insertIfAbsent = require("./utils/insertIfAbsent")
-const movementData = require("@data/movement.json")
+const { CategoryModel, AccountModel, MovementModel } = require('@models')
+const insertIfAbsent = require('./utils/insertIfAbsent')
+const movementData = require('@data/movement.json')
 
 const insertMovements = async () => {
   const accountId = await AccountModel.findOneData(
-    { name: "Principal" }
-  );
+    { name: 'Principal' }
+  )
   const gersomCategory = await CategoryModel.findOneData(
-    { name: "Inicial" }
-  );
+    { name: 'Inicial' }
+  )
 
   await insertIfAbsent({
     name: 'Movements',
@@ -19,7 +19,7 @@ const insertMovements = async () => {
         accountId: accountId.id,
         categories: [gersomCategory.id]
       }
-    ],
+    ]
   })
 }
 
