@@ -11,6 +11,10 @@ const { initEnv } = require('@config/env');
 
 const startServer = async () => {
   await initEnv();
+
+
+
+  
   await connectDB();
   const app = express();
   middlewares(app);
