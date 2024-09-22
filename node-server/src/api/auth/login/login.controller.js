@@ -1,7 +1,4 @@
 class LoginController {
-  /**
-   * @param {import('./login.types').ILoginService} loginService
-   */
   constructor (dependecies) {
     this.loginService = dependecies.loginService
     this.serv = dependecies.serv

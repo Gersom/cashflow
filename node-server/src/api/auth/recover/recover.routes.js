@@ -1,7 +1,8 @@
 const express = require('express')
 const { asyncHandler } = require('@middlewares/asyncHandler')
-const { validateRequest, validateVerify, validateResend, validateReset } = require('./recoverValidation')
-const RecoverController = require('./recoverController')
+const { validateRequest, validateVerify, validateResend, validateReset } = require('./recover.validation')
+const createRecoverModule = require('./recover.di')
+const RecoverController = createRecoverModule()
 
 const router = express.Router()
 

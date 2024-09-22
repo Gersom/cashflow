@@ -2,7 +2,7 @@ const { Router } = require('express')
 
 const loginRoutes = require('./login/login.routes')
 const registerRoutes = require('./register/registerRoutes')
-const recoverRoutes = require('./recover/recoverRoutes')
+const recoverRoutes = require('./recover/recover.routes')
 const tokenRoutes = require('./token/tokenRoutes')
 
 const router = Router()
