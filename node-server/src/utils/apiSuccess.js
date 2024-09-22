@@ -10,7 +10,11 @@ const responseSuccess = (message = 'success', data = null) => {
 }
 
 const dataSuccess = (message = 'success', data = null) => {
-  return { message, data, success: true }
+  const response = { message, data, success: true }
+
+  if (data instanceof Array) response.count = data.length
+
+  return response
 }
 
 module.exports = {

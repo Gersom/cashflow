@@ -50,20 +50,17 @@ const MovementService = {
     const { totalExpenses = 0, totalIncome = 0 } = totals[0] || {}
 
     return {
-      data: {
-        movements: movements.map(movement => new MovementDTO(movement)),
-        totalIncome: totalIncome.toFixed(2),
-        totalExpenses: totalExpenses.toFixed(2)
-      },
-      count: movements.length,
-      success: 'Movements retrieved successfully'
+      movements: movements.map(movement => new MovementDTO(movement)),
+      totalIncome: totalIncome.toFixed(2),
+      totalExpenses: totalExpenses.toFixed(2),
+      count: movements.length
     }
   },
 
   async postMovement (req) {
     const data = req.body
     const user = await UserModel.findDataById(req.user.id)
-    console.log(user)
+    // console.log(user)
 
     if (!data.amount || !data.title || !data.type) {
       throw new ValidationError('Amount, title, type  are required')
@@ -73,7 +70,7 @@ const MovementService = {
 
     try {
       session.startTransaction()
-      console.log('transaction', user.selectedAccountId.toString())
+      // console.log('transaction', user.selectedAccountId.toString())
 
       // this can be improved
       let verifiedCategories = []
@@ -113,10 +110,7 @@ const MovementService = {
       await account.save({ session })
 
       await session.commitTransaction()
-      return {
-        success: 'Movement created successfully',
-        data: { id: newMovement._id }
-      }
+      return { id: newMovement._id }
     } catch (err) {
       await session.abortTransaction()
       throw err
@@ -188,10 +182,7 @@ const MovementService = {
       await movement.save({ session })
 
       await session.commitTransaction()
-      return {
-        success: 'Movement updated successfully'
-        // data: new MovementDTO(movement)
-      }
+      return true
     } catch (err) {
       await session.abortTransaction()
       throw err
@@ -231,9 +222,7 @@ const MovementService = {
       await MovementModel.deleteOne({ _id: id }).session(session)
 
       await session.commitTransaction()
-      return {
-        success: 'Movement deleted successfully'
-      }
+      return true
     } catch (err) {
       await session.abortTransaction()
       throw err

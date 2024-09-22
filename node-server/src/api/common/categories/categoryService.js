@@ -7,22 +7,13 @@ const CategoryService = {
     const { selectedAccountId } = await UserModel.findDataById(id)
     const categories = await CategoryModel.findAllDataQuery({ accountId: selectedAccountId })
 
-    return {
-      data: categories.map(category => new CategoryDTO(category)),
-      count: categories.length,
-      success: 'Categories retrieved successfully'
-    }
+    return categories.map(category => new CategoryDTO(category))
   },
 
   // this exixts if we want to get all categories for a specific account
   // but whitout change the selected account in the user model
   async getAllCategoriesByAccountId (accountId) {
-    const categories = await CategoryModel.findAllDataQuery({ accountId })
-    return {
-      data: categories,
-      count: categories.length,
-      success: 'Categories retrieved successfully'
-    }
+    return await CategoryModel.findAllDataQuery({ accountId })
   },
 
   async getCategory (id) {
@@ -30,10 +21,7 @@ const CategoryService = {
     if (!category) {
       throw new NotFoundError(`Category with id ${id} not found`)
     }
-    return {
-      data: category,
-      success: 'Category retrieved successfully'
-    }
+    return category
   },
 
   async postCategory (data) {
@@ -41,9 +29,7 @@ const CategoryService = {
       throw new ValidationError('Category name is required')
     }
     await CategoryModel.create(data)
-    return {
-      success: 'Category created successfully'
-    }
+    return true
   },
 
   async updateCategory (id, data) {
@@ -51,9 +37,7 @@ const CategoryService = {
     if (!updatedCategory) {
       throw new NotFoundError(`Category with id ${id} not found`)
     }
-    return {
-      success: 'Category updated successfully'
-    }
+    return true
   },
 
   async deleteCategory (id) {
@@ -61,9 +45,7 @@ const CategoryService = {
     if (!deletedCategory) {
       throw new NotFoundError(`Category with id ${id} not found`)
     }
-    return {
-      success: 'Category deleted successfully'
-    }
+    return true
   }
 }
 

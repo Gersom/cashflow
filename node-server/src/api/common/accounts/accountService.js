@@ -8,11 +8,7 @@ const AccountService = {
 
     if (!accounts) throw new NotFoundError('Accounts not found')
 
-    return {
-      data: accounts.map(account => new AccountDTO(account)),
-      count: accounts.length,
-      success: 'Accounts retrieved successfully'
-    }
+    return accounts.map(account => new AccountDTO(account))
   },
 
   async changeCurrecy (id, selectedCurrencyId) {
@@ -28,9 +24,7 @@ const AccountService = {
 
     account.selectedCurrencyId = selectedCurrencyId
     await account.save()
-    return {
-      success: 'Account updated successfully'
-    }
+    return true
   }
 
   // async getAccount (id) {
