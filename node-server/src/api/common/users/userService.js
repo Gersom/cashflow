@@ -16,10 +16,7 @@ const UserService = {
       throw new NotFoundError(`User with id ${id} not found`)
     }
 
-    return {
-      data: new UserDTO(user),
-      success: 'User retrieved successfully'
-    }
+    return new UserDTO(user)
   },
 
   async changeSelectedAccount (id, accountId) {
@@ -30,9 +27,7 @@ const UserService = {
 
     await UserModel.updateData(id, { selectedAccountId: accountId })
 
-    return {
-      success: 'User updated successfully'
-    }
+    return true
   },
 
   async updateUser (id, data) {
@@ -46,9 +41,7 @@ const UserService = {
     if (!updatedUser) {
       throw new NotFoundError(`User with id ${id} not found`)
     }
-    return {
-      success: 'User updated successfully'
-    }
+    return true
   },
 
   async deleteUser (id) {
@@ -56,9 +49,7 @@ const UserService = {
     if (!deletedUser) {
       throw new NotFoundError(`User with id ${id} not found`)
     }
-    return {
-      success: 'User deleted successfully'
-    }
+    return true
   }
 }
 

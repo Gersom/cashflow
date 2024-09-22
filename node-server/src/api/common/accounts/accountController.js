@@ -1,15 +1,16 @@
 const AccountService = require('./accountService')
+const { responseSuccess, dataSuccess } = require('@utils/apiSuccess')
 
 const AccountController = {
   async getAllAccounts (req, res) {
-    const result = await AccountService.getAllAccounts(req.user.id)
-    res.status(200).json(result)
+    const accounts = await AccountService.getAllAccounts(req.user.id)
+    res.status(200).json(dataSuccess('Acounts retrieved successfully', accounts))
   },
 
   async changeCurrecy (req, res) {
     const { id } = req.user
-    const result = await AccountService.changeCurrecy(id, req.body.currencyId)
-    res.status(200).json(result)
+    await AccountService.changeCurrecy(id, req.body.currencyId)
+    res.status(200).json(responseSuccess('Account updated successfully'))
   }
   //   async getAccount (req, res) {
   //     const { id } = req.params;
