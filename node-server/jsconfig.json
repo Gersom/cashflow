@@ -13,5 +13,5 @@
       "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "src/api/auth/login/login.test.js", "jest.config.js"]
 }

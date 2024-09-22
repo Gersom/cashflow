@@ -1,6 +1,6 @@
 const { Router } = require('express')
 
-const loginRoutes = require('./login/loginRoutes')
+const loginRoutes = require('./login/login.routes')
 const registerRoutes = require('./register/registerRoutes')
 const recoverRoutes = require('./recover/recoverRoutes')
 const tokenRoutes = require('./token/tokenRoutes')
