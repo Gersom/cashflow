@@ -8,9 +8,9 @@
   "scripts": {
     "start": "node ./src/app.js",
     "dev": "node --trace-warnings --watch --env-file .env ./src/app.js",
-    "dev:lint": "eslint src/**/*.js && node --trace-warnings --watch --env-file .env ./src/app.js",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint --fix src/**/*.js",
+    "dev:lint": "eslint && node --trace-warnings --watch --env-file .env ./src/app.js",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
