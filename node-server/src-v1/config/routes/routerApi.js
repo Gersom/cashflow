@@ -1,20 +1,20 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const path = require('path');
-const ROUTES_DIR = path.join(__dirname, '..', '..', 'routes', 'api');
+const path = require('path')
+const ROUTES_DIR = path.join(__dirname, '..', '..', 'routes', 'api')
 
 const routerApi = async () => {
-  const getRouteFolders = require('./utils/getRouteFolders');
-  const foldersList = await getRouteFolders(ROUTES_DIR) || [];
+  const getRouteFolders = require('./utils/getRouteFolders')
+  const foldersList = await getRouteFolders(ROUTES_DIR) || []
   for (const folder of foldersList) {
-    const pathFolder = path.join(ROUTES_DIR, folder);
-    const routeFilePath = path.join(pathFolder, `${folder}Route.js`);
-    const route = require(routeFilePath);
-    router.use(`/${folder}`, route);
+    const pathFolder = path.join(ROUTES_DIR, folder)
+    const routeFilePath = path.join(pathFolder, `${folder}Route.js`)
+    const route = require(routeFilePath)
+    router.use(`/${folder}`, route)
   }
 
-  return  router;
-};
+  return router
+}
 
-module.exports = routerApi();
+module.exports = routerApi()

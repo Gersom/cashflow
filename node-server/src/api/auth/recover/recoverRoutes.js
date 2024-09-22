@@ -1,29 +1,29 @@
-const express = require("express");
-const { asyncHandler } = require("@middlewares/asyncHandler");
-const { validateRequest, validateVerify, validateResend, validateReset } = require("./recoverValidation");
-const RecoverController = require("./recoverController");
+const express = require('express')
+const { asyncHandler } = require('@middlewares/asyncHandler')
+const { validateRequest, validateVerify, validateResend, validateReset } = require('./recoverValidation')
+const RecoverController = require('./recoverController')
 
-const router = express.Router();
+const router = express.Router()
 
 router.post(
-  "/request", 
-  validateRequest, 
+  '/request',
+  validateRequest,
   asyncHandler(RecoverController.requestCode)
-);
+)
 router.post(
-  "/verify", 
-  validateVerify, 
+  '/verify',
+  validateVerify,
   asyncHandler(RecoverController.verifyCode)
-);
+)
 router.post(
-  "/resend", 
-  validateResend, 
+  '/resend',
+  validateResend,
   asyncHandler(RecoverController.resendCode)
-);
+)
 router.post(
-  "/reset", 
-  validateReset, 
+  '/reset',
+  validateReset,
   asyncHandler(RecoverController.resetPassword)
-);
+)
 
-module.exports = router;
+module.exports = router

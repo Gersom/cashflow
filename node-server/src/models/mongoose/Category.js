@@ -1,34 +1,34 @@
-const { Schema, model } = require('mongoose');
-const addMethods = require('./utils/addStaticMethods');
+const { Schema, model } = require('mongoose')
+const addMethods = require('./utils/addStaticMethods')
 
 const categorySchema = new Schema({
-  name: { 
+  name: {
     type: String,
     required: true,
-    trim: true,
+    trim: true
   },
   icon: {
     type: String,
-    required: true,
+    required: true
   },
   color: {
     type: String,
-    required: true,
+    required: true
   },
   accountId: {
     type: Schema.Types.ObjectId,
     ref: 'Account',
     required: true
-  },
+  }
 }, {
   timestamps: false,
   versionKey: false
-});
+})
 
 // Índices únicos para mejorar el rendimiento y garantizar la unicidad
-categorySchema.index({ name: 1 });
+categorySchema.index({ name: 1 })
 
 // Agregar métodos estáticos
-addMethods(categorySchema);
+addMethods(categorySchema)
 
-module.exports = model('Category', categorySchema);
+module.exports = model('Category', categorySchema)

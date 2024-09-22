@@ -1,33 +1,33 @@
-const CategoryService = require("./categoryService.js");
+const CategoryService = require('./categoryService.js')
 
 const CategoryController = {
   async getAllCategories (req, res) {
-    const result = await CategoryService.getAllCategories(req.query);
-    res.status(200).json(result);
+    const result = await CategoryService.getAllCategories(req.query)
+    res.status(200).json(result)
   },
-  
+
   async getCategory (req, res) {
-    const { id } = req.params;
-    const result = await CategoryService.getCategory(id);
-    res.status(200).json(result);
+    const { id } = req.params
+    const result = await CategoryService.getCategory(id)
+    res.status(200).json(result)
   },
-  
+
   async createCategory (req, res) {
-    const result = await CategoryService.postCategory(req.body);
-    res.status(201).json(result);
+    const result = await CategoryService.postCategory(req.body)
+    res.status(201).json(result)
   },
-  
+
   async updateCategory (req, res) {
-    const { id } = req.params;
-    const result = await CategoryService.updateCategory(id, req.body);
-    res.status(200).json(result);
+    const { id } = req.params
+    const result = await CategoryService.updateCategory(id, req.body)
+    res.status(200).json(result)
   },
-  
+
   async deleteCategory (req, res) {
-    const { id } = req.params;
-    const result = await CategoryService.deleteCategory(id);
-    res.status(200).json(result);
-  },
+    const { id } = req.params
+    const result = await CategoryService.deleteCategory(id)
+    res.status(200).json(result)
+  }
 }
 
-module.exports = CategoryController;
+module.exports = CategoryController

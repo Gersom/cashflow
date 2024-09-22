@@ -1,12 +1,12 @@
 const {
-  registerUserController,
-} = require("./registerController");
+  registerUserController
+} = require('./registerController')
 
 const register = async (req, res) => {
-  const result = await registerUserController(req.body);
-  res.status(200).json(result);
-};
+  const result = await registerUserController(req.body)
+  res.status(200).json(result)
+}
 
 module.exports = {
-  register,
-};
+  register
+}
