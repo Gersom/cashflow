@@ -8,11 +8,10 @@ const middlewares = require('@config/middlewares');
 const setupRoutes = require('@config/setupRoutes');
 const { initEnv } = require('@config/env');
 
+const pepe = ''
 
 const startServer = async () => {
   await initEnv();
-
-
 
   
   await connectDB();
