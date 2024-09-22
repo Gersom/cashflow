@@ -1,53 +1,49 @@
-class AbstractError extends Error {
-  constructor (message, status, code) {
-    super(message)
+const ERROR_CODES = require('./errorCodes')
+class BaseError extends Error {
+  constructor (category, errorKey, customMessage) {
+    const errorDef = ERROR_CODES[category][errorKey]
+    if (!errorDef) { throw new Error(`Error definition not found for ${category}.${errorKey}`) }
+
+    super(customMessage || errorDef.message)
     this.name = this.constructor.name
-    this.code = code
-    this.status = status
+    this.code = {
+      id: errorDef.code,
+      description: errorDef.description
+    }
+    this.status = errorDef.status
   }
 }
 
-class ValidationError extends AbstractError {
-  constructor (messsage = 'Validation error', code = 'AUTH_000') {
-    super(messsage, 400, code)
+class AuthorizationError extends BaseError {
+  constructor (errorKey, customMessage) {
+    super('AUTH', errorKey, customMessage)
   }
 }
-
-class AuthorizationError extends AbstractError {
-  constructor (message = 'Unauthorized', code = 'AUTH_001') {
-    super(message, 401, 'AUTH_001')
+class ExpirationError extends BaseError {
+  constructor (errorKey, customMessage) {
+    super('EXPIRATION', errorKey, customMessage)
   }
 }
-
-class UnauthorizedError extends AbstractError {
-  constructor (message = 'Unauthorized', code = 'AUTH_002') {
-    super(message, 403, code)
+class EmailError extends BaseError {
+  constructor (errorKey, customMessage) {
+    super('EMAIL', errorKey, customMessage)
   }
 }
-
-class NotFoundError extends AbstractError {
-  constructor (message = 'Not found', code = 'NOT_FOUND') {
-    super(message, 404, code)
+class DataError extends BaseError {
+  constructor (errorKey, customMessage) {
+    super('DATA', errorKey, customMessage)
   }
 }
-
-class ExpirationError extends AbstractError {
-  constructor (message = 'Expired', code = 'EXPIRED') {
-    super(message, 410, code)
-  }
-}
-
-class EmailSendError extends AbstractError {
-  constructor (message = 'Error sending email', code = 'EMAIL_SEND') {
-    super(message, 500, code)
+class ValidationError extends BaseError {
+  constructor (errorKey, customMessage) {
+    super('VALIDATION', errorKey, customMessage)
   }
 }
 
 module.exports = {
-  NotFoundError,
-  ValidationError,
-  ExpirationError,
   AuthorizationError,
-  UnauthorizedError,
-  EmailSendError
+  ExpirationError,
+  EmailError,
+  DataError,
+  ValidationError
 }

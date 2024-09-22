@@ -1,8 +1,6 @@
 const customErrors = require('@utils/apiErrors')
 
 const errorHandler = (err, req, res, next) => {
-  console.error('ERROR:', err)
-
   const isCustomError = Object.values(customErrors).some(
     (ErrorType) => err instanceof ErrorType
   )
@@ -12,16 +10,22 @@ const errorHandler = (err, req, res, next) => {
     success: false,
     error: {
       message: isCustomError ? err.message : 'An unexpected error occurred',
-      code: isCustomError ? err.code : 'UNKNOWN_ERROR'
+      code: isCustomError ? err.code.id : 'UNKNOWN_ERROR'
     }
   }
 
+  console.error('ERROR:')
+  console.error('> NAME =>', err.name)
+  console.error('> MESSAGE =>', err.message)
+
   if (process.env.NODE_ENV === 'development') {
-    console.error('NAME =>', err.name)
-    console.error('MESSAGE =>', err.message)
-    console.error('STACK =>', err.stack)
-    console.error('TYPE =>', err.code)
+    errorResponse.error.description = isCustomError ? err.code.description : 'UNKNOWN_ERROR'
     errorResponse.error.stack = err.stack
+
+    console.error('> CODE =>', `${err.code.id} (${err.code.description})`)
+    console.error('> STACK :\n', err.stack)
+  } else {
+    console.error('> CODE =>', err.code.id)
   }
 
   res.status(errorResponse.status).json(errorResponse)

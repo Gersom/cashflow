@@ -1,4 +1,4 @@
-const { AuthorizationError, UnauthorizedError } = require('@utils/apiErrors')
+const { AuthorizationError } = require('@utils/apiErrors')
 const { jwt: envJwt } = require('@config/env')
 const { UserModel, AccountModel } = require('@models')
 const bcrypt = require('bcrypt')
@@ -18,7 +18,7 @@ const LoginService = async (body = {}) => {
   }
 
   if (!user?.isEmailVerified) {
-    throw new UnauthorizedError('Email not verified')
+    throw new AuthorizationError('Email not verified')
   }
 
   const userForToken = {
