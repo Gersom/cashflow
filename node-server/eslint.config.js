@@ -25,5 +25,15 @@ module.exports = [
       // 'no-console': 'warn',
       'eol-last': 'off'
     }
+  },
+  {
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.git/**',
+      '**/.vscode/**',
+      '**/*.min.js',
+      '**/public/**'
+    ]
   }
 ]
