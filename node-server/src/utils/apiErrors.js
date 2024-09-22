@@ -1,48 +1,45 @@
-class ValidationError extends Error {
-  constructor (message) {
+class AbstractError extends Error {
+  constructor (message, status, code) {
     super(message)
-    this.name = 'ValidationError'
-    this.status = 400
+    this.name = this.constructor.name
+    this.code = code
+    this.status = status
   }
 }
 
-class AuthorizationError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = 'AuthorizationError'
-    this.status = 401
+class ValidationError extends AbstractError {
+  constructor (messsage = 'Validation error', code = 'AUTH_000') {
+    super(messsage, 400, code)
   }
 }
 
-class UnauthorizedError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = 'UnauthorizedError'
-    this.status = 403
+class AuthorizationError extends AbstractError {
+  constructor (message = 'Unauthorized', code = 'AUTH_001') {
+    super(message, 401, 'AUTH_001')
   }
 }
 
-class NotFoundError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = 'NotFoundError'
-    this.status = 404
+class UnauthorizedError extends AbstractError {
+  constructor (message = 'Unauthorized', code = 'AUTH_002') {
+    super(message, 403, code)
   }
 }
 
-class ExpirationError extends Error {
-  constructor (message) {
-    super(message)
-    this.name = 'ExpirationError'
-    this.status = 410
+class NotFoundError extends AbstractError {
+  constructor (message = 'Not found', code = 'NOT_FOUND') {
+    super(message, 404, code)
   }
 }
 
-class EmailSendError extends Error {
-  constructor (message) {
-    super(message || 'Error sending email')
-    this.name = 'EmailSendError'
-    this.status = 500
+class ExpirationError extends AbstractError {
+  constructor (message = 'Expired', code = 'EXPIRED') {
+    super(message, 410, code)
+  }
+}
+
+class EmailSendError extends AbstractError {
+  constructor (message = 'Error sending email', code = 'EMAIL_SEND') {
+    super(message, 500, code)
   }
 }
 
