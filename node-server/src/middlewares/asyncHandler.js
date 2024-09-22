@@ -1,6 +1,6 @@
 // v1
-// const asyncHandler = (fn) => (req, res, next) =>
-//   Promise.resolve(fn(req, res, next)).catch(next);
+const asyncHandler = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next)
 
 // v2
 // const asyncHandler = (fn) => {
@@ -8,15 +8,15 @@
 //     try {
 //       if (fn.length > 3) {
 //         // Si la función tiene más de 3 parámetros, asumimos que es un error handler
-//         await fn(err, req, res, next);
+//         await fn(err, req, res, next)
 //       } else {
-//         await fn(req, res, next);
+//         await fn(req, res, next)
 //       }
 //     } catch (error) {
 //       next(error);
 //     }
-//   };
-// };
+//   }
+// }
 
 // v3 combinado
 // const asyncHandler = (fn) => {
@@ -33,16 +33,16 @@
 // };
 
 // v4 separado
-const asyncHandler = (fn) => {
-  return (req, res, next) => {
-    Promise.resolve(fn(req, res, next)).catch(next)
-  }
-}
+// const asyncHandler = (fn) => {
+//   return (req, res, next) => {
+//     Promise.resolve(fn(req, res, next)).catch(next)
+//   }
+// }
 
-const asyncErrorHandler = (fn) => {
-  return (err, req, res, next) => {
-    Promise.resolve(fn(err, req, res, next)).catch(next)
-  }
-}
+// const asyncErrorHandler = (fn) => {
+//   return (err, req, res, next) => {
+//     Promise.resolve(fn(err, req, res, next)).catch(next)
+//   }
+// }
 
-module.exports = { asyncHandler, asyncErrorHandler }
+module.exports = { asyncHandler }
