@@ -1,7 +1,7 @@
 <script setup>
 // Imports
 import '@cyhnkckali/vue3-color-picker/dist/style.css'
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { Vue3ColorPicker } from '@cyhnkckali/vue3-color-picker'
 import CustomButton from '@components/CustomButton/GeneralButton.vue'
 import DialogBlur from '@layouts/DialogBlur.vue'
@@ -23,32 +23,27 @@ const props = defineProps({
 })
 
 // Data
-const colorValue = ref('#90A4AE')
 const showColorPicker = ref(false)
 
-const valueProp = computed(() => props.modelValue)
+const valueInput = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value)
+})
 
 // Methods
 const toggleColorPicker = () => {
   showColorPicker.value = !showColorPicker.value
   if (
     showColorPicker.value &&
-      colorValue.value[0] !== '#' &&
-      colorValue.value.slice(0, 3) !== 'rgb'
+    valueInput.value[0] !== '#' &&
+    valueInput.value.slice(0, 3) !== 'rgb'
   ) {
-    updateColorValue('#ff8e38')
+    emit('update:modelValue', '#90A4AE')
   }
 }
 const closeColorPicker = () => {
   showColorPicker.value = false
 }
-const updateColorValue = (value) => {
-  emit('update:modelValue', value)
-}
-
-watch(valueProp, (newValue) => {
-  colorValue.value = newValue
-})
 </script>
 
 <template>
@@ -58,8 +53,8 @@ watch(valueProp, (newValue) => {
   >
     <div class="input-container">
       <InputColor
-        v-model="colorValue"
-        @input="updateColorValue"
+        v-model="valueInput"
+        :disabled="showColorPicker"
         @select-color="toggleColorPicker"
       />
     </div>
@@ -73,7 +68,7 @@ watch(valueProp, (newValue) => {
     >
       <Vue3ColorPicker
         v-if="showColorPicker"
-        v-model="colorValue"
+        v-model="valueInput"
         mode="solid"
         theme="dark"
         type="HEX"
@@ -89,7 +84,6 @@ watch(valueProp, (newValue) => {
       <CustomButton
         size="small"
         :text="showColorPicker ? 'Cerrar' : 'Editar'"
-        :animation="true"
         :icon-component="IconEdit"
         :transparent="true"
         @click="toggleColorPicker"

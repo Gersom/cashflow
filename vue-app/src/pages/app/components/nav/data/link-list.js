@@ -12,14 +12,14 @@ let dataLinks = [
 
 const devDataLinks = [
   {
-    pageName: 'AppProfile',
-    text: 'Perfil',
-    icon: IconPerson
-  },
-  {
     pageName: 'AppCategories',
     text: 'Categorías',
     icon: IconGeometricFigures
+  },
+  {
+    pageName: 'AppProfile',
+    text: 'Perfil',
+    icon: IconPerson
   }
 ]
 

@@ -13,7 +13,11 @@ const emit = defineEmits([
 const props = defineProps({
   modelValue: {
     type: String,
-    default: '#90A4AE'
+    default: ''
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -25,6 +29,12 @@ const valueInput = computed({
   get: () => props.modelValue,
   set: (value) => emit('update:modelValue', value)
 })
+
+const handleBlur = (e) => {
+  if (e.target.value === '') {
+    emit('update:modelValue', 'transparent')
+  }
+}
 </script>
 
 <template>
@@ -38,11 +48,13 @@ const valueInput = computed({
       <input
         v-model="valueInput"
         class="input-tag"
+        :disabled="props.disabled"
         :style="{borderColor: valueInput}"
+        @blur="handleBlur"
       >
       <button
         class="button-color"
-        :style="{backgroundColor: valueInput}"
+        :style="`--input-color-button-color: ${valueInput}`"
         @click="emit('select-color')"
       />
     </label>
@@ -75,14 +87,31 @@ const valueInput = computed({
       font-weight: 700;
     }
     .button-color{
-      background: var(--background-color);
-      border-radius: 50%;
       border: none;
       display: block;
       height: 34px;
       margin-left: 10px;
       min-width: 34px;
+      position: relative;
       width: 34px;
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--background-color);
+        border-radius: 50%;
+      }
+      &::before {
+        z-index: 1;
+      }
+      &::after {
+        z-index: 2;
+        background: var(--input-color-button-color);
+      }
     }
 
     /* Dark Theme */
@@ -94,6 +123,9 @@ const valueInput = computed({
       .input-tag:focus {
         background: rgb(var(--background-color-rgb) / 70%);
         color: var(--title-color);
+      }
+      .button-color {
+        &::before { background: rgb(var(--background-color-rgb) / 30%); }
       }
     }
   }

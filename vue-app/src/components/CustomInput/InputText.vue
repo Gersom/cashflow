@@ -83,9 +83,9 @@ const valueInput = computed({
       padding: 0 15px;
       width: 100%;
     }
-    .input-tag:disabled {
-      cursor: not-allowed;
-    }
+    // .input-tag:disabled {
+    //   cursor: not-allowed;
+    // }
   }
 
   &.is-icon {
