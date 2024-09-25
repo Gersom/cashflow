@@ -31,9 +31,12 @@ jobs:
       - name: Install step
         run: "bun install"
 
+      - name: Build step
+        run: "bun ./src/app,js"
+
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "cashflow"
-          entrypoint: "src/main.js"
+          entrypoint: "src/app.js"
           root: "node-server"
