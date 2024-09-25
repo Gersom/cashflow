@@ -29,7 +29,7 @@ jobs:
           node-version: lts/*
 
       - name: Install step
-        run: "cd node-server && ls && npm install"
+        run: "ls && cd node-server && ls && npm install"
 
       - name: Build step
         run: "cd node-server && npm run start"
@@ -39,4 +39,4 @@ jobs:
         with:
           project: "cashflow"
           entrypoint: "node-server/src/app.js"
-          root: "/node-server"
+          root: "node-server"
