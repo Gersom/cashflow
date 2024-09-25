@@ -1,5 +1,4 @@
-// Importamos checkInteger de manera compatible con Deno y Node.js
-import checkInteger from "./utils/checkInteger.js";
+const checkInteger = require("@utils/checkInteger")
 
 const ENV_VARS = {
   // serv
