@@ -1,4 +1,5 @@
-const checkInteger = require("@utils/checkInteger");
+// Importamos checkInteger de manera compatible con Deno y Node.js
+import checkInteger from "./utils/checkInteger.js";
 
 const ENV_VARS = {
   // serv
@@ -33,25 +34,24 @@ const ENV_VARS = {
   MAILER_PASSWORD: 'MAILER_PASSWORD',
 };
 
+const getEnvVar = (key) => {
+  if (typeof Deno !== 'undefined') {
+    return Deno.env.get(ENV_VARS[key]);
+  } else {
+    return process.env[ENV_VARS[key]];
+  }
+};
 
 const initEnv = () => {
-  const missingVars = Object.values(ENV_VARS).filter(varName => !process.env[varName]);
+  const missingVars = Object.values(ENV_VARS).filter(varName => !getEnvVar(varName));
   
   if (missingVars.length > 0) {
     throw new Error(
-      `\n*** ERROR ***\nThe following environment variables are not configured in the .env file:\n\n${missingVars.join('\n')}\n\nPlease ensure that the .env file contains the necessary configuration.`
+      `\n*** ERROR ***\nThe following environment variables are not configured:\n\n${missingVars.join('\n')}\n\nPlease ensure that the environment variables are set correctly.`
     );
   }
 
-  console.log('Server mode:', process.env.NODE_ENV);
-};
-
-const getEnvVar = (key) => {
-  const value = process.env[ENV_VARS[key]];
-  // if (value === undefined) {
-  //   throw new Error(`Environment variable ${ENV_VARS[key]} is not configured.`);
-  // }
-  return value;
+  console.log('Server mode:', getEnvVar('NODE_ENV'));
 };
 
 const client = {
@@ -87,7 +87,6 @@ const jwt = {
   secret: getEnvVar('JWT_ACCESS_SECRET'),
 };
 
-
 const auth = {
   get saltRounds() {
     return checkInteger(getEnvVar('SALT_ROUNDS'));
@@ -105,7 +104,7 @@ const mailer = {
   password: getEnvVar('MAILER_PASSWORD'),
 };
 
-module.exports = { 
+export { 
   initEnv,
   serv, db, jwt, mailer, auth, client
 };
