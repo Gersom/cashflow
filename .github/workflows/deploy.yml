@@ -29,14 +29,14 @@ jobs:
           node-version: lts/*
 
       - name: Install step
-        run: "cd node-server && npm install"
+        run: "cd node-server && ls && npm install"
 
       - name: Build step
-        run: "npm run start"
+        run: "cd node-server && npm run start"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "cashflow"
-          entrypoint: "src/app.js"
-          root: "/"
+          entrypoint: "node-server/src/app.js"
+          root: "/node-server"
