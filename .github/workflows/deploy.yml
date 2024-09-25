@@ -38,5 +38,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "cashflow"
-          entrypoint: ""
-          root: "node-server"
+          entrypoint: "/src/app.js"
+          root: "/node-server"
